@@ -30,5 +30,5 @@ func SaveMetric (m *metrics.MetricDTO) error {
 			storage.collectionCounter[m.MetricName] = metricValue
 		}
 	}
-return nil
+	return nil
 }
