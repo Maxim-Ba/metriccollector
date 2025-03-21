@@ -24,5 +24,6 @@ vendor/
 .idea
 .vscode
 metricstest-windows-amd64.exe
-server
-agent
+metricstest.exe
+./server
+./agent
