@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/Maxim-Ba/metriccollector/internal/handlers"
+	"github.com/Maxim-Ba/metriccollector/internal/server/handlers"
 )
 
 

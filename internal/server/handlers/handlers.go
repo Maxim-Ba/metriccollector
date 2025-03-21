@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
-	"github.com/Maxim-Ba/metriccollector/internal/storage"
+	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
 )
 
 func InitHandlers() *http.ServeMux {
@@ -17,6 +17,7 @@ func InitHandlers() *http.ServeMux {
 }
 
 func updateHandler(res http.ResponseWriter, req *http.Request) {
+	
 	err := checkForAllowedMethod(req)
 	if err != nil {
 		res.WriteHeader(http.StatusMethodNotAllowed)
@@ -26,9 +27,7 @@ func updateHandler(res http.ResponseWriter, req *http.Request) {
 	urlString := req.URL.Path //  /update/asdasd/asdasd/sdfsdfsdf/234
 	params := strings.TrimPrefix(urlString, "/update/")
 	parameters := strings.Split(params, "/")
-
 	metric, err := metricRecord(parameters)
-	fmt.Print(parameters)
 
 	if err != nil {
 		if err == ErrNoMetricName {
@@ -59,7 +58,6 @@ func checkForAllowedMethod(req *http.Request) error {
 func metricRecord(parameters []string) (metrics.MetricDTO, error) {
 	if len(parameters) != 3 {
 		return metrics.MetricDTO{}, ErrNoMetricName
-
 	}
 	if parameters[0] != "gauge" && parameters[0] != "counter" {
 		return metrics.MetricDTO{}, ErrNoMetricsType
