@@ -33,7 +33,11 @@ func (c *HTTPClient) SendMetrics(metrics []*metrics.MetricDTO) error {
 	fmt.Println("send request")
 	for _, metric := range metrics {
 		path := fmt.Sprintf("http://%s:%d/update/%s/%s/%f", host, port, metric.MetricType, metric.MetricName, metric.Value)
-		c.httpClient.Post(path, "text/plain", nil)
+		resp,err:=c.httpClient.Post(path, "text/plain", nil)
+		if err != nil {
+			return nil
+		}  
+		resp.Body.Close()//?
 	}
 	return nil
 }
