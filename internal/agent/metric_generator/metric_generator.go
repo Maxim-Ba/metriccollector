@@ -1,6 +1,7 @@
 package metricgenerator
 
 import (
+	"fmt"
 	"math/rand"
 	"reflect"
 	"runtime"
@@ -10,48 +11,20 @@ import (
 
 type MetricGenerator interface {
 	Generate() ([]*metrics.MetricDTO, error)
-	updatePollCount() int64
+	UpdatePollCount() int64
 }
 
 type generator struct {
 	pollCount int64
 }
 
-var gaugeMetrics = []string{
-	"Alloc",
-	"BuckHashSys",
-	"Frees",
-	"GCCPUFraction",
-	"GCSys",
-	"HeapAlloc",
-	"HeapIdle",
-	"HeapInuse",
-	"HeapObjects",
-	"HeapReleased",
-	"HeapSys",
-	"LastGC",
-	"Lookups",
-	"MCacheInuse",
-	"MCacheSys",
-	"MSpanInuse",
-	"MSpanSys",
-	"Mallocs",
-	"NextGC",
-	"NumForcedGC",
-	"NumGC",
-	"OtherSys",
-	"PauseTotalNs",
-	"StackInuse",
-	"StackSys",
-	"Sys",
-	"TotalAlloc",
-}
+
 
 var Generator = generator{
 	pollCount: 0,
 }
 
-func (g generator) Generate() ([]*metrics.MetricDTO, error) {
+func (g *generator) Generate() ([]*metrics.MetricDTO, error) {
 
 	// var metricSlice []*metrics.MetricDTO
 	// metricSlice = append(metricSlice, &metrics.MetricDTO{"gauge", "Alloc", float64(memStats.Alloc)})
@@ -86,7 +59,7 @@ func (g generator) Generate() ([]*metrics.MetricDTO, error) {
 
 	var metricSlice []*metrics.MetricDTO
 	memStatsValue := reflect.ValueOf(memStats)
-	for _, metricName := range gaugeMetrics {
+	for _, metricName := range metrics.GaugeMetrics {
 		field := memStatsValue.FieldByName(metricName)
 		if field.IsValid() {
 			var value float64
@@ -114,13 +87,13 @@ func (g generator) Generate() ([]*metrics.MetricDTO, error) {
 	metricSlice = append(metricSlice, &metrics.MetricDTO{
 		MetricType: "counter",
 		MetricName: "PollCount",
-		Value:      float64(g.updatePollCount()),
+		Value:      float64(g.pollCount),
 	})
-
+	fmt.Print(g.pollCount)
 	return metricSlice, nil
 }
 
-func (g *generator) updatePollCount() int64 {
+func (g *generator) UpdatePollCount() int64 {
 	g.pollCount = g.pollCount + 1
 	return g.pollCount
 }

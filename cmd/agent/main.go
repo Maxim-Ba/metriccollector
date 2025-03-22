@@ -19,6 +19,7 @@ func main() {
 			panic("Can not collect metrics")
 		}
 		if time.Since(reportIntervalStart) >= reportInterval {
+			metricgenerator.Generator.UpdatePollCount()
 			httpClient.SendMetrics(metrics)
 			reportIntervalStart = time.Now()
 
