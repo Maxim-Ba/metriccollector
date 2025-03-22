@@ -37,7 +37,7 @@ func (c *HTTPClient) SendMetrics(metrics []*metrics.MetricDTO) error {
 		if err != nil {
 			return nil
 		}  
-		resp.Body.Close()//?
+		resp.Body.Close()
 	}
 	return nil
 }

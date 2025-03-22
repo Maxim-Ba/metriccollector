@@ -9,6 +9,7 @@ import (
 
 
 func main() {
+
 	mux:=handlers.InitHandlers()
 
 	err := http.ListenAndServe(`:8080`, mux)

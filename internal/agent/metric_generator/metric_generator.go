@@ -17,35 +17,7 @@ type generator struct {
 	pollCount int64
 }
 
-var gaugeMetrics = []string{
-	"Alloc",
-	"BuckHashSys",
-	"Frees",
-	"GCCPUFraction",
-	"GCSys",
-	"HeapAlloc",
-	"HeapIdle",
-	"HeapInuse",
-	"HeapObjects",
-	"HeapReleased",
-	"HeapSys",
-	"LastGC",
-	"Lookups",
-	"MCacheInuse",
-	"MCacheSys",
-	"MSpanInuse",
-	"MSpanSys",
-	"Mallocs",
-	"NextGC",
-	"NumForcedGC",
-	"NumGC",
-	"OtherSys",
-	"PauseTotalNs",
-	"StackInuse",
-	"StackSys",
-	"Sys",
-	"TotalAlloc",
-}
+
 
 var Generator = generator{
 	pollCount: 0,
@@ -86,7 +58,7 @@ func (g generator) Generate() ([]*metrics.MetricDTO, error) {
 
 	var metricSlice []*metrics.MetricDTO
 	memStatsValue := reflect.ValueOf(memStats)
-	for _, metricName := range gaugeMetrics {
+	for _, metricName := range metrics.GaugeMetrics {
 		field := memStatsValue.FieldByName(metricName)
 		if field.IsValid() {
 			var value float64
