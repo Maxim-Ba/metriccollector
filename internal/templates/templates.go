@@ -23,7 +23,12 @@ func GetAllMetricsHTMLPage(m *[]metrics.MetricDTO) string {
 	`
 var body string 
 	for _, metric := range *m {
-		body += fmt.Sprintf("Тип: %s, Метрика: %s Значение %f <br/>", metric.MetricType, metric.MetricName, metric.Value)
+		if metric.MetricType == "gauge"{
+
+			body += fmt.Sprintf("Тип: %s, Метрика: %s Значение %f <br/>", metric.MetricType, metric.MetricName, metric.Value)
+		} else {
+			body += fmt.Sprintf("Тип: %s, Метрика: %s Значение %d <br/>", metric.MetricType, metric.MetricName, int64(metric.Value))
+		}
 }
 	return titlepageStart + body + titlepageEnd
 }

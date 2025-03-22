@@ -7,10 +7,10 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 )
 
-func Test_generator_updatePollCount(t *testing.T) {
+func Test_generator_UpdatePollCount(t *testing.T) {
 	g := generator{pollCount: 5}
 
-	result := g.updatePollCount()
+	result := g.UpdatePollCount()
 
 	if g.pollCount != 6 {
 		t.Errorf("Expected pollCount to be 6, got %d", g.pollCount)

@@ -36,10 +36,10 @@ func SaveMetric(m *metrics.MetricDTO) error {
 	return nil
 }
 func GetMetrics(metricsNames *[]string) (*[]metrics.MetricDTO , error){
-	err:= checkCorrectMetricsName(metricsNames)
-	if err != nil {
-		return nil, ErrUnknownMetricName
-	}
+	// err:= checkCorrectMetricsName(metricsNames)
+	// if err != nil {
+	// 	return nil, ErrUnknownMetricName
+	// }
 	var metricsSlice []metrics.MetricDTO
 	// Get all metrics
 	if len(*metricsNames) == 0 {
@@ -62,7 +62,9 @@ func GetMetrics(metricsNames *[]string) (*[]metrics.MetricDTO , error){
 			metricsSlice = append(metricsSlice, metrics.MetricDTO{MetricType: "counter", MetricName: metric, Value: float64( value)})
 		}
 	}
-	
+	if len(metricsSlice) ==0 {
+		return  nil, ErrUnknownMetricName
+	}
 	return &metricsSlice, nil
 }
 

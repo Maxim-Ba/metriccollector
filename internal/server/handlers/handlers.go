@@ -14,6 +14,7 @@ import (
 )
 
 func InitHandlers() *chi.Mux {
+	fmt.Print("InitHandlers")
 	r := chi.NewRouter()
 	r.Get("/", getAllHandler)
 
@@ -58,6 +59,8 @@ func getOneHandler(res http.ResponseWriter, req *http.Request) {
 	parameters := strings.Split(params, "/")
 	name := []string{parameters[1]}
 
+fmt.Print(parameters[1])//
+
 	metricsSlice, err := storage.GetMetrics(&name)
 	if err != nil {
 		res.WriteHeader(http.StatusNotFound)
@@ -65,8 +68,13 @@ func getOneHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 	metric := (*metricsSlice)[0]
+	fmt.Print("00000000000")
 	res.Header().Set("Content-Type", " text/plain")
-	res.Write([]byte(strconv.FormatFloat(metric.Value, 'f', 3, 64)))
+	if parameters[0]== "gauge" {
+		res.Write([]byte(strconv.FormatFloat(metric.Value, 'f', 3, 64)))
+	return
+	}
+	res.Write([]byte(strconv.FormatInt(int64(metric.Value), 10)))
 }
 
 func updateHandler(res http.ResponseWriter, req *http.Request) {

@@ -1,6 +1,7 @@
 package metricgenerator
 
 import (
+	"fmt"
 	"math/rand"
 	"reflect"
 	"runtime"
@@ -10,7 +11,7 @@ import (
 
 type MetricGenerator interface {
 	Generate() ([]*metrics.MetricDTO, error)
-	updatePollCount() int64
+	UpdatePollCount() int64
 }
 
 type generator struct {
@@ -23,7 +24,7 @@ var Generator = generator{
 	pollCount: 0,
 }
 
-func (g generator) Generate() ([]*metrics.MetricDTO, error) {
+func (g *generator) Generate() ([]*metrics.MetricDTO, error) {
 
 	// var metricSlice []*metrics.MetricDTO
 	// metricSlice = append(metricSlice, &metrics.MetricDTO{"gauge", "Alloc", float64(memStats.Alloc)})
@@ -86,13 +87,13 @@ func (g generator) Generate() ([]*metrics.MetricDTO, error) {
 	metricSlice = append(metricSlice, &metrics.MetricDTO{
 		MetricType: "counter",
 		MetricName: "PollCount",
-		Value:      float64(g.updatePollCount()),
+		Value:      float64(g.pollCount),
 	})
-
+	fmt.Print(g.pollCount)
 	return metricSlice, nil
 }
 
-func (g *generator) updatePollCount() int64 {
+func (g *generator) UpdatePollCount() int64 {
 	g.pollCount = g.pollCount + 1
 	return g.pollCount
 }
