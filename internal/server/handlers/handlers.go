@@ -71,7 +71,7 @@ fmt.Print(parameters[1])//
 	fmt.Print("00000000000")
 	res.Header().Set("Content-Type", " text/plain")
 	if parameters[0]== "gauge" {
-		res.Write([]byte(strconv.FormatFloat(metric.Value, 'f', 3, 64)))
+		res.Write([]byte(strconv.FormatFloat(metric.Value, 'f', -1, 64)))
 	return
 	}
 	res.Write([]byte(strconv.FormatInt(int64(metric.Value), 10)))
