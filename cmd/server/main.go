@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/Maxim-Ba/metriccollector/internal/server/handlers"
@@ -9,10 +10,11 @@ import (
 
 
 func main() {
-
+	parseFlags()
 	mux:=handlers.InitHandlers()
+	fmt.Println("Running server on", flagRunAddr)
 
-	err := http.ListenAndServe(`:8080`, mux)
+	err := http.ListenAndServe(flagRunAddr, mux)
 	if err != nil {
 		panic(err)
 	}

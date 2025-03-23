@@ -16,12 +16,10 @@ type HTTPClient struct {
 	httpClient *http.Client
 }
 
-var port int
-var host string
+var address string
 
-func NewClient(initHost string, initPort int) *HTTPClient {
-	port = initPort
-	host = initHost
+func NewClient(initAddress string) *HTTPClient {
+	address = initAddress
 	return &HTTPClient{
 		httpClient: &http.Client{
 			Timeout: 10 * time.Second,
@@ -32,7 +30,7 @@ func NewClient(initHost string, initPort int) *HTTPClient {
 func (c *HTTPClient) SendMetrics(metrics []*metrics.MetricDTO) error {
 	fmt.Println("send request")
 	for _, metric := range metrics {
-		path := fmt.Sprintf("http://%s:%d/update/%s/%s/%f", host, port, metric.MetricType, metric.MetricName, metric.Value)
+		path := fmt.Sprintf("http://%s/update/%s/%s/%f", address, metric.MetricType, metric.MetricName, metric.Value)
 		resp,err:=c.httpClient.Post(path, "text/plain", nil)
 		if err != nil {
 			return nil
