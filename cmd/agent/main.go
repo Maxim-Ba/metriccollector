@@ -35,9 +35,9 @@ func main() {
 func getParameters() Parameters {
 	parseFlags()
 	envConfig := parseEnv()
-	address := envConfig.ADDRESS
-	pollInterval := envConfig.POLL_INTERVAL
-	reportInterval := envConfig.REPORT_INTERVAL
+	address := envConfig.Address
+	pollInterval := envConfig.PollInterval
+	reportInterval := envConfig.ReportInterval
 	if address == "" {
 		address = flagRunAddr
 	}

@@ -27,7 +27,7 @@ func main() {
 func getParameters() Parameters {
 	parseFlags()
 	envConfig := parseEnv()
-	addres := envConfig.ADDRESS
+	addres := envConfig.Addres
 	if addres != "" {
 		return Parameters{
 			Addres: addres,

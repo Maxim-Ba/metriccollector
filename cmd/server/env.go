@@ -7,7 +7,7 @@ import (
 )
 
 type Config struct {
-	ADDRESS string `env:"ADDRESS"`
+	Addres string `env:"ADDRESS"`
 }
 
 func parseEnv() *Config {

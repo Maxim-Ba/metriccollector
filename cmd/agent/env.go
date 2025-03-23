@@ -7,9 +7,9 @@ import (
 )
 
 type Config struct {
-	ADDRESS string `env:"ADDRESS"`
-	REPORT_INTERVAL int `env:"REPORT_INTERVAL"`
-	POLL_INTERVAL int `env:"POLL_INTERVAL"`
+	Address string `env:"ADDRESS"`
+	ReportInterval int `env:"REPORT_INTERVAL"`
+	PollInterval int `env:"POLL_INTERVAL"`
 }
 
 func parseEnv() *Config {
