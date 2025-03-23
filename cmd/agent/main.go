@@ -32,6 +32,7 @@ func main() {
 		time.Sleep(time.Duration(parameterts.PollInterval) * time.Second)
 	}
 }
+
 func getParameters() Parameters {
 	parseFlags()
 	envConfig := parseEnv()
