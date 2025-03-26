@@ -1,4 +1,4 @@
-package metricgenerator
+package generator
 
 import (
 	"fmt"

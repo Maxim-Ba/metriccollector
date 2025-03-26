@@ -69,7 +69,7 @@ func Test_updateHandler(t *testing.T) {
 			},
 		},
 	}
-	handler := http.HandlerFunc(updateHandler)
+	handler := http.HandlerFunc(UpdateHandler)
 	srv := httptest.NewServer(handler)
 	client := &http.Client{}
 	for _, test := range tests {
@@ -115,7 +115,7 @@ func Test_getAllHandler(t *testing.T) {
 			},
 		},
 	}
-	handler := http.HandlerFunc(getAllHandler)
+	handler := http.HandlerFunc(GetAllHandler)
 	srv := httptest.NewServer(handler)
 	client := &http.Client{}
 	for _, test := range tests {

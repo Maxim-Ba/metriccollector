@@ -1,0 +1,23 @@
+package router
+
+import (
+	"fmt"
+
+	"github.com/Maxim-Ba/metriccollector/internal/server/handlers"
+	"github.com/go-chi/chi/v5"
+)
+
+func New() *chi.Mux {
+	fmt.Print("InitHandlers")
+	r := chi.NewRouter()
+	r.Get("/", handlers.GetAllHandler)
+
+	r.Route("/value", func(r chi.Router) {
+		r.Get("/{metricType}/{metricName}", handlers.GetOneHandler)
+	})
+	r.Route("/update", func(r chi.Router) {
+		r.Post("/{metricType}/{metricName}/{value}", handlers.UpdateHandler)
+	})
+
+	return r
+}

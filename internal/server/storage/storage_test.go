@@ -19,9 +19,11 @@ func TestGetMetrics(t *testing.T) {
 	}{
 		// TODO: Add test cases.
 	}
+	s,_ := New()
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := GetMetrics(tt.args.metricsNames)
+			got, err := s.GetMetrics(tt.args.metricsNames)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetMetrics() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -33,42 +35,3 @@ func TestGetMetrics(t *testing.T) {
 	}
 }
 
-func Test_checkCorrectMetricsName(t *testing.T) {
-	type want struct {
-		result  error
-	}
-	tests := []struct {
-		name    string
-		metricsNames *[]string
-		want    want
-	}{
-		{
-			name: "correct name case",
-			metricsNames: &[]string{"StackInuse"},
-			want: want{
-				result : nil,
-			},
-		},
-		{
-			name: "correct names case",
-			metricsNames: &[]string{"StackInuse", "PollCount"},
-			want: want{
-				result : nil,
-			},
-		},
-		{
-			name: "wrong names case",
-			metricsNames: &[]string{"Stack4545Inuse1"},
-			want: want{
-				result : ErrUnknownMetricName,
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if err := checkCorrectMetricsName(tt.metricsNames); err != tt.want.result {
-				t.Errorf("checkCorrectMetricsName() error = %v, wantErr %v", err, tt.want.result)
-			}
-		})
-	}
-}

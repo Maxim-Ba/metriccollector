@@ -4,7 +4,8 @@ import (
 	"time"
 
 	"github.com/Maxim-Ba/metriccollector/internal/agent/client"
-	metricgenerator "github.com/Maxim-Ba/metriccollector/internal/agent/metric_generator"
+	"github.com/Maxim-Ba/metriccollector/internal/agent/config"
+	metricGenerator "github.com/Maxim-Ba/metriccollector/internal/agent/generator"
 )
 
 type Parameters struct {
@@ -19,12 +20,12 @@ func main() {
 	httpClient := client.NewClient(parameterts.Addres)
 	reportIntervalStart := time.Now()
 	for {
-		metrics, err := metricgenerator.Generator.Generate()
+		metrics, err := metricGenerator.Generator.Generate()
 		if err != nil {
 			panic("Can not collect metrics")
 		}
 		if time.Since(reportIntervalStart) >= time.Duration(parameterts.ReportInterval)*time.Second {
-			metricgenerator.Generator.UpdatePollCount()
+			metricGenerator.Generator.UpdatePollCount()
 			httpClient.SendMetrics(metrics)
 			reportIntervalStart = time.Now()
 
@@ -34,19 +35,19 @@ func main() {
 }
 
 func getParameters() Parameters {
-	parseFlags()
-	envConfig := parseEnv()
+	flags:=config.ParseFlags()
+	envConfig := config.ParseEnv()
 	address := envConfig.Address
 	pollInterval := envConfig.PollInterval
 	reportInterval := envConfig.ReportInterval
 	if address == "" {
-		address = flagRunAddr
+		address = flags.FlagRunAddr
 	}
 	if pollInterval == 0 {
-		pollInterval = flagPollInterval
+		pollInterval = flags.FlagPollInterval
 	}
 	if reportInterval == 0 {
-		reportInterval = flagReportInterval
+		reportInterval = flags.FlagReportInterval
 	}
 	return Parameters{
 		Addres:         address,

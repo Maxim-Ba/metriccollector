@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"log"
@@ -7,12 +7,10 @@ import (
 )
 
 type Config struct {
-	Address string `env:"ADDRESS"`
-	ReportInterval int `env:"REPORT_INTERVAL"`
-	PollInterval int `env:"POLL_INTERVAL"`
+	Addres string `env:"ADDRESS"`
 }
 
-func parseEnv() *Config {
+func ParseEnv() *Config {
 	var cfg Config
 	err := env.Parse(&cfg)
 	if err != nil {
