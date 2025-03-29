@@ -7,6 +7,7 @@ import (
 )
 
 
+
 type MemStorage struct {
 	collectionGauge   map[string]float64
 	collectionCounter map[string]int64

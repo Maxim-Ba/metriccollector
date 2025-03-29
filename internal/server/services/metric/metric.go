@@ -2,11 +2,14 @@ package metric
 
 import (
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
-	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
 	"github.com/Maxim-Ba/metriccollector/internal/templates"
 )
+type Storage interface {
+	SaveMetric(m *metrics.MetricDTO) error
+	GetMetrics(metricsNames *[]string) (*[]metrics.MetricDTO , error)
+}
 
-func GetAll(s storage.Storage) (string, error) {
+func GetAll(s Storage) (string, error) {
 	empySlice := []string{}
 	metricsSlice, err := s.GetMetrics(&empySlice)
 	if err != nil {
@@ -16,7 +19,7 @@ func GetAll(s storage.Storage) (string, error) {
 	return html, nil
 }
 
-func Get(s storage.Storage, metricsNames *[]string) (*metrics.MetricDTO, error) {
+func Get(s Storage, metricsNames *[]string) (*metrics.MetricDTO, error) {
 
 	metricsSlice, err := s.GetMetrics(metricsNames)
 	if err != nil {
@@ -26,7 +29,7 @@ func Get(s storage.Storage, metricsNames *[]string) (*metrics.MetricDTO, error) 
 	return &metric, nil
 }
 
-func Update(s storage.Storage, m *metrics.MetricDTO) error {
+func Update(s Storage, m *metrics.MetricDTO) error {
 	err := s.SaveMetric(m)
 	if err != nil {
 		return err

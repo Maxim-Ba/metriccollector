@@ -20,14 +20,7 @@ func GetAllHandler(res http.ResponseWriter, req *http.Request) {
 		res.Write([]byte(""))
 		return
 	}
-	// empySlice := []string{}
-	// metricsSlice, err := storage.GetMetrics(&empySlice)
-	// if err != nil {
-	// 	res.WriteHeader(http.StatusNotFound)
-	// 	res.Write([]byte(""))
-	// 	return
-	// }
-	// html := templates.GetAllMetricsHTMLPage(metricsSlice)
+
 
 	html, err := metricsService.GetAll(storage.StorageInstance)
 	if err != nil {
@@ -54,13 +47,11 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Print(parameters[1]) //
 	metric, err := metricsService.Get(storage.StorageInstance, &name)
 
-	// metricsSlice, err := storage.GetMetrics(&name)
 	if err != nil {
 		res.WriteHeader(http.StatusNotFound)
 		res.Write([]byte(""))
 		return
 	}
-	// metric := (*metricsSlice)[0]
 
 	res.Header().Set("Content-Type", " text/plain")
 	if parameters[0] == "gauge" {

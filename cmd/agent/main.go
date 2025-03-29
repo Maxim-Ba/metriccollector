@@ -8,14 +8,9 @@ import (
 	metricGenerator "github.com/Maxim-Ba/metriccollector/internal/agent/generator"
 )
 
-type Parameters struct {
-	Addres         string
-	ReportInterval int
-	PollInterval   int
-}
 
 func main() {
-	parameterts := getParameters()
+	parameterts := config.GetParameters()
 
 	httpClient := client.NewClient(parameterts.Addres)
 	reportIntervalStart := time.Now()
@@ -34,24 +29,3 @@ func main() {
 	}
 }
 
-func getParameters() Parameters {
-	flags:=config.ParseFlags()
-	envConfig := config.ParseEnv()
-	address := envConfig.Address
-	pollInterval := envConfig.PollInterval
-	reportInterval := envConfig.ReportInterval
-	if address == "" {
-		address = flags.FlagRunAddr
-	}
-	if pollInterval == 0 {
-		pollInterval = flags.FlagPollInterval
-	}
-	if reportInterval == 0 {
-		reportInterval = flags.FlagReportInterval
-	}
-	return Parameters{
-		Addres:         address,
-		ReportInterval: reportInterval,
-		PollInterval:   pollInterval,
-	}
-}
