@@ -19,6 +19,7 @@ func New() *chi.Mux {
 	r.Route("/update", func(r chi.Router) {
 		r.Post("/", logger.WithLogging (handlers.UpdateHandler))
 		r.Post("/{metricType}/{metricName}/{value}", logger.WithLogging (handlers.UpdateHandlerByURLParams))
+		r.Get("/{metricType}/{metricName}/{value}", logger.WithLogging (handlers.UpdateHandlerByURLParams))
 
 	})
 

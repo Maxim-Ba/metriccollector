@@ -142,7 +142,7 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 }
 func  UpdateHandlerByURLParams (res http.ResponseWriter, req *http.Request) {
 	fmt.Print("UpdateHandlerByURLParams \n")
-	err := checkForAllowedMethod(req, []string{http.MethodPost})
+	err := checkForAllowedMethod(req, []string{http.MethodPost, http.MethodGet})
 	if err != nil {
 		logger.LogInfo(err)
 		res.WriteHeader(http.StatusMethodNotAllowed)
