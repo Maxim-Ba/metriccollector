@@ -18,7 +18,6 @@ func main() {
 	for {
 		metrics, err := metricGenerator.Generator.Generate()
 		if err != nil {
-			logger.LogInfo("agent 10------------")
 			logger.LogInfo(err)
 			panic("Can not collect metrics")
 		}

@@ -98,6 +98,8 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 		res.Write([]byte(""))
 		return
 	}
+	fmt.Print("1 updateHandler \n")
+
 	var buf bytes.Buffer
 	_, err = buf.ReadFrom(req.Body)
 	if err != nil {
@@ -108,6 +110,8 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 			res.Write([]byte(""))
 			return
 	}
+	fmt.Print("2 updateHandler \n")
+
 	metric, err := parseMetric(&buf)
 
 	if err != nil {
@@ -149,11 +153,8 @@ func  UpdateHandlerByURLParams (res http.ResponseWriter, req *http.Request) {
 	params := strings.TrimPrefix(urlString, "/update/")
 	parameters := strings.Split(params, "/")
 	metric, err := metricRecord(parameters)
-	logger.LogInfo("urlString------------")
-	logger.LogInfo(urlString)
 
 	if err != nil {
-		logger.LogInfo("UpdateHandlerByURLParams3------------")
 		logger.LogInfo(err)
 		if err == ErrNoMetricName {
 			res.WriteHeader(http.StatusNotFound)
@@ -166,7 +167,6 @@ func  UpdateHandlerByURLParams (res http.ResponseWriter, req *http.Request) {
 	}
 	err = metricsService.Update(storage.StorageInstance, &metric)
 	if err != nil {
-		logger.LogInfo("UpdateHandlerByURLParams4------------")
 		logger.LogInfo(err)
 		res.WriteHeader(http.StatusMethodNotAllowed)
 		res.Write([]byte(""))

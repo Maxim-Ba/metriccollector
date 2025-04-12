@@ -7,7 +7,7 @@ import (
 
 var sugar zap.SugaredLogger
 
-func InitLogger() {
+func init() {
     // создаём предустановленный регистратор zap
     logger, err := zap.NewDevelopment()
     if err != nil {
