@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net/http"
 	"slices"
+	"strconv"
+	"strings"
 
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
@@ -134,7 +136,80 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 	res.WriteHeader(http.StatusOK)
 	res.Write([]byte(""))
 }
+func  UpdateHandlerByURLParams (res http.ResponseWriter, req *http.Request) {
+	fmt.Print("UpdateHandlerByURLParams \n")
+	err := checkForAllowedMethod(req, []string{http.MethodPost})
+	if err != nil {
+		logger.LogInfo(err)
+		res.WriteHeader(http.StatusMethodNotAllowed)
+		res.Write([]byte(""))
+		return
+	}
+	urlString := req.URL.Path //  /update/asdasd/asdasd/sdfsdfsdf/234
+	params := strings.TrimPrefix(urlString, "/update/")
+	parameters := strings.Split(params, "/")
+	metric, err := metricRecord(parameters)
+	logger.LogInfo("urlString------------")
+	logger.LogInfo(urlString)
 
+	if err != nil {
+		logger.LogInfo("UpdateHandlerByURLParams3------------")
+		logger.LogInfo(err)
+		if err == ErrNoMetricName {
+			res.WriteHeader(http.StatusNotFound)
+		}
+		if err == ErrNoMetricsType || err == ErrWrongValue {
+			res.WriteHeader(http.StatusBadRequest)
+		}
+		res.Write([]byte(""))
+		return
+	}
+	err = metricsService.Update(storage.StorageInstance, &metric)
+	if err != nil {
+		logger.LogInfo("UpdateHandlerByURLParams4------------")
+		logger.LogInfo(err)
+		res.WriteHeader(http.StatusMethodNotAllowed)
+		res.Write([]byte(""))
+		return
+	}
+	res.WriteHeader(http.StatusOK)
+	res.Write([]byte(params))
+	res.Write([]byte(""))
+}
+func metricRecord(parameters []string) (metrics.Metrics, error) {
+	if len(parameters) != 3 {
+		return metrics.Metrics{}, ErrNoMetricName
+	}
+		if parameters[0] != "gauge" && parameters[0] != "counter" {
+			return metrics.Metrics{}, ErrNoMetricsType
+		
+		}
+		if parameters[1] == "" {
+			return metrics.Metrics{}, ErrNoMetricName
+		}
+		metricType := parameters[0]
+		metricName := parameters[1]
+		var value float64
+		var delta int64
+		var err error
+		if parameters[0] == "gauge" {
+			value, err = strconv.ParseFloat(parameters[2], 64)
+			} else {
+				delta, err = strconv.ParseInt(parameters[2], 10,64)
+
+			}
+			if err != nil {
+				return metrics.Metrics{}, ErrWrongValue
+			}
+		
+		return metrics.Metrics{
+			MType: metricType,
+			ID: metricName,
+			Value:      &value,
+			Delta: &delta,
+		}, nil
+	
+			}	
 func checkForAllowedMethod(req *http.Request, allowedMethod []string) error {
 	if !(slices.Contains(allowedMethod, req.Method)) {
 		return fmt.Errorf("not allowed method")
