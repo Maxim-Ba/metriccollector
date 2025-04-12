@@ -14,7 +14,7 @@ func TestGetMetrics(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    *[]metrics.MetricDTO
+		want    *[]metrics.Metrics
 		wantErr bool
 	}{
 		// TODO: Add test cases.

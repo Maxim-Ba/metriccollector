@@ -1,10 +1,13 @@
 package client
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"time"
 
+	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 )
 
@@ -27,12 +30,22 @@ func NewClient(initAddress string) *HTTPClient {
 	}
 }
 
-func (c *HTTPClient) SendMetrics(metrics []*metrics.MetricDTO) error {
+func (c *HTTPClient) SendMetrics(metrics []*metrics.Metrics) error {
 	fmt.Println("send request")
+
 	for _, metric := range metrics {
-		path := fmt.Sprintf("http://%s/update/%s/%s/%f", address, metric.MetricType, metric.MetricName, metric.Value)
-		resp,err:=c.httpClient.Post(path, "text/plain", nil)
+		body, err := json.Marshal(*metric)
 		if err != nil {
+			logger.LogInfo("agent 0------------")
+			logger.LogInfo(err)
+
+			return err
+	}
+		path := fmt.Sprintf("http://%s/update/", address)
+		resp,err:=c.httpClient.Post(path, "application/json", bytes.NewReader(body))
+		if err != nil {
+			logger.LogInfo("agent 1------------")
+			logger.LogInfo(err)
 			return nil
 		}  
 		resp.Body.Close()

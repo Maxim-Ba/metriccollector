@@ -1,10 +1,14 @@
 package handlers
 
 import (
+	"bytes"
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
+	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -14,21 +18,29 @@ func Test_updateHandler(t *testing.T) {
 	}
 	tests := []struct {
 		name   string
-		path   string
 		method string
+		body metrics.Metrics
 		want   want
 	}{
 		{
 			name:   "If Method not POST must be error",
-			path:   `gauge/name/234.34`,
 			method: http.MethodGet,
+			body: metrics.Metrics{
+				ID: "name" ,
+				Value:utils.IntToPointerFloat(234) ,
+				MType: "gauge",
+			},
 			want: want{
 				code: http.StatusMethodNotAllowed,
 			},
 		},
 		{
 			name:   "No name metrics",
-			path:   `gauge//234.34`,
+			body: metrics.Metrics{
+				ID: "" ,
+				Value:utils.IntToPointerFloat(234) ,
+				MType: "gauge",
+			},
 			method: http.MethodPost,
 			want: want{
 				code: http.StatusNotFound,
@@ -36,33 +48,48 @@ func Test_updateHandler(t *testing.T) {
 		},
 		{
 			name:   "Wrong metric type",
-			path:   `g/name/234.34`,
 			method: http.MethodPost,
-
+			body: metrics.Metrics{
+				ID: "name" ,
+				Value:utils.IntToPointerFloat(234) ,
+				MType: "",
+			},
 			want: want{
 				code: http.StatusBadRequest,
 			},
 		},
-		{
-			name:   "Wrong metric value",
-			path:   `gauge/name/string`,
-			method: http.MethodPost,
-
-			want: want{
-				code: http.StatusBadRequest,
-			},
-		},
+		// {
+		// 	name:   "Wrong metric value",
+		// 	path:   `gauge/name/string`,
+		// 	method: http.MethodPost,
+		// 	body: metrics.Metrics{
+		// 		ID: "name" ,
+		// 		Value:utils.IntToPointerFloat(234) ,
+		// 		MType: "",
+		// 	},
+		// 	want: want{
+		// 		code: http.StatusBadRequest,
+		// 	},
+		// },
 		{
 			name:   "Ok counter",
-			path:   `counter/name/345`,
 			method: http.MethodPost,
+			body: metrics.Metrics{
+				ID: "name" ,
+				MType: "counter",
+				Delta:utils.IntToPointerInt(345)  ,
+			},
 			want: want{
 				code: http.StatusOK,
 			},
 		},
 		{
 			name:   "Ok gauge",
-			path:   `gauge/name/345`,
+			body: metrics.Metrics{
+				ID: "name" ,
+				Value:utils.IntToPointerFloat(234) ,
+				MType: "gauge",
+			},
 			method: http.MethodPost,
 			want: want{
 				code: http.StatusOK,
@@ -73,9 +100,10 @@ func Test_updateHandler(t *testing.T) {
 	srv := httptest.NewServer(handler)
 	client := &http.Client{}
 	for _, test := range tests {
-		path := "/update/" + test.path
+		path := "/update/"
+		body ,_:= json.Marshal(test.body)
 		t.Run(test.name, func(t *testing.T) {
-			request, _ := http.NewRequest(test.method, srv.URL+path, nil)
+			request, _ := http.NewRequest(test.method, srv.URL+path, bytes.NewReader(body))
 			res, err := client.Do(request)  
 			assert.NoError(t,err)
 			assert.Equal(t, test.want.code, res.StatusCode)

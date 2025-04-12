@@ -14,10 +14,10 @@ func New() *chi.Mux {
 	r.Get("/", handlers.GetAllHandler)
 
 	r.Route("/value", func(r chi.Router) {
-		r.Get("/{metricType}/{metricName}",logger.WithLogging (handlers.GetOneHandler))
+		r.Post("/", logger.WithLogging (handlers.GetOneHandler))
 	})
 	r.Route("/update", func(r chi.Router) {
-		r.Post("/{metricType}/{metricName}/{value}", logger.WithLogging (handlers.UpdateHandler))
+		r.Post("/", logger.WithLogging (handlers.UpdateHandler))
 	})
 
 	return r

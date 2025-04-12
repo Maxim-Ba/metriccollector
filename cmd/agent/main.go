@@ -6,6 +6,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/agent/client"
 	"github.com/Maxim-Ba/metriccollector/internal/agent/config"
 	metricGenerator "github.com/Maxim-Ba/metriccollector/internal/agent/generator"
+	"github.com/Maxim-Ba/metriccollector/internal/logger"
 )
 
 
@@ -17,6 +18,8 @@ func main() {
 	for {
 		metrics, err := metricGenerator.Generator.Generate()
 		if err != nil {
+			logger.LogInfo("agent 10------------")
+			logger.LogInfo(err)
 			panic("Can not collect metrics")
 		}
 		if time.Since(reportIntervalStart) >= time.Duration(parameterts.ReportInterval)*time.Second {

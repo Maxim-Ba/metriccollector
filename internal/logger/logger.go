@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"go.uber.org/zap"
 )
 
@@ -19,8 +20,16 @@ func InitLogger() {
 		LogInfo("logger is initialized")
 }
 
-func LogInfo( message string)  {
+func LogInfo( message interface{})  {
 	sugar.Infoln(
 		"message", message,
 )
+
 }
+func LogMetric( m metrics.Metrics)  {
+	sugar.Infoln(
+		"MType", m.MType,
+		"ID", m.ID,
+		"Value", m.Value,
+		"Delta", m.Delta,
+)}

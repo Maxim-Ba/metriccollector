@@ -6,7 +6,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 )
 
-func GetAllMetricsHTMLPage(m *[]metrics.MetricDTO) string {
+func GetAllMetricsHTMLPage(m *[]metrics.Metrics) string {
 	const titlepageStart = `
 	<!DOCTYPE html>
 <html lang="en">
@@ -16,18 +16,18 @@ func GetAllMetricsHTMLPage(m *[]metrics.MetricDTO) string {
 </head>
 <body>
 <h1>Метрики</h1>`
-   
+  
 
 	const titlepageEnd =`</body>
 </html>
 	`
 var body string 
 	for _, metric := range *m {
-		if metric.MetricType == "gauge"{
+		if metric.MType == "gauge"{
 
-			body += fmt.Sprintf("Тип: %s, Метрика: %s Значение %f <br/>", metric.MetricType, metric.MetricName, metric.Value)
+			body += fmt.Sprintf("Тип: %s, Метрика: %s Значение %f <br/>", metric.MType, metric.ID, *metric.Value)
 		} else {
-			body += fmt.Sprintf("Тип: %s, Метрика: %s Значение %d <br/>", metric.MetricType, metric.MetricName, int64(metric.Value))
+			body += fmt.Sprintf("Тип: %s, Метрика: %s Значение %d <br/>", metric.MType, metric.ID, int64(*metric.Delta))
 		}
 }
 	return titlepageStart + body + titlepageEnd
