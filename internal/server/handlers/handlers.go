@@ -34,6 +34,37 @@ func GetAllHandler(res http.ResponseWriter, req *http.Request) {
 	res.Header().Set("Content-Type", "text/html")
 	res.Write([]byte(html))
 }
+func GetOneHandlerByParams (res http.ResponseWriter, req *http.Request) {
+	fmt.Print("GetOneHandlerByParams")
+	err := checkForAllowedMethod(req, []string{http.MethodGet})
+	if err != nil {
+		logger.LogInfo(err)
+		res.WriteHeader(http.StatusMethodNotAllowed)
+		res.Write([]byte(""))
+		return
+	}
+	urlString := req.URL.Path //  /value/asdasd/asdasd/sdfsdfsdf/234
+	params := strings.TrimPrefix(urlString, "/value/")
+	parameters := strings.Split(params, "/")
+	name := []string{parameters[1]}
+
+	fmt.Print(parameters[1]) //
+	metric, err := metricsService.Get(storage.StorageInstance, &name)
+
+	if err != nil {
+		res.WriteHeader(http.StatusNotFound)
+		res.Write([]byte(""))
+		return
+	}
+	res.Header().Set("Content-Type", " text/plain")
+	if parameters[0] == "gauge" {
+		res.Write([]byte(strconv.FormatFloat(*metric.Value, 'f', -1, 64)))
+		return
+}
+res.Write([]byte(strconv.FormatInt(int64(*metric.Delta), 10)))
+
+res.WriteHeader(http.StatusOK)
+}
 func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 	fmt.Print("getOneHandler \n")
 	err := checkForAllowedMethod(req, []string{http.MethodPost})
