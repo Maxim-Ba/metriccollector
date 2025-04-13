@@ -11,14 +11,10 @@ tasks:
         go build -ldflags '-s -w -X main.buildVersion=1.0.0 -X main.buildDate=2023-01-23 -X main.buildCommit=0c2fs'  -o cmd/agent/agent cmd/agent/main.go
         go build -ldflags '-s -w -X main.buildVersion=1.0.0 -X main.buildDate=2023-01-23 -X main.buildCommit=0c2fs'  -o cmd/server/server cmd/server/main.go
         # Run your test commands
-          SERVER_PORT=5555
-          ADDRESS="localhost:${SERVER_PORT}"
-          TEMP_FILE=5555
-          metricstestbeta -test.v -test.run=^TestIteration7$ \
+          metricstestbeta -test.v -test.run=^TestIteration3[AB]*$ \
+            -source-path=. \
             -agent-binary-path=cmd/agent/agent \
-            -binary-path=cmd/server/server \
-            -server-port=$SERVER_PORT \
-            -source-path=.
+            -binary-path=cmd/server/server
 
 
   static-tests:

@@ -1,6 +1,8 @@
 package storage
 
 import (
+	"slices"
+
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
@@ -53,39 +55,36 @@ func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]me
 		}
 		return &metricsSlice, nil
 	}
-	for _, m := range *metricsParams {
-		if m.MetricType == "gauge" {
-			value, ok := StorageInstance.collectionGauge[m.MetricsName]
-			if ok {
-				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: m.MetricsName, Value: utils.FloatToPointerFloat(value)})
-			} else {
-				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: m.MetricsName, Value: utils.FloatToPointerFloat(0)})
-			}
-		}
-		if m.MetricType == "counter" {
-			value, ok := StorageInstance.collectionCounter[m.MetricsName]
-			if ok {
-				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: m.MetricsName, Delta: utils.FloatToPointerInt(value)})
-			} else {
-				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: m.MetricsName, Delta: utils.FloatToPointerInt(0)})
-			}
+	// for _, m := range *metricsParams {
+	// 	if m.MetricType == "gauge" {
+	// 		value, ok := StorageInstance.collectionGauge[m.MetricsName]
+	// 		if ok {
+	// 			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: m.MetricsName, Value: utils.FloatToPointerFloat(value)})
+	// 		} else {
+	// 			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: m.MetricsName, Value: utils.FloatToPointerFloat(0)})
+	// 		}
+	// 	}
+	// 	if m.MetricType == "counter" {
+	// 		value, ok := StorageInstance.collectionCounter[m.MetricsName]
+	// 		if ok {
+	// 			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: m.MetricsName, Delta: utils.FloatToPointerInt(value)})
+	// 		} else {
+	// 			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: m.MetricsName, Delta: utils.FloatToPointerInt(0)})
+	// 		}
 
+	// 	}
+	// }
+	//Get choosen metrics
+	for metric, value := range StorageInstance.collectionGauge {
+		if slices.Contains(metricsNames,metric) {
+			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: metric, Value: utils.FloatToPointerFloat(value)})
 		}
 	}
-	//Get choosen metrics
-	// for metric, value := range StorageInstance.collectionGauge {
-	// 	if slices.Contains(metricsNames,metric) {
-	// 		metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: metric, Value: utils.FloatToPointerFloat(value)})
-	// 	}
-	// 	else {
-	// 		metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: metric, Value: utils.FloatToPointerFloat(value)})
-	// 	}
-	// }
-	// for metric, value := range StorageInstance.collectionCounter {
-	// 	if slices.Contains(metricsNames,metric) {
-	// 		metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: metric, Delta: utils.FloatToPointerInt(value)})
-	// 	}
-	// }
+	for metric, value := range StorageInstance.collectionCounter {
+		if slices.Contains(metricsNames,metric) {
+			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: metric, Delta: utils.FloatToPointerInt(value)})
+		}
+	}
 	if len(metricsSlice) == 0 {
 		return nil, ErrUnknownMetricName
 	}

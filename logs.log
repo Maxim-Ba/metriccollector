@@ -5867,3 +5867,1201 @@
 {"level":"info","ts":1744530161.738948,"caller":"logger/logger.go:42","msg":"MType gauge ID GetSet194 Value 232507.40292410832 Delta 0"}
 {"level":"info","ts":1744530161.7391157,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
 {"level":"info","ts":1744530161.73931,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 703µs size 60"}
+{"level":"info","ts":1744530713.9986613,"caller":"logger/logger.go:28","msg":"message logger is initialized"}
+{"level":"info","ts":1744530724.27559,"caller":"logger/logger.go:28","msg":"message agent 1------------"}
+{"level":"info","ts":1744530724.2763286,"caller":"logger/logger.go:28","msg":"message Post \"http://localhost:8080/update/\": EOF"}
+{"level":"info","ts":1744530724.455551,"caller":"logger/logger.go:28","msg":"message logger is initialized"}
+{"level":"info","ts":1744530724.7006145,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530724.7153811,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530724.7164772,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530724.7173772,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 16.6933ms size 0"}
+{"level":"info","ts":1744530724.8204427,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530724.8218179,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530724.8228576,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530724.8238912,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.4353ms size 0"}
+{"level":"info","ts":1744530724.9270175,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530724.9282904,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530724.9293933,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530724.930403,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3705ms size 0"}
+{"level":"info","ts":1744530725.0332093,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530725.0343082,"caller":"logger/logger.go:42","msg":"MType gauge ID BuckHashSys Value 0 Delta 0"}
+{"level":"info","ts":1744530725.0351868,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530725.0360796,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.8602ms size 0"}
+{"level":"info","ts":1744530725.1392345,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530725.1402917,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530725.1413417,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530725.1424387,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.1945ms size 0"}
+{"level":"info","ts":1744530725.2447667,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530725.2461233,"caller":"logger/logger.go:42","msg":"MType gauge ID GCCPUFraction Value 0 Delta 0"}
+{"level":"info","ts":1744530725.2470982,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530725.248196,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.4171ms size 0"}
+{"level":"info","ts":1744530725.3509903,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530725.3520763,"caller":"logger/logger.go:42","msg":"MType gauge ID GCSys Value 0 Delta 0"}
+{"level":"info","ts":1744530725.352895,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530725.3537161,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.7167ms size 0"}
+{"level":"info","ts":1744530725.456199,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530725.4568658,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530725.4573317,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530725.457745,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.5438ms size 0"}
+{"level":"info","ts":1744530725.5598624,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530725.5610461,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530725.562128,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530725.5631928,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.321ms size 0"}
+{"level":"info","ts":1744530725.6652932,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530725.6656392,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530725.6659367,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530725.6662068,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 912.7µs size 0"}
+{"level":"info","ts":1744530725.7684283,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530725.7696688,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530725.7707174,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530725.7718742,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.4362ms size 0"}
+{"level":"info","ts":1744530725.874002,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530725.8744042,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapReleased Value 0 Delta 0"}
+{"level":"info","ts":1744530725.8747525,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530725.8751242,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.1215ms size 0"}
+{"level":"info","ts":1744530725.9771016,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530725.978422,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapSys Value 0 Delta 0"}
+{"level":"info","ts":1744530725.9794703,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530725.9805162,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.4048ms size 0"}
+{"level":"info","ts":1744530726.0830214,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530726.0841029,"caller":"logger/logger.go:42","msg":"MType gauge ID LastGC Value 0 Delta 0"}
+{"level":"info","ts":1744530726.0849693,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530726.085816,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.785ms size 0"}
+{"level":"info","ts":1744530726.1880903,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530726.1884344,"caller":"logger/logger.go:42","msg":"MType gauge ID Lookups Value 0 Delta 0"}
+{"level":"info","ts":1744530726.1887734,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530726.1890748,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 983.5µs size 0"}
+{"level":"info","ts":1744530726.2916064,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530726.29288,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530726.293756,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530726.294754,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.1386ms size 0"}
+{"level":"info","ts":1744530726.3976748,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530726.39864,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheSys Value 0 Delta 0"}
+{"level":"info","ts":1744530726.3995125,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530726.4003685,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.6835ms size 0"}
+{"level":"info","ts":1744530726.5034313,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530726.5048718,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530726.505863,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530726.5068471,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.4048ms size 0"}
+{"level":"info","ts":1744530726.6092653,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530726.6096318,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanSys Value 0 Delta 0"}
+{"level":"info","ts":1744530726.6098793,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530726.6101034,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 847.1µs size 0"}
+{"level":"info","ts":1744530726.7118921,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530726.7128634,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530726.7136955,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530726.714454,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.5555ms size 0"}
+{"level":"info","ts":1744530726.816254,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530726.8165405,"caller":"logger/logger.go:42","msg":"MType gauge ID NextGC Value 0 Delta 0"}
+{"level":"info","ts":1744530726.816763,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530726.8170052,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 750.2µs size 0"}
+{"level":"info","ts":1744530726.9186475,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530726.9199135,"caller":"logger/logger.go:42","msg":"MType gauge ID NumForcedGC Value 0 Delta 0"}
+{"level":"info","ts":1744530726.9209542,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530726.92198,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3233ms size 0"}
+{"level":"info","ts":1744530727.0249412,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530727.026208,"caller":"logger/logger.go:42","msg":"MType gauge ID NumGC Value 0 Delta 0"}
+{"level":"info","ts":1744530727.0272934,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530727.0283067,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3536ms size 0"}
+{"level":"info","ts":1744530727.1312666,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530727.132526,"caller":"logger/logger.go:42","msg":"MType gauge ID OtherSys Value 0 Delta 0"}
+{"level":"info","ts":1744530727.1336346,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530727.13457,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.2929ms size 0"}
+{"level":"info","ts":1744530727.2378771,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530727.2391155,"caller":"logger/logger.go:42","msg":"MType gauge ID PauseTotalNs Value 0 Delta 0"}
+{"level":"info","ts":1744530727.2400684,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530727.241065,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.1786ms size 0"}
+{"level":"info","ts":1744530727.3439631,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530727.345232,"caller":"logger/logger.go:42","msg":"MType gauge ID StackInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530727.3462381,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530727.3473957,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.4228ms size 0"}
+{"level":"info","ts":1744530727.4504287,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530727.4516416,"caller":"logger/logger.go:42","msg":"MType gauge ID StackSys Value 0 Delta 0"}
+{"level":"info","ts":1744530727.4525206,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530727.4535315,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.0935ms size 0"}
+{"level":"info","ts":1744530727.5563908,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530727.557578,"caller":"logger/logger.go:42","msg":"MType gauge ID Sys Value 0 Delta 0"}
+{"level":"info","ts":1744530727.5586033,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530727.559618,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.2172ms size 0"}
+{"level":"info","ts":1744530727.6625752,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530727.663808,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530727.664866,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530727.6658938,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3084ms size 0"}
+{"level":"info","ts":1744530727.7683005,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530727.769482,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530727.769667,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530727.769895,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.5993ms size 0"}
+{"level":"info","ts":1744530727.8711948,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530727.871591,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530727.8718703,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530727.8721654,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 969.9µs size 0"}
+{"level":"info","ts":1744530727.973403,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530727.9739187,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530727.9742503,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530727.9746537,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.2488ms size 0"}
+{"level":"info","ts":1744530728.0765855,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530728.0778959,"caller":"logger/logger.go:42","msg":"MType gauge ID BuckHashSys Value 0 Delta 0"}
+{"level":"info","ts":1744530728.0789967,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530728.0799358,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3405ms size 0"}
+{"level":"info","ts":1744530728.1827996,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530728.1840115,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530728.1849837,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530728.1859698,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.1604ms size 0"}
+{"level":"info","ts":1744530728.2894778,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530728.290735,"caller":"logger/logger.go:42","msg":"MType gauge ID GCCPUFraction Value 0 Delta 0"}
+{"level":"info","ts":1744530728.2918632,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530728.2928405,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3548ms size 0"}
+{"level":"info","ts":1744530728.395669,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530728.3968797,"caller":"logger/logger.go:42","msg":"MType gauge ID GCSys Value 0 Delta 0"}
+{"level":"info","ts":1744530728.3978808,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530728.3989332,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.2548ms size 0"}
+{"level":"info","ts":1744530728.5018148,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530728.5030496,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530728.5040896,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530728.5050879,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.2631ms size 0"}
+{"level":"info","ts":1744530728.6078393,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530728.6090863,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530728.6100526,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530728.6110916,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.2424ms size 0"}
+{"level":"info","ts":1744530728.7139626,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530728.715098,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530728.7159936,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530728.716905,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.9316ms size 0"}
+{"level":"info","ts":1744530728.8197625,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530728.8208878,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530728.8218808,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530728.8228252,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.0529ms size 0"}
+{"level":"info","ts":1744530728.9249654,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530728.9253669,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapReleased Value 0 Delta 0"}
+{"level":"info","ts":1744530728.925622,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530728.9259584,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 992.4µs size 0"}
+{"level":"info","ts":1744530729.026945,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530729.0273032,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapSys Value 0 Delta 0"}
+{"level":"info","ts":1744530729.0275285,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530729.0277488,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 803.5µs size 0"}
+{"level":"info","ts":1744530729.128672,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530729.1290314,"caller":"logger/logger.go:42","msg":"MType gauge ID LastGC Value 0 Delta 0"}
+{"level":"info","ts":1744530729.1293046,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530729.1295402,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 867.9µs size 0"}
+{"level":"info","ts":1744530729.231621,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530729.2327752,"caller":"logger/logger.go:42","msg":"MType gauge ID Lookups Value 0 Delta 0"}
+{"level":"info","ts":1744530729.2337203,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530729.234566,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.9373ms size 0"}
+{"level":"info","ts":1744530729.3372214,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530729.33849,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530729.3395383,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530729.3405938,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3621ms size 0"}
+{"level":"info","ts":1744530729.4423726,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530729.442869,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheSys Value 0 Delta 0"}
+{"level":"info","ts":1744530729.443222,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530729.4436307,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.256ms size 0"}
+{"level":"info","ts":1744530729.5455854,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530729.5469265,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530729.547992,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530729.5490546,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.4597ms size 0"}
+{"level":"info","ts":1744530729.6511834,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530729.6524055,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanSys Value 0 Delta 0"}
+{"level":"info","ts":1744530729.6534545,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530729.6545076,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3141ms size 0"}
+{"level":"info","ts":1744530729.7572577,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530729.7585516,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530729.75962,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530729.760649,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3818ms size 0"}
+{"level":"info","ts":1744530729.864145,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530729.8654156,"caller":"logger/logger.go:42","msg":"MType gauge ID NextGC Value 0 Delta 0"}
+{"level":"info","ts":1744530729.865727,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530729.8659384,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.7977ms size 0"}
+{"level":"info","ts":1744530729.967007,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530729.967434,"caller":"logger/logger.go:42","msg":"MType gauge ID NumForcedGC Value 0 Delta 0"}
+{"level":"info","ts":1744530729.9677851,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530729.9680345,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.0273ms size 0"}
+{"level":"info","ts":1744530730.0694942,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530730.070244,"caller":"logger/logger.go:42","msg":"MType gauge ID NumGC Value 0 Delta 0"}
+{"level":"info","ts":1744530730.070832,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530730.071413,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.9139ms size 0"}
+{"level":"info","ts":1744530730.1734538,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530730.1741621,"caller":"logger/logger.go:42","msg":"MType gauge ID OtherSys Value 0 Delta 0"}
+{"level":"info","ts":1744530730.1746776,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530730.1752112,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.7532ms size 0"}
+{"level":"info","ts":1744530730.277538,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530730.278781,"caller":"logger/logger.go:42","msg":"MType gauge ID PauseTotalNs Value 0 Delta 0"}
+{"level":"info","ts":1744530730.2797158,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530730.2807376,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.1894ms size 0"}
+{"level":"info","ts":1744530730.3842523,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530730.3853414,"caller":"logger/logger.go:42","msg":"MType gauge ID StackInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530730.3862252,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530730.3870904,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.8285ms size 0"}
+{"level":"info","ts":1744530730.4902728,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530730.49178,"caller":"logger/logger.go:42","msg":"MType gauge ID StackSys Value 0 Delta 0"}
+{"level":"info","ts":1744530730.4928222,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530730.4939291,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.6447ms size 0"}
+{"level":"info","ts":1744530730.596823,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530730.597901,"caller":"logger/logger.go:42","msg":"MType gauge ID Sys Value 0 Delta 0"}
+{"level":"info","ts":1744530730.598773,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530730.5996716,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.8398ms size 0"}
+{"level":"info","ts":1744530730.7015667,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530730.7019799,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530730.7023416,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530730.7026424,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.0617ms size 0"}
+{"level":"info","ts":1744530730.803978,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530730.8045738,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530730.8050115,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530730.8055518,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.5714ms size 0"}
+{"level":"info","ts":1744530730.907737,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530730.9088755,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530730.910038,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530730.910923,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.1764ms size 0"}
+{"level":"info","ts":1744530731.0134218,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530731.0139997,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530731.014365,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530731.0148296,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.4184ms size 0"}
+{"level":"info","ts":1744530731.1170046,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530731.1183097,"caller":"logger/logger.go:42","msg":"MType gauge ID BuckHashSys Value 0 Delta 0"}
+{"level":"info","ts":1744530731.1193118,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530731.120349,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3345ms size 0"}
+{"level":"info","ts":1744530731.2231927,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530731.224326,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530731.225093,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530731.2258716,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.6665ms size 0"}
+{"level":"info","ts":1744530731.327979,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530731.3283749,"caller":"logger/logger.go:42","msg":"MType gauge ID GCCPUFraction Value 0 Delta 0"}
+{"level":"info","ts":1744530731.3285916,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530731.3288155,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 835.1µs size 0"}
+{"level":"info","ts":1744530731.4297755,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530731.4301715,"caller":"logger/logger.go:42","msg":"MType gauge ID GCSys Value 0 Delta 0"}
+{"level":"info","ts":1744530731.4303946,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530731.4307442,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 967.9µs size 0"}
+{"level":"info","ts":1744530731.531901,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530731.532238,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530731.532442,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530731.5326397,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 738.7µs size 0"}
+{"level":"info","ts":1744530731.6345804,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530731.6357162,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530731.6365452,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530731.6374261,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.8366ms size 0"}
+{"level":"info","ts":1744530731.740285,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530731.7414398,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530731.742384,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530731.7432697,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.9767ms size 0"}
+{"level":"info","ts":1744530731.8463035,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530731.8475938,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530731.8486636,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530731.8496046,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.2923ms size 0"}
+{"level":"info","ts":1744530731.9525626,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530731.9538689,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapReleased Value 0 Delta 0"}
+{"level":"info","ts":1744530731.9548855,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530731.955915,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3424ms size 0"}
+{"level":"info","ts":1744530732.0580494,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530732.0584378,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapSys Value 0 Delta 0"}
+{"level":"info","ts":1744530732.0587184,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530732.0589507,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 900.5µs size 0"}
+{"level":"info","ts":1744530732.1600392,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530732.1605365,"caller":"logger/logger.go:42","msg":"MType gauge ID LastGC Value 0 Delta 0"}
+{"level":"info","ts":1744530732.1609013,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530732.1612313,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.191ms size 0"}
+{"level":"info","ts":1744530732.2634509,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530732.2645695,"caller":"logger/logger.go:42","msg":"MType gauge ID Lookups Value 0 Delta 0"}
+{"level":"info","ts":1744530732.2654083,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530732.266298,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.8387ms size 0"}
+{"level":"info","ts":1744530732.369597,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530732.3708742,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530732.3718562,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530732.3729239,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.317ms size 0"}
+{"level":"info","ts":1744530732.4750535,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530732.4754968,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheSys Value 0 Delta 0"}
+{"level":"info","ts":1744530732.4758527,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530732.4761772,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.1219ms size 0"}
+{"level":"info","ts":1744530732.5781646,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530732.5793428,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530732.5803444,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530732.5813215,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.1453ms size 0"}
+{"level":"info","ts":1744530732.684462,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530732.6857212,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanSys Value 0 Delta 0"}
+{"level":"info","ts":1744530732.686743,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530732.6877186,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.2463ms size 0"}
+{"level":"info","ts":1744530732.790574,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530732.791816,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530732.79269,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530732.7938917,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.308ms size 0"}
+{"level":"info","ts":1744530732.8961782,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530732.8967144,"caller":"logger/logger.go:42","msg":"MType gauge ID NextGC Value 0 Delta 0"}
+{"level":"info","ts":1744530732.8971071,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530732.8975034,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.3233ms size 0"}
+{"level":"info","ts":1744530732.9995863,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530733.0007894,"caller":"logger/logger.go:42","msg":"MType gauge ID NumForcedGC Value 0 Delta 0"}
+{"level":"info","ts":1744530733.0018737,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530733.0028918,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.295ms size 0"}
+{"level":"info","ts":1744530733.1053972,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530733.1063669,"caller":"logger/logger.go:42","msg":"MType gauge ID NumGC Value 0 Delta 0"}
+{"level":"info","ts":1744530733.1071162,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530733.1079216,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.5185ms size 0"}
+{"level":"info","ts":1744530733.2107785,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530733.2120302,"caller":"logger/logger.go:42","msg":"MType gauge ID OtherSys Value 0 Delta 0"}
+{"level":"info","ts":1744530733.213028,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530733.214072,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.2838ms size 0"}
+{"level":"info","ts":1744530733.3162456,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530733.3168685,"caller":"logger/logger.go:42","msg":"MType gauge ID PauseTotalNs Value 0 Delta 0"}
+{"level":"info","ts":1744530733.317353,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530733.3178003,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.552ms size 0"}
+{"level":"info","ts":1744530733.4200141,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530733.4211235,"caller":"logger/logger.go:42","msg":"MType gauge ID StackInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530733.422077,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530733.4231317,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.1058ms size 0"}
+{"level":"info","ts":1744530733.525949,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530733.5272193,"caller":"logger/logger.go:42","msg":"MType gauge ID StackSys Value 0 Delta 0"}
+{"level":"info","ts":1744530733.5282226,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530733.5292723,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.3135ms size 0"}
+{"level":"info","ts":1744530733.6318073,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530733.6326563,"caller":"logger/logger.go:42","msg":"MType gauge ID Sys Value 0 Delta 0"}
+{"level":"info","ts":1744530733.633364,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530733.6339247,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.1126ms size 0"}
+{"level":"info","ts":1744530733.7354236,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530733.7357194,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530733.735912,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530733.7361596,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 736µs size 0"}
+{"level":"info","ts":1744530733.8370874,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530733.8374155,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530733.837604,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530733.8378139,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 725.5µs size 0"}
+{"level":"info","ts":1744530733.938847,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530733.93932,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530733.939675,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530733.9400148,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 1.1668ms size 0"}
+{"level":"info","ts":1744530734.0418193,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530734.0430028,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530734.043961,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530734.0449588,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.1298ms size 0"}
+{"level":"info","ts":1744530734.1478994,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530734.1489198,"caller":"logger/logger.go:42","msg":"MType gauge ID BuckHashSys Value 0 Delta 0"}
+{"level":"info","ts":1744530734.1497283,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530734.150557,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.6477ms size 0"}
+{"level":"info","ts":1744530734.253437,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530734.2547033,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530734.2557259,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530734.2567363,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 3.2901ms size 0"}
+{"level":"info","ts":1744530734.2888565,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.290175,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530734.291226,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.2923207,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 3.5014ms size 0"}
+{"level":"info","ts":1744530734.2944808,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.2956364,"caller":"logger/logger.go:42","msg":"MType gauge ID BuckHashSys Value 2987 Delta 0"}
+{"level":"info","ts":1744530734.2966092,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.2976372,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 3.1447ms size 0"}
+{"level":"info","ts":1744530734.2997155,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3008518,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 190 Delta 0"}
+{"level":"info","ts":1744530734.3017812,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3028877,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 3.1604ms size 0"}
+{"level":"info","ts":1744530734.3051968,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3063464,"caller":"logger/logger.go:42","msg":"MType gauge ID GCCPUFraction Value 0 Delta 0"}
+{"level":"info","ts":1744530734.3073564,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.308394,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 3.1873ms size 0"}
+{"level":"info","ts":1744530734.3104684,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3114426,"caller":"logger/logger.go:42","msg":"MType gauge ID GCSys Value 1.7066e+06 Delta 0"}
+{"level":"info","ts":1744530734.3123999,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3132634,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 2.7829ms size 0"}
+{"level":"info","ts":1744530734.314702,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.315548,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530734.3162854,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3170176,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 2.3067ms size 0"}
+{"level":"info","ts":1744530734.3184934,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3191326,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 2.244608e+06 Delta 0"}
+{"level":"info","ts":1744530734.3196933,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3202739,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.7739ms size 0"}
+{"level":"info","ts":1744530734.3213892,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3219516,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 1.622016e+06 Delta 0"}
+{"level":"info","ts":1744530734.3224676,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3229816,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.5868ms size 0"}
+{"level":"info","ts":1744530734.3239691,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3245635,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 1490 Delta 0"}
+{"level":"info","ts":1744530734.3250356,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.325461,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.487ms size 0"}
+{"level":"info","ts":1744530734.3264105,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3268833,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapReleased Value 2.146304e+06 Delta 0"}
+{"level":"info","ts":1744530734.3273377,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.327779,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.3639ms size 0"}
+{"level":"info","ts":1744530734.328627,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3290322,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapSys Value 3.866624e+06 Delta 0"}
+{"level":"info","ts":1744530734.3294406,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3297465,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.1152ms size 0"}
+{"level":"info","ts":1744530734.3305562,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3309033,"caller":"logger/logger.go:42","msg":"MType gauge ID LastGC Value 0 Delta 0"}
+{"level":"info","ts":1744530734.3311813,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3315187,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 961.4µs size 0"}
+{"level":"info","ts":1744530734.3323486,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3325622,"caller":"logger/logger.go:42","msg":"MType gauge ID Lookups Value 0 Delta 0"}
+{"level":"info","ts":1744530734.3327937,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.333002,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 651.3µs size 0"}
+{"level":"info","ts":1744530734.3334908,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3337386,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheInuse Value 7248 Delta 0"}
+{"level":"info","ts":1744530734.3339245,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.334118,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 625µs size 0"}
+{"level":"info","ts":1744530734.3345053,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3347044,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheSys Value 15704 Delta 0"}
+{"level":"info","ts":1744530734.334872,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3350353,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 528.1µs size 0"}
+{"level":"info","ts":1744530734.3354502,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3357038,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanInuse Value 33440 Delta 0"}
+{"level":"info","ts":1744530734.3358805,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3360784,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 625.3µs size 0"}
+{"level":"info","ts":1744530734.336501,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.336716,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanSys Value 48960 Delta 0"}
+{"level":"info","ts":1744530734.3368752,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3370645,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 562µs size 0"}
+{"level":"info","ts":1744530734.3374221,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3376164,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 1680 Delta 0"}
+{"level":"info","ts":1744530734.3377855,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3379254,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 501µs size 0"}
+{"level":"info","ts":1744530734.3382616,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3384368,"caller":"logger/logger.go:42","msg":"MType gauge ID NextGC Value 4.194304e+06 Delta 0"}
+{"level":"info","ts":1744530734.3385813,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3387272,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 464.1µs size 0"}
+{"level":"info","ts":1744530734.339072,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.339247,"caller":"logger/logger.go:42","msg":"MType gauge ID NumForcedGC Value 0 Delta 0"}
+{"level":"info","ts":1744530734.3393862,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.339541,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 467.5µs size 0"}
+{"level":"info","ts":1744530734.3398612,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3400254,"caller":"logger/logger.go:42","msg":"MType gauge ID NumGC Value 0 Delta 0"}
+{"level":"info","ts":1744530734.3401668,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3403065,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 443.5µs size 0"}
+{"level":"info","ts":1744530734.3406465,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.340825,"caller":"logger/logger.go:42","msg":"MType gauge ID OtherSys Value 936293 Delta 0"}
+{"level":"info","ts":1744530734.340967,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3410952,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 446.6µs size 0"}
+{"level":"info","ts":1744530734.3414364,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3416274,"caller":"logger/logger.go:42","msg":"MType gauge ID PauseTotalNs Value 0 Delta 0"}
+{"level":"info","ts":1744530734.3417673,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3419194,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 481µs size 0"}
+{"level":"info","ts":1744530734.342282,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3424535,"caller":"logger/logger.go:42","msg":"MType gauge ID StackInuse Value 327680 Delta 0"}
+{"level":"info","ts":1744530734.342597,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.342821,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 536.5µs size 0"}
+{"level":"info","ts":1744530734.3431613,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3433156,"caller":"logger/logger.go:42","msg":"MType gauge ID StackSys Value 327680 Delta 0"}
+{"level":"info","ts":1744530734.3434536,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.343587,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 423.5µs size 0"}
+{"level":"info","ts":1744530734.3439093,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3440793,"caller":"logger/logger.go:42","msg":"MType gauge ID Sys Value 6.904848e+06 Delta 0"}
+{"level":"info","ts":1744530734.3442216,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3443565,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 445.6µs size 0"}
+{"level":"info","ts":1744530734.3446784,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3448534,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530734.3449955,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3451371,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 456.8µs size 0"}
+{"level":"info","ts":1744530734.3454618,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.345632,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 1.0045744569701053e+18 Delta 0"}
+{"level":"info","ts":1744530734.345765,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3459132,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 436.3µs size 0"}
+{"level":"info","ts":1744530734.34624,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530734.3464093,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 1"}
+{"level":"info","ts":1744530734.346552,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530734.3466935,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 451.5µs size 0"}
+{"level":"info","ts":1744530734.3602142,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530734.361347,"caller":"logger/logger.go:42","msg":"MType gauge ID GCCPUFraction Value 0 Delta 0"}
+{"level":"info","ts":1744530734.36237,"caller":"logger/logger.go:42","msg":"MType gauge ID GCCPUFraction Value 0 Delta 0"}
+{"level":"info","ts":1744530734.3633332,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530734.3643754,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.1496ms size 47"}
+{"level":"info","ts":1744530734.4672973,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530734.4678242,"caller":"logger/logger.go:42","msg":"MType gauge ID GCSys Value 0 Delta 0"}
+{"level":"info","ts":1744530734.468236,"caller":"logger/logger.go:42","msg":"MType gauge ID GCSys Value 1.7066e+06 Delta 0"}
+{"level":"info","ts":1744530734.4686801,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530734.4690928,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.7929ms size 45"}
+{"level":"info","ts":1744530734.5717335,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530734.5730257,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530734.5741227,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530734.5750997,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530734.5763917,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.6504ms size 48"}
+{"level":"info","ts":1744530734.6794276,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530734.6806684,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530734.6818135,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 2.244608e+06 Delta 0"}
+{"level":"info","ts":1744530734.6828415,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530734.6839044,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.4695ms size 48"}
+{"level":"info","ts":1744530734.7856367,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530734.7859824,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530734.7862556,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 1.622016e+06 Delta 0"}
+{"level":"info","ts":1744530734.7865286,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530734.7868755,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.2391ms size 49"}
+{"level":"info","ts":1744530734.88824,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530734.8886986,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530734.8890634,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 1490 Delta 0"}
+{"level":"info","ts":1744530734.8893785,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530734.8896947,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.455ms size 48"}
+{"level":"info","ts":1744530734.991612,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530734.992857,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapReleased Value 0 Delta 0"}
+{"level":"info","ts":1744530734.993887,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapReleased Value 2.146304e+06 Delta 0"}
+{"level":"info","ts":1744530734.99492,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530734.9959338,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3138ms size 52"}
+{"level":"info","ts":1744530735.0985525,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530735.0989566,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapSys Value 0 Delta 0"}
+{"level":"info","ts":1744530735.0992703,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapSys Value 3.866624e+06 Delta 0"}
+{"level":"info","ts":1744530735.0996127,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530735.0999377,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.3845ms size 47"}
+{"level":"info","ts":1744530735.2022493,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530735.203465,"caller":"logger/logger.go:42","msg":"MType gauge ID LastGC Value 0 Delta 0"}
+{"level":"info","ts":1744530735.2045083,"caller":"logger/logger.go:42","msg":"MType gauge ID LastGC Value 0 Delta 0"}
+{"level":"info","ts":1744530735.2054858,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530735.206517,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2599ms size 40"}
+{"level":"info","ts":1744530735.3089771,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530735.3099167,"caller":"logger/logger.go:42","msg":"MType gauge ID Lookups Value 0 Delta 0"}
+{"level":"info","ts":1744530735.3105614,"caller":"logger/logger.go:42","msg":"MType gauge ID Lookups Value 0 Delta 0"}
+{"level":"info","ts":1744530735.311223,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530735.3118353,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 2.8565ms size 41"}
+{"level":"info","ts":1744530735.413608,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530735.414041,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530735.4143646,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheInuse Value 7248 Delta 0"}
+{"level":"info","ts":1744530735.414715,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530735.4150271,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.4175ms size 48"}
+{"level":"info","ts":1744530735.517086,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530735.5182917,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheSys Value 0 Delta 0"}
+{"level":"info","ts":1744530735.5193827,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheSys Value 15704 Delta 0"}
+{"level":"info","ts":1744530735.520396,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530735.521462,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3689ms size 47"}
+{"level":"info","ts":1744530735.6243572,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530735.62562,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530735.6266313,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanInuse Value 33440 Delta 0"}
+{"level":"info","ts":1744530735.6276345,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530735.6286378,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2736ms size 48"}
+{"level":"info","ts":1744530735.7325375,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530735.7338037,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanSys Value 0 Delta 0"}
+{"level":"info","ts":1744530735.7348654,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanSys Value 48960 Delta 0"}
+{"level":"info","ts":1744530735.735904,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530735.736971,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.426ms size 46"}
+{"level":"info","ts":1744530735.8392293,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530735.8400133,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530735.8406317,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 1680 Delta 0"}
+{"level":"info","ts":1744530735.841211,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530735.8418477,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 2.6159ms size 44"}
+{"level":"info","ts":1744530735.9443896,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530735.9455347,"caller":"logger/logger.go:42","msg":"MType gauge ID NextGC Value 0 Delta 0"}
+{"level":"info","ts":1744530735.9457898,"caller":"logger/logger.go:42","msg":"MType gauge ID NextGC Value 4.194304e+06 Delta 0"}
+{"level":"info","ts":1744530735.9460974,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530735.9463713,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.9875ms size 46"}
+{"level":"info","ts":1744530736.047503,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530736.0478597,"caller":"logger/logger.go:42","msg":"MType gauge ID NumForcedGC Value 0 Delta 0"}
+{"level":"info","ts":1744530736.0480819,"caller":"logger/logger.go:42","msg":"MType gauge ID NumForcedGC Value 0 Delta 0"}
+{"level":"info","ts":1744530736.0483637,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530736.0486243,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.1208ms size 45"}
+{"level":"info","ts":1744530736.1496308,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530736.1499677,"caller":"logger/logger.go:42","msg":"MType gauge ID NumGC Value 0 Delta 0"}
+{"level":"info","ts":1744530736.1502085,"caller":"logger/logger.go:42","msg":"MType gauge ID NumGC Value 0 Delta 0"}
+{"level":"info","ts":1744530736.1504025,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530736.1505663,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 935.4µs size 39"}
+{"level":"info","ts":1744530736.2516196,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530736.252011,"caller":"logger/logger.go:42","msg":"MType gauge ID OtherSys Value 0 Delta 0"}
+{"level":"info","ts":1744530736.2523177,"caller":"logger/logger.go:42","msg":"MType gauge ID OtherSys Value 936293 Delta 0"}
+{"level":"info","ts":1744530736.2525852,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530736.252927,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.3077ms size 47"}
+{"level":"info","ts":1744530736.3544369,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530736.3556874,"caller":"logger/logger.go:42","msg":"MType gauge ID PauseTotalNs Value 0 Delta 0"}
+{"level":"info","ts":1744530736.356736,"caller":"logger/logger.go:42","msg":"MType gauge ID PauseTotalNs Value 0 Delta 0"}
+{"level":"info","ts":1744530736.3578386,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530736.3587277,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2825ms size 46"}
+{"level":"info","ts":1744530736.4614086,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530736.4626846,"caller":"logger/logger.go:42","msg":"MType gauge ID StackInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530736.4637601,"caller":"logger/logger.go:42","msg":"MType gauge ID StackInuse Value 327680 Delta 0"}
+{"level":"info","ts":1744530736.4647534,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530736.4657884,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3727ms size 49"}
+{"level":"info","ts":1744530736.5691423,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530736.570434,"caller":"logger/logger.go:42","msg":"MType gauge ID StackSys Value 0 Delta 0"}
+{"level":"info","ts":1744530736.5714421,"caller":"logger/logger.go:42","msg":"MType gauge ID StackSys Value 327680 Delta 0"}
+{"level":"info","ts":1744530736.5726051,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530736.573671,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.5206ms size 47"}
+{"level":"info","ts":1744530736.6763031,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530736.676719,"caller":"logger/logger.go:42","msg":"MType gauge ID Sys Value 0 Delta 0"}
+{"level":"info","ts":1744530736.6769917,"caller":"logger/logger.go:42","msg":"MType gauge ID Sys Value 6.904848e+06 Delta 0"}
+{"level":"info","ts":1744530736.6773093,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530736.6776826,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.3652ms size 43"}
+{"level":"info","ts":1744530736.7798612,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530736.7810209,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530736.782104,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530736.783139,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530736.7841494,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2814ms size 49"}
+{"level":"info","ts":1744530736.8854961,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530736.885945,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530736.8862433,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 1"}
+{"level":"info","ts":1744530736.8865688,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530736.8869138,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.4171ms size 45"}
+{"level":"info","ts":1744530736.9886315,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530736.9897876,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530736.9907198,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 1.0045744569701053e+18 Delta 0"}
+{"level":"info","ts":1744530736.9915917,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530736.9927073,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.0654ms size 63"}
+{"level":"info","ts":1744530737.095819,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530737.0971854,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530737.0982196,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530737.0990736,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530737.1000519,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2224ms size 44"}
+{"level":"info","ts":1744530737.2030842,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530737.2042284,"caller":"logger/logger.go:42","msg":"MType gauge ID BuckHashSys Value 0 Delta 0"}
+{"level":"info","ts":1744530737.2051415,"caller":"logger/logger.go:42","msg":"MType gauge ID BuckHashSys Value 2987 Delta 0"}
+{"level":"info","ts":1744530737.2060664,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530737.2070606,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.9686ms size 48"}
+{"level":"info","ts":1744530737.3107133,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530737.3120594,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530737.313005,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 190 Delta 0"}
+{"level":"info","ts":1744530737.31393,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530737.3150215,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3005ms size 41"}
+{"level":"info","ts":1744530737.4164212,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530737.4168813,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530737.4171932,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530737.4174817,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530737.4177747,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.352ms size 48"}
+{"level":"info","ts":1744530737.519637,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530737.5207424,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530737.521414,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 2.244608e+06 Delta 0"}
+{"level":"info","ts":1744530737.5221384,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530737.5229511,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.3092ms size 48"}
+{"level":"info","ts":1744530737.6254706,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530737.6265504,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530737.6275132,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 1.622016e+06 Delta 0"}
+{"level":"info","ts":1744530737.628384,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530737.6293683,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.8907ms size 49"}
+{"level":"info","ts":1744530737.7321777,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530737.733405,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530737.7344472,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 1490 Delta 0"}
+{"level":"info","ts":1744530737.7354722,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530737.736528,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3427ms size 48"}
+{"level":"info","ts":1744530737.8397608,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530737.84107,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530737.8421266,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 1680 Delta 0"}
+{"level":"info","ts":1744530737.8431077,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530737.8441396,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3711ms size 44"}
+{"level":"info","ts":1744530737.946292,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530737.9475148,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530737.9486794,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530737.9495213,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530737.9504626,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.1761ms size 49"}
+{"level":"info","ts":1744530738.0516877,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530738.052097,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530738.0523906,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 1"}
+{"level":"info","ts":1744530738.05267,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530738.0529845,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.2968ms size 45"}
+{"level":"info","ts":1744530738.1551044,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530738.1563668,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530738.157392,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 1.0045744569701053e+18 Delta 0"}
+{"level":"info","ts":1744530738.1583686,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530738.159413,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3005ms size 63"}
+{"level":"info","ts":1744530738.262609,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530738.2638092,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530738.2648923,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530738.265874,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530738.2669075,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2922ms size 44"}
+{"level":"info","ts":1744530738.3696535,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530738.3708081,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530738.3718686,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 190 Delta 0"}
+{"level":"info","ts":1744530738.3726583,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530738.3736172,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.9566ms size 41"}
+{"level":"info","ts":1744530738.475595,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530738.475981,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530738.4761765,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530738.4764419,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530738.476611,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.0152ms size 48"}
+{"level":"info","ts":1744530738.5776582,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530738.5780785,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530738.57837,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 2.244608e+06 Delta 0"}
+{"level":"info","ts":1744530738.5786893,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530738.5789618,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.3034ms size 48"}
+{"level":"info","ts":1744530738.680082,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530738.6805043,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530738.6807883,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 1.622016e+06 Delta 0"}
+{"level":"info","ts":1744530738.6811266,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530738.6814077,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.3248ms size 49"}
+{"level":"info","ts":1744530738.7828264,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530738.7832484,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530738.7835183,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 1490 Delta 0"}
+{"level":"info","ts":1744530738.783804,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530738.7840703,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.2438ms size 48"}
+{"level":"info","ts":1744530738.8852694,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530738.885645,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530738.8859682,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 1680 Delta 0"}
+{"level":"info","ts":1744530738.8862817,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530738.8865964,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.3262ms size 44"}
+{"level":"info","ts":1744530738.988699,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530738.9900596,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530738.9910808,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530738.9920616,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530738.9931095,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.4027ms size 49"}
+{"level":"info","ts":1744530739.0962257,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530739.0976176,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530739.098656,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 1"}
+{"level":"info","ts":1744530739.0996594,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530739.100874,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.6405ms size 45"}
+{"level":"info","ts":1744530739.203154,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530739.204306,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530739.2051833,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 1.0045744569701053e+18 Delta 0"}
+{"level":"info","ts":1744530739.2061892,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530739.2072418,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.0808ms size 63"}
+{"level":"info","ts":1744530739.3093543,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530739.3104804,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530739.3117192,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530739.3125222,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530739.3133855,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.0218ms size 44"}
+{"level":"info","ts":1744530739.4163415,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530739.4168687,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530739.4171715,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 190 Delta 0"}
+{"level":"info","ts":1744530739.417459,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530739.4177303,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.3933ms size 41"}
+{"level":"info","ts":1744530739.5198274,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530739.5210636,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530739.5221224,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530739.5231133,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530739.5241044,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2694ms size 48"}
+{"level":"info","ts":1744530739.627153,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530739.628277,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530739.6292014,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 2.244608e+06 Delta 0"}
+{"level":"info","ts":1744530739.6300933,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530739.6310167,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.856ms size 48"}
+{"level":"info","ts":1744530739.7342224,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530739.7353349,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530739.7361941,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 1.622016e+06 Delta 0"}
+{"level":"info","ts":1744530739.7370908,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530739.7381494,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.919ms size 49"}
+{"level":"info","ts":1744530739.841312,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530739.8424299,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530739.8435254,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 1490 Delta 0"}
+{"level":"info","ts":1744530739.8444061,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530739.8453922,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.1541ms size 48"}
+{"level":"info","ts":1744530739.9488478,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530739.9500031,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530739.9508934,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 1680 Delta 0"}
+{"level":"info","ts":1744530739.9518385,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530739.952759,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.903ms size 44"}
+{"level":"info","ts":1744530740.0558345,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530740.0570974,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530740.0581725,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530740.0592015,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530740.0602665,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.4243ms size 49"}
+{"level":"info","ts":1744530740.1635702,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530740.1648242,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530740.1658523,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 1"}
+{"level":"info","ts":1744530740.1667938,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530740.1678312,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.253ms size 45"}
+{"level":"info","ts":1744530740.2708766,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530740.2719479,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530740.272841,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 1.0045744569701053e+18 Delta 0"}
+{"level":"info","ts":1744530740.27371,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530740.2746253,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.7404ms size 63"}
+{"level":"info","ts":1744530740.3777876,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530740.379044,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530740.3800912,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530740.381126,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530740.3821807,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.385ms size 44"}
+{"level":"info","ts":1744530740.4847307,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530740.4859145,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530740.486902,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 190 Delta 0"}
+{"level":"info","ts":1744530740.4878578,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530740.4889193,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.1803ms size 41"}
+{"level":"info","ts":1744530740.5923758,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530740.5936372,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530740.594694,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530740.595746,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530740.5967853,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.4016ms size 48"}
+{"level":"info","ts":1744530740.699151,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530740.6995618,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530740.6998355,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 2.244608e+06 Delta 0"}
+{"level":"info","ts":1744530740.7000687,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530740.7002912,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.1395ms size 48"}
+{"level":"info","ts":1744530740.80131,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530740.801629,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530740.8018816,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 1.622016e+06 Delta 0"}
+{"level":"info","ts":1744530740.802138,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530740.802401,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.0912ms size 49"}
+{"level":"info","ts":1744530740.9033623,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530740.903716,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530740.9040384,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 1490 Delta 0"}
+{"level":"info","ts":1744530740.9042497,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530740.9044719,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.1082ms size 48"}
+{"level":"info","ts":1744530741.005642,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530741.0060968,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530741.0064006,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 1680 Delta 0"}
+{"level":"info","ts":1744530741.0067916,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530741.0071023,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.4593ms size 44"}
+{"level":"info","ts":1744530741.1090755,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530741.1103785,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530741.1114771,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530741.1126373,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530741.1136882,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.6053ms size 49"}
+{"level":"info","ts":1744530741.2176087,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530741.218825,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530741.2198925,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 1"}
+{"level":"info","ts":1744530741.2209115,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530741.2220073,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.39ms size 45"}
+{"level":"info","ts":1744530741.3252714,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530741.3263574,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530741.3272364,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 1.0045744569701053e+18 Delta 0"}
+{"level":"info","ts":1744530741.3280952,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530741.3289754,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.6961ms size 63"}
+{"level":"info","ts":1744530741.4321306,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530741.4333591,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530741.4343977,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530741.4354055,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530741.436411,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2742ms size 44"}
+{"level":"info","ts":1744530741.5395706,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530741.5407183,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530741.5418923,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 190 Delta 0"}
+{"level":"info","ts":1744530741.5430894,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530741.5441258,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.5472ms size 41"}
+{"level":"info","ts":1744530741.6473668,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530741.6484344,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530741.6493444,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530741.6501696,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530741.650662,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.2968ms size 48"}
+{"level":"info","ts":1744530741.7527053,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530741.7540014,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530741.7550275,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 2.244608e+06 Delta 0"}
+{"level":"info","ts":1744530741.7560596,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530741.7573397,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.6261ms size 48"}
+{"level":"info","ts":1744530741.8604255,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530741.8617692,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530741.8628001,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 1.622016e+06 Delta 0"}
+{"level":"info","ts":1744530741.8637886,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530741.8648305,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3981ms size 49"}
+{"level":"info","ts":1744530741.9679725,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530741.9692295,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530741.9702349,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 1490 Delta 0"}
+{"level":"info","ts":1744530741.9712203,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530741.9716573,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.6902ms size 48"}
+{"level":"info","ts":1744530742.073589,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530742.0750165,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530742.0759964,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 1680 Delta 0"}
+{"level":"info","ts":1744530742.0771017,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530742.0781505,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.5532ms size 44"}
+{"level":"info","ts":1744530742.1811967,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530742.1823926,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530742.1834173,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530742.1844385,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530742.1854908,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2866ms size 49"}
+{"level":"info","ts":1744530742.2888393,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530742.290144,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530742.291167,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 1"}
+{"level":"info","ts":1744530742.2921884,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530742.2932353,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.388ms size 45"}
+{"level":"info","ts":1744530742.3964164,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530742.3976674,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530742.3986778,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 1.0045744569701053e+18 Delta 0"}
+{"level":"info","ts":1744530742.3996944,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530742.4007192,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2949ms size 63"}
+{"level":"info","ts":1744530742.5034862,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530742.50468,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530742.5056787,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530742.5067723,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530742.5077622,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2688ms size 44"}
+{"level":"info","ts":1744530742.610984,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530742.6121109,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530742.6131244,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 190 Delta 0"}
+{"level":"info","ts":1744530742.6141014,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530742.615198,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.1489ms size 41"}
+{"level":"info","ts":1744530742.7180514,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530742.7193446,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530742.720394,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530742.7214088,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530742.7224863,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.4626ms size 48"}
+{"level":"info","ts":1744530742.825788,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530742.8270667,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530742.8279548,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 2.244608e+06 Delta 0"}
+{"level":"info","ts":1744530742.828989,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530742.8298962,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.1016ms size 48"}
+{"level":"info","ts":1744530742.9330497,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530742.9342823,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530742.9353054,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 1.622016e+06 Delta 0"}
+{"level":"info","ts":1744530742.9363132,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530742.937321,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.2633ms size 49"}
+{"level":"info","ts":1744530743.0399854,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530743.040779,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530743.0413463,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 1490 Delta 0"}
+{"level":"info","ts":1744530743.0418499,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530743.0424023,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 2.4133ms size 48"}
+{"level":"info","ts":1744530743.1441836,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530743.1446116,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530743.1448483,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 1680 Delta 0"}
+{"level":"info","ts":1744530743.1452005,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530743.1454656,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.2821ms size 44"}
+{"level":"info","ts":1744530743.246628,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530743.2470677,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530743.2474077,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530743.2477286,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530743.2479467,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.3182ms size 49"}
+{"level":"info","ts":1744530743.3498683,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530743.3511624,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530743.3522532,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 1"}
+{"level":"info","ts":1744530743.353308,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530743.3544028,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.5271ms size 45"}
+{"level":"info","ts":1744530743.457473,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530743.4587371,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530743.459758,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 1.0045744569701053e+18 Delta 0"}
+{"level":"info","ts":1744530743.4608457,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530743.4618917,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.4097ms size 63"}
+{"level":"info","ts":1744530743.5644147,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530743.5649035,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530743.5653522,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530743.5657089,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530743.566083,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.6671ms size 44"}
+{"level":"info","ts":1744530743.6682458,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530743.6695092,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530743.6707096,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 190 Delta 0"}
+{"level":"info","ts":1744530743.6718729,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530743.6729379,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.6848ms size 41"}
+{"level":"info","ts":1744530743.7759387,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530743.777173,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530743.7782316,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530743.7792666,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530743.7803423,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3942ms size 48"}
+{"level":"info","ts":1744530743.8822825,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530743.882664,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530743.8830068,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 2.244608e+06 Delta 0"}
+{"level":"info","ts":1744530743.8833287,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530743.8837097,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.4267ms size 48"}
+{"level":"info","ts":1744530743.98572,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530743.9870062,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530743.9880555,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 1.622016e+06 Delta 0"}
+{"level":"info","ts":1744530743.989116,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530743.990179,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.4513ms size 49"}
+{"level":"info","ts":1744530744.0932713,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530744.094534,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530744.0954885,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 1490 Delta 0"}
+{"level":"info","ts":1744530744.095809,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530744.09616,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 2.8937ms size 48"}
+{"level":"info","ts":1744530744.198253,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530744.1995425,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530744.2007692,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 1680 Delta 0"}
+{"level":"info","ts":1744530744.2017534,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530744.2027655,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.5497ms size 44"}
+{"level":"info","ts":1744530744.305733,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530744.307026,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530744.308061,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 913080 Delta 0"}
+{"level":"info","ts":1744530744.309073,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530744.3101277,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3873ms size 49"}
+{"level":"info","ts":1744530744.3575835,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3586798,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 1.168832e+06 Delta 0"}
+{"level":"info","ts":1744530744.3595445,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3603666,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 2.7738ms size 0"}
+{"level":"info","ts":1744530744.3617885,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3620512,"caller":"logger/logger.go:42","msg":"MType gauge ID BuckHashSys Value 2987 Delta 0"}
+{"level":"info","ts":1744530744.3622952,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.362581,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 790.7µs size 0"}
+{"level":"info","ts":1744530744.3630834,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3633957,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 284 Delta 0"}
+{"level":"info","ts":1744530744.3636892,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3639545,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 869µs size 0"}
+{"level":"info","ts":1744530744.3645916,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3648996,"caller":"logger/logger.go:42","msg":"MType gauge ID GCCPUFraction Value 0 Delta 0"}
+{"level":"info","ts":1744530744.3652034,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.365458,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 864.1µs size 0"}
+{"level":"info","ts":1744530744.3660228,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3662722,"caller":"logger/logger.go:42","msg":"MType gauge ID GCSys Value 1.743608e+06 Delta 0"}
+{"level":"info","ts":1744530744.3665433,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3668108,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 773.1µs size 0"}
+{"level":"info","ts":1744530744.3673258,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3676124,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 1.168832e+06 Delta 0"}
+{"level":"info","ts":1744530744.3678277,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3680513,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 723.7µs size 0"}
+{"level":"info","ts":1744530744.368511,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3687167,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 1.916928e+06 Delta 0"}
+{"level":"info","ts":1744530744.3689334,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3692384,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 738.7µs size 0"}
+{"level":"info","ts":1744530744.3697672,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3700118,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 1.916928e+06 Delta 0"}
+{"level":"info","ts":1744530744.3702834,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3705184,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 749.3µs size 0"}
+{"level":"info","ts":1744530744.3710506,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3713045,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 3680 Delta 0"}
+{"level":"info","ts":1744530744.3715076,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3717244,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 659.3µs size 0"}
+{"level":"info","ts":1744530744.3721526,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3724117,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapReleased Value 1.818624e+06 Delta 0"}
+{"level":"info","ts":1744530744.372625,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3728452,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 690.1µs size 0"}
+{"level":"info","ts":1744530744.3732421,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3734612,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapSys Value 3.833856e+06 Delta 0"}
+{"level":"info","ts":1744530744.3736553,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3738058,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 549.6µs size 0"}
+{"level":"info","ts":1744530744.3741925,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3743842,"caller":"logger/logger.go:42","msg":"MType gauge ID LastGC Value 0 Delta 0"}
+{"level":"info","ts":1744530744.3745449,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3746862,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 492.6µs size 0"}
+{"level":"info","ts":1744530744.375055,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3752205,"caller":"logger/logger.go:42","msg":"MType gauge ID Lookups Value 0 Delta 0"}
+{"level":"info","ts":1744530744.3753638,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.375485,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 428.6µs size 0"}
+{"level":"info","ts":1744530744.375837,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3760037,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheInuse Value 7248 Delta 0"}
+{"level":"info","ts":1744530744.3762133,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3763516,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 512.6µs size 0"}
+{"level":"info","ts":1744530744.3767328,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3768764,"caller":"logger/logger.go:42","msg":"MType gauge ID MCacheSys Value 15704 Delta 0"}
+{"level":"info","ts":1744530744.3770227,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3771777,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 443.4µs size 0"}
+{"level":"info","ts":1744530744.3775237,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3776965,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanInuse Value 33440 Delta 0"}
+{"level":"info","ts":1744530744.377834,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3779855,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 460.1µs size 0"}
+{"level":"info","ts":1744530744.3783658,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3785431,"caller":"logger/logger.go:42","msg":"MType gauge ID MSpanSys Value 48960 Delta 0"}
+{"level":"info","ts":1744530744.3786862,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3788419,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 474µs size 0"}
+{"level":"info","ts":1744530744.3791313,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.379291,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 3964 Delta 0"}
+{"level":"info","ts":1744530744.379447,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3795826,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 449.2µs size 0"}
+{"level":"info","ts":1744530744.3799455,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3800912,"caller":"logger/logger.go:42","msg":"MType gauge ID NextGC Value 4.194304e+06 Delta 0"}
+{"level":"info","ts":1744530744.3802364,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3803906,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 447.6µs size 0"}
+{"level":"info","ts":1744530744.380712,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3808703,"caller":"logger/logger.go:42","msg":"MType gauge ID NumForcedGC Value 0 Delta 0"}
+{"level":"info","ts":1744530744.3810096,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3811526,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 438.7µs size 0"}
+{"level":"info","ts":1744530744.3815012,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3816545,"caller":"logger/logger.go:42","msg":"MType gauge ID NumGC Value 0 Delta 0"}
+{"level":"info","ts":1744530744.381793,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.38194,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 437µs size 0"}
+{"level":"info","ts":1744530744.3822572,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.382428,"caller":"logger/logger.go:42","msg":"MType gauge ID OtherSys Value 899285 Delta 0"}
+{"level":"info","ts":1744530744.3825674,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3827102,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 451.1µs size 0"}
+{"level":"info","ts":1744530744.3830783,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3832226,"caller":"logger/logger.go:42","msg":"MType gauge ID PauseTotalNs Value 0 Delta 0"}
+{"level":"info","ts":1744530744.3833406,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.383458,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 378µs size 0"}
+{"level":"info","ts":1744530744.3837795,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.383963,"caller":"logger/logger.go:42","msg":"MType gauge ID StackInuse Value 360448 Delta 0"}
+{"level":"info","ts":1744530744.3840966,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3842402,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 458.8µs size 0"}
+{"level":"info","ts":1744530744.38462,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3847897,"caller":"logger/logger.go:42","msg":"MType gauge ID StackSys Value 360448 Delta 0"}
+{"level":"info","ts":1744530744.3853574,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3855114,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 888.9µs size 0"}
+{"level":"info","ts":1744530744.385907,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3860765,"caller":"logger/logger.go:42","msg":"MType gauge ID Sys Value 6.904848e+06 Delta 0"}
+{"level":"info","ts":1744530744.3862197,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3863547,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 446.1µs size 0"}
+{"level":"info","ts":1744530744.3866823,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.38685,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 1.168832e+06 Delta 0"}
+{"level":"info","ts":1744530744.3869934,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3871415,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 456.8µs size 0"}
+{"level":"info","ts":1744530744.3874772,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3876295,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 1.66628351516677e+19 Delta 0"}
+{"level":"info","ts":1744530744.3877463,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.3878598,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 381.2µs size 0"}
+{"level":"info","ts":1744530744.3881652,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530744.3883204,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 2"}
+{"level":"info","ts":1744530744.3884597,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530744.388612,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 445.2µs size 0"}
+{"level":"info","ts":1744530744.414089,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530744.4150825,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 0"}
+{"level":"info","ts":1744530744.4158964,"caller":"logger/logger.go:42","msg":"MType counter ID PollCount Value 0 Delta 3"}
+{"level":"info","ts":1744530744.4167252,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530744.4175296,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.4316ms size 45"}
+{"level":"info","ts":1744530744.5201278,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530744.521344,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 0 Delta 0"}
+{"level":"info","ts":1744530744.5224411,"caller":"logger/logger.go:42","msg":"MType gauge ID RandomValue Value 1.66628351516677e+19 Delta 0"}
+{"level":"info","ts":1744530744.5234425,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530744.524476,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3407ms size 64"}
+{"level":"info","ts":1744530744.6275303,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530744.628323,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 0 Delta 0"}
+{"level":"info","ts":1744530744.628984,"caller":"logger/logger.go:42","msg":"MType gauge ID Alloc Value 1.168832e+06 Delta 0"}
+{"level":"info","ts":1744530744.6297376,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530744.6303823,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 2.8481ms size 45"}
+{"level":"info","ts":1744530744.733126,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530744.7343247,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 0 Delta 0"}
+{"level":"info","ts":1744530744.73526,"caller":"logger/logger.go:42","msg":"MType gauge ID Frees Value 284 Delta 0"}
+{"level":"info","ts":1744530744.7361245,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530744.7370255,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.8919ms size 41"}
+{"level":"info","ts":1744530744.8395777,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530744.8409061,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530744.841906,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapAlloc Value 1.168832e+06 Delta 0"}
+{"level":"info","ts":1744530744.8429425,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530744.8439972,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.4125ms size 49"}
+{"level":"info","ts":1744530744.9472814,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530744.9482334,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 0 Delta 0"}
+{"level":"info","ts":1744530744.9490278,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapIdle Value 1.916928e+06 Delta 0"}
+{"level":"info","ts":1744530744.949821,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530744.950611,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 3.325ms size 48"}
+{"level":"info","ts":1744530745.054001,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530745.055269,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 0 Delta 0"}
+{"level":"info","ts":1744530745.0563726,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapInuse Value 1.916928e+06 Delta 0"}
+{"level":"info","ts":1744530745.0573964,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530745.0584712,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.4746ms size 49"}
+{"level":"info","ts":1744530745.1605616,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530745.1618352,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 0 Delta 0"}
+{"level":"info","ts":1744530745.1628962,"caller":"logger/logger.go:42","msg":"MType gauge ID HeapObjects Value 3680 Delta 0"}
+{"level":"info","ts":1744530745.1639009,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530745.164931,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.3624ms size 48"}
+{"level":"info","ts":1744530745.2685199,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530745.2697003,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 0 Delta 0"}
+{"level":"info","ts":1744530745.2707043,"caller":"logger/logger.go:42","msg":"MType gauge ID Mallocs Value 3964 Delta 0"}
+{"level":"info","ts":1744530745.2717965,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530745.272701,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 4.1735ms size 44"}
+{"level":"info","ts":1744530745.3753269,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530745.3757582,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 0 Delta 0"}
+{"level":"info","ts":1744530745.3760686,"caller":"logger/logger.go:42","msg":"MType gauge ID TotalAlloc Value 1.168832e+06 Delta 0"}
+{"level":"info","ts":1744530745.3764918,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530745.376788,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 1.4613ms size 50"}
+{"level":"info","ts":1744530745.3789172,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530745.379214,"caller":"logger/logger.go:42","msg":"MType counter ID GetSet137 Value 0 Delta 0"}
+{"level":"info","ts":1744530745.379394,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530745.3796322,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 760.2µs size 0"}
+{"level":"info","ts":1744530745.3800423,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530745.3804948,"caller":"logger/logger.go:42","msg":"MType counter ID GetSet137 Value 0 Delta 114354410"}
+{"level":"info","ts":1744530745.3807495,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530745.3810105,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 964.5µs size 0"}
+{"level":"info","ts":1744530745.3815322,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530745.3817608,"caller":"logger/logger.go:42","msg":"MType counter ID GetSet137 Value 0 Delta 720454911"}
+{"level":"info","ts":1744530745.3820825,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530745.3823586,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 824.5µs size 0"}
+{"level":"info","ts":1744530745.3829737,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530745.3832686,"caller":"logger/logger.go:42","msg":"MType counter ID GetSet137 Value 0 Delta 0"}
+{"level":"info","ts":1744530745.3835294,"caller":"logger/logger.go:42","msg":"MType counter ID GetSet137 Value 0 Delta 834809321"}
+{"level":"info","ts":1744530745.3837569,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530745.3839498,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 966.8µs size 53"}
+{"level":"info","ts":1744530745.4053628,"caller":"logger/logger.go:28","msg":"message updateHandler \n"}
+{"level":"info","ts":1744530745.4056048,"caller":"logger/logger.go:42","msg":"MType gauge ID GetSet222 Value 644474.5494339222 Delta 0"}
+{"level":"info","ts":1744530745.405865,"caller":"logger/logger.go:28","msg":"message ------return------"}
+{"level":"info","ts":1744530745.4060357,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 688.9µs size 0"}
+{"level":"info","ts":1744530745.4064698,"caller":"logger/logger.go:28","msg":"message GetOneHandler \n"}
+{"level":"info","ts":1744530745.4066484,"caller":"logger/logger.go:42","msg":"MType gauge ID GetSet222 Value 0 Delta 0"}
+{"level":"info","ts":1744530745.406805,"caller":"logger/logger.go:42","msg":"MType gauge ID GetSet222 Value 644474.5494339222 Delta 0"}
+{"level":"info","ts":1744530745.406975,"caller":"logger/logger.go:28","msg":"message return GetOneHandler"}
+{"level":"info","ts":1744530745.4071527,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 681.3µs size 59"}
+{"level":"info","ts":1744530792.4534879,"caller":"logger/logger.go:28","msg":"message logger is initialized"}
+{"level":"info","ts":1744530792.5105388,"caller":"logger/logger.go:28","msg":"message GetOneHandlerByParams"}
+{"level":"info","ts":1744530792.5107322,"caller":"logger/logger.go:28","msg":"message testSetGet104"}
+{"level":"info","ts":1744530792.5109584,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530792.511174,"caller":"logger/middleware.go:40","msg":"uri /value/counter/testSetGet104 method GET status 404 duration 632.3µs size 0"}
+{"level":"info","ts":1744530792.5117552,"caller":"logger/logger.go:28","msg":"message UpdateHandlerByURLParams \n"}
+{"level":"info","ts":1744530792.5119245,"caller":"logger/middleware.go:40","msg":"uri /update/counter/testSetGet104/763 method POST status 200 duration 167.7µs size 25"}
+{"level":"info","ts":1744530792.512336,"caller":"logger/logger.go:28","msg":"message GetOneHandlerByParams"}
+{"level":"info","ts":1744530792.5124977,"caller":"logger/logger.go:28","msg":"message testSetGet104"}
+{"level":"info","ts":1744530792.513566,"caller":"logger/middleware.go:40","msg":"uri /value/counter/testSetGet104 method GET status 200 duration 1.2253ms size 3"}
+{"level":"info","ts":1744530792.5140784,"caller":"logger/logger.go:28","msg":"message UpdateHandlerByURLParams \n"}
+{"level":"info","ts":1744530792.5142457,"caller":"logger/middleware.go:40","msg":"uri /update/counter/testSetGet104/911 method POST status 200 duration 167.3µs size 25"}
+{"level":"info","ts":1744530792.5145738,"caller":"logger/logger.go:28","msg":"message GetOneHandlerByParams"}
+{"level":"info","ts":1744530792.5147254,"caller":"logger/logger.go:28","msg":"message testSetGet104"}
+{"level":"info","ts":1744530792.514877,"caller":"logger/middleware.go:40","msg":"uri /value/counter/testSetGet104 method GET status 200 duration 303.7µs size 4"}
+{"level":"info","ts":1744530792.5152717,"caller":"logger/logger.go:28","msg":"message UpdateHandlerByURLParams \n"}
+{"level":"info","ts":1744530792.5154128,"caller":"logger/middleware.go:40","msg":"uri /update/counter/testSetGet104/691 method POST status 200 duration 140.3µs size 25"}
+{"level":"info","ts":1744530792.5157182,"caller":"logger/logger.go:28","msg":"message GetOneHandlerByParams"}
+{"level":"info","ts":1744530792.5158865,"caller":"logger/logger.go:28","msg":"message testSetGet104"}
+{"level":"info","ts":1744530792.51604,"caller":"logger/middleware.go:40","msg":"uri /value/counter/testSetGet104 method GET status 200 duration 321.1µs size 4"}
+{"level":"info","ts":1744530792.5166087,"caller":"logger/logger.go:28","msg":"message GetOneHandlerByParams"}
+{"level":"info","ts":1744530792.5167594,"caller":"logger/logger.go:28","msg":"message testUnknown158"}
+{"level":"info","ts":1744530792.5168939,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530792.5170197,"caller":"logger/middleware.go:40","msg":"uri /value/counter/testUnknown158 method GET status 404 duration 408.3µs size 0"}
+{"level":"info","ts":1744530792.5178752,"caller":"logger/logger.go:28","msg":"message UpdateHandlerByURLParams \n"}
+{"level":"info","ts":1744530792.5183043,"caller":"logger/middleware.go:40","msg":"uri /update/gauge/testSetGet12/180949.75 method POST status 200 duration 418.5µs size 28"}
+{"level":"info","ts":1744530792.5186374,"caller":"logger/logger.go:28","msg":"message GetOneHandlerByParams"}
+{"level":"info","ts":1744530792.5187814,"caller":"logger/logger.go:28","msg":"message testSetGet12"}
+{"level":"info","ts":1744530792.5189433,"caller":"logger/middleware.go:40","msg":"uri /value/gauge/testSetGet12 method GET status 0 duration 305µs size 9"}
+{"level":"info","ts":1744530792.519237,"caller":"logger/logger.go:28","msg":"message UpdateHandlerByURLParams \n"}
+{"level":"info","ts":1744530792.5193853,"caller":"logger/middleware.go:40","msg":"uri /update/gauge/testSetGet12/230477.228 method POST status 200 duration 146.8µs size 29"}
+{"level":"info","ts":1744530792.5196815,"caller":"logger/logger.go:28","msg":"message GetOneHandlerByParams"}
+{"level":"info","ts":1744530792.5198267,"caller":"logger/logger.go:28","msg":"message testSetGet12"}
+{"level":"info","ts":1744530792.5199974,"caller":"logger/middleware.go:40","msg":"uri /value/gauge/testSetGet12 method GET status 0 duration 314.7µs size 10"}
+{"level":"info","ts":1744530792.5203743,"caller":"logger/logger.go:28","msg":"message UpdateHandlerByURLParams \n"}
+{"level":"info","ts":1744530792.520526,"caller":"logger/middleware.go:40","msg":"uri /update/gauge/testSetGet12/380127.866 method POST status 200 duration 148.6µs size 29"}
+{"level":"info","ts":1744530792.5208955,"caller":"logger/logger.go:28","msg":"message GetOneHandlerByParams"}
+{"level":"info","ts":1744530792.5210316,"caller":"logger/logger.go:28","msg":"message testSetGet12"}
+{"level":"info","ts":1744530792.5211678,"caller":"logger/middleware.go:40","msg":"uri /value/gauge/testSetGet12 method GET status 0 duration 279.1µs size 10"}
+{"level":"info","ts":1744530792.5216637,"caller":"logger/logger.go:28","msg":"message GetOneHandlerByParams"}
+{"level":"info","ts":1744530792.5218325,"caller":"logger/logger.go:28","msg":"message testUnknown207"}
+{"level":"info","ts":1744530792.5220122,"caller":"logger/logger.go:28","msg":"message unknown metrics name"}
+{"level":"info","ts":1744530792.5221705,"caller":"logger/middleware.go:40","msg":"uri /value/gauge/testUnknown207 method GET status 404 duration 504.5µs size 0"}
