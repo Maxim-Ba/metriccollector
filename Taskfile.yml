@@ -14,7 +14,7 @@ tasks:
           SERVER_PORT=5555
           ADDRESS="localhost:${SERVER_PORT}"
           TEMP_FILE=5555
-          metricstestbeta -test.v -test.run=^TestIteration5$ \
+          metricstestbeta -test.v -test.run=^TestIteration7$ \
             -agent-binary-path=cmd/agent/agent \
             -binary-path=cmd/server/server \
             -server-port=$SERVER_PORT \
@@ -30,8 +30,8 @@ tasks:
   run-server:
     cmds:
     - echo "Run server"
-    - go run cmd/server/main.go
+    - go run cmd/server/main.go -a localhost:3333
   run-agent:
     cmds:
     - echo "Run agent"
-    - go run cmd/agent/main.go
+    - go run cmd/agent/main.go -a localhost:3333

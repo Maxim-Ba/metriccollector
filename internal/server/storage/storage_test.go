@@ -9,7 +9,7 @@ import (
 
 func TestGetMetrics(t *testing.T) {
 	type args struct {
-		metricsNames *[]string
+		metricsNames *[]*metrics.MetricDTOParams
 	}
 	tests := []struct {
 		name    string

@@ -60,13 +60,20 @@ func (g *generator) Generate() ([]*metrics.Metrics, error) {
 	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "Sys", Value: utils.IntToPointerFloat(memStats.Sys)})
 	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "TotalAlloc", Value: utils.IntToPointerFloat(memStats.TotalAlloc)})
 
-
-
+	// 
 	metricSlice = append(metricSlice, &metrics.Metrics{
-		MType: "counter",
+		MType: "gauge",
 		ID: "RandomValue",
-		Delta:      utils.IntToPointerInt(rand.Int63()),
+		Value:      utils.IntToPointerFloat(rand.Uint64()),
 	})
+	// 
+
+
+	// metricSlice = append(metricSlice, &metrics.Metrics{
+	// 	MType: "counter",
+	// 	ID: "RandomValue",
+	// 	Delta:      utils.IntToPointerInt(rand.Int63()),
+	// })
 	metricSlice = append(metricSlice, &metrics.Metrics{
 		MType: "counter",
 		ID: "PollCount",
