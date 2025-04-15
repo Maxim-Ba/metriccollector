@@ -2,27 +2,42 @@ package router
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/server/handlers"
+	"github.com/Maxim-Ba/metriccollector/internal/server/handlers/middleware"
 	"github.com/go-chi/chi/v5"
 )
+
+type Middleware func(http.HandlerFunc) http.HandlerFunc
 
 func New() *chi.Mux {
 	fmt.Print("InitHandlers")
 	r := chi.NewRouter()
-	r.Get("/", handlers.GetAllHandler)
+	r.Get("/", middlewares(handlers.GetAllHandler))
 
 	r.Route("/value", func(r chi.Router) {
-		r.Post("/", logger.WithLogging (handlers.GetOneHandler))
-		r.Get("/{metricType}/{metricName}", logger.WithLogging (handlers.GetOneHandlerByParams))
+		r.Post("/", middlewares(handlers.GetOneHandler))
+		r.Get("/{metricType}/{metricName}", middlewares(handlers.GetOneHandlerByParams))
 	})
 	r.Route("/update", func(r chi.Router) {
-		r.Post("/", logger.WithLogging (handlers.UpdateHandler))
-		r.Post("/{metricType}/{metricName}/{value}", logger.WithLogging (handlers.UpdateHandlerByURLParams))
-		r.Get("/{metricType}/{metricName}/{value}", logger.WithLogging (handlers.UpdateHandlerByURLParams))
+		r.Post("/", middlewares(handlers.UpdateHandler))
+		r.Post("/{metricType}/{metricName}/{value}", middlewares(handlers.UpdateHandlerByURLParams))
+		r.Get("/{metricType}/{metricName}/{value}", middlewares(handlers.UpdateHandlerByURLParams))
 
 	})
 
 	return r
+}
+
+func middlewares(next http.HandlerFunc) http.HandlerFunc {
+	mids := []Middleware{
+		middleware.GzipHandle,
+		logger.WithLogging,
+	}
+	for _, mid := range mids {
+		next = mid(next)
+	}
+	return next
 }

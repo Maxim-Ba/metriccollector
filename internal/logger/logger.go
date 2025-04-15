@@ -27,8 +27,11 @@ func init() {
 func LogInfo( message interface{})  {
 	sugar.Infoln(
 		"message", message,
+)}
+func LogError( message interface{})  {
+	sugar.Errorln(
+		"message", message,
 )
-
 }
 func LogMetric( m metrics.Metrics)  {
 	var Value float64 

@@ -2,6 +2,7 @@ package client
 
 import (
 	"bytes"
+	"compress/gzip"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -36,18 +37,36 @@ func (c *HTTPClient) SendMetrics(metrics []*metrics.Metrics) error {
 	for _, metric := range metrics {
 		body, err := json.Marshal(*metric)
 		if err != nil {
-			logger.LogInfo("agent 0------------")
 			logger.LogInfo(err)
 
 			return err
 	}
 		path := fmt.Sprintf("http://%s/update/", address)
-		resp,err:=c.httpClient.Post(path, "application/json", bytes.NewReader(body))
+		// реализует io.Writer и io.Reader
+		var compressedBody bytes.Buffer
+		gzipWriter := gzip.NewWriter(&compressedBody)
+		_, err = gzipWriter.Write(body)
 		if err != nil {
-			logger.LogInfo("agent 1------------")
+			logger.LogInfo(err)
+			return err
+		}
+		gzipWriter.Close()
+
+		req, err := http.NewRequest("POST", path, &compressedBody)
+
+		if err != nil {
 			logger.LogInfo(err)
 			return nil
 		}  
+		req.Header.Set("Accept-Encoding", "gzip")
+		req.Header.Set("Content-Encoding", "gzip")
+		req.Header.Set("Content-Type", "application/json")
+
+		resp, err := c.httpClient.Do(req)
+		if err != nil {
+			logger.LogInfo(err)
+			return err
+		}
 		resp.Body.Close()
 	}
 	return nil

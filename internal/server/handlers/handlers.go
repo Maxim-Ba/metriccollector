@@ -157,7 +157,7 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 		res.Write([]byte(""))
 		return
 	}
-	logger.LogMetric(metric)
+	// logger.LogMetric(metric)
 
 	err = metricsService.Update(storage.StorageInstance, &metric)
 	if err != nil {
@@ -166,7 +166,6 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 		res.Write([]byte(""))
 		return
 	}
-	logger.LogInfo("------return------")
 
 	res.WriteHeader(http.StatusOK)
 	res.Write([]byte(""))

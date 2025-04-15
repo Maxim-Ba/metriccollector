@@ -14,7 +14,7 @@ func TestHTTPClient_SendMetrics(t *testing.T) {
 	}
 	tests := []struct {
 		name        string
-		client           *HTTPClient
+		client      *HTTPClient
 		args        args
 		wantErr     bool
 		wantHeaders map[string]string
@@ -26,14 +26,38 @@ func TestHTTPClient_SendMetrics(t *testing.T) {
 			},
 			args: args{
 				metrics: []*metrics.Metrics{
-					{
-						// Initialize with appropriate test data
-					},
+					{},
 				},
 			},
 			wantErr: false,
 			wantHeaders: map[string]string{
 				"Content-Type": "application/json",
+			},
+		},
+		{
+			name: "Valid Content-Encoding",
+			client: &HTTPClient{
+				httpClient: &http.Client{},
+			},
+			args: args{
+				metrics: []*metrics.Metrics{{}},
+			},
+			wantErr: false,
+			wantHeaders: map[string]string{
+				"Content-Encoding": "gzip",
+			},
+		},
+		{
+			name: "Valid Accept-Encoding",
+			client: &HTTPClient{
+				httpClient: &http.Client{},
+			},
+			args: args{
+				metrics: []*metrics.Metrics{{}},
+			},
+			wantErr: false,
+			wantHeaders: map[string]string{
+				"Accept-Encoding": "gzip",
 			},
 		},
 	}
