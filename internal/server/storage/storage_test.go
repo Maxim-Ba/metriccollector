@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
+	"github.com/Maxim-Ba/metriccollector/internal/server/config"
 )
 
 func TestGetMetrics(t *testing.T) {
@@ -19,7 +20,7 @@ func TestGetMetrics(t *testing.T) {
 	}{
 		// TODO: Add test cases.
 	}
-	s,_ := New()
+	s,_ := New(config.Parameters{})
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

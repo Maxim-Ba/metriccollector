@@ -21,6 +21,7 @@ func (w gzipWriter) Write(b []byte) (int, error) {
 }
 func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(res http.ResponseWriter, r *http.Request) {
+
 		r, err := decodeGzip(r)
 		if err != nil {
 			logger.LogError(err)
@@ -30,22 +31,16 @@ func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 		}
 		// проверяем, что клиент поддерживает gzip-сжатие
 		headerValues := r.Header.Values("Accept-Encoding")
-		logger.LogInfo("===Accept-Encoding===")
+		logger.LogInfo("Accept-Encoding:")
 		logger.LogInfo(headerValues)
+		logger.LogInfo(slices.Contains(headerValues, "gzip"))
 
 		if !slices.Contains(headerValues, "gzip") {
 			next.ServeHTTP(res, r)
 			return
 		}
-
-		headerValues = r.Header.Values("Content-Type")
-		logger.LogInfo("===Content-Type===")
-		logger.LogInfo(headerValues)
-		// if !slices.Contains(headerValues, "application/json") && !slices.Contains(headerValues, "text/html") {
-		// 	next.ServeHTTP(res, r)
-		// 	return
-		// }
-	
+		// next.ServeHTTP(res, r)
+		// return
 		// создаём gzip.Writer поверх текущего w
 		gz, err := gzip.NewWriterLevel(res, gzip.BestSpeed)
 		if err != nil {
@@ -54,9 +49,6 @@ func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 		}
 		defer gz.Close()
 
-		res.Header().Set("Content-Encoding", "gzip")
-		logger.LogInfo("===Header().Set===")
-
 		// передаём обработчику страницы переменную типа gzipWriter для вывода данных
 		next.ServeHTTP(gzipWriter{ResponseWriter: res, Writer: gz}, r)
 	})
@@ -64,6 +56,10 @@ func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 
 func decodeGzip(r *http.Request) (*http.Request, error) {
 	headerValues := r.Header.Values("Content-Encoding")
+	logger.LogInfo("--Content-Encoding--")
+	logger.LogInfo(headerValues)
+	logger.LogInfo(slices.Contains(headerValues, "gzip"))
+
 	if !slices.Contains(headerValues, "gzip") {
 		return r, nil
 	}

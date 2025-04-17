@@ -7,6 +7,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/server/handlers"
 	"github.com/Maxim-Ba/metriccollector/internal/server/handlers/middleware"
+	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -25,9 +26,7 @@ func New() *chi.Mux {
 		r.Post("/", middlewares(handlers.UpdateHandler))
 		r.Post("/{metricType}/{metricName}/{value}", middlewares(handlers.UpdateHandlerByURLParams))
 		r.Get("/{metricType}/{metricName}/{value}", middlewares(handlers.UpdateHandlerByURLParams))
-
 	})
-
 	return r
 }
 
@@ -35,6 +34,7 @@ func middlewares(next http.HandlerFunc) http.HandlerFunc {
 	mids := []Middleware{
 		middleware.GzipHandle,
 		logger.WithLogging,
+		storage.WithSyncLocalStorage,
 	}
 	for _, mid := range mids {
 		next = mid(next)

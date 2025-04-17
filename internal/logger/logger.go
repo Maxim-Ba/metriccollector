@@ -24,14 +24,11 @@ func init() {
 		LogInfo("logger is initialized")
 }
 
-func LogInfo( message interface{})  {
-	sugar.Infoln(
-		"message", message,
-)}
-func LogError( message interface{})  {
-	sugar.Errorln(
-		"message", message,
-)
+func LogInfo(params ...interface{}) {
+	sugar.Info(params...)
+}
+func LogError(params ...interface{}) {
+	sugar.Error(params...)
 }
 func LogMetric( m metrics.Metrics)  {
 	var Value float64 
