@@ -32,7 +32,7 @@ func loadMetricsFromFile(path string) ([]*metrics.Metrics, error) {
 	}
 	// Проверка на пустые данные
 	if len(data) == 0 {
-		logger.LogInfo("Файл пуст, возвращаем пустой список метрик")
+		logger.LogInfo("file is empty")
 		return metricsList, nil
 	}
 	if err := json.Unmarshal(data, &metricsList); err != nil {
