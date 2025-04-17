@@ -2687,3 +2687,322 @@
 {"level":"info","ts":1744920345.6237993,"caller":"logger/logger.go:42","msg":"MType gauge ID GetSet83 Value 474340.3848456771 Delta 0"}
 {"level":"info","ts":1744920345.6239223,"caller":"logger/logger.go:28","msg":"return GetOneHandler"}
 {"level":"info","ts":1744920345.6248202,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 2.1042ms size 86"}
+{"level":"info","ts":1744921161.032103,"caller":"logger/logger.go:28","msg":"logger is initialized"}
+{"level":"info","ts":1744921171.102568,"caller":"logger/logger.go:28","msg":"Post \"http://localhost:3333/update/\": EOF"}
+{"level":"info","ts":1744921171.282938,"caller":"logger/logger.go:28","msg":"logger is initialized"}
+{"level":"info","ts":1744921171.4158132,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921171.4159937,"caller":"logger/logger.go:28","msg":"[]"}
+{"level":"info","ts":1744921171.4161623,"caller":"logger/logger.go:28","msg":"false"}
+{"level":"info","ts":1744921171.4163642,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921171.4165435,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921171.4166913,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921171.4168468,"caller":"logger/logger.go:28","msg":"GetOneHandler \n"}
+{"level":"info","ts":1744921171.4170341,"caller":"logger/logger.go:42","msg":"MType counter ID GetSet80 Value 0 Delta 0"}
+{"level":"info","ts":1744921171.4172015,"caller":"logger/logger.go:28","msg":"unknown metrics name"}
+{"level":"info","ts":1744921171.4181085,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 404 duration 2.2864ms size 23"}
+{"level":"info","ts":1744921171.4187107,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921171.4188836,"caller":"logger/logger.go:28","msg":"[]"}
+{"level":"info","ts":1744921171.4190416,"caller":"logger/logger.go:28","msg":"false"}
+{"level":"info","ts":1744921171.4191995,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921171.4193444,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921171.419478,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921171.419611,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921171.4211397,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 2.4211ms size 23"}
+{"level":"info","ts":1744921171.42165,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921171.4217865,"caller":"logger/logger.go:28","msg":"[]"}
+{"level":"info","ts":1744921171.4219081,"caller":"logger/logger.go:28","msg":"false"}
+{"level":"info","ts":1744921171.4220412,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921171.4221644,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921171.4222758,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921171.422408,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921171.4230103,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.3571ms size 23"}
+{"level":"info","ts":1744921171.4236245,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921171.4237952,"caller":"logger/logger.go:28","msg":"[]"}
+{"level":"info","ts":1744921171.4239564,"caller":"logger/logger.go:28","msg":"false"}
+{"level":"info","ts":1744921171.424117,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921171.4242544,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921171.4243832,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921171.424548,"caller":"logger/logger.go:28","msg":"GetOneHandler \n"}
+{"level":"info","ts":1744921171.424774,"caller":"logger/logger.go:42","msg":"MType counter ID GetSet80 Value 0 Delta 0"}
+{"level":"info","ts":1744921171.4249864,"caller":"logger/logger.go:42","msg":"MType counter ID GetSet80 Value 0 Delta 3633066095"}
+{"level":"info","ts":1744921171.4251645,"caller":"logger/logger.go:28","msg":"return GetOneHandler"}
+{"level":"info","ts":1744921171.4258893,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 2.2588ms size 81"}
+{"level":"info","ts":1744921173.336577,"caller":"logger/logger.go:28","msg":"file saved"}
+{"level":"info","ts":1744921175.3400972,"caller":"logger/logger.go:28","msg":"file saved"}
+{"level":"info","ts":1744921176.601537,"caller":"logger/logger.go:28","msg":"logger is initialized"}
+{"level":"info","ts":1744921176.7582521,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921176.7584598,"caller":"logger/logger.go:28","msg":"[]"}
+{"level":"info","ts":1744921176.758614,"caller":"logger/logger.go:28","msg":"false"}
+{"level":"info","ts":1744921176.7587984,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921176.7589464,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921176.7591534,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921176.7593424,"caller":"logger/logger.go:28","msg":"GetOneHandler \n"}
+{"level":"info","ts":1744921176.759542,"caller":"logger/logger.go:42","msg":"MType counter ID GetSet80 Value 0 Delta 0"}
+{"level":"info","ts":1744921176.7597086,"caller":"logger/logger.go:42","msg":"MType counter ID GetSet80 Value 0 Delta 3633066095"}
+{"level":"info","ts":1744921176.759882,"caller":"logger/logger.go:28","msg":"return GetOneHandler"}
+{"level":"info","ts":1744921176.7608805,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 2.6198ms size 81"}
+{"level":"info","ts":1744921176.7619562,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921176.7621615,"caller":"logger/logger.go:28","msg":"[]"}
+{"level":"info","ts":1744921176.7623348,"caller":"logger/logger.go:28","msg":"false"}
+{"level":"info","ts":1744921176.7625499,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921176.7627654,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921176.7629673,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921176.763165,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921176.7641678,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 2.1243ms size 23"}
+{"level":"info","ts":1744921176.7650743,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921176.765285,"caller":"logger/logger.go:28","msg":"[]"}
+{"level":"info","ts":1744921176.765459,"caller":"logger/logger.go:28","msg":"false"}
+{"level":"info","ts":1744921176.7655964,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921176.7658198,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921176.765978,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921176.7661285,"caller":"logger/logger.go:28","msg":"GetOneHandler \n"}
+{"level":"info","ts":1744921176.7663698,"caller":"logger/logger.go:42","msg":"MType gauge ID GetSet6 Value 0 Delta 0"}
+{"level":"info","ts":1744921176.7665036,"caller":"logger/logger.go:42","msg":"MType gauge ID GetSet6 Value 79254.47602685407 Delta 0"}
+{"level":"info","ts":1744921176.7666507,"caller":"logger/logger.go:28","msg":"return GetOneHandler"}
+{"level":"info","ts":1744921176.7672944,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 2.2176ms size 85"}
+{"level":"info","ts":1744921178.6594608,"caller":"logger/logger.go:28","msg":"file saved"}
+{"level":"info","ts":1744921180.6688387,"caller":"logger/logger.go:28","msg":"file saved"}
+{"level":"info","ts":1744921181.1108818,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1111932,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1114163,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1117563,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.111971,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1122086,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1124294,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1141365,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 3.2611ms size 23"}
+{"level":"info","ts":1744921181.1151617,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1154544,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1157267,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1160195,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.116187,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1163492,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1165814,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1168141,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.6602ms size 23"}
+{"level":"info","ts":1744921181.1202636,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1210675,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1212893,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1216755,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1219003,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.12217,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.122391,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1235344,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 3.2773ms size 23"}
+{"level":"info","ts":1744921181.126214,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1265383,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.126851,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.127147,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1273656,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.127553,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1277492,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1280115,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.8048ms size 23"}
+{"level":"info","ts":1744921181.1290052,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1292584,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1295278,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1298532,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1300387,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1302047,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1303668,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.135926,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 6.9248ms size 23"}
+{"level":"info","ts":1744921181.1375928,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1378694,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1380439,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1383727,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1385949,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1387904,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.138979,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1392589,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.6797ms size 23"}
+{"level":"info","ts":1744921181.1402595,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1405282,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1406748,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1408827,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1410673,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1413238,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1415598,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1423323,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 2.0459ms size 23"}
+{"level":"info","ts":1744921181.1434336,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.143633,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.143796,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1440141,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.144152,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.144339,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.144501,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1447399,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.3099ms size 23"}
+{"level":"info","ts":1744921181.1461134,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.146308,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.146474,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1466773,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1468534,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1470518,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1472566,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1481109,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 2.0014ms size 23"}
+{"level":"info","ts":1744921181.1489775,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1491363,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1492867,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.149493,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1496427,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.149781,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1499455,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1501462,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.1759ms size 23"}
+{"level":"info","ts":1744921181.1509395,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1511116,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1512475,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1514435,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1515672,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1516993,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1518598,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1523905,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.4554ms size 23"}
+{"level":"info","ts":1744921181.1539576,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1541493,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1543293,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1545203,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.154701,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1548223,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1549637,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1552162,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.2708ms size 23"}
+{"level":"info","ts":1744921181.1563709,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.15654,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1567054,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1568732,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1570094,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1571386,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1572678,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1579986,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.5764ms size 23"}
+{"level":"info","ts":1744921181.1592612,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1594384,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.159579,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1597593,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1599193,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1600738,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1602242,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1604831,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.2253ms size 23"}
+{"level":"info","ts":1744921181.1618178,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1620066,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1621873,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1623535,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1624882,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.162643,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1627934,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1630175,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.2082ms size 23"}
+{"level":"info","ts":1744921181.1642084,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1643922,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1645427,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1647437,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1649017,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1650424,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1652026,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1655655,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.2912ms size 23"}
+{"level":"info","ts":1744921181.1664643,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1666327,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1667612,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1669345,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1670601,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.167178,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1672919,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.167479,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.0221ms size 23"}
+{"level":"info","ts":1744921181.1689415,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1691375,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1692939,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.169497,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1696453,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1698058,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1699443,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1702936,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.3574ms size 23"}
+{"level":"info","ts":1744921181.1717951,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1722658,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.172544,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1728497,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1729972,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1731424,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1733406,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1736937,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.8505ms size 23"}
+{"level":"info","ts":1744921181.1752036,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1754277,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1755776,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1757557,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1758988,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.17604,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1761932,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.176513,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.319ms size 23"}
+{"level":"info","ts":1744921181.1775079,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.177715,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1778774,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.178043,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1782038,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1784034,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.178543,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1793506,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.8486ms size 23"}
+{"level":"info","ts":1744921181.1805537,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.180732,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.180897,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1810844,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.181238,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1814,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1815393,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1817589,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.2299ms size 23"}
+{"level":"info","ts":1744921181.1825883,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.182778,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1829264,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1831248,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.183276,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1834512,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1836023,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1843336,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.7499ms size 23"}
+{"level":"info","ts":1744921181.185358,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1855326,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1856728,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1858323,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.185985,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1861298,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1862922,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.186516,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.1677ms size 23"}
+{"level":"info","ts":1744921181.1874573,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1877093,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1878598,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1880455,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1881952,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1883316,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1884723,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1892002,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.7129ms size 23"}
+{"level":"info","ts":1744921181.1899998,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.190201,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1904008,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1905832,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1907084,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1908507,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.190996,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1911988,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.2067ms size 23"}
+{"level":"info","ts":1744921181.1919465,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.192123,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.192256,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1924539,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1926093,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1927457,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1928914,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1935353,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.5909ms size 23"}
+{"level":"info","ts":1744921181.1953933,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1956077,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1957688,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1959639,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1961057,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.196242,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1963987,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1966453,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.2612ms size 23"}
+{"level":"info","ts":1744921181.1973708,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921181.1975157,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1976602,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1978562,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921181.1980042,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921181.1981387,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921181.1982772,"caller":"logger/logger.go:28","msg":"updateHandler \n"}
+{"level":"info","ts":1744921181.1988177,"caller":"logger/middleware.go:40","msg":"uri /update/ method POST status 200 duration 1.4526ms size 23"}
+{"level":"info","ts":1744921182.0415204,"caller":"logger/logger.go:28","msg":"logger is initialized"}
+{"level":"info","ts":1744921182.1805122,"caller":"logger/logger.go:28","msg":"--Content-Encoding--"}
+{"level":"info","ts":1744921182.1807127,"caller":"logger/logger.go:28","msg":"[]"}
+{"level":"info","ts":1744921182.1809285,"caller":"logger/logger.go:28","msg":"false"}
+{"level":"info","ts":1744921182.1810887,"caller":"logger/logger.go:28","msg":"Accept-Encoding:"}
+{"level":"info","ts":1744921182.1812549,"caller":"logger/logger.go:28","msg":"[gzip]"}
+{"level":"info","ts":1744921182.18141,"caller":"logger/logger.go:28","msg":"true"}
+{"level":"info","ts":1744921182.1815834,"caller":"logger/logger.go:28","msg":"GetOneHandler \n"}
+{"level":"info","ts":1744921182.1817672,"caller":"logger/logger.go:42","msg":"MType gauge ID GetSet6 Value 0 Delta 0"}
+{"level":"info","ts":1744921182.1819394,"caller":"logger/logger.go:42","msg":"MType gauge ID GetSet6 Value 79254.47602685407 Delta 0"}
+{"level":"info","ts":1744921182.1820922,"caller":"logger/logger.go:28","msg":"return GetOneHandler"}
+{"level":"info","ts":1744921182.1829386,"caller":"logger/middleware.go:40","msg":"uri /value/ method POST status 200 duration 2.4423ms size 85"}

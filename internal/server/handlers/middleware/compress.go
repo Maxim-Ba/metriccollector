@@ -39,6 +39,7 @@ func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 			next.ServeHTTP(res, r)
 			return
 		}
+		res.Header().Set("Content-Encoding", "gzip")
 		// next.ServeHTTP(res, r)
 		// return
 		// создаём gzip.Writer поверх текущего w
