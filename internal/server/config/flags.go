@@ -9,12 +9,15 @@ type ParsedFlags struct {
 	FlagStoreIntervalSecond int
 	FlagStoragePath         string
 	FlagRestore             bool
+	// debug info warn error
+	LogLevel string
 }
 
 var FlagRunAddr string
 var FlagStoreIntervalSecond int
 var FlagStoragePath string
 var FlagRestore bool
+var LogLevel string
 
 // parseFlags обрабатывает аргументы командной строки
 // и сохраняет их значения в соответствующих переменных
@@ -25,6 +28,8 @@ func ParseFlags() *ParsedFlags {
 	flag.IntVar(&FlagStoreIntervalSecond, "i", 300, "interval after save metrics to file")
 	flag.StringVar(&FlagStoragePath, "f", "./store.json", "file path for save metrics")
 	flag.BoolVar(&FlagRestore, "r", true, "load metrics at server start ")
+	flag.StringVar(&LogLevel, "l", "debug", "log level: debug info warn error")
+
 	// парсим переданные серверу аргументы в зарегистрированные переменные
 	flag.Parse()
 	return &ParsedFlags{
@@ -32,5 +37,6 @@ func ParseFlags() *ParsedFlags {
 		FlagStoreIntervalSecond: FlagStoreIntervalSecond,
 		FlagStoragePath:         FlagStoragePath,
 		FlagRestore:             FlagRestore,
+		LogLevel:                LogLevel,
 	}
 }

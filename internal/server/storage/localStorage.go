@@ -23,7 +23,11 @@ func loadMetricsFromFile(path string) ([]*metrics.Metrics, error) {
 		logger.LogError(err)
 		return nil, err
 	}
-	defer file.Close()
+	defer func() {
+		if err := file.Close(); err != nil {
+			logger.LogError(err)
+		}
+	}()
 
 	data, err := io.ReadAll(file)
 	if err != nil {
@@ -48,7 +52,11 @@ func saveMetricsToFile(path string, metricsList *[]metrics.Metrics) error {
 		logger.LogError(err)
 		return err
 	}
-	defer file.Close()
+	defer func() {
+		if err := file.Close(); err != nil {
+			logger.LogError(err)
+		}
+	}()
 	data, err := json.Marshal(metricsList)
 	if err != nil {
 		logger.LogError(err)

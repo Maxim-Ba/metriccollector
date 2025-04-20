@@ -26,7 +26,10 @@ func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 		if err != nil {
 			logger.LogError(err)
 			res.WriteHeader(http.StatusMethodNotAllowed)
-			res.Write([]byte(""))
+			_,err:=res.Write([]byte(""))
+			if err != nil {
+				return 
+			}
 			return
 		}
 		// проверяем, что клиент поддерживает gzip-сжатие
@@ -45,7 +48,11 @@ func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 			logger.LogError(err)
 			return
 		}
-		defer gz.Close()
+		defer func() {
+			if err :=  gz.Close(); err != nil {
+				logger.LogError(err)
+			}
+		}()
 
 		// передаём обработчику страницы переменную типа gzipWriter для вывода данных
 		next.ServeHTTP(gzipWriter{ResponseWriter: res, Writer: gz}, r)
@@ -63,7 +70,12 @@ func decodeGzip(r *http.Request) (*http.Request, error) {
 	if err != nil {
 		return r, ErrWrongBodyEncoding
 	}
-	defer gz.Close()
+	defer func() {
+		if err :=  gz.Close(); err != nil {
+			logger.LogError(err)
+		}
+	}()
+	
 	body, err := io.ReadAll(gz)
 	if err != nil {
 		return r, ErrWrongBodyEncoding

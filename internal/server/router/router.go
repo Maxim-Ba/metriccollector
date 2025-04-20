@@ -1,7 +1,6 @@
 package router
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
@@ -14,7 +13,7 @@ import (
 type Middleware func(http.HandlerFunc) http.HandlerFunc
 
 func New() *chi.Mux {
-	fmt.Print("InitHandlers")
+	logger.LogInfo("InitHandlers")
 	r := chi.NewRouter()
 	r.Get("/", middlewares(handlers.GetAllHandler))
 
@@ -33,7 +32,7 @@ func New() *chi.Mux {
 func middlewares(next http.HandlerFunc) http.HandlerFunc {
 	mids := []Middleware{
 		middleware.GzipHandle,
-		logger.WithLogging,
+		middleware.WithLogging,
 		storage.WithSyncLocalStorage,
 	}
 	for _, mid := range mids {

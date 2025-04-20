@@ -12,6 +12,7 @@ type Config struct {
 	StoreIntervalSecond int    `env:"STORE_INTERVAL"`
 	StoragePath         string `env:"FILE_STORAGE_PATH"`
 	Restore             bool   `env:"RESTORE"`
+	LogLevel            string `env:"LOG_LEVEL"`
 }
 
 func ParseEnv() *Config {

@@ -32,42 +32,48 @@ func NewClient(initAddress string) *HTTPClient {
 }
 
 func (c *HTTPClient) SendMetrics(metrics []*metrics.Metrics) error {
-	fmt.Println("send request")
+	logger.LogInfo("send request")
 
 	for _, metric := range metrics {
 		body, err := json.Marshal(*metric)
 		if err != nil {
-			logger.LogInfo(err)
-
+			logger.LogError(err)
 			return err
-	}
+		}
 		path := fmt.Sprintf("http://%s/update/", address)
 		// реализует io.Writer и io.Reader
 		var compressedBody bytes.Buffer
 		gzipWriter := gzip.NewWriter(&compressedBody)
 		_, err = gzipWriter.Write(body)
 		if err != nil {
-			logger.LogInfo(err)
+			logger.LogError(err)
 			return err
 		}
-		gzipWriter.Close()
-
+		err = gzipWriter.Close()
+		if err != nil {
+			logger.LogError(err)
+		}
 		req, err := http.NewRequest("POST", path, &compressedBody)
 
 		if err != nil {
-			logger.LogInfo(err)
+			logger.LogError(err)
 			return nil
-		}  
+		}
 		req.Header.Set("Accept-Encoding", "gzip")
 		req.Header.Set("Content-Encoding", "gzip")
 		req.Header.Set("Content-Type", "application/json")
 
 		resp, err := c.httpClient.Do(req)
 		if err != nil {
-			logger.LogInfo(err)
+			logger.LogError(err)
 			return err
 		}
-		resp.Body.Close()
+		err = resp.Body.Close()
+		if err != nil {
+			logger.LogError(err)
+		return err
+		}
+		
 	}
 	return nil
 }

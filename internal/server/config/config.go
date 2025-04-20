@@ -5,6 +5,7 @@ type Parameters struct {
 	StoreIntervalSecond int
 	StoragePath         string
 	Restore             bool
+	LogLevel            string
 }
 
 func GetParameters() Parameters {
@@ -14,6 +15,7 @@ func GetParameters() Parameters {
 	storeInterval := envConfig.StoreIntervalSecond
 	storagePath := envConfig.StoragePath
 	restore := envConfig.Restore
+	logLevel := envConfig.LogLevel
 	if address == "" {
 		address = flags.FlagRunAddr
 	}
@@ -26,10 +28,14 @@ func GetParameters() Parameters {
 	if !isRestoreSet() {
 		restore = flags.FlagRestore
 	}
+	if logLevel == "" {
+		logLevel = flags.LogLevel
+	}
 	return Parameters{
 		Address:             address,
 		StoreIntervalSecond: storeInterval,
 		StoragePath:         storagePath,
 		Restore:             restore,
+		LogLevel:            logLevel,
 	}
 }

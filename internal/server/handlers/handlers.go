@@ -13,6 +13,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	metricsService "github.com/Maxim-Ba/metriccollector/internal/server/services/metric"
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
 func GetAllHandler(res http.ResponseWriter, req *http.Request) {
@@ -20,26 +21,42 @@ func GetAllHandler(res http.ResponseWriter, req *http.Request) {
 	err := checkForAllowedMethod(req, []string{http.MethodGet})
 	if err != nil {
 		res.WriteHeader(http.StatusMethodNotAllowed)
-		res.Write([]byte(""))
+		// _, err := res.Write([]byte(""))
+		// if err != nil {
+		// 	return
+		// }
+		utils.WrireZeroBytes(res)
 		return
 	}
 
 	html, err := metricsService.GetAll(storage.StorageInstance)
 	if err != nil {
 		res.WriteHeader(http.StatusNotFound)
-		res.Write([]byte(""))
+		// _, err := res.Write([]byte(""))
+		// if err != nil {
+		// 	return
+		// }
+		utils.WrireZeroBytes(res)
 		return
 	}
 	res.Header().Set("Content-Type", "text/html")
-	res.Write([]byte(html))
+	_, err = res.Write([]byte(html))
+
+	if err != nil {
+		logger.LogError(err)
+		return
+	}
 }
 func GetOneHandlerByParams(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("GetOneHandlerByParams")
 	err := checkForAllowedMethod(req, []string{http.MethodGet})
 	if err != nil {
-		// logger.LogInfo(err)
 		res.WriteHeader(http.StatusMethodNotAllowed)
-		res.Write([]byte(""))
+		// _, err := res.Write([]byte(""))
+		// if err != nil {
+		// 	return
+		// }
+		utils.WrireZeroBytes(res)
 		return
 	}
 	urlString := req.URL.Path //  /value/asdasd/asdasd/sdfsdfsdf/234
@@ -53,16 +70,27 @@ func GetOneHandlerByParams(res http.ResponseWriter, req *http.Request) {
 
 	if err != nil {
 		res.WriteHeader(http.StatusNotFound)
-		res.Write([]byte(""))
+		// _, err := res.Write([]byte(""))
+		// if err != nil {
+		// 	return
+		// }
+		utils.WrireZeroBytes(res)
 		return
 	}
 	res.Header().Set("Content-Type", " text/plain")
 	if parameters[0] == "gauge" {
-		res.Write([]byte(strconv.FormatFloat(*metric.Value, 'f', -1, 64)))
+		_, err = res.Write([]byte(strconv.FormatFloat(*metric.Value, 'f', -1, 64)))
+		if err != nil {
+			logger.LogError(err)
+			return
+		}
 		return
 	}
-	res.Write([]byte(strconv.FormatInt(int64(*metric.Delta), 10)))
-
+	_, err = res.Write([]byte(strconv.FormatInt(int64(*metric.Delta), 10)))
+	if err != nil {
+		logger.LogError(err)
+		return
+	}
 	res.WriteHeader(http.StatusOK)
 }
 func GetOneHandler(res http.ResponseWriter, req *http.Request) {
@@ -71,7 +99,11 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		logger.LogInfo(err)
 		res.WriteHeader(http.StatusMethodNotAllowed)
-		res.Write([]byte(""))
+		// if _, err := res.Write([]byte("")); err != nil {
+		// 	logger.LogError(err)
+		// 	return
+		// }
+		utils.WrireZeroBytes(res)
 		return
 	}
 
@@ -80,7 +112,11 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		logger.LogInfo(err)
 		res.WriteHeader(http.StatusBadRequest)
-		res.Write([]byte(""))
+		// if _, err := res.Write([]byte("")); err != nil {
+		// 	logger.LogError(err)
+		// 	return
+		// }
+		utils.WrireZeroBytes(res)
 		return
 	}
 	requestMetric, err := parseMetric(&buf)
@@ -90,7 +126,11 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 
 		logger.LogInfo(err)
 		res.WriteHeader(http.StatusBadRequest)
-		res.Write([]byte(""))
+		// if _, err := res.Write([]byte("")); err != nil {
+		// 	logger.LogError(err)
+		// 	return
+		// }
+		utils.WrireZeroBytes(res)
 		return
 	}
 
@@ -103,7 +143,8 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 
 	if err != nil {
 		res.WriteHeader(http.StatusNotFound)
-		res.Write([]byte(""))
+		// res.Write([]byte(""))
+		utils.WrireZeroBytes(res)
 		return
 	}
 
@@ -112,7 +153,8 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		logger.LogInfo(err)
 		res.WriteHeader(http.StatusInternalServerError)
-		res.Write([]byte(""))
+		// res.Write([]byte(""))
+		utils.WrireZeroBytes(res)
 		return
 	}
 	logger.LogMetric(*responseMetrics)
@@ -121,7 +163,10 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 
 	res.Header().Set("Content-Type", " application/json")
 	res.WriteHeader(http.StatusOK)
-	res.Write(body)
+	if _,err:= res.Write(body); err != nil {
+		logger.LogError(err)
+	}
+	
 }
 
 func UpdateHandler(res http.ResponseWriter, req *http.Request) {
@@ -130,7 +175,8 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		logger.LogInfo(err)
 		res.WriteHeader(http.StatusMethodNotAllowed)
-		res.Write([]byte(""))
+		// res.Write([]byte(""))
+		utils.WrireZeroBytes(res)
 		return
 	}
 
@@ -140,7 +186,8 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 		logger.LogInfo(err)
 
 		res.WriteHeader(http.StatusBadRequest)
-		res.Write([]byte(""))
+		// res.Write([]byte(""))
+		utils.WrireZeroBytes(res)
 		return
 	}
 
@@ -154,7 +201,8 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 		if err == ErrNoMetricsType || err == ErrWrongValue {
 			res.WriteHeader(http.StatusBadRequest)
 		}
-		res.Write([]byte(""))
+		// res.Write([]byte(""))
+		utils.WrireZeroBytes(res)
 		return
 	}
 	// logger.LogMetric(metric)
@@ -163,12 +211,14 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		logger.LogInfo(err)
 		res.WriteHeader(http.StatusMethodNotAllowed)
-		res.Write([]byte(""))
+		// res.Write([]byte(""))
+		utils.WrireZeroBytes(res)
 		return
 	}
 
 	res.WriteHeader(http.StatusOK)
-	res.Write([]byte(""))
+	// res.Write([]byte(""))
+	utils.WrireZeroBytes(res)
 }
 func UpdateHandlerByURLParams(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("UpdateHandlerByURLParams \n")
@@ -176,7 +226,8 @@ func UpdateHandlerByURLParams(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		// logger.LogInfo(err)
 		res.WriteHeader(http.StatusMethodNotAllowed)
-		res.Write([]byte(""))
+		// res.Write([]byte(""))
+		utils.WrireZeroBytes(res)
 		return
 	}
 	urlString := req.URL.Path //  /update/asdasd/asdasd/sdfsdfsdf/234
@@ -192,19 +243,24 @@ func UpdateHandlerByURLParams(res http.ResponseWriter, req *http.Request) {
 		if err == ErrNoMetricsType || err == ErrWrongValue {
 			res.WriteHeader(http.StatusBadRequest)
 		}
-		res.Write([]byte(""))
+		// res.Write([]byte(""))
+		utils.WrireZeroBytes(res)
 		return
 	}
 	err = metricsService.Update(storage.StorageInstance, &metric)
 	if err != nil {
 		// logger.LogInfo(err)
 		res.WriteHeader(http.StatusMethodNotAllowed)
-		res.Write([]byte(""))
+		// res.Write([]byte(""))
+		utils.WrireZeroBytes(res)
 		return
 	}
 	res.WriteHeader(http.StatusOK)
-	res.Write([]byte(params))
-	res.Write([]byte(""))
+	if _,err:= res.Write([]byte(params));err != nil {
+		return 
+	} 
+	// res.Write([]byte(""))
+	utils.WrireZeroBytes(res)
 }
 func metricRecord(parameters []string) (metrics.Metrics, error) {
 	if len(parameters) != 3 {
@@ -260,22 +316,4 @@ func parseMetric(buf *bytes.Buffer) (metrics.Metrics, error) {
 		return metrics.Metrics{}, ErrNoMetricName
 	}
 	return metric, nil
-}
-func parseMetrics(buf *bytes.Buffer) ([]metrics.Metrics, error) {
-	var metricsList []metrics.Metrics
-	if err := json.Unmarshal(buf.Bytes(), &metricsList); err != nil {
-		// logger.LogInfo(err)
-		return nil, ErrNoMetricName
-	}
-
-	for _, metric := range metricsList {
-		if metric.MType != "gauge" && metric.MType != "counter" {
-			return nil, ErrNoMetricsType
-		}
-		if metric.ID == "" {
-			return nil, ErrNoMetricName
-		}
-	}
-
-	return metricsList, nil
 }

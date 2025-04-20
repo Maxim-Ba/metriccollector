@@ -7,6 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 	"github.com/stretchr/testify/assert"
@@ -58,19 +59,7 @@ func Test_updateHandler(t *testing.T) {
 				code: http.StatusBadRequest,
 			},
 		},
-		// {
-		// 	name:   "Wrong metric value",
-		// 	path:   `gauge/name/string`,
-		// 	method: http.MethodPost,
-		// 	body: metrics.Metrics{
-		// 		ID: "name" ,
-		// 		Value:utils.IntToPointerFloat(234) ,
-		// 		MType: "",
-		// 	},
-		// 	want: want{
-		// 		code: http.StatusBadRequest,
-		// 	},
-		// },
+
 		{
 			name:   "Ok counter",
 			method: http.MethodPost,
@@ -101,13 +90,22 @@ func Test_updateHandler(t *testing.T) {
 	client := &http.Client{}
 	for _, test := range tests {
 		path := "/update/"
-		body ,_:= json.Marshal(test.body)
+		body ,err:= json.Marshal(test.body)
+		if err != nil {
+			logger.LogError("error in convert bpdy to JSON")
+			return 
+		}
 		t.Run(test.name, func(t *testing.T) {
-			request, _ := http.NewRequest(test.method, srv.URL+path, bytes.NewReader(body))
+			request, err := http.NewRequest(test.method, srv.URL+path, bytes.NewReader(body))
+			assert.NoError(t,err)
 			res, err := client.Do(request)  
 			assert.NoError(t,err)
 			assert.Equal(t, test.want.code, res.StatusCode)
-			defer res.Body.Close()
+			defer func() {
+				if err := res.Body.Close(); err != nil {
+					logger.LogError(err)
+				}
+			}()
 		})
 	}
 }
@@ -148,11 +146,17 @@ func Test_getAllHandler(t *testing.T) {
 	client := &http.Client{}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			request, _ := http.NewRequest(test.method, srv.URL+ test.path, nil)
+			request, err := http.NewRequest(test.method, srv.URL+ test.path, nil)
+			assert.NoError(t,err)
+
 			res, err := client.Do(request)  
 			assert.NoError(t,err)
 			assert.Equal(t, test.want.code, res.StatusCode)
-			defer res.Body.Close()
+			defer func() {
+				if err := res.Body.Close(); err != nil {
+					logger.LogError(err)
+				}
+			}()
 		})
 	}
 }

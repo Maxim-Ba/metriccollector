@@ -28,3 +28,4 @@ metricstest.exe
 ./server
 ./agent
 .qodo
+store.json

@@ -1,8 +1,10 @@
-package logger
+package middleware
 
 import (
 	"net/http"
 	"time"
+
+	"github.com/Maxim-Ba/metriccollector/internal/logger"
 )
 
 
@@ -37,7 +39,7 @@ func WithLogging(h http.HandlerFunc) http.HandlerFunc {
 
 			duration := time.Since(start)
 
-			sugar.Infoln(
+			logger.LogInfo(
 					"uri", r.RequestURI,
 					"method", r.Method,
 					"status", responseData.status, // получаем перехваченный код статуса ответа

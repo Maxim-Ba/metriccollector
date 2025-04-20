@@ -1,8 +1,7 @@
 package storage
 
 import (
-	"slices"
-
+	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"github.com/Maxim-Ba/metriccollector/internal/server/config"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
@@ -26,16 +25,20 @@ func New(cfg config.Parameters) (*MemStorage, error) {
 	if cfg.Restore {
 		initStoreValues, err = loadMetricsFromFile(localStoragePath)
 		if err != nil {
-			panic("error on read storage file")
+			logger.LogError(err)
+			return nil, err
 		}
 	}
 	for _, m := range initStoreValues {
-		StorageInstance.SaveMetric(m)
+		err := StorageInstance.SaveMetric(m)
+		if err != nil {
+			logger.LogError(err)
+			return nil, err
+		}
 	}
 	go saveLoop()
 	return &StorageInstance, nil
 }
-
 
 func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
 
@@ -58,8 +61,10 @@ func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
 func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]metrics.Metrics, error) {
 
 	metricsNames := make([]string, len(*metricsParams))
+	metricsTypes := make([]string, len(*metricsParams))
 	for i, m := range *metricsParams {
 		metricsNames[i] = m.MetricsName
+		metricsTypes[i] = m.MetricType
 	}
 	var metricsSlice []metrics.Metrics
 	// Get all metrics
@@ -74,14 +79,15 @@ func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]me
 	}
 
 	//Get choosen metrics
-	for metric, value := range StorageInstance.collectionGauge {
-		if slices.Contains(metricsNames, metric) {
-			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: metric, Value: utils.FloatToPointerFloat(value)})
-		}
-	}
-	for metric, value := range StorageInstance.collectionCounter {
-		if slices.Contains(metricsNames, metric) {
-			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: metric, Delta: utils.FloatToPointerInt(value)})
+	for _, metric := range *metricsParams {
+		if metric.MetricType == "gauge" {
+			if value, ok := StorageInstance.collectionGauge[metric.MetricsName]; ok {
+				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: metric.MetricsName, Value: utils.FloatToPointerFloat(value)})
+			}
+		} else if metric.MetricType == "counter" {
+			if value, ok := StorageInstance.collectionCounter[metric.MetricsName]; ok {
+				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: metric.MetricsName, Delta: utils.FloatToPointerInt(value)})
+			}
 		}
 	}
 	if len(metricsSlice) == 0 {

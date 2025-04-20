@@ -5,14 +5,6 @@ type MetricDTO struct {
 	MetricName string
 	Value      float64
 }
-type MetricDTOGauge struct {
-	MetricDTO
-	value float64
-}
-type MetricDTOCounter struct {
-	MetricDTO
-	value int64
-}
 
 type Metrics struct {
 	ID    string   `json:"id"`              // имя метрики
