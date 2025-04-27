@@ -31,7 +31,7 @@ func ParseFlags() *ParsedFlags {
 	flag.StringVar(&FlagStoragePath, "f", "./store.json", "file path for save metrics")
 	flag.BoolVar(&FlagRestore, "r", true, "load metrics at server start ")
 	flag.StringVar(&LogLevel, "l", "debug", "log level: debug info warn error")
-	flag.StringVar(&DatabaseDSN, "d", "./../../metrics.db", "addres to connect to database")
+	flag.StringVar(&DatabaseDSN, "d", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable", "addres to connect to database")
 
 	// парсим переданные серверу аргументы в зарегистрированные переменные
 	flag.Parse()

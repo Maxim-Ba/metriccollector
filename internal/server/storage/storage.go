@@ -24,18 +24,24 @@ var StorageInstance = MemStorage{
 var db *sql.DB
 
 func New(cfg config.Parameters) (*MemStorage, error) {
+	logger.LogInfo("storage New")
 	initStoreValues := []*metrics.Metrics{}
 	saveInterval = cfg.StoreIntervalSecond
-	localStoragePath = config.FlagStoragePath
+	localStoragePath = cfg.StoragePath
+	databaseDSN = cfg.DatabaseDSN
 	var err error
 	if cfg.Restore {
-		initStoreValues, err = loadMetricsFromFile(localStoragePath)
-		if err != nil {
-			logger.LogError(err)
-			return nil, err
+		if cfg.DatabaseDSN != "" {
+			db, err = postgres.New(cfg.DatabaseDSN)
+			if err != nil {
+				logger.LogError(err)
+				return nil, err
+			}
+			initStoreValues, err = postgres.LoadMetricsFromDB()
+		} else {
+			initStoreValues, err = loadMetricsFromFile(localStoragePath)
 		}
 	}
-	db, err = postgres.New(cfg.DatabaseDSN)
 	if err != nil {
 		logger.LogError(err)
 		return nil, err
@@ -51,8 +57,11 @@ func New(cfg config.Parameters) (*MemStorage, error) {
 	return &StorageInstance, nil
 }
 func Close() {
-	db.Close()
+	err := db.Close()
+	if err != nil {
+		logger.LogError(err)
 
+	}
 }
 
 func (s MemStorage) SaveMetric(m *metrics.Metrics) error {

@@ -11,10 +11,10 @@ tasks:
         go build -ldflags '-s -w -X main.buildVersion=1.0.0 -X main.buildDate=2023-01-23 -X main.buildCommit=0c2fs'  -o cmd/agent/agent cmd/agent/main.go
         go build -ldflags '-s -w -X main.buildVersion=1.0.0 -X main.buildDate=2023-01-23 -X main.buildCommit=0c2fs'  -o cmd/server/server cmd/server/main.go
         # Run your test commands
-          SERVER_PORT=3333
+          SERVER_PORT=4444
           ADDRESS="localhost:${SERVER_PORT}"
-          TEMP_FILE=hgjkhjkhj
-          metricstestbeta -test.v -test.run=^TestIteration10[AB]$ \
+          TEMP_FILE=4444
+          metricstestbeta -test.v -test.run=^TestIteration11$ \
             -agent-binary-path=cmd/agent/agent \
             -binary-path=cmd/server/server \
             -database-dsn='postgres://postgres:postgres@postgres:5432/praktikum?sslmode=disable' \
