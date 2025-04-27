@@ -6,6 +6,7 @@ type Parameters struct {
 	StoragePath         string
 	Restore             bool
 	LogLevel            string
+	DatabaseDSN         string
 }
 
 func GetParameters() Parameters {
@@ -16,6 +17,7 @@ func GetParameters() Parameters {
 	storagePath := envConfig.StoragePath
 	restore := envConfig.Restore
 	logLevel := envConfig.LogLevel
+	databaseDSN := envConfig.DatabaseDSN
 	if address == "" {
 		address = flags.FlagRunAddr
 	}
@@ -31,11 +33,15 @@ func GetParameters() Parameters {
 	if logLevel == "" {
 		logLevel = flags.LogLevel
 	}
+	if databaseDSN == "" {
+		databaseDSN = flags.DatabaseDSN
+	}
 	return Parameters{
 		Address:             address,
 		StoreIntervalSecond: storeInterval,
 		StoragePath:         storagePath,
 		Restore:             restore,
 		LogLevel:            logLevel,
+		DatabaseDSN:         databaseDSN,
 	}
 }

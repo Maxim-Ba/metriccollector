@@ -11,7 +11,6 @@ var atomicLevel = zap.NewAtomicLevel()
 func init() {
 	config := zap.NewProductionConfig()
 	config.OutputPaths = []string{
-		"logs.log",
 		"stdout",
 	}
 	config.Level = atomicLevel

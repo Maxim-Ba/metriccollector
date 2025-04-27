@@ -9,17 +9,20 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
 )
 
-
 func main() {
+	defer storage.Close()
 	defer logger.Sync()
-
-	parameters := config.GetParameters()
 	
-	_,err:=storage.New(parameters)
+	parameters := config.GetParameters()
+
+
+	_, err := storage.New(parameters)
 	if err != nil {
 		panic(err)
 	}
 	logger.SetLogLevel(parameters.LogLevel)
+
+	
 	mux := router.New()
 	logger.LogInfo("Running server on ", parameters.Address)
 	err = http.ListenAndServe(parameters.Address, mux)

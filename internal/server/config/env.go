@@ -13,6 +13,7 @@ type Config struct {
 	StoragePath         string `env:"FILE_STORAGE_PATH"`
 	Restore             bool   `env:"RESTORE"`
 	LogLevel            string `env:"LOG_LEVEL"`
+	DatabaseDSN            string `env:"DATABASE_DSN"`
 }
 
 func ParseEnv() *Config {

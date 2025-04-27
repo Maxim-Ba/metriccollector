@@ -1,9 +1,13 @@
 package storage
 
 import (
+	"context"
+	"database/sql"
+
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"github.com/Maxim-Ba/metriccollector/internal/server/config"
+	"github.com/Maxim-Ba/metriccollector/internal/server/storage/database/postgres"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
@@ -17,6 +21,8 @@ var StorageInstance = MemStorage{
 	collectionCounter: map[string]int64{},
 }
 
+var db *sql.DB
+
 func New(cfg config.Parameters) (*MemStorage, error) {
 	initStoreValues := []*metrics.Metrics{}
 	saveInterval = cfg.StoreIntervalSecond
@@ -29,6 +35,11 @@ func New(cfg config.Parameters) (*MemStorage, error) {
 			return nil, err
 		}
 	}
+	db, err = postgres.New(cfg.DatabaseDSN)
+	if err != nil {
+		logger.LogError(err)
+		return nil, err
+	}
 	for _, m := range initStoreValues {
 		err := StorageInstance.SaveMetric(m)
 		if err != nil {
@@ -38,6 +49,10 @@ func New(cfg config.Parameters) (*MemStorage, error) {
 	}
 	go saveLoop()
 	return &StorageInstance, nil
+}
+func Close() {
+	db.Close()
+
 }
 
 func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
@@ -94,4 +109,9 @@ func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]me
 		return nil, ErrUnknownMetricName
 	}
 	return &metricsSlice, nil
+}
+
+func Ping(ctx context.Context) error {
+	err := db.PingContext(ctx)
+	return err
 }
