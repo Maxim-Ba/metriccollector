@@ -14,10 +14,10 @@ tasks:
           SERVER_PORT=4444
           ADDRESS="localhost:${SERVER_PORT}"
           TEMP_FILE=4444
-          metricstestbeta -test.v -test.run=^TestIteration11$ \
+          metricstestbeta -test.v -test.run=^TestIteration9$ \
             -agent-binary-path=cmd/agent/agent \
             -binary-path=cmd/server/server \
-            -database-dsn='postgres://postgres:postgres@postgres:5432/praktikum?sslmode=disable' \
+            -file-storage-path=$TEMP_FILE \
             -server-port=$SERVER_PORT \
             -source-path=.
 
