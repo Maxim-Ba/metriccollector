@@ -79,7 +79,17 @@ func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
 	}
 	return nil
 }
-
+func (s MemStorage) SaveMetrics(metricsSlice *[]metrics.Metrics) error {
+	for _, m := range *metricsSlice {
+		err:=StorageInstance.SaveMetric(&m)
+		if err != nil {
+			logger.LogError(err)
+			return err
+		}
+	}
+	
+	return nil
+}
 //
 
 func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]metrics.Metrics, error) {

@@ -28,6 +28,11 @@ func main() {
 			if err != nil {
 				logger.LogError(err)
 			}
+			err = httpClient.SendMetricsWithBatch(metrics)
+			if err != nil {
+				logger.LogError(err)
+			}
+
 			reportIntervalStart = time.Now()
 
 		}
