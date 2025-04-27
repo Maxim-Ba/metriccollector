@@ -1,10 +1,14 @@
 package client
 
 import (
+	"bytes"
+	"compress/gzip"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"time"
 
+	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 )
 
@@ -27,15 +31,49 @@ func NewClient(initAddress string) *HTTPClient {
 	}
 }
 
-func (c *HTTPClient) SendMetrics(metrics []*metrics.MetricDTO) error {
-	fmt.Println("send request")
+func (c *HTTPClient) SendMetrics(metrics []*metrics.Metrics) error {
+	logger.LogInfo("send request")
+
 	for _, metric := range metrics {
-		path := fmt.Sprintf("http://%s/update/%s/%s/%f", address, metric.MetricType, metric.MetricName, metric.Value)
-		resp,err:=c.httpClient.Post(path, "text/plain", nil)
+		body, err := json.Marshal(*metric)
 		if err != nil {
+			logger.LogError(err)
+			return err
+		}
+		path := fmt.Sprintf("http://%s/update/", address)
+		// реализует io.Writer и io.Reader
+		var compressedBody bytes.Buffer
+		gzipWriter := gzip.NewWriter(&compressedBody)
+		_, err = gzipWriter.Write(body)
+		if err != nil {
+			logger.LogError(err)
+			return err
+		}
+		err = gzipWriter.Close()
+		if err != nil {
+			logger.LogError(err)
+		}
+		req, err := http.NewRequest("POST", path, &compressedBody)
+
+		if err != nil {
+			logger.LogError(err)
 			return nil
-		}  
-		resp.Body.Close()
+		}
+		req.Header.Set("Accept-Encoding", "gzip")
+		req.Header.Set("Content-Encoding", "gzip")
+		req.Header.Set("Content-Type", "application/json")
+
+		resp, err := c.httpClient.Do(req)
+		if err != nil {
+			logger.LogError(err)
+			return err
+		}
+		err = resp.Body.Close()
+		if err != nil {
+			logger.LogError(err)
+		return err
+		}
+		
 	}
 	return nil
 }

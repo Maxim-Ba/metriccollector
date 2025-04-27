@@ -1,16 +1,17 @@
 package generator
 
 import (
-	"fmt"
 	"math/rand"
 
 	"runtime"
 
+	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
 type MetricGenerator interface {
-	Generate() ([]*metrics.MetricDTO, error)
+	Generate() ([]*metrics.Metrics, error)
 	UpdatePollCount() int64
 }
 
@@ -18,64 +19,60 @@ type generator struct {
 	pollCount int64
 }
 
-
-
 var Generator = generator{
 	pollCount: 0,
 }
 
-func (g *generator) Generate() ([]*metrics.MetricDTO, error) {
-
+func (g *generator) Generate() ([]*metrics.Metrics, error) {
 
 	var memStats runtime.MemStats
 	runtime.ReadMemStats(&memStats)
 
-	var metricSlice []*metrics.MetricDTO
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "Alloc", Value: float64(memStats.Alloc)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "BuckHashSys", Value: float64(memStats.BuckHashSys)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "Frees", Value: float64(memStats.Frees)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "GCCPUFraction", Value: memStats.GCCPUFraction})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "GCSys", Value: float64(memStats.GCSys)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "HeapAlloc", Value: float64(memStats.HeapAlloc)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "HeapIdle", Value: float64(memStats.HeapIdle)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "HeapInuse", Value: float64(memStats.HeapInuse)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "HeapObjects", Value: float64(memStats.HeapObjects)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "HeapReleased", Value: float64(memStats.HeapReleased)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "HeapSys", Value: float64(memStats.HeapSys)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "LastGC", Value: float64(memStats.LastGC)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "Lookups", Value: float64(memStats.Lookups)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "MCacheInuse", Value: float64(memStats.MCacheInuse)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "MCacheSys", Value: float64(memStats.MCacheSys)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "MSpanInuse", Value: float64(memStats.MSpanInuse)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "MSpanSys", Value: float64(memStats.MSpanSys)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "Mallocs", Value: float64(memStats.Mallocs)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "NextGC", Value: float64(memStats.NextGC)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "NumForcedGC", Value: float64(memStats.NumForcedGC)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "NumGC", Value: float64(memStats.NumGC)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "OtherSys", Value: float64(memStats.OtherSys)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "PauseTotalNs", Value: float64(memStats.PauseTotalNs)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "StackInuse", Value: float64(memStats.StackInuse)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "StackSys", Value: float64(memStats.StackSys)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "Sys", Value: float64(memStats.Sys)})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{MetricType: "gauge", MetricName: "TotalAlloc", Value: float64(memStats.TotalAlloc)})
+	var metricSlice []*metrics.Metrics
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "Alloc", Value: utils.IntToPointerFloat(memStats.Alloc)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "BuckHashSys", Value: utils.IntToPointerFloat(memStats.BuckHashSys)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "Frees", Value: utils.IntToPointerFloat(memStats.Frees)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "GCCPUFraction", Value: utils.IntToPointerFloat(uint64(memStats.GCCPUFraction))})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "GCSys", Value: utils.IntToPointerFloat(memStats.GCSys)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "HeapAlloc", Value: utils.IntToPointerFloat(memStats.HeapAlloc)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "HeapIdle", Value: utils.IntToPointerFloat(memStats.HeapIdle)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "HeapInuse", Value: utils.IntToPointerFloat(memStats.HeapInuse)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "HeapObjects", Value: utils.IntToPointerFloat(memStats.HeapObjects)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "HeapReleased", Value: utils.IntToPointerFloat(memStats.HeapReleased)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "HeapSys", Value: utils.IntToPointerFloat(memStats.HeapSys)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "LastGC", Value: utils.IntToPointerFloat(memStats.LastGC)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "Lookups", Value: utils.IntToPointerFloat(memStats.Lookups)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "MCacheInuse", Value: utils.IntToPointerFloat(memStats.MCacheInuse)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "MCacheSys", Value: utils.IntToPointerFloat(memStats.MCacheSys)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "MSpanInuse", Value: utils.IntToPointerFloat(memStats.MSpanInuse)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "MSpanSys", Value: utils.IntToPointerFloat(memStats.MSpanSys)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "Mallocs", Value: utils.IntToPointerFloat(memStats.Mallocs)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "NextGC", Value: utils.IntToPointerFloat(memStats.NextGC)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "NumForcedGC", Value: utils.IntToPointerFloat(uint64(memStats.NumForcedGC))})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "NumGC", Value: utils.IntToPointerFloat(uint64(memStats.NumGC))})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "OtherSys", Value: utils.IntToPointerFloat(memStats.OtherSys)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "PauseTotalNs", Value: utils.IntToPointerFloat(memStats.PauseTotalNs)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "StackInuse", Value: utils.IntToPointerFloat(memStats.StackInuse)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "StackSys", Value: utils.IntToPointerFloat(memStats.StackSys)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "Sys", Value: utils.IntToPointerFloat(memStats.Sys)})
+	metricSlice = append(metricSlice, &metrics.Metrics{MType: "gauge", ID: "TotalAlloc", Value: utils.IntToPointerFloat(memStats.TotalAlloc)})
 
-
-
-	metricSlice = append(metricSlice, &metrics.MetricDTO{
-		MetricType: "counter",
-		MetricName: "RandomValue",
-		Value:      float64(rand.Int63()),
+	metricSlice = append(metricSlice, &metrics.Metrics{
+		MType: "gauge",
+		ID:    "RandomValue",
+		Value: utils.IntToPointerFloat(rand.Uint64()),
 	})
-	metricSlice = append(metricSlice, &metrics.MetricDTO{
-		MetricType: "counter",
-		MetricName: "PollCount",
-		Value:      float64(g.pollCount),
+
+	metricSlice = append(metricSlice, &metrics.Metrics{
+		MType: "counter",
+		ID:    "PollCount",
+		Delta: (utils.IntToPointerInt(g.pollCount)),
 	})
-	fmt.Print(g.pollCount)
+	logger.LogInfo(g.pollCount)
 	return metricSlice, nil
 }
 
 func (g *generator) UpdatePollCount() int64 {
-	g.pollCount = g.pollCount + 1
+	g.pollCount++
 	return g.pollCount
 }

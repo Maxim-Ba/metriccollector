@@ -27,3 +27,9 @@ metricstest-windows-amd64.exe
 metricstest.exe
 ./server
 ./agent
+.qodo
+
+
+store.json
+
+logs.log

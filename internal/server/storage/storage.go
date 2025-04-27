@@ -1,12 +1,11 @@
 package storage
 
 import (
-	"slices"
-
+	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
+	"github.com/Maxim-Ba/metriccollector/internal/server/config"
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
-
-
 
 type MemStorage struct {
 	collectionGauge   map[string]float64
@@ -18,49 +17,81 @@ var StorageInstance = MemStorage{
 	collectionCounter: map[string]int64{},
 }
 
-func New()(*MemStorage ,error)  {
+func New(cfg config.Parameters) (*MemStorage, error) {
+	initStoreValues := []*metrics.Metrics{}
+	saveInterval = cfg.StoreIntervalSecond
+	localStoragePath = config.FlagStoragePath
+	var err error
+	if cfg.Restore {
+		initStoreValues, err = loadMetricsFromFile(localStoragePath)
+		if err != nil {
+			logger.LogError(err)
+			return nil, err
+		}
+	}
+	for _, m := range initStoreValues {
+		err := StorageInstance.SaveMetric(m)
+		if err != nil {
+			logger.LogError(err)
+			return nil, err
+		}
+	}
+	go saveLoop()
 	return &StorageInstance, nil
 }
-func (s MemStorage) SaveMetric(m *metrics.MetricDTO) error {
-	if m.MetricType == "gauge" {
-		StorageInstance.collectionGauge[m.MetricName] = m.Value
+
+func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
+
+	if m.MType == "gauge" {
+		StorageInstance.collectionGauge[m.ID] = *m.Value
 	}
-	if m.MetricType == "counter" {
-		metricValue := int64(m.Value)
-		if val, ok := StorageInstance.collectionCounter[m.MetricName]; ok {
-			StorageInstance.collectionCounter[m.MetricName] = val + metricValue
+	if m.MType == "counter" {
+		metricValue := int64(*m.Delta)
+		if val, ok := StorageInstance.collectionCounter[m.ID]; ok {
+			StorageInstance.collectionCounter[m.ID] = val + metricValue
 		} else {
-			StorageInstance.collectionCounter[m.MetricName] = metricValue
+			StorageInstance.collectionCounter[m.ID] = metricValue
 		}
 	}
 	return nil
 }
-func (s MemStorage) GetMetrics(metricsNames *[]string) (*[]metrics.MetricDTO , error){
 
-	var metricsSlice []metrics.MetricDTO
+//
+
+func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]metrics.Metrics, error) {
+
+	metricsNames := make([]string, len(*metricsParams))
+	metricsTypes := make([]string, len(*metricsParams))
+	for i, m := range *metricsParams {
+		metricsNames[i] = m.MetricsName
+		metricsTypes[i] = m.MetricType
+	}
+	var metricsSlice []metrics.Metrics
 	// Get all metrics
-	if len(*metricsNames) == 0 {
+	if len(metricsNames) == 0 {
 		for metric, value := range StorageInstance.collectionGauge {
-			metricsSlice = append(metricsSlice, metrics.MetricDTO{MetricType: "gauge", MetricName: metric, Value: value})
+			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: metric, Value: utils.FloatToPointerFloat(value)})
 		}
 		for metric, value := range StorageInstance.collectionCounter {
-			metricsSlice = append(metricsSlice, metrics.MetricDTO{MetricType: "counter", MetricName: metric, Value: float64( value)})
+			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: metric, Delta: utils.FloatToPointerInt(value)})
 		}
 		return &metricsSlice, nil
 	}
+
 	//Get choosen metrics
-	for metric, value := range StorageInstance.collectionGauge {
-		if slices.Contains(*metricsNames,metric) {
-			metricsSlice = append(metricsSlice, metrics.MetricDTO{MetricType: "gauge", MetricName: metric, Value: value})
+	for _, metric := range *metricsParams {
+		if metric.MetricType == "gauge" {
+			if value, ok := StorageInstance.collectionGauge[metric.MetricsName]; ok {
+				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: metric.MetricsName, Value: utils.FloatToPointerFloat(value)})
+			}
+		} else if metric.MetricType == "counter" {
+			if value, ok := StorageInstance.collectionCounter[metric.MetricsName]; ok {
+				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: metric.MetricsName, Delta: utils.FloatToPointerInt(value)})
+			}
 		}
 	}
-	for metric, value := range StorageInstance.collectionCounter {
-		if slices.Contains(*metricsNames,metric) {
-			metricsSlice = append(metricsSlice, metrics.MetricDTO{MetricType: "counter", MetricName: metric, Value: float64( value)})
-		}
-	}
-	if len(metricsSlice) ==0 {
-		return  nil, ErrUnknownMetricName
+	if len(metricsSlice) == 0 {
+		return nil, ErrUnknownMetricName
 	}
 	return &metricsSlice, nil
 }

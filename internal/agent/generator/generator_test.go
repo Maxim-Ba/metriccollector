@@ -28,9 +28,9 @@ func Test_generator_Generate(t *testing.T) {
 		t.Error("Un expected error", err)
 	}
 	for _, v := range result {
-		if !(slices.Contains(metrics.GaugeMetrics, v.MetricName))   {
-			if v.MetricName != "PollCount"&& v.MetricName != "RandomValue" {
-				t.Error("Un expected MetricName", v.MetricName)
+		if !(slices.Contains(metrics.GaugeMetrics, v.ID))   {
+			if v.ID != "PollCount"&& v.ID != "RandomValue" {
+				t.Error("Un expected MetricName", v.ID)
 			}
 		}
 	}
