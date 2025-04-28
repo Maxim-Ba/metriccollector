@@ -10,6 +10,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 	"github.com/jackc/pgerrcode"
 	"github.com/jackc/pgx/v5/pgconn"
+	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
 var (
@@ -17,7 +18,6 @@ var (
 	saveMetricsMutex sync.Mutex // Мьютекс для синхронизации
 )
 
-// Custom error type for unique violation
 var ErrUniqueViolation = errors.New("unique violation")
 
 func New(connectionParams string) (*sql.DB, error) {
