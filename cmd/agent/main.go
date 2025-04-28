@@ -7,6 +7,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/agent/config"
 	metricGenerator "github.com/Maxim-Ba/metriccollector/internal/agent/generator"
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
 func main() {
@@ -24,11 +25,17 @@ func main() {
 		}
 		if time.Since(reportIntervalStart) >= time.Duration(parameters.ReportInterval)*time.Second {
 			metricGenerator.Generator.UpdatePollCount()
-			err := httpClient.SendMetrics(metrics)
+			err = utils.RetryWrapper(func() error {
+				return httpClient.SendMetrics(metrics)
+			}, 3, []error{client.ErrServerInternalError,client.ErrServerInternalError})
+			// err := httpClient.SendMetrics(metrics)
 			if err != nil {
 				logger.LogError(err)
 			}
-			err = httpClient.SendMetricsWithBatch(metrics)
+			err = utils.RetryWrapper(func() error {
+				return httpClient.SendMetricsWithBatch(metrics)
+			}, 3, []error{client.ErrServerInternalError,client.ErrServerInternalError })
+			// err = httpClient.SendMetricsWithBatch(metrics)
 			if err != nil {
 				logger.LogError(err)
 			}

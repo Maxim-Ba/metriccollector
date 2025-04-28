@@ -7,13 +7,18 @@ import (
 
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
-	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
+	"github.com/jackc/pgerrcode"
+	"github.com/jackc/pgx/v5/pgconn"
 )
 
 var (
-	dbInstance *sql.DB
+	dbInstance       *sql.DB
 	saveMetricsMutex sync.Mutex // Мьютекс для синхронизации
 )
+
+// Custom error type for unique violation
+var ErrUniqueViolation = errors.New("unique violation")
 
 func New(connectionParams string) (*sql.DB, error) {
 	logger.LogInfo("postgres New")
@@ -22,14 +27,22 @@ func New(connectionParams string) (*sql.DB, error) {
 		logger.LogError(err)
 		return nil, err
 	}
+	err = utils.RetryWrapper(func() error {
+		_, err = database.Exec(`CREATE TABLE IF NOT EXISTS metrics (
+			id VARCHAR(255) PRIMARY KEY,
+			type VARCHAR(255) NOT NULL,
+			value DOUBLE PRECISION,
+			delta BIGINT,
+			CONSTRAINT chk_value_delta CHECK ((value IS NULL) OR (delta IS NULL))
+		)`)
+		if pgErr, ok := err.(*pgconn.PgError); ok {
+			if pgErr.Code == pgerrcode.UniqueViolation {
+				return ErrUniqueViolation
+			}
+		}
+		return err
+	}, 3, []error{ErrUniqueViolation})
 
-	_, err = database.Exec(`CREATE TABLE IF NOT EXISTS metrics (
-		id VARCHAR(255) PRIMARY KEY,
-		type VARCHAR(255) NOT NULL,
-		value DOUBLE PRECISION,
-		delta BIGINT,
-    CONSTRAINT chk_value_delta CHECK ((value IS NULL) OR (delta IS NULL))
-	)`)
 	if err != nil {
 		logger.LogError(err)
 		return nil, err
@@ -47,30 +60,35 @@ func LoadMetricsFromDB() ([]*metrics.Metrics, error) {
 		return nil, err
 	}
 
-	rows, err := dbInstance.Query(`SELECT * FROM metrics`)
-	if err != nil {
-		logger.LogError(err)
-		return nil, err
-	}
-	defer func() {
-
-		err := rows.Close()
-		if err != nil {
-			logger.LogError(err)
-		}
-	}()
-
 	var metricsList []*metrics.Metrics
-	for rows.Next() {
-		var m metrics.Metrics
-		if err := rows.Scan(&m.ID, &m.MType, &m.Value, &m.Delta); err != nil {
-			logger.LogError(err)
-			return nil, err
+	err := utils.RetryWrapper(func() error {
+		rows, err := dbInstance.Query(`SELECT * FROM metrics`)
+		if err != nil {
+			return err
 		}
-		metricsList = append(metricsList, &m)
-	}
+		defer func() {
+			err := rows.Close()
+			if err != nil {
+				logger.LogError(err)
+			}
+		}()
 
-	if err := rows.Err(); err != nil {
+		for rows.Next() {
+			var m metrics.Metrics
+			if err := rows.Scan(&m.ID, &m.MType, &m.Value, &m.Delta); err != nil {
+				return err
+			}
+			metricsList = append(metricsList, &m)
+		}
+
+		if err := rows.Err(); err != nil {
+			return err
+		}
+
+		return nil
+	}, 3, []error{sql.ErrConnDone, ErrUniqueViolation})
+
+	if err != nil {
 		logger.LogError(err)
 		return nil, err
 	}
@@ -79,27 +97,33 @@ func LoadMetricsFromDB() ([]*metrics.Metrics, error) {
 }
 
 func SaveMetricsToDB(metricsList *[]metrics.Metrics) error {
-	saveMetricsMutex.Lock()   // Заблокировать перед выполнением
+	saveMetricsMutex.Lock()         // Заблокировать перед выполнением
 	defer saveMetricsMutex.Unlock() // Разблокировать в конце
-	tx, err := dbInstance.Begin()
-	if err != nil {
-		logger.LogError(err)
-		return err
-	}
-	for _, m := range *metricsList {
-		// все изменения записываются в транзакцию
-		_, err := dbInstance.Exec(`INSERT INTO metrics (id, type, value, delta) 
-			VALUES ($1, $2, $3, $4)
-			ON CONFLICT (id) DO UPDATE 
-			SET type = $2, value = $3, delta = $4`,
-			m.ID, m.MType, m.Value, m.Delta)
+
+	err := utils.RetryWrapper(func() error {
+		tx, err := dbInstance.Begin()
 		if err != nil {
-			logger.LogError(err)
-			err := tx.Rollback()
 			return err
 		}
-	}
-	err = tx.Commit()
+		for _, m := range *metricsList {
+			// все изменения записываются в транзакцию
+			_, err := dbInstance.Exec(`INSERT INTO metrics (id, type, value, delta) 
+				VALUES ($1, $2, $3, $4)
+				ON CONFLICT (id) DO UPDATE 
+				SET type = $2, value = $3, delta = $4`,
+				m.ID, m.MType, m.Value, m.Delta)
+			if err != nil {
+				tx.Rollback()
+				return err
+			}
+		}
+		err = tx.Commit()
+		if err != nil {
+			return err
+		}
+		return nil
+	}, 3, []error{sql.ErrConnDone, ErrUniqueViolation})
+
 	if err != nil {
 		logger.LogError(err)
 		return err

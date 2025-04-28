@@ -68,6 +68,12 @@ func (c *HTTPClient) SendMetrics(metrics []*metrics.Metrics) error {
 			logger.LogError(err)
 			return err
 		}
+		if resp.StatusCode == http.StatusInternalServerError {
+			return ErrServerInternalError
+		}
+		if resp.StatusCode == http.StatusRequestTimeout {
+			return ErrRequestTimeout
+		}
 		err = resp.Body.Close()
 		if err != nil {
 			logger.LogError(err)
@@ -113,6 +119,12 @@ func (c *HTTPClient) SendMetricsWithBatch(metrics []*metrics.Metrics) error {
 	if err != nil {
 		logger.LogError(err)
 		return err
+	}
+	if resp.StatusCode == http.StatusInternalServerError {
+		return ErrServerInternalError
+	}
+	if resp.StatusCode == http.StatusRequestTimeout {
+		return ErrRequestTimeout
 	}
 	err = resp.Body.Close()
 	if err != nil {
