@@ -113,7 +113,11 @@ func SaveMetricsToDB(metricsList *[]metrics.Metrics) error {
 				SET type = $2, value = $3, delta = $4`,
 				m.ID, m.MType, m.Value, m.Delta)
 			if err != nil {
-				tx.Rollback()
+				logger.LogError(err)
+				err:=tx.Rollback()
+				if err != nil {
+					logger.LogError(err)
+				}
 				return err
 			}
 		}
