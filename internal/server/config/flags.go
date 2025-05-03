@@ -10,8 +10,8 @@ type ParsedFlags struct {
 	FlagStoragePath         string
 	FlagRestore             bool
 	// debug info warn error
-	LogLevel    string
-	DatabaseDSN string
+	LogLevel       string
+	DatabaseDSN    string
 	MigrationsPath string
 }
 
@@ -33,8 +33,8 @@ func ParseFlags() *ParsedFlags {
 	flag.StringVar(&FlagStoragePath, "f", "./store.json", "file path for save metrics")
 	flag.BoolVar(&FlagRestore, "r", true, "load metrics at server start ")
 	flag.StringVar(&LogLevel, "l", "debug", "log level: debug info warn error")
-	flag.StringVar(&DatabaseDSN, "d", "", "addres to connect to database")//-d postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
-	flag.StringVar(&MigrationsPath, "m", "file://migrations", "path to migrations")// -m file://migrations
+	flag.StringVar(&DatabaseDSN, "d", "", "addres to connect to database")          //-d postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
+	flag.StringVar(&MigrationsPath, "m", "migrations", "path to migrations") // -m migrations
 	// парсим переданные серверу аргументы в зарегистрированные переменные
 	flag.Parse()
 	return &ParsedFlags{
@@ -44,5 +44,6 @@ func ParseFlags() *ParsedFlags {
 		FlagRestore:             FlagRestore,
 		LogLevel:                LogLevel,
 		DatabaseDSN:             DatabaseDSN,
+		MigrationsPath:          MigrationsPath,
 	}
 }

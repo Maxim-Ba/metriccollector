@@ -137,6 +137,8 @@ func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]me
 }
 
 func (s MemStorage) Ping(ctx context.Context) error {
-	
+	if db == nil {
+		return ErrDatabaseConnection
+	}
 	return db.PingContext(ctx)
 }

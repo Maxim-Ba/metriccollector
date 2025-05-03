@@ -18,20 +18,17 @@ func main() {
 	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
 
 	parameters := config.New()
-
+	logger.SetLogLevel(parameters.LogLevel)
 	_, err := storage.New(parameters)
 	if err != nil {
+
 		panic(err)
 	}
-	logger.SetLogLevel(parameters.LogLevel)
-
 	mux := router.New()
 	server := &http.Server{
 		Addr:    parameters.Address,
 		Handler: mux,
 	}
-
-
 
 	go func() {
 		logger.LogInfo("Running server on ", parameters.Address)
@@ -39,7 +36,7 @@ func main() {
 			logger.LogError("ListenAndServe: ", err)
 		}
 	}()
-	
+
 	<-exit // Ожидание сигнала завершения
 
 	logger.LogInfo("Shutting down server...")
