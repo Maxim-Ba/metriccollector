@@ -3,6 +3,7 @@ package storage
 import (
 	"testing"
 
+	"github.com/Maxim-Ba/metriccollector/internal/constants"
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"github.com/Maxim-Ba/metriccollector/internal/server/config"
@@ -21,7 +22,7 @@ func TestGetMetrics(t *testing.T) {
 		{
 			name: "happy pass gauge",
 			params: &[]*metrics.MetricDTOParams{{MetricsName: "a",
-				MetricType: "gauge"},
+				MetricType: constants.Gauge},
 			},
 			fixtures: MemStorage{
 				collectionCounter: map[string]int64{
@@ -32,14 +33,14 @@ func TestGetMetrics(t *testing.T) {
 				},
 			},
 			want: &[]metrics.Metrics{
-				{ID: "a", MType: "gauge", Value: utils.IntToPointerFloat(100)},
+				{ID: "a", MType: constants.Gauge, Value: utils.IntToPointerFloat(100)},
 			},
 			wantErr: false,
 		},
 		{
 			name: "happy pass counter",
 			params: &[]*metrics.MetricDTOParams{{MetricsName: "a",
-				MetricType: "counter"},
+				MetricType: constants.Counter},
 			},
 			fixtures: MemStorage{
 				collectionCounter: map[string]int64{
@@ -50,17 +51,17 @@ func TestGetMetrics(t *testing.T) {
 				},
 			},
 			want: &[]metrics.Metrics{
-				{ID: "a", MType: "counter", Delta: utils.IntToPointerInt(100)},
+				{ID: "a", MType: constants.Counter, Delta: utils.IntToPointerInt(100)},
 			},
 			wantErr: false,
 		},
 		{
 			name: "happy pass both types",
 			params: &[]*metrics.MetricDTOParams{{MetricsName: "a",
-				MetricType: "counter"}, {MetricsName: "random",
-				MetricType: "counter"},{MetricsName: "a",
-				MetricType: "gauge"},{MetricsName: "b",
-				MetricType: "gauge"},
+				MetricType: constants.Counter}, {MetricsName: "random",
+				MetricType: constants.Counter},{MetricsName: "a",
+				MetricType: constants.Gauge},{MetricsName: "b",
+				MetricType: constants.Gauge},
 			},
 			fixtures: MemStorage{
 				collectionCounter: map[string]int64{
@@ -73,10 +74,10 @@ func TestGetMetrics(t *testing.T) {
 				},
 			},
 			want: &[]metrics.Metrics{
-				{ID: "a", MType: "counter", Delta: utils.IntToPointerInt(100)},
-				{ID: "random", MType: "counter", Delta: utils.IntToPointerInt(100)},
-				{ID: "a", MType: "gauge", Value: utils.IntToPointerFloat(100)},
-				{ID: "b", MType: "gauge", Value: utils.IntToPointerFloat(100)},
+				{ID: "a", MType: constants.Counter, Delta: utils.IntToPointerInt(100)},
+				{ID: "random", MType: constants.Counter, Delta: utils.IntToPointerInt(100)},
+				{ID: "a", MType: constants.Gauge, Value: utils.IntToPointerFloat(100)},
+				{ID: "b", MType: constants.Gauge, Value: utils.IntToPointerFloat(100)},
 			},
 			wantErr: false,
 		},
@@ -106,12 +107,12 @@ func TestGetMetrics(t *testing.T) {
 				if v.MType != gotSlice[i].MType {
 					t.Errorf("GetMetrics() = %v, want %v", got, tt.want)
 				}
-				if v.MType == "gauge" {
+				if v.MType == constants.Gauge {
 					if v.Value == nil || gotSlice[i].Value == nil || *v.Value != *(gotSlice[i].Value) {
 						t.Errorf("GetMetrics() Value = %v, want %v", gotSlice[i].Value, v.Value)
 					}
 				}
-				if v.MType == "counter" {
+				if v.MType == constants.Counter {
 					if v.Delta == nil || gotSlice[i].Delta == nil || *v.Delta != *(gotSlice[i].Delta) {
 						t.Errorf("GetMetrics() Delta = %v, want %v", gotSlice[i].Delta, v.Delta)
 					}

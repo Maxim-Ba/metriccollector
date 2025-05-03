@@ -85,7 +85,7 @@ func saveLoop() {
 			logger.LogError(err)
 		}
 		if databaseDSN != "" {
-			err = postgres.SaveMetricsToDB(metricList)
+			err = postgres.SaveMetricsToDB(metricList, db)
 		} else {
 			err = saveMetricsToFile(localStoragePath, metricList)
 		}

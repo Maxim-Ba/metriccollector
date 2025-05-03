@@ -11,9 +11,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Maxim-Ba/metriccollector/internal/constants"
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	metricsService "github.com/Maxim-Ba/metriccollector/internal/server/services/metric"
+	storageService "github.com/Maxim-Ba/metriccollector/internal/server/services/starage"
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
@@ -68,7 +70,7 @@ func GetOneHandlerByParams(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 	res.Header().Set("Content-Type", " text/plain")
-	if parameters[0] == "gauge" {
+	if parameters[0] == constants.Gauge {
 		_, err = res.Write([]byte(strconv.FormatFloat(*metric.Value, 'f', -1, 64)))
 		if err != nil {
 			logger.LogError(err)
@@ -275,7 +277,7 @@ func metricRecord(parameters []string) (metrics.Metrics, error) {
 	if len(parameters) != 3 {
 		return metrics.Metrics{}, ErrNoMetricName
 	}
-	if parameters[0] != "gauge" && parameters[0] != "counter" {
+	if parameters[0] != constants.Gauge && parameters[0] != constants.Counter {
 		return metrics.Metrics{}, ErrNoMetricsType
 
 	}
@@ -287,7 +289,7 @@ func metricRecord(parameters []string) (metrics.Metrics, error) {
 	var value float64
 	var delta int64
 	var err error
-	if parameters[0] == "gauge" {
+	if parameters[0] == constants.Gauge {
 		value, err = strconv.ParseFloat(parameters[2], 64)
 	} else {
 		delta, err = strconv.ParseInt(parameters[2], 10, 64)
@@ -317,7 +319,7 @@ func parseMetric(buf *bytes.Buffer) (metrics.Metrics, error) {
 		return metrics.Metrics{}, ErrNoMetricName
 	}
 
-	if metric.MType != "gauge" && metric.MType != "counter" {
+	if metric.MType != constants.Gauge && metric.MType != constants.Counter {
 		return metrics.Metrics{}, ErrNoMetricsType
 	}
 	if metric.ID == "" {
@@ -331,7 +333,7 @@ func parseMetrics(buf *bytes.Buffer) (*[]metrics.Metrics, error) {
 		return &[]metrics.Metrics{}, ErrNoMetricName
 	}
 	for _, m := range metricsSlice {
-		if m.MType != "gauge" && m.MType != "counter" {
+		if m.MType != constants.Gauge && m.MType != constants.Counter {
 			return &[]metrics.Metrics{}, ErrNoMetricsType
 		}
 		if m.ID == "" {
@@ -344,17 +346,15 @@ func parseMetrics(buf *bytes.Buffer) (*[]metrics.Metrics, error) {
 func PingDB(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("PingDB")
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(req.Context(), 10*time.Second)
 	defer cancel()
-	err := storage.Ping(ctx)
+	err := storageService.Ping(ctx, storage.StorageInstance)
 	if err != nil {
-		logger.LogError("err")
 		logger.LogError(err)
 		res.WriteHeader(http.StatusInternalServerError)
 		utils.WrireZeroBytes(res)
 		return
 	}
-	logger.LogInfo("StatusOK")
 
 	res.WriteHeader(http.StatusOK)
 	utils.WrireZeroBytes(res)

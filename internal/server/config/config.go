@@ -7,9 +7,10 @@ type Parameters struct {
 	Restore             bool
 	LogLevel            string
 	DatabaseDSN         string
+	MigrationsPath      string
 }
 
-func GetParameters() Parameters {
+func New() Parameters {
 	flags := ParseFlags()
 	envConfig := ParseEnv()
 	address := envConfig.Addres
@@ -18,6 +19,7 @@ func GetParameters() Parameters {
 	restore := envConfig.Restore
 	logLevel := envConfig.LogLevel
 	databaseDSN := envConfig.DatabaseDSN
+	migrationsPath := envConfig.MigrationsPath
 	if address == "" {
 		address = flags.FlagRunAddr
 	}
@@ -36,6 +38,9 @@ func GetParameters() Parameters {
 	if databaseDSN == "" {
 		databaseDSN = flags.DatabaseDSN
 	}
+	if !isMigrationsPathSet() {
+		migrationsPath = flags.MigrationsPath
+	}
 	return Parameters{
 		Address:             address,
 		StoreIntervalSecond: storeInterval,
@@ -43,5 +48,6 @@ func GetParameters() Parameters {
 		Restore:             restore,
 		LogLevel:            logLevel,
 		DatabaseDSN:         databaseDSN,
+		MigrationsPath:      migrationsPath,
 	}
 }

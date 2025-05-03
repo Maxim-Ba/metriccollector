@@ -12,6 +12,7 @@ type ParsedFlags struct {
 	// debug info warn error
 	LogLevel    string
 	DatabaseDSN string
+	MigrationsPath string
 }
 
 var FlagRunAddr string
@@ -20,6 +21,7 @@ var FlagStoragePath string
 var FlagRestore bool
 var LogLevel string
 var DatabaseDSN string
+var MigrationsPath string
 
 // parseFlags обрабатывает аргументы командной строки
 // и сохраняет их значения в соответствующих переменных
@@ -32,7 +34,7 @@ func ParseFlags() *ParsedFlags {
 	flag.BoolVar(&FlagRestore, "r", true, "load metrics at server start ")
 	flag.StringVar(&LogLevel, "l", "debug", "log level: debug info warn error")
 	flag.StringVar(&DatabaseDSN, "d", "", "addres to connect to database")//-d postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
-
+	flag.StringVar(&MigrationsPath, "m", "file://migrations", "path to migrations")// -m file://migrations
 	// парсим переданные серверу аргументы в зарегистрированные переменные
 	flag.Parse()
 	return &ParsedFlags{

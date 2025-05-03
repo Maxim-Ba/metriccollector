@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 
+	"github.com/Maxim-Ba/metriccollector/internal/constants"
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"github.com/Maxim-Ba/metriccollector/internal/server/config"
@@ -32,12 +33,12 @@ func New(cfg config.Parameters) (*MemStorage, error) {
 	var err error
 	if cfg.Restore {
 		if cfg.DatabaseDSN != "" {
-			db, err = postgres.New(cfg.DatabaseDSN)
+			db, err = postgres.New(cfg.DatabaseDSN, cfg.MigrationsPath)
 			if err != nil {
 				logger.LogError(err)
 				return nil, err
 			}
-			initStoreValues, err = postgres.LoadMetricsFromDB()
+			initStoreValues, err = postgres.LoadMetricsFromDB(db)
 		} else {
 			initStoreValues, err = loadMetricsFromFile(localStoragePath)
 		}
@@ -57,19 +58,23 @@ func New(cfg config.Parameters) (*MemStorage, error) {
 	return &StorageInstance, nil
 }
 func Close() {
-	err := db.Close()
-	if err != nil {
-		logger.LogError(err)
+	if db != nil {
 
+		err := db.Close()
+		if err != nil {
+			logger.LogError(err)
+		} else {
+			logger.LogInfo("Database connection is already closed or was never opened")
+		}
 	}
 }
 
 func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
 
-	if m.MType == "gauge" {
+	if m.MType == constants.Gauge {
 		StorageInstance.collectionGauge[m.ID] = *m.Value
 	}
-	if m.MType == "counter" {
+	if m.MType == constants.Counter {
 		metricValue := int64(*m.Delta)
 		if val, ok := StorageInstance.collectionCounter[m.ID]; ok {
 			StorageInstance.collectionCounter[m.ID] = val + metricValue
@@ -81,15 +86,16 @@ func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
 }
 func (s MemStorage) SaveMetrics(metricsSlice *[]metrics.Metrics) error {
 	for _, m := range *metricsSlice {
-		err:=StorageInstance.SaveMetric(&m)
+		err := StorageInstance.SaveMetric(&m)
 		if err != nil {
 			logger.LogError(err)
 			return err
 		}
 	}
-	
+
 	return nil
 }
+
 //
 
 func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]metrics.Metrics, error) {
@@ -104,23 +110,23 @@ func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]me
 	// Get all metrics
 	if len(metricsNames) == 0 {
 		for metric, value := range StorageInstance.collectionGauge {
-			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: metric, Value: utils.FloatToPointerFloat(value)})
+			metricsSlice = append(metricsSlice, metrics.Metrics{MType: constants.Gauge, ID: metric, Value: utils.FloatToPointerFloat(value)})
 		}
 		for metric, value := range StorageInstance.collectionCounter {
-			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: metric, Delta: utils.FloatToPointerInt(value)})
+			metricsSlice = append(metricsSlice, metrics.Metrics{MType: constants.Counter, ID: metric, Delta: utils.FloatToPointerInt(value)})
 		}
 		return &metricsSlice, nil
 	}
 
 	//Get choosen metrics
 	for _, metric := range *metricsParams {
-		if metric.MetricType == "gauge" {
+		if metric.MetricType == constants.Gauge {
 			if value, ok := StorageInstance.collectionGauge[metric.MetricsName]; ok {
-				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: metric.MetricsName, Value: utils.FloatToPointerFloat(value)})
+				metricsSlice = append(metricsSlice, metrics.Metrics{MType: constants.Gauge, ID: metric.MetricsName, Value: utils.FloatToPointerFloat(value)})
 			}
-		} else if metric.MetricType == "counter" {
+		} else if metric.MetricType == constants.Counter {
 			if value, ok := StorageInstance.collectionCounter[metric.MetricsName]; ok {
-				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: metric.MetricsName, Delta: utils.FloatToPointerInt(value)})
+				metricsSlice = append(metricsSlice, metrics.Metrics{MType: constants.Counter, ID: metric.MetricsName, Delta: utils.FloatToPointerInt(value)})
 			}
 		}
 	}
@@ -130,7 +136,7 @@ func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]me
 	return &metricsSlice, nil
 }
 
-func Ping(ctx context.Context) error {
-	err := db.PingContext(ctx)
-	return err
+func (s MemStorage) Ping(ctx context.Context) error {
+	
+	return db.PingContext(ctx)
 }

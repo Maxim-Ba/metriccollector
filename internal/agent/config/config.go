@@ -7,7 +7,7 @@ type Parameters struct {
 	LogLevel       string
 }
 
-func GetParameters() Parameters {
+func New() Parameters {
 	flags := ParseFlags()
 	envConfig := ParseEnv()
 	address := envConfig.Address

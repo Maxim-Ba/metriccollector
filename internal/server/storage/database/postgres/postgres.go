@@ -8,50 +8,47 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
-	"github.com/jackc/pgerrcode"
-	"github.com/jackc/pgx/v5/pgconn"
+	"github.com/golang-migrate/migrate/v4"
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
 var (
-	dbInstance       *sql.DB
 	saveMetricsMutex sync.Mutex // Мьютекс для синхронизации
 )
 
-var ErrUniqueViolation = errors.New("unique violation")
+var ErrConnectionException = errors.New("connection exception")
+var ErrConnectionFailure = errors.New("connection failure")
+var ErrConnectionClosed = errors.New("connection closed")
 
-func New(connectionParams string) (*sql.DB, error) {
+func New(connectionParams string, migrationsPath string) (*sql.DB, error) {
 	logger.LogInfo("postgres New")
 	database, err := sql.Open("pgx", connectionParams)
 	if err != nil {
 		logger.LogError(err)
 		return nil, err
 	}
-	err = utils.RetryWrapper(func() error {
-		_, err = database.Exec(`CREATE TABLE IF NOT EXISTS metrics (
-			id VARCHAR(255) PRIMARY KEY,
-			type VARCHAR(255) NOT NULL,
-			value DOUBLE PRECISION,
-			delta BIGINT,
-			CONSTRAINT chk_value_delta CHECK ((value IS NULL) OR (delta IS NULL))
-		)`)
-		if pgErr, ok := err.(*pgconn.PgError); ok {
-			if pgErr.Code == pgerrcode.UniqueViolation {
-				return ErrUniqueViolation
-			}
-		}
-		return err
-	}, 3, []error{ErrUniqueViolation})
 
+	// Применение миграций
+	m, err := migrate.New(
+		"file://"+migrationsPath,
+		connectionParams,
+	)
 	if err != nil {
 		logger.LogError(err)
 		return nil, err
 	}
-	dbInstance = database
+
+	if err := m.Up(); err != nil && !errors.Is(err, migrate.ErrNoChange) {
+		logger.LogError(err)
+		return nil, err
+	}
+
 	return database, nil
 }
 
-func LoadMetricsFromDB() ([]*metrics.Metrics, error) {
+func LoadMetricsFromDB(dbInstance *sql.DB) ([]*metrics.Metrics, error) {
 	logger.LogInfo("LoadMetricsFromDB")
 
 	if dbInstance == nil {
@@ -86,7 +83,7 @@ func LoadMetricsFromDB() ([]*metrics.Metrics, error) {
 		}
 
 		return nil
-	}, 3, []error{sql.ErrConnDone, ErrUniqueViolation})
+	},  []error{sql.ErrConnDone})
 
 	if err != nil {
 		logger.LogError(err)
@@ -96,7 +93,7 @@ func LoadMetricsFromDB() ([]*metrics.Metrics, error) {
 	return metricsList, nil
 }
 
-func SaveMetricsToDB(metricsList *[]metrics.Metrics) error {
+func SaveMetricsToDB(metricsList *[]metrics.Metrics, dbInstance *sql.DB) error {
 	saveMetricsMutex.Lock()         // Заблокировать перед выполнением
 	defer saveMetricsMutex.Unlock() // Разблокировать в конце
 
@@ -114,7 +111,7 @@ func SaveMetricsToDB(metricsList *[]metrics.Metrics) error {
 				m.ID, m.MType, m.Value, m.Delta)
 			if err != nil {
 				logger.LogError(err)
-				err:=tx.Rollback()
+				err := tx.Rollback()
 				if err != nil {
 					logger.LogError(err)
 				}
@@ -126,7 +123,7 @@ func SaveMetricsToDB(metricsList *[]metrics.Metrics) error {
 			return err
 		}
 		return nil
-	}, 3, []error{sql.ErrConnDone, ErrUniqueViolation})
+	},  []error{sql.ErrConnDone})
 
 	if err != nil {
 		logger.LogError(err)

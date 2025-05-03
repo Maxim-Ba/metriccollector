@@ -7,8 +7,9 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 )
 
+var retries = 3
 // RetryWrapper вызывает функцию, повторяя попытку в случае ошибки из переданного списка.
-func RetryWrapper(action func() error, retries int, errorList []error) error {
+func RetryWrapper(action func() error,  errorList []error) error {
     for i := 0; i < retries; i++ {
         err := action()
         if err != nil && contains(errorList, err) {
