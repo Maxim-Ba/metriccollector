@@ -1,9 +1,14 @@
 package storage
 
 import (
+	"context"
+	"database/sql"
+
+	"github.com/Maxim-Ba/metriccollector/internal/constants"
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"github.com/Maxim-Ba/metriccollector/internal/server/config"
+	"github.com/Maxim-Ba/metriccollector/internal/server/storage/database/postgres"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
@@ -17,17 +22,30 @@ var StorageInstance = MemStorage{
 	collectionCounter: map[string]int64{},
 }
 
+var db *sql.DB
+
 func New(cfg config.Parameters) (*MemStorage, error) {
+	logger.LogInfo("storage New")
 	initStoreValues := []*metrics.Metrics{}
 	saveInterval = cfg.StoreIntervalSecond
-	localStoragePath = config.FlagStoragePath
+	localStoragePath = cfg.StoragePath
+	databaseDSN = cfg.DatabaseDSN
 	var err error
 	if cfg.Restore {
-		initStoreValues, err = loadMetricsFromFile(localStoragePath)
-		if err != nil {
-			logger.LogError(err)
-			return nil, err
+		if cfg.DatabaseDSN != "" {
+			db, err = postgres.New(cfg.DatabaseDSN, cfg.MigrationsPath)
+			if err != nil {
+				logger.LogError(err)
+				return nil, err
+			}
+			initStoreValues, err = postgres.LoadMetricsFromDB(db)
+		} else {
+			initStoreValues, err = loadMetricsFromFile(localStoragePath)
 		}
+	}
+	if err != nil {
+		logger.LogError(err)
+		return nil, err
 	}
 	for _, m := range initStoreValues {
 		err := StorageInstance.SaveMetric(m)
@@ -39,13 +57,24 @@ func New(cfg config.Parameters) (*MemStorage, error) {
 	go saveLoop()
 	return &StorageInstance, nil
 }
+func Close() {
+	if db != nil {
+
+		err := db.Close()
+		if err != nil {
+			logger.LogError(err)
+		} else {
+			logger.LogInfo("Database connection is already closed or was never opened")
+		}
+	}
+}
 
 func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
 
-	if m.MType == "gauge" {
+	if m.MType == constants.Gauge {
 		StorageInstance.collectionGauge[m.ID] = *m.Value
 	}
-	if m.MType == "counter" {
+	if m.MType == constants.Counter {
 		metricValue := int64(*m.Delta)
 		if val, ok := StorageInstance.collectionCounter[m.ID]; ok {
 			StorageInstance.collectionCounter[m.ID] = val + metricValue
@@ -53,6 +82,17 @@ func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
 			StorageInstance.collectionCounter[m.ID] = metricValue
 		}
 	}
+	return nil
+}
+func (s MemStorage) SaveMetrics(metricsSlice *[]metrics.Metrics) error {
+	for _, m := range *metricsSlice {
+		err := StorageInstance.SaveMetric(&m)
+		if err != nil {
+			logger.LogError(err)
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -70,23 +110,23 @@ func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]me
 	// Get all metrics
 	if len(metricsNames) == 0 {
 		for metric, value := range StorageInstance.collectionGauge {
-			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: metric, Value: utils.FloatToPointerFloat(value)})
+			metricsSlice = append(metricsSlice, metrics.Metrics{MType: constants.Gauge, ID: metric, Value: utils.FloatToPointerFloat(value)})
 		}
 		for metric, value := range StorageInstance.collectionCounter {
-			metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: metric, Delta: utils.FloatToPointerInt(value)})
+			metricsSlice = append(metricsSlice, metrics.Metrics{MType: constants.Counter, ID: metric, Delta: utils.FloatToPointerInt(value)})
 		}
 		return &metricsSlice, nil
 	}
 
 	//Get choosen metrics
 	for _, metric := range *metricsParams {
-		if metric.MetricType == "gauge" {
+		if metric.MetricType == constants.Gauge {
 			if value, ok := StorageInstance.collectionGauge[metric.MetricsName]; ok {
-				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "gauge", ID: metric.MetricsName, Value: utils.FloatToPointerFloat(value)})
+				metricsSlice = append(metricsSlice, metrics.Metrics{MType: constants.Gauge, ID: metric.MetricsName, Value: utils.FloatToPointerFloat(value)})
 			}
-		} else if metric.MetricType == "counter" {
+		} else if metric.MetricType == constants.Counter {
 			if value, ok := StorageInstance.collectionCounter[metric.MetricsName]; ok {
-				metricsSlice = append(metricsSlice, metrics.Metrics{MType: "counter", ID: metric.MetricsName, Delta: utils.FloatToPointerInt(value)})
+				metricsSlice = append(metricsSlice, metrics.Metrics{MType: constants.Counter, ID: metric.MetricsName, Delta: utils.FloatToPointerInt(value)})
 			}
 		}
 	}
@@ -94,4 +134,11 @@ func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]me
 		return nil, ErrUnknownMetricName
 	}
 	return &metricsSlice, nil
+}
+
+func (s MemStorage) Ping(ctx context.Context) error {
+	if db == nil {
+		return ErrDatabaseConnection
+	}
+	return db.PingContext(ctx)
 }

@@ -3,6 +3,7 @@ package templates
 import (
 	"fmt"
 
+	"github.com/Maxim-Ba/metriccollector/internal/constants"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 )
 
@@ -23,7 +24,7 @@ func GetAllMetricsHTMLPage(m *[]metrics.Metrics) string {
 	`
 var body string 
 	for _, metric := range *m {
-		if metric.MType == "gauge"{
+		if metric.MType == constants.Gauge{
 
 			body += fmt.Sprintf("Тип: %s, Метрика: %s Значение %f <br/>", metric.MType, metric.ID, *metric.Value)
 		} else {

@@ -26,6 +26,13 @@ func New() *chi.Mux {
 		r.Post("/{metricType}/{metricName}/{value}", middlewares(handlers.UpdateHandlerByURLParams))
 		r.Get("/{metricType}/{metricName}/{value}", middlewares(handlers.UpdateHandlerByURLParams))
 	})
+	r.Route("/updates", func(r chi.Router) {
+		r.Post("/", middlewares(handlers.UpdatesHandler))
+	})
+	
+	r.Route("/ping", func(r chi.Router) {
+		r.Get("/", middlewares(handlers.PingDB))
+	})
 	return r
 }
 

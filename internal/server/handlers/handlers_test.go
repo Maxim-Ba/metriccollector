@@ -7,6 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/Maxim-Ba/metriccollector/internal/constants"
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
@@ -29,7 +30,7 @@ func Test_updateHandler(t *testing.T) {
 			body: metrics.Metrics{
 				ID: "name" ,
 				Value:utils.IntToPointerFloat(234) ,
-				MType: "gauge",
+				MType: constants.Gauge,
 			},
 			want: want{
 				code: http.StatusMethodNotAllowed,
@@ -40,7 +41,7 @@ func Test_updateHandler(t *testing.T) {
 			body: metrics.Metrics{
 				ID: "" ,
 				Value:utils.IntToPointerFloat(234) ,
-				MType: "gauge",
+				MType: constants.Gauge,
 			},
 			method: http.MethodPost,
 			want: want{
@@ -65,7 +66,7 @@ func Test_updateHandler(t *testing.T) {
 			method: http.MethodPost,
 			body: metrics.Metrics{
 				ID: "name" ,
-				MType: "counter",
+				MType: constants.Counter,
 				Delta:utils.IntToPointerInt(345)  ,
 			},
 			want: want{
@@ -77,7 +78,7 @@ func Test_updateHandler(t *testing.T) {
 			body: metrics.Metrics{
 				ID: "name" ,
 				Value:utils.IntToPointerFloat(234) ,
-				MType: "gauge",
+				MType: constants.Gauge,
 			},
 			method: http.MethodPost,
 			want: want{

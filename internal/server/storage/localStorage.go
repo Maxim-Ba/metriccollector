@@ -9,15 +9,16 @@ import (
 
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
+	"github.com/Maxim-Ba/metriccollector/internal/server/storage/database/postgres"
 )
 
 var saveInterval int
 var localStoragePath string
+var databaseDSN string
 
 func loadMetricsFromFile(path string) ([]*metrics.Metrics, error) {
 	var metricsList []*metrics.Metrics
 
-	// data, err := os.ReadFile(path)
 	file, err := os.OpenFile(path, os.O_RDONLY|os.O_CREATE, 0666)
 	if err != nil {
 		logger.LogError(err)
@@ -83,17 +84,20 @@ func saveLoop() {
 		if err != nil {
 			logger.LogError(err)
 		}
-
-		err = saveMetricsToFile(localStoragePath, metricList)
+		if databaseDSN != "" {
+			err = postgres.SaveMetricsToDB(metricList, db)
+		} else {
+			err = saveMetricsToFile(localStoragePath, metricList)
+		}
 		if err != nil {
 			logger.LogError(err)
 		}
 	}
 }
 
-func WithSyncLocalStorage (next http.HandlerFunc) http.HandlerFunc {
+func WithSyncLocalStorage(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(res http.ResponseWriter, r *http.Request) {
-		if  saveInterval != 0 {
+		if saveInterval != 0 {
 			next.ServeHTTP(res, r)
 			return
 		}

@@ -13,14 +13,13 @@ tasks:
         # Run your test commands
           SERVER_PORT=3333
           ADDRESS="localhost:${SERVER_PORT}"
-          TEMP_FILE=abcd
-          metricstestbeta -test.v -test.run=^TestIteration9$ \
+          TEMP_FILE=3333
+          metricstestbeta -test.v -test.run=^TestIteration12$ \
             -agent-binary-path=cmd/agent/agent \
             -binary-path=cmd/server/server \
-            -file-storage-path=$TEMP_FILE \
+            -database-dsn='postgres://postgres:postgres@postgres:5432/praktikum?sslmode=disable' \
             -server-port=$SERVER_PORT \
             -source-path=.
-
 
   static-tests:
     cmds:

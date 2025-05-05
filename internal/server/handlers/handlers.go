@@ -2,16 +2,20 @@ package handlers
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"slices"
 	"strconv"
 	"strings"
+	"time"
 
+	"github.com/Maxim-Ba/metriccollector/internal/constants"
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	metricsService "github.com/Maxim-Ba/metriccollector/internal/server/services/metric"
+	storageService "github.com/Maxim-Ba/metriccollector/internal/server/services/starage"
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
@@ -21,7 +25,7 @@ func GetAllHandler(res http.ResponseWriter, req *http.Request) {
 	err := checkForAllowedMethod(req, []string{http.MethodGet})
 	if err != nil {
 		res.WriteHeader(http.StatusMethodNotAllowed)
-	
+
 		utils.WrireZeroBytes(res)
 		return
 	}
@@ -29,7 +33,7 @@ func GetAllHandler(res http.ResponseWriter, req *http.Request) {
 	html, err := metricsService.GetAll(storage.StorageInstance)
 	if err != nil {
 		res.WriteHeader(http.StatusNotFound)
-	
+
 		utils.WrireZeroBytes(res)
 		return
 	}
@@ -46,7 +50,7 @@ func GetOneHandlerByParams(res http.ResponseWriter, req *http.Request) {
 	err := checkForAllowedMethod(req, []string{http.MethodGet})
 	if err != nil {
 		res.WriteHeader(http.StatusMethodNotAllowed)
-	
+
 		utils.WrireZeroBytes(res)
 		return
 	}
@@ -66,7 +70,7 @@ func GetOneHandlerByParams(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 	res.Header().Set("Content-Type", " text/plain")
-	if parameters[0] == "gauge" {
+	if parameters[0] == constants.Gauge {
 		_, err = res.Write([]byte(strconv.FormatFloat(*metric.Value, 'f', -1, 64)))
 		if err != nil {
 			logger.LogError(err)
@@ -87,7 +91,7 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		logger.LogInfo(err)
 		res.WriteHeader(http.StatusMethodNotAllowed)
-	
+
 		utils.WrireZeroBytes(res)
 		return
 	}
@@ -97,7 +101,7 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		logger.LogInfo(err)
 		res.WriteHeader(http.StatusBadRequest)
-	
+
 		utils.WrireZeroBytes(res)
 		return
 	}
@@ -112,7 +116,6 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 		utils.WrireZeroBytes(res)
 		return
 	}
-
 
 	metricParams := metrics.MetricDTOParams{MetricsName: requestMetric.ID, MetricType: requestMetric.MType}
 	p := []*metrics.MetricDTOParams{&metricParams}
@@ -139,14 +142,14 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 
 	res.Header().Set("Content-Type", " application/json")
 	res.WriteHeader(http.StatusOK)
-	if _,err:= res.Write(body); err != nil {
+	if _, err := res.Write(body); err != nil {
 		logger.LogError(err)
 	}
-	
+
 }
 
 func UpdateHandler(res http.ResponseWriter, req *http.Request) {
-	logger.LogInfo("updateHandler \n")
+	logger.LogInfo("updateHandler")
 	err := checkForAllowedMethod(req, []string{http.MethodPost})
 	if err != nil {
 		logger.LogInfo(err)
@@ -190,6 +193,7 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 	res.WriteHeader(http.StatusOK)
 	utils.WrireZeroBytes(res)
 }
+
 func UpdateHandlerByURLParams(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("UpdateHandlerByURLParams \n")
 	err := checkForAllowedMethod(req, []string{http.MethodPost, http.MethodGet})
@@ -220,16 +224,60 @@ func UpdateHandlerByURLParams(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 	res.WriteHeader(http.StatusOK)
-	if _,err:= res.Write([]byte(params));err != nil {
-		return 
-	} 
+	if _, err := res.Write([]byte(params)); err != nil {
+		return
+	}
+	utils.WrireZeroBytes(res)
+}
+
+func UpdatesHandler (res http.ResponseWriter, req *http.Request)  {
+	logger.LogInfo("UpdatesHandler")
+
+	err := checkForAllowedMethod(req, []string{http.MethodPost})
+	if err != nil {
+		logger.LogInfo(err)
+		res.WriteHeader(http.StatusMethodNotAllowed)
+		utils.WrireZeroBytes(res)
+		return
+	}
+	var buf bytes.Buffer
+	_, err = buf.ReadFrom(req.Body)
+	if err != nil {
+		logger.LogInfo(err)
+
+		res.WriteHeader(http.StatusBadRequest)
+		utils.WrireZeroBytes(res)
+		return
+	}
+	metricsSlice, err := parseMetrics(&buf)
+
+	if err != nil {
+		logger.LogInfo(err)
+		if err == ErrNoMetricName {
+			res.WriteHeader(http.StatusNotFound)
+		}
+		if err == ErrNoMetricsType || err == ErrWrongValue {
+			res.WriteHeader(http.StatusBadRequest)
+		}
+		utils.WrireZeroBytes(res)
+		return
+	}
+	err = metricsService.UpdateMany(storage.StorageInstance, metricsSlice)
+	if err != nil {
+		logger.LogInfo(err)
+		res.WriteHeader(http.StatusMethodNotAllowed)
+		utils.WrireZeroBytes(res)
+		return
+	}
+
+	res.WriteHeader(http.StatusOK)
 	utils.WrireZeroBytes(res)
 }
 func metricRecord(parameters []string) (metrics.Metrics, error) {
 	if len(parameters) != 3 {
 		return metrics.Metrics{}, ErrNoMetricName
 	}
-	if parameters[0] != "gauge" && parameters[0] != "counter" {
+	if parameters[0] != constants.Gauge && parameters[0] != constants.Counter {
 		return metrics.Metrics{}, ErrNoMetricsType
 
 	}
@@ -241,7 +289,7 @@ func metricRecord(parameters []string) (metrics.Metrics, error) {
 	var value float64
 	var delta int64
 	var err error
-	if parameters[0] == "gauge" {
+	if parameters[0] == constants.Gauge {
 		value, err = strconv.ParseFloat(parameters[2], 64)
 	} else {
 		delta, err = strconv.ParseInt(parameters[2], 10, 64)
@@ -271,11 +319,44 @@ func parseMetric(buf *bytes.Buffer) (metrics.Metrics, error) {
 		return metrics.Metrics{}, ErrNoMetricName
 	}
 
-	if metric.MType != "gauge" && metric.MType != "counter" {
+	if metric.MType != constants.Gauge && metric.MType != constants.Counter {
 		return metrics.Metrics{}, ErrNoMetricsType
 	}
 	if metric.ID == "" {
 		return metrics.Metrics{}, ErrNoMetricName
 	}
 	return metric, nil
+}
+func parseMetrics(buf *bytes.Buffer) (*[]metrics.Metrics, error) {
+	var metricsSlice []metrics.Metrics
+	if err := json.Unmarshal(buf.Bytes(), &metricsSlice); err != nil {
+		return &[]metrics.Metrics{}, ErrNoMetricName
+	}
+	for _, m := range metricsSlice {
+		if m.MType != constants.Gauge && m.MType != constants.Counter {
+			return &[]metrics.Metrics{}, ErrNoMetricsType
+		}
+		if m.ID == "" {
+			return &[]metrics.Metrics{}, ErrNoMetricName
+		}
+	}
+	
+	return &metricsSlice, nil
+}
+func PingDB(res http.ResponseWriter, req *http.Request) {
+	logger.LogInfo("PingDB")
+
+	ctx, cancel := context.WithTimeout(req.Context(), 10*time.Second)
+	defer cancel()
+	err := storageService.Ping(ctx, storage.StorageInstance)
+	if err != nil {
+		logger.LogError(err)
+		res.WriteHeader(http.StatusInternalServerError)
+		utils.WrireZeroBytes(res)
+		return
+	}
+
+	res.WriteHeader(http.StatusOK)
+	utils.WrireZeroBytes(res)
+
 }

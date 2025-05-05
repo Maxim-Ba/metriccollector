@@ -19,7 +19,7 @@ cmd/server/server
 
 # Dependency directories (remove the comment below to include it)
 vendor/
-
+_DATABASE/
 # IDEs directories
 .idea
 .vscode
@@ -33,3 +33,4 @@ metricstest.exe
 store.json
 
 logs.log
+metrics.db
