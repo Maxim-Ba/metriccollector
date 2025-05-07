@@ -15,6 +15,7 @@ type Config struct {
 	LogLevel            string `env:"LOG_LEVEL"`
 	DatabaseDSN         string `env:"DATABASE_DSN"`
 	MigrationsPath      string `env:"MIGRATIONS_PATH"`
+	Key                 string `env:"KEY"`
 }
 
 func ParseEnv() *Config {
@@ -37,4 +38,3 @@ func isMigrationsPathSet() bool {
 	_, isSet := os.LookupEnv("MIGRATIONS_PATH")
 	return isSet
 }
-

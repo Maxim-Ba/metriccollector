@@ -3,6 +3,7 @@ package client
 import (
 	"bytes"
 	"compress/gzip"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
+	"github.com/Maxim-Ba/metriccollector/internal/signature"
 )
 
 type Client interface {
@@ -58,6 +60,15 @@ func (c *HTTPClient) SendMetrics(metrics []*metrics.Metrics) error {
 		if err != nil {
 			logger.LogError(err)
 			return nil
+		}
+		if signature.GetKey() != "" {
+			hash, err := signature.Get(compressedBody.Bytes())
+			if err != nil {
+				logger.LogError(err)
+				return err
+			}
+			encodedHash := base64.StdEncoding.EncodeToString(hash)
+			req.Header.Set("HashSHA256", encodedHash)
 		}
 		req.Header.Set("Accept-Encoding", "gzip")
 		req.Header.Set("Content-Encoding", "gzip")
@@ -110,6 +121,15 @@ func (c *HTTPClient) SendMetricsWithBatch(metrics []*metrics.Metrics) error {
 	if err != nil {
 		logger.LogError(err)
 		return nil
+	}
+	if signature.GetKey() != "" {
+		hash, err := signature.Get(compressedBody.Bytes())
+		if err != nil {
+			logger.LogError(err)
+			return err
+		}
+		encodedHash := base64.StdEncoding.EncodeToString(hash)
+		req.Header.Set("HashSHA256", encodedHash)
 	}
 	req.Header.Set("Accept-Encoding", "gzip")
 	req.Header.Set("Content-Encoding", "gzip")

@@ -10,6 +10,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/agent/config"
 	metricGenerator "github.com/Maxim-Ba/metriccollector/internal/agent/generator"
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
+	"github.com/Maxim-Ba/metriccollector/internal/signature"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
@@ -17,9 +18,9 @@ func main() {
 
 	exit := make(chan os.Signal, 1)
 	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
-	
 
 	parameters := config.New()
+	signature.SetKey(config.Key)
 	logger.SetLogLevel(parameters.LogLevel)
 	httpClient := client.NewClient(parameters.Addres)
 	reportIntervalStart := time.Now()
@@ -35,19 +36,19 @@ func main() {
 				metricGenerator.Generator.UpdatePollCount()
 				err = utils.RetryWrapper(func() error {
 					return httpClient.SendMetrics(metrics)
-				}, []error{client.ErrServerInternalError,client.ErrServerInternalError})
+				}, []error{client.ErrServerInternalError, client.ErrServerInternalError})
 				if err != nil {
 					logger.LogError(err)
 				}
 				err = utils.RetryWrapper(func() error {
 					return httpClient.SendMetricsWithBatch(metrics)
-				}, []error{client.ErrServerInternalError,client.ErrServerInternalError })
+				}, []error{client.ErrServerInternalError, client.ErrServerInternalError})
 				if err != nil {
 					logger.LogError(err)
 				}
-	
+
 				reportIntervalStart = time.Now()
-	
+
 			}
 			time.Sleep(time.Duration(parameters.PollInterval) * time.Second)
 		}

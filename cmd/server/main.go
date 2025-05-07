@@ -11,6 +11,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/server/config"
 	"github.com/Maxim-Ba/metriccollector/internal/server/router"
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
+	"github.com/Maxim-Ba/metriccollector/internal/signature"
 )
 
 func main() {
@@ -18,6 +19,8 @@ func main() {
 	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
 
 	parameters := config.New()
+	signature.SetKey(config.Key)
+
 	logger.SetLogLevel(parameters.LogLevel)
 	_, err := storage.New(parameters)
 	if err != nil {
