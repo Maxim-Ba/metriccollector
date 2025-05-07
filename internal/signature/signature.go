@@ -26,5 +26,9 @@ func Get(src []byte) ([]byte, error) {
 func Check(src []byte) bool {
 	h := hmac.New(sha256.New, hashKey)
 	sign := h.Sum(nil)
+	_, err := h.Write(src)
+	if err != nil {
+		return false
+	}
 	return hmac.Equal(sign, src)
 }

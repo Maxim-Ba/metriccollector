@@ -37,6 +37,6 @@ func New() Parameters {
 		ReportInterval: reportInterval,
 		PollInterval:   pollInterval,
 		LogLevel:       logLevel,
-		Key:            Key,
+		Key:            key,
 	}
 }

@@ -36,13 +36,13 @@ func main() {
 				metricGenerator.Generator.UpdatePollCount()
 				err = utils.RetryWrapper(func() error {
 					return httpClient.SendMetrics(metrics)
-				}, []error{client.ErrServerInternalError, client.ErrServerInternalError})
+				}, []error{client.ErrServerInternalError, client.ErrRequestTimeout})
 				if err != nil {
 					logger.LogError(err)
 				}
 				err = utils.RetryWrapper(func() error {
 					return httpClient.SendMetricsWithBatch(metrics)
-				}, []error{client.ErrServerInternalError, client.ErrServerInternalError})
+				}, []error{client.ErrServerInternalError, client.ErrRequestTimeout})
 				if err != nil {
 					logger.LogError(err)
 				}
