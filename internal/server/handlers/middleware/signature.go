@@ -1,7 +1,9 @@
 package middleware
 
 import (
+	"bytes"
 	"encoding/base64"
+	"io"
 	"net/http"
 
 	"github.com/Maxim-Ba/metriccollector/internal/signature"
@@ -30,7 +32,10 @@ func SignatureHandle(next http.HandlerFunc) http.HandlerFunc {
 			}
       return 
     }
-		if !signature.Check(decodedHeader) {
+		bodyBytes, _ := io.ReadAll(r.Body)
+		r.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
+
+		if !signature.Check(decodedHeader, bodyBytes) {
 			res.WriteHeader(http.StatusBadRequest)
 			_, err := res.Write([]byte(""))
 			if err != nil {

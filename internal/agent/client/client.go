@@ -56,17 +56,17 @@ func (c *HTTPClient) SendMetrics(metrics []*metrics.Metrics) error {
 			logger.LogError(err)
 		}
 		req, err := http.NewRequest("POST", path, &compressedBody)
-
 		if err != nil {
 			logger.LogError(err)
 			return nil
 		}
 		if signature.GetKey() != "" {
-			hash, err := signature.Get(compressedBody.Bytes())
+			hash, err := signature.Get(body)
 			if err != nil {
 				logger.LogError(err)
 				return err
 			}
+
 			encodedHash := base64.StdEncoding.EncodeToString(hash)
 			req.Header.Set("HashSHA256", encodedHash)
 		}
@@ -123,7 +123,7 @@ func (c *HTTPClient) SendMetricsWithBatch(metrics []*metrics.Metrics) error {
 		return nil
 	}
 	if signature.GetKey() != "" {
-		hash, err := signature.Get(compressedBody.Bytes())
+		hash, err := signature.Get(body)
 		if err != nil {
 			logger.LogError(err)
 			return err

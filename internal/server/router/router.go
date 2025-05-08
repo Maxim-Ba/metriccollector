@@ -37,11 +37,12 @@ func New() *chi.Mux {
 }
 
 func middlewares(next http.HandlerFunc) http.HandlerFunc {
+
 	mids := []Middleware{
 		middleware.SignatureHandle,
+		storage.WithSyncLocalStorage,
 		middleware.GzipHandle,
 		middleware.WithLogging,
-		storage.WithSyncLocalStorage,
 	}
 	for _, mid := range mids {
 		next = mid(next)

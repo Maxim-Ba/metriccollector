@@ -3,6 +3,8 @@ package signature
 import (
 	"crypto/hmac"
 	"crypto/sha256"
+
+	"github.com/Maxim-Ba/metriccollector/internal/logger"
 )
 
 var hashKey = []byte("")
@@ -20,15 +22,20 @@ func Get(src []byte) ([]byte, error) {
 		return nil, err
 	}
 	dst := h.Sum(nil)
+
+
 	return dst, nil
 }
 
-func Check(src []byte) bool {
+func Check(dst []byte, bodySrc []byte) bool {
 	h := hmac.New(sha256.New, hashKey)
-	sign := h.Sum(nil)
-	_, err := h.Write(src)
+	_, err := h.Write(bodySrc)
 	if err != nil {
+		logger.LogError(err)
 		return false
 	}
-	return hmac.Equal(sign, src)
+
+	sign := h.Sum(nil)
+
+	return hmac.Equal(sign, dst)
 }
