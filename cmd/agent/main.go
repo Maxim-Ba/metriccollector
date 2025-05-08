@@ -20,8 +20,8 @@ func main() {
 	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
 
 	parameters := config.New()
-	signature.SetKey(config.Key)
 	logger.SetLogLevel(parameters.LogLevel)
+	signature.SetKey(parameters.Key)
 	httpClient := client.NewClient(parameters.Addres)
 	reportIntervalStart := time.Now()
 	go func() {

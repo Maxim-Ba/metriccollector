@@ -19,9 +19,11 @@ func main() {
 	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
 
 	parameters := config.New()
-	signature.SetKey(config.Key)
-
+	
+	signature.SetKey(parameters.Key)
 	logger.SetLogLevel(parameters.LogLevel)
+	logger.LogInfo("config.Key ::::::" , parameters.Key)
+
 	_, err := storage.New(parameters)
 	if err != nil {
 

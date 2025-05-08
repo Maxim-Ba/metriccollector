@@ -1,5 +1,5 @@
 # https://taskfile.dev
-# docker run -v "D:\Traning golang\__practicum__\metriccollector\metriccollector:/app" gotests task unit-tests
+# docker run -v "D:\Traning golang\__practicum__\metriccollector\metriccollector:/app" -p "5432:5432" gotests task unit-tests 
 version: '3'
 
 silent: true
@@ -14,7 +14,7 @@ tasks:
           SERVER_PORT=4444
           ADDRESS="localhost:${SERVER_PORT}"
           TEMP_FILE=sdfsdf
-          metricstestbeta -test.v -test.run=^TestIteration14$ \
+          metricstest -test.v -test.run=^TestIteration14$ \
             -agent-binary-path=cmd/agent/agent \
             -binary-path=cmd/server/server \
             -database-dsn='postgres://postgres:postgres@postgres:5432/praktikum?sslmode=disable' \
