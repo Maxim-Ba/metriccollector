@@ -44,7 +44,7 @@ var GaugeMetrics = []string{
 	"StackInuse",
 	"StackSys",
 	"Sys",
-	"TotalAlloc",
+	"TotalAlloc", "TotalMemory", "FreeMemory", "CPUutilization1", "RandomValue",
 }
 var CounterMetrics = []string{
 	"RandomValue",

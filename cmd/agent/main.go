@@ -27,7 +27,7 @@ func main() {
 	go func() {
 
 		for {
-			metrics, err := metricGenerator.Generator.Generate()
+			metrics, err := metricGenerator.Generator.Generate(parameters.RateLimit)
 			if err != nil {
 				logger.LogError(err)
 				panic("Can not collect metrics")

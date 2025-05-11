@@ -10,7 +10,6 @@ import (
 var hashKey = []byte("")
 
 func SetKey(key string) {
-	logger.LogInfo("key" , key, "-1-1-1-1-1-1-")
 
 	hashKey = []byte(key)
 }
@@ -38,6 +37,5 @@ func Check(dst []byte, bodySrc []byte) bool {
 	}
 
 	sign := h.Sum(nil)
-	logger.LogInfo(sign, dst)
 	return hmac.Equal(sign, dst)
 }

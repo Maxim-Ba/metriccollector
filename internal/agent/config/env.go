@@ -11,8 +11,8 @@ type Config struct {
 	ReportInterval int    `env:"REPORT_INTERVAL"`
 	PollInterval   int    `env:"POLL_INTERVAL"`
 	LogLevel       string `env:"LOG_LEVEL"`
-	Key                 string `env:"KEY"`
-
+	Key            string `env:"KEY"`
+	RateLimit      int    `env:"RATE_LIMIT"`
 }
 
 func ParseEnv() *Config {
