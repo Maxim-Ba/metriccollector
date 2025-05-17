@@ -3,7 +3,6 @@ package router
 import (
 	"net/http"
 
-	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/server/handlers"
 	"github.com/Maxim-Ba/metriccollector/internal/server/handlers/middleware"
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
@@ -13,7 +12,6 @@ import (
 type Middleware func(http.HandlerFunc) http.HandlerFunc
 
 func New() *chi.Mux {
-	logger.LogInfo("InitHandlers")
 	r := chi.NewRouter()
 	r.Get("/", middlewares(handlers.GetAllHandler))
 
@@ -37,10 +35,12 @@ func New() *chi.Mux {
 }
 
 func middlewares(next http.HandlerFunc) http.HandlerFunc {
+
 	mids := []Middleware{
+		middleware.SignatureHandle,
+		storage.WithSyncLocalStorage,
 		middleware.GzipHandle,
 		middleware.WithLogging,
-		storage.WithSyncLocalStorage,
 	}
 	for _, mid := range mids {
 		next = mid(next)

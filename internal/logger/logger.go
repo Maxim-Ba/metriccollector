@@ -1,6 +1,9 @@
 package logger
 
 import (
+	"net/http"
+	"time"
+
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"go.uber.org/zap"
 )
@@ -61,5 +64,16 @@ func LogMetric(m metrics.Metrics) {
 		"ID", m.ID,
 		"Value", Value,
 		"Delta", Delta,
+	)
+}
+
+func LogResponse(r *http.Request, duration time.Duration, status ,size int ) {
+	
+	sugar.Infoln(
+		"uri", r.RequestURI,
+					"method", r.Method,
+					"status", status, // получаем перехваченный код статуса ответа
+					"duration", duration,
+					"size", size, // получаем перехваченный размер ответа
 	)
 }

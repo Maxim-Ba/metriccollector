@@ -5,6 +5,8 @@ type Parameters struct {
 	ReportInterval int
 	PollInterval   int
 	LogLevel       string
+	Key            string
+	RateLimit      int
 }
 
 func New() Parameters {
@@ -14,6 +16,8 @@ func New() Parameters {
 	pollInterval := envConfig.PollInterval
 	reportInterval := envConfig.ReportInterval
 	logLevel := envConfig.LogLevel
+	key := envConfig.Key
+	rateLimit := envConfig.RateLimit
 
 	if address == "" {
 		address = flags.FlagRunAddr
@@ -27,10 +31,18 @@ func New() Parameters {
 	if logLevel == "" {
 		logLevel = flags.LogLevel
 	}
+	if key == "" {
+		key = flags.Key
+	}
+	if rateLimit == 0 {
+		rateLimit = flags.RateLimit
+	}
 	return Parameters{
 		Addres:         address,
 		ReportInterval: reportInterval,
 		PollInterval:   pollInterval,
 		LogLevel:       logLevel,
+		Key:            key,
+		RateLimit:      rateLimit,
 	}
 }

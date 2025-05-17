@@ -8,6 +8,7 @@ type Parameters struct {
 	LogLevel            string
 	DatabaseDSN         string
 	MigrationsPath      string
+	Key                 string
 }
 
 func New() Parameters {
@@ -20,6 +21,7 @@ func New() Parameters {
 	logLevel := envConfig.LogLevel
 	databaseDSN := envConfig.DatabaseDSN
 	migrationsPath := envConfig.MigrationsPath
+	key := envConfig.Key
 	if address == "" {
 		address = flags.FlagRunAddr
 	}
@@ -41,6 +43,9 @@ func New() Parameters {
 	if !isMigrationsPathSet() {
 		migrationsPath = flags.MigrationsPath
 	}
+	if key == "" {
+		key = flags.Key
+	}
 	return Parameters{
 		Address:             address,
 		StoreIntervalSecond: storeInterval,
@@ -49,5 +54,6 @@ func New() Parameters {
 		LogLevel:            logLevel,
 		DatabaseDSN:         databaseDSN,
 		MigrationsPath:      migrationsPath,
+		Key:                 key,
 	}
 }
