@@ -20,13 +20,11 @@ func main() {
 
 	parameters := config.New()
 	
-	signature.SetKey(parameters.Key)
+	signature.New(parameters.Key)
 	logger.SetLogLevel(parameters.LogLevel)
-	logger.LogInfo("config.Key ::::::" , parameters.Key)
 
 	_, err := storage.New(parameters)
 	if err != nil {
-
 		panic(err)
 	}
 	mux := router.New()

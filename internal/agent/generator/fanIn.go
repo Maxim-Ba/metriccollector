@@ -15,8 +15,7 @@ func fanIn(doneCh chan struct{}, resultChs ... <-chan *metrics.Metrics) chan *me
 
 	// перебираем все входящие каналы
 	for _, ch := range resultChs {
-		// в горутину передавать переменную цикла нельзя, поэтому делаем так
-		chClosure := ch
+	
 
 		// инкрементируем счётчик горутин, которые нужно подождать
 		wg.Add(1)
@@ -26,7 +25,7 @@ func fanIn(doneCh chan struct{}, resultChs ... <-chan *metrics.Metrics) chan *me
 			defer wg.Done()
 
 			// получаем данные из канала
-			for data := range chClosure {
+			for data := range ch {
 				select {
 				// выходим из горутины, если канал закрылся
 				case <-doneCh:
