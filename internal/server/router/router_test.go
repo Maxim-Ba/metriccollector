@@ -1,7 +1,6 @@
 package router
 
 import (
-	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -48,12 +47,11 @@ func TestRoutePatterns(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.path, func(t *testing.T) {
-			req, err := http.NewRequest(tt.method, tt.path, nil)
+			_, err := http.NewRequest(tt.method, tt.path, nil)
 			require.NoError(t, err)
 
 			// Создаем контекст маршрутизации
 			rctx := chi.NewRouteContext()
-			req = req.WithContext(context.WithValue(req.Context(), chi.RouteCtxKey, rctx))
 
 			// Пытаемся найти маршрут
 			matched := r.Match(rctx, tt.method, tt.path)
