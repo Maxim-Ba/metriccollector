@@ -6,6 +6,8 @@ import (
 	"syscall"
 	"time"
 
+	_ "net/http/pprof"
+
 	"github.com/Maxim-Ba/metriccollector/internal/agent/client"
 	"github.com/Maxim-Ba/metriccollector/internal/agent/config"
 	metricGenerator "github.com/Maxim-Ba/metriccollector/internal/agent/generator"

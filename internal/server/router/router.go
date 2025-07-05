@@ -3,6 +3,8 @@ package router
 import (
 	"net/http"
 
+	m "github.com/go-chi/chi/v5/middleware"
+
 	"github.com/Maxim-Ba/metriccollector/internal/server/handlers"
 	"github.com/Maxim-Ba/metriccollector/internal/server/handlers/middleware"
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
@@ -13,6 +15,8 @@ type Middleware func(http.HandlerFunc) http.HandlerFunc
 
 func New() *chi.Mux {
 	r := chi.NewRouter()
+	r.Mount("/debug", m.Profiler())
+
 	r.Get("/", middlewares(handlers.GetAllHandler))
 
 	r.Route("/value", func(r chi.Router) {
@@ -27,7 +31,7 @@ func New() *chi.Mux {
 	r.Route("/updates", func(r chi.Router) {
 		r.Post("/", middlewares(handlers.UpdatesHandler))
 	})
-	
+
 	r.Route("/ping", func(r chi.Router) {
 		r.Get("/", middlewares(handlers.PingDB))
 	})
@@ -35,7 +39,6 @@ func New() *chi.Mux {
 }
 
 func middlewares(next http.HandlerFunc) http.HandlerFunc {
-
 	mids := []Middleware{
 		middleware.SignatureHandle,
 		storage.WithSyncLocalStorage,

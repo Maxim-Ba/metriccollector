@@ -142,3 +142,14 @@ func (s MemStorage) Ping(ctx context.Context) error {
 	}
 	return db.PingContext(ctx)
 }
+func (s *MemStorage) ClearGaugeMetric(name string) {
+    delete(s.collectionGauge, name)
+}
+
+func (s *MemStorage) ClearCounterMetric(name string) {
+    delete(s.collectionCounter, name)
+}
+func (s *MemStorage) ClearAll() {
+    s.collectionGauge = make(map[string]float64)
+    s.collectionCounter = make(map[string]int64)
+}

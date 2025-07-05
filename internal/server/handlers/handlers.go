@@ -228,7 +228,7 @@ func UpdateHandlerByURLParams(res http.ResponseWriter, req *http.Request) {
 	utils.WrireZeroBytes(res)
 }
 
-func UpdatesHandler (res http.ResponseWriter, req *http.Request)  {
+func UpdatesHandler(res http.ResponseWriter, req *http.Request)  {
 	logger.LogInfo("UpdatesHandler")
 
 	err := checkForAllowedMethod(req, []string{http.MethodPost})
