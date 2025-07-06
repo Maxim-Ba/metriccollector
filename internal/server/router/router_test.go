@@ -10,8 +10,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-
-
 func TestMiddlewaresOrder(t *testing.T) {
 	r := New()
 
@@ -23,7 +21,7 @@ func TestMiddlewaresOrder(t *testing.T) {
 
 	// Проверяем наличие заголовков, которые должны добавляться middleware
 	assert.NotEmpty(t, rec.Header().Get("Content-Type"))
-	
+
 }
 
 func TestChiRouter(t *testing.T) {

@@ -21,7 +21,7 @@ func workerPool(callbacks []func() *metrics.Metrics, maxWorkers int) <-chan *met
 	// передаем id, это для наглядности, канал задач и канал результатов
 	for w := 0; w < maxWorkers; w++ {
 		wg.Add(1)
-		go worker( jobs, results, &wg)
+		go worker(jobs, results, &wg)
 	}
 
 	// в канал задач отправляем какие-то данные
@@ -33,15 +33,15 @@ func workerPool(callbacks []func() *metrics.Metrics, maxWorkers int) <-chan *met
 	go func() {
 		wg.Wait()      // Ждём завершения всех горутин
 		close(results) // Закрываем канал
-}()
+	}()
 
 	return results
 }
 
-func worker( jobs <-chan (func() *metrics.Metrics), results chan<- *metrics.Metrics,  wg *sync.WaitGroup) {
+func worker(jobs <-chan (func() *metrics.Metrics), results chan<- *metrics.Metrics, wg *sync.WaitGroup) {
 	for job := range jobs {
 		results <- job()
 	}
 	defer wg.Done()
-	
+
 }

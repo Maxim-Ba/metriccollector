@@ -137,7 +137,6 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 	}
 	logger.LogMetric(*responseMetrics)
 
-
 	res.Header().Set("Content-Type", " application/json")
 	res.WriteHeader(http.StatusOK)
 	if _, err := res.Write(body); err != nil {
@@ -228,7 +227,7 @@ func UpdateHandlerByURLParams(res http.ResponseWriter, req *http.Request) {
 	utils.WrireZeroBytes(res)
 }
 
-func UpdatesHandler(res http.ResponseWriter, req *http.Request)  {
+func UpdatesHandler(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("UpdatesHandler")
 
 	err := checkForAllowedMethod(req, []string{http.MethodPost})
@@ -338,7 +337,7 @@ func parseMetrics(buf *bytes.Buffer) (*[]metrics.Metrics, error) {
 			return &[]metrics.Metrics{}, ErrNoMetricName
 		}
 	}
-	
+
 	return &metricsSlice, nil
 }
 func PingDB(res http.ResponseWriter, req *http.Request) {

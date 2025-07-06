@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"testing"
 
 	"github.com/Maxim-Ba/metriccollector/internal/constants"
@@ -450,173 +451,173 @@ func TestGetOneHandler(t *testing.T) {
 	}
 }
 func TestUpdateHandlerByURLParams(t *testing.T) {
-    type want struct {
-        code        int
-        contentType string
-    }
+	type want struct {
+		code        int
+		contentType string
+	}
 
-    type metricCheck struct {
-        name  string
-        mType string
-        value interface{}
-    }
+	type metricCheck struct {
+		name  string
+		mType string
+		value interface{}
+	}
 
-    tests := []struct {
-        name      string
-        method    string
-        path      string
-        want      want
-        checks    []metricCheck // Метрики для проверки после запроса
-        setup     []metricCheck // Предварительная настройка данных
-    }{
-        {
-            name:   "Wrong method - not POST or GET",
-            method: http.MethodPut,
-            path:   "/update/gauge/test/123.45",
-            want: want{
-                code:        http.StatusMethodNotAllowed,
-                contentType: "",
-            },
-        },
-        {
-            name:   "Not enough parameters in path",
-            method: http.MethodPost,
-            path:   "/update/gauge",
-            want: want{
-                code:        http.StatusNotFound,
-                contentType: "",
-            },
-        },
-        {
-            name:   "Wrong metric type",
-            method: http.MethodPost,
-            path:   "/update/unknown/test/123",
-            want: want{
-                code:        http.StatusBadRequest,
-                contentType: "",
-            },
-        },
-        {
-            name:   "Update gauge metric via POST",
-            method: http.MethodPost,
-            path:   "/update/gauge/testGauge/123.45",
-            want: want{
-                code:        http.StatusOK,
-                contentType: "",
-            },
-            checks: []metricCheck{
-                {
-                    name:  "testGauge",
-                    mType: constants.Gauge,
-                    value: 123.45,
-                },
-            },
-        },
-        {
-            name:   "Update counter metric via POST",
-            method: http.MethodPost,
-            path:   "/update/counter/testCounter/42",
-            want: want{
-                code:        http.StatusOK,
-                contentType: "",
-            },
-            checks: []metricCheck{
-                {
-                    name:  "testCounter",
-                    mType: constants.Counter,
-                    value: int64(42),
-                },
-            },
-        },
-        {
-            name:   "Increment counter metric",
-            method: http.MethodPost,
-            path:   "/update/counter/testCounter/10",
-            setup: []metricCheck{
-                {
-                    name:  "testCounter",
-                    mType: constants.Counter,
-                    value: int64(5),
-                },
-            },
-            want: want{
-                code:        http.StatusOK,
-                contentType: "",
-            },
-            checks: []metricCheck{
-                {
-                    name:  "testCounter",
-                    mType: constants.Counter,
-                    value: int64(15),
-                },
-            },
-        },
-    }
+	tests := []struct {
+		name   string
+		method string
+		path   string
+		want   want
+		checks []metricCheck // Метрики для проверки после запроса
+		setup  []metricCheck // Предварительная настройка данных
+	}{
+		{
+			name:   "Wrong method - not POST or GET",
+			method: http.MethodPut,
+			path:   "/update/gauge/test/123.45",
+			want: want{
+				code:        http.StatusMethodNotAllowed,
+				contentType: "",
+			},
+		},
+		{
+			name:   "Not enough parameters in path",
+			method: http.MethodPost,
+			path:   "/update/gauge",
+			want: want{
+				code:        http.StatusNotFound,
+				contentType: "",
+			},
+		},
+		{
+			name:   "Wrong metric type",
+			method: http.MethodPost,
+			path:   "/update/unknown/test/123",
+			want: want{
+				code:        http.StatusBadRequest,
+				contentType: "",
+			},
+		},
+		{
+			name:   "Update gauge metric via POST",
+			method: http.MethodPost,
+			path:   "/update/gauge/testGauge/123.45",
+			want: want{
+				code:        http.StatusOK,
+				contentType: "",
+			},
+			checks: []metricCheck{
+				{
+					name:  "testGauge",
+					mType: constants.Gauge,
+					value: 123.45,
+				},
+			},
+		},
+		{
+			name:   "Update counter metric via POST",
+			method: http.MethodPost,
+			path:   "/update/counter/testCounter/42",
+			want: want{
+				code:        http.StatusOK,
+				contentType: "",
+			},
+			checks: []metricCheck{
+				{
+					name:  "testCounter",
+					mType: constants.Counter,
+					value: int64(42),
+				},
+			},
+		},
+		{
+			name:   "Increment counter metric",
+			method: http.MethodPost,
+			path:   "/update/counter/testCounter/10",
+			setup: []metricCheck{
+				{
+					name:  "testCounter",
+					mType: constants.Counter,
+					value: int64(5),
+				},
+			},
+			want: want{
+				code:        http.StatusOK,
+				contentType: "",
+			},
+			checks: []metricCheck{
+				{
+					name:  "testCounter",
+					mType: constants.Counter,
+					value: int64(15),
+				},
+			},
+		},
+	}
 
-    for _, test := range tests {
-        t.Run(test.name, func(t *testing.T) {
-            // Очищаем хранилище перед тестом
-            storage.StorageInstance.ClearAll()
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			// Очищаем хранилище перед тестом
+			storage.StorageInstance.ClearAll()
 
-            // Подготавливаем начальные данные
-            for _, m := range test.setup {
-                switch m.mType {
-                case constants.Gauge:
-                    val := m.value.(float64)
-                    metricsService.Update(storage.StorageInstance, &metrics.Metrics{
-                        ID:    m.name,
-                        MType: m.mType,
-                        Value: &val,
-                    })
-                case constants.Counter:
-                    val := m.value.(int64)
-                    metricsService.Update(storage.StorageInstance, &metrics.Metrics{
-                        ID:    m.name,
-                        MType: m.mType,
-                        Delta: &val,
-                    })
-                }
-            }
+			// Подготавливаем начальные данные
+			for _, m := range test.setup {
+				switch m.mType {
+				case constants.Gauge:
+					val := m.value.(float64)
+					metricsService.Update(storage.StorageInstance, &metrics.Metrics{
+						ID:    m.name,
+						MType: m.mType,
+						Value: &val,
+					})
+				case constants.Counter:
+					val := m.value.(int64)
+					metricsService.Update(storage.StorageInstance, &metrics.Metrics{
+						ID:    m.name,
+						MType: m.mType,
+						Delta: &val,
+					})
+				}
+			}
 
-            handler := http.HandlerFunc(UpdateHandlerByURLParams)
-            srv := httptest.NewServer(handler)
-            defer srv.Close()
+			handler := http.HandlerFunc(UpdateHandlerByURLParams)
+			srv := httptest.NewServer(handler)
+			defer srv.Close()
 
-            req, err := http.NewRequest(test.method, srv.URL+test.path, nil)
-            assert.NoError(t, err)
+			req, err := http.NewRequest(test.method, srv.URL+test.path, nil)
+			assert.NoError(t, err)
 
-            client := &http.Client{}
-            res, err := client.Do(req)
-            assert.NoError(t, err)
-            defer res.Body.Close()
+			client := &http.Client{}
+			res, err := client.Do(req)
+			assert.NoError(t, err)
+			defer res.Body.Close()
 
-            assert.Equal(t, test.want.code, res.StatusCode)
+			assert.Equal(t, test.want.code, res.StatusCode)
 
-            if test.want.contentType != "" {
-                assert.Equal(t, test.want.contentType, res.Header.Get("Content-Type"))
-            }
+			if test.want.contentType != "" {
+				assert.Equal(t, test.want.contentType, res.Header.Get("Content-Type"))
+			}
 
-            // Проверяем состояние метрик
-            for _, check := range test.checks {
-                metricParams := []*metrics.MetricDTOParams{
-                    {
-                        MetricsName: check.name,
-                        MetricType: check.mType,
-                    },
-                }
+			// Проверяем состояние метрик
+			for _, check := range test.checks {
+				metricParams := []*metrics.MetricDTOParams{
+					{
+						MetricsName: check.name,
+						MetricType:  check.mType,
+					},
+				}
 
-                result, err := metricsService.Get(storage.StorageInstance, &metricParams)
-                assert.NoError(t, err)
+				result, err := metricsService.Get(storage.StorageInstance, &metricParams)
+				assert.NoError(t, err)
 
-                switch check.mType {
-                case constants.Gauge:
-                    assert.Equal(t, check.value.(float64), *result.Value)
-                case constants.Counter:
-                    assert.Equal(t, check.value.(int64), int64(*result.Delta))
-                }
-            }
-        })
-    }
+				switch check.mType {
+				case constants.Gauge:
+					assert.Equal(t, check.value.(float64), *result.Value)
+				case constants.Counter:
+					assert.Equal(t, check.value.(int64), int64(*result.Delta))
+				}
+			}
+		})
+	}
 }
 func Test_metricRecord(t *testing.T) {
 	tests := []struct {
@@ -769,112 +770,240 @@ func Test_checkForAllowedMethod(t *testing.T) {
 	}
 }
 func TestUpdatesHandler(t *testing.T) {
-    type want struct {
-        code int
-    }
+	type want struct {
+		code int
+	}
 
-    tests := []struct {
-        name    string
-        method  string
-        body    []metrics.Metrics
-        want    want
-        wantErr bool
-    }{
-        {
-            name:   "Wrong method - not POST",
-            method: http.MethodGet,
-            body:   []metrics.Metrics{},
-            want: want{
-                code: http.StatusMethodNotAllowed,
-            },
-            wantErr: true,
-        },
-        {
-            name:   "Empty metrics slice - should be accepted",
-            method: http.MethodPost,
-            body:   []metrics.Metrics{},
-            want: want{
-                code: http.StatusOK,
-            },
-            wantErr: false,
-        },
-        {
-            name:   "Valid gauge metrics",
-            method: http.MethodPost,
-            body: []metrics.Metrics{
-                {
-                    ID:    "testGauge1",
-                    MType: constants.Gauge,
-                    Value: utils.FloatToPointerFloat(123.45),
-                },
-            },
-            want: want{
-                code: http.StatusOK,
-            },
-            wantErr: false,
-        },
-        {
-            name:   "Metric with empty name",
-            method: http.MethodPost,
-            body: []metrics.Metrics{
-                {
-                    ID:    "",
-                    MType: constants.Gauge,
-                    Value: utils.FloatToPointerFloat(123.45),
-                },
-            },
-            want: want{
-                code: http.StatusNotFound,
-            },
-            wantErr: true,
-        },
-        {
-            name:   "Metric with wrong type",
-            method: http.MethodPost,
-            body: []metrics.Metrics{
-                {
-                    ID:    "test",
-                    MType: "invalid",
-                    Value: utils.FloatToPointerFloat(123.45),
-                },
-            },
-            want: want{
-                code: http.StatusBadRequest,
-            },
-            wantErr: true,
-        },
-    }
+	tests := []struct {
+		name    string
+		method  string
+		body    []metrics.Metrics
+		want    want
+		wantErr bool
+	}{
+		{
+			name:   "Wrong method - not POST",
+			method: http.MethodGet,
+			body:   []metrics.Metrics{},
+			want: want{
+				code: http.StatusMethodNotAllowed,
+			},
+			wantErr: true,
+		},
+		{
+			name:   "Empty metrics slice - should be accepted",
+			method: http.MethodPost,
+			body:   []metrics.Metrics{},
+			want: want{
+				code: http.StatusOK,
+			},
+			wantErr: false,
+		},
+		{
+			name:   "Valid gauge metrics",
+			method: http.MethodPost,
+			body: []metrics.Metrics{
+				{
+					ID:    "testGauge1",
+					MType: constants.Gauge,
+					Value: utils.FloatToPointerFloat(123.45),
+				},
+			},
+			want: want{
+				code: http.StatusOK,
+			},
+			wantErr: false,
+		},
+		{
+			name:   "Metric with empty name",
+			method: http.MethodPost,
+			body: []metrics.Metrics{
+				{
+					ID:    "",
+					MType: constants.Gauge,
+					Value: utils.FloatToPointerFloat(123.45),
+				},
+			},
+			want: want{
+				code: http.StatusNotFound,
+			},
+			wantErr: true,
+		},
+		{
+			name:   "Metric with wrong type",
+			method: http.MethodPost,
+			body: []metrics.Metrics{
+				{
+					ID:    "test",
+					MType: "invalid",
+					Value: utils.FloatToPointerFloat(123.45),
+				},
+			},
+			want: want{
+				code: http.StatusBadRequest,
+			},
+			wantErr: true,
+		},
+	}
 
-    for _, test := range tests {
-        t.Run(test.name, func(t *testing.T) {
-            storage.StorageInstance.ClearAll()
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			storage.StorageInstance.ClearAll()
 
-            body, err := json.Marshal(test.body)
-            assert.NoError(t, err)
+			body, err := json.Marshal(test.body)
+			assert.NoError(t, err)
 
-            req := httptest.NewRequest(test.method, "/updates/", bytes.NewReader(body))
-            rec := httptest.NewRecorder()
+			req := httptest.NewRequest(test.method, "/updates/", bytes.NewReader(body))
+			rec := httptest.NewRecorder()
 
-            UpdatesHandler(rec, req)
+			UpdatesHandler(rec, req)
 
-            assert.Equal(t, test.want.code, rec.Code)
+			assert.Equal(t, test.want.code, rec.Code)
 
-            if !test.wantErr && test.want.code == http.StatusOK && len(test.body) > 0 {
-                for _, m := range test.body {
-                    metricParams := []*metrics.MetricDTOParams{
-                        {MetricsName: m.ID, MetricType: m.MType},
-                    }
-                    result, err := metricsService.Get(storage.StorageInstance, &metricParams)
-                    assert.NoError(t, err)
-                    
-                    switch m.MType {
-                    case constants.Gauge:
-                        assert.Equal(t, *m.Value, *result.Value)
-                    case constants.Counter:
-                        assert.Equal(t, *m.Delta, int64(*result.Delta))
-                    }
-                }
-            }
-        })
-    }
+			if !test.wantErr && test.want.code == http.StatusOK && len(test.body) > 0 {
+				for _, m := range test.body {
+					metricParams := []*metrics.MetricDTOParams{
+						{MetricsName: m.ID, MetricType: m.MType},
+					}
+					result, err := metricsService.Get(storage.StorageInstance, &metricParams)
+					assert.NoError(t, err)
+
+					switch m.MType {
+					case constants.Gauge:
+						assert.Equal(t, *m.Value, *result.Value)
+					case constants.Counter:
+						assert.Equal(t, *m.Delta, int64(*result.Delta))
+					}
+				}
+			}
+		})
+	}
+}
+
+// ..............................
+
+func BenchmarkUpdateHandler(b *testing.B) {
+	handler := http.HandlerFunc(UpdateHandler)
+	testMetric := metrics.Metrics{
+		ID:    "testMetric",
+		MType: constants.Gauge,
+		Value: utils.FloatToPointerFloat(123.45),
+	}
+	body, _ := json.Marshal(testMetric)
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		req := httptest.NewRequest(http.MethodPost, "/update/", bytes.NewReader(body))
+		rec := httptest.NewRecorder()
+		handler.ServeHTTP(rec, req)
+	}
+}
+
+func BenchmarkGetAllHandler(b *testing.B) {
+	handler := http.HandlerFunc(GetAllHandler)
+
+	// Предварительно заполняем хранилище
+	for i := 0; i < 100; i++ {
+		metric := metrics.Metrics{
+			ID:    "metric" + strconv.Itoa(i),
+			MType: constants.Gauge,
+			Value: utils.FloatToPointerFloat(float64(i)),
+		}
+		_ = metricsService.Update(storage.StorageInstance, &metric)
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		req := httptest.NewRequest(http.MethodGet, "/", nil)
+		rec := httptest.NewRecorder()
+		handler.ServeHTTP(rec, req)
+	}
+}
+
+func BenchmarkGetOneHandlerByParams(b *testing.B) {
+	handler := http.HandlerFunc(GetOneHandlerByParams)
+	// Подготовка тестовой метрики
+	testMetric := metrics.Metrics{
+		ID:    "benchmarkMetric",
+		MType: constants.Gauge,
+		Value: utils.FloatToPointerFloat(123.45),
+	}
+	_ = metricsService.Update(storage.StorageInstance, &testMetric)
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		req := httptest.NewRequest(http.MethodGet, "/value/gauge/benchmarkMetric", nil)
+		rec := httptest.NewRecorder()
+		handler.ServeHTTP(rec, req)
+	}
+}
+
+func BenchmarkGetOneHandler(b *testing.B) {
+	handler := http.HandlerFunc(GetOneHandler)
+	testMetric := metrics.Metrics{
+		ID:    "testMetric",
+		MType: constants.Gauge,
+	}
+	body, _ := json.Marshal(testMetric)
+
+	// Подготовка тестовой метрики
+	storageMetric := metrics.Metrics{
+		ID:    "testMetric",
+		MType: constants.Gauge,
+		Value: utils.FloatToPointerFloat(123.45),
+	}
+	_ = metricsService.Update(storage.StorageInstance, &storageMetric)
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		req := httptest.NewRequest(http.MethodPost, "/value/", bytes.NewReader(body))
+		rec := httptest.NewRecorder()
+		handler.ServeHTTP(rec, req)
+	}
+}
+
+func BenchmarkUpdateHandlerByURLParams(b *testing.B) {
+	handler := http.HandlerFunc(UpdateHandlerByURLParams)
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		req := httptest.NewRequest(http.MethodPost, "/update/gauge/testMetric/123.45", nil)
+		rec := httptest.NewRecorder()
+		handler.ServeHTTP(rec, req)
+	}
+}
+
+func BenchmarkUpdatesHandler(b *testing.B) {
+	handler := http.HandlerFunc(UpdatesHandler)
+	metricsSlice := []metrics.Metrics{
+		{
+			ID:    "metric1",
+			MType: constants.Gauge,
+			Value: utils.FloatToPointerFloat(123.45),
+		},
+		{
+			ID:    "metric2",
+			MType: constants.Counter,
+			Delta: utils.FloatToPointerInt(42),
+		},
+	}
+	body, _ := json.Marshal(metricsSlice)
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		req := httptest.NewRequest(http.MethodPost, "/updates/", bytes.NewReader(body))
+		rec := httptest.NewRecorder()
+		handler.ServeHTTP(rec, req)
+	}
+}
+
+func BenchmarkPingDB(b *testing.B) {
+	handler := http.HandlerFunc(PingDB)
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		req := httptest.NewRequest(http.MethodGet, "/ping", nil)
+		rec := httptest.NewRecorder()
+		handler.ServeHTTP(rec, req)
+	}
 }

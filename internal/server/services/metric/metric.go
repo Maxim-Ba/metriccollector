@@ -9,7 +9,7 @@ import (
 type Storage interface {
 	SaveMetric(m *metrics.Metrics) error
 	SaveMetrics(m *[]metrics.Metrics) error
-	GetMetrics(params *[]*metrics.MetricDTOParams) (*[]metrics.Metrics , error)
+	GetMetrics(params *[]*metrics.MetricDTOParams) (*[]metrics.Metrics, error)
 }
 
 func GetAll(s Storage) (string, error) {
@@ -40,7 +40,7 @@ func Update(s Storage, m *metrics.Metrics) error {
 	}
 	return nil
 }
-func UpdateMany (s Storage, m *[]metrics.Metrics) error{
+func UpdateMany(s Storage, m *[]metrics.Metrics) error {
 	err := s.SaveMetrics(m)
 	if err != nil {
 		return err

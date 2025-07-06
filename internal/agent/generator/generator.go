@@ -226,7 +226,7 @@ func (g *generator) Generate(maxWorkers int) ([]*metrics.Metrics, error) {
 		func() *metrics.Metrics {
 			return &metrics.Metrics{
 				MType: constants.Gauge,
-				ID: "RandomValue",
+				ID:    "RandomValue",
 				Value: utils.IntToPointerFloat(rand.Uint64()),
 			}
 		},
@@ -234,7 +234,7 @@ func (g *generator) Generate(maxWorkers int) ([]*metrics.Metrics, error) {
 		func() *metrics.Metrics {
 			return &metrics.Metrics{
 				MType: constants.Counter,
-				ID: "PollCount",
+				ID:    "PollCount",
 				Delta: (utils.IntToPointerInt(g.pollCount)),
 			}
 		},

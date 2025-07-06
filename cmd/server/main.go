@@ -26,7 +26,7 @@ func main() {
 	p.Start()
 	signature.New(parameters.Key)
 	logger.SetLogLevel(parameters.LogLevel)
-	
+
 	_, err := storage.New(parameters)
 	if err != nil {
 		panic(err)
@@ -44,7 +44,6 @@ func main() {
 		}
 	}()
 	<-exit // Ожидание сигнала завершения
-	
 
 	logger.LogInfo("Shutting down server...")
 

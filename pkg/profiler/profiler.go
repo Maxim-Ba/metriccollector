@@ -22,7 +22,7 @@ func New(cpuProfile, memProfile string) *Profiler {
 	if err != nil {
 		panic(err)
 	}
-	fmem, err := os.Create(`profiles/` +memProfile)
+	fmem, err := os.Create(`profiles/` + memProfile)
 	if err != nil {
 		panic(err)
 	}

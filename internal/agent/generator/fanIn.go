@@ -6,7 +6,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 )
 
-func fanIn(doneCh chan struct{}, resultChs ... <-chan *metrics.Metrics) chan *metrics.Metrics {
+func fanIn(doneCh chan struct{}, resultChs ...<-chan *metrics.Metrics) chan *metrics.Metrics {
 	// конечный выходной канал в который отправляем данные из всех каналов из слайса, назовём его результирующим
 	finalCh := make(chan *metrics.Metrics)
 
@@ -15,7 +15,6 @@ func fanIn(doneCh chan struct{}, resultChs ... <-chan *metrics.Metrics) chan *me
 
 	// перебираем все входящие каналы
 	for _, ch := range resultChs {
-	
 
 		// инкрементируем счётчик горутин, которые нужно подождать
 		wg.Add(1)

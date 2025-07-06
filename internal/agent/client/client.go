@@ -67,7 +67,7 @@ func (c *HTTPClient) SendMetrics(metrics []*metrics.Metrics) error {
 				return err
 			}
 			encodedHash := base64.StdEncoding.EncodeToString(hash)
-			logger.LogInfo("encodedHash ",encodedHash)
+			logger.LogInfo("encodedHash ", encodedHash)
 			req.Header.Set("HashSHA256", encodedHash)
 		}
 		req.Header.Set("Accept-Encoding", "gzip")
