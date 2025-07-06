@@ -11,8 +11,17 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
+// Middleware is a type alias for functions that wrap http.HandlerFunc
+// to provide additional functionality like logging, compression, etc.
 type Middleware func(http.HandlerFunc) http.HandlerFunc
 
+// New creates and configures a new chi.Mux router with all application routes
+// and middleware. The router includes:
+// - Debug profiling endpoints under /debug
+// - Metric retrieval and update endpoints
+// - Database health check endpoint
+// Middlewares are applied in the order: signature verification, storage sync,
+// gzip compression, and request logging.
 func New() *chi.Mux {
 	r := chi.NewRouter()
 	r.Mount("/debug", m.Profiler())

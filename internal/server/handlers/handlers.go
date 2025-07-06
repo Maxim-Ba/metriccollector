@@ -20,6 +20,9 @@ import (
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
+// GetAllHandler handles HTTP GET requests to retrieve all metrics.
+// Returns an HTML page listing all metrics in storage.
+// Responds with appropriate HTTP status codes for errors.
 func GetAllHandler(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("getAllHandler \n")
 	err := checkForAllowedMethod(req, []string{http.MethodGet})
@@ -45,6 +48,11 @@ func GetAllHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 }
+
+// GetOneHandlerByParams handles HTTP GET requests to retrieve a single metric via URL parameters.
+// Expected URL format: /value/<type>/<name>.
+// Returns the metric value as plain text.
+// Responds with HTTP 404 if metric is not found, or 400 for bad requests.
 func GetOneHandlerByParams(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("GetOneHandlerByParams")
 	err := checkForAllowedMethod(req, []string{http.MethodGet})
@@ -84,6 +92,11 @@ func GetOneHandlerByParams(res http.ResponseWriter, req *http.Request) {
 	}
 	res.WriteHeader(http.StatusOK)
 }
+
+// GetOneHandler handles HTTP POST requests to retrieve a single metric in JSON format.
+// Accepts a metric object in the request body.
+// Returns the current metric value as JSON.
+// Responds with appropriate HTTP status codes for errors.
 func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("GetOneHandler \n")
 	err := checkForAllowedMethod(req, []string{http.MethodPost})
@@ -145,6 +158,10 @@ func GetOneHandler(res http.ResponseWriter, req *http.Request) {
 
 }
 
+// UpdateHandler handles HTTP POST requests to update a metric.
+// Accepts a metric object in JSON format in the request body.
+// Returns HTTP 200 on success.
+// Responds with appropriate HTTP status codes for errors.
 func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("updateHandler")
 	err := checkForAllowedMethod(req, []string{http.MethodPost})
@@ -191,6 +208,10 @@ func UpdateHandler(res http.ResponseWriter, req *http.Request) {
 	utils.WrireZeroBytes(res)
 }
 
+// UpdateHandlerByURLParams handles HTTP requests to update a metric via URL parameters.
+// Expected URL format: /update/<type>/<name>/<value>.
+// Returns HTTP 200 on success.
+// Responds with appropriate HTTP status codes for errors.
 func UpdateHandlerByURLParams(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("UpdateHandlerByURLParams \n")
 	err := checkForAllowedMethod(req, []string{http.MethodPost, http.MethodGet})
@@ -227,6 +248,10 @@ func UpdateHandlerByURLParams(res http.ResponseWriter, req *http.Request) {
 	utils.WrireZeroBytes(res)
 }
 
+// UpdatesHandler handles HTTP POST requests for batch metric updates.
+// Accepts an array of metric objects in JSON format.
+// Returns HTTP 200 on success.
+// Responds with appropriate HTTP status codes for errors.
 func UpdatesHandler(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("UpdatesHandler")
 
@@ -340,6 +365,10 @@ func parseMetrics(buf *bytes.Buffer) (*[]metrics.Metrics, error) {
 
 	return &metricsSlice, nil
 }
+
+// PingDB checks the database connection.
+// Returns HTTP 200 if connection is successful,
+// or HTTP 500 if there's a connection error.
 func PingDB(res http.ResponseWriter, req *http.Request) {
 	logger.LogInfo("PingDB")
 
@@ -355,5 +384,4 @@ func PingDB(res http.ResponseWriter, req *http.Request) {
 
 	res.WriteHeader(http.StatusOK)
 	utils.WrireZeroBytes(res)
-
 }

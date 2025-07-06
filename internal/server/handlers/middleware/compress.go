@@ -19,6 +19,11 @@ func (w gzipWriter) Write(b []byte) (int, error) {
 	// w.Writer будет отвечать за gzip-сжатие, поэтому пишем в него
 	return w.Writer.Write(b)
 }
+
+// GzipHandle is a middleware that handles gzip compression for HTTP responses
+// and decompression for requests. It checks the Accept-Encoding and Content-Encoding
+// headers to determine if gzip should be used. Responses are compressed if the client
+// supports gzip, and requests with gzip content are automatically decompressed.
 func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(res http.ResponseWriter, r *http.Request) {
 

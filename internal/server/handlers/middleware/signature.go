@@ -27,6 +27,10 @@ func (r *hashResponseWriter) Write(b []byte) (int, error) {
 	return size, err
 }
 
+// SignatureHandle is a middleware that handles request/response signing.
+// For incoming requests, it verifies the HashSHA256 header if present.
+// For responses, it calculates and sets the HashSHA256 header when
+// a signing key is configured.
 func SignatureHandle(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(res http.ResponseWriter, r *http.Request) {
 		headerValues := r.Header.Get("HashSHA256")
