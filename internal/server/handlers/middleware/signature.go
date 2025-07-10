@@ -6,7 +6,6 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/signature"
 )
 
@@ -46,11 +45,10 @@ func SignatureHandle(next http.HandlerFunc) http.HandlerFunc {
 		}
 		bodyBytes, err := io.ReadAll(r.Body)
 		if err != nil {
-			http.Error(res, err.Error(), http.StatusBadRequest)
+			http.Error(res, "failed to read request body", http.StatusBadRequest)
 			return
 		}
-		if _, err := signature.Check(decodedHeader, bodyBytes); err != nil {
-			logger.LogError(err)
+		if err := signature.Check(decodedHeader, bodyBytes); err != nil {
 			http.Error(res, "", http.StatusBadRequest)
 			return
 		}

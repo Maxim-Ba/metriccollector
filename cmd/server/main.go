@@ -22,12 +22,15 @@ func main() {
 	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
 
 	parameters := config.New()
-	p := profiler.New("cpu.profile", "result.pprof")
+	p, err := profiler.New(parameters.IsProfileOn, parameters.ProfileFileCPU, parameters.ProfileFileMem)
+	if err != nil {
+		logger.LogError("Profiler error ", err)
+	}
 	p.Start()
 	signature.New(parameters.Key)
 	logger.SetLogLevel(parameters.LogLevel)
 
-	_, err := storage.New(parameters)
+	_, err = storage.New(parameters)
 	if err != nil {
 		panic(err)
 	}

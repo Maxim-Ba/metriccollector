@@ -37,17 +37,22 @@ func Get(src []byte) ([]byte, error) {
 	return dst, nil
 }
 
-func Check(dst []byte, bodySrc []byte) (bool, error) {
+func Check(dst []byte, bodySrc []byte) (error) {
 	if len(signature.Key) == 0 {
-		return false, ErrKeyIsNotDefined
+		return ErrKeyIsNotDefined
 	}
 	h := hmac.New(sha256.New, signature.Key)
 	_, err := h.Write(bodySrc)
 	if err != nil {
 		logger.LogError(err)
-		return false, err
+		return err
 	}
 
 	sign := h.Sum(nil)
-	return hmac.Equal(sign, dst), nil
+
+	if !hmac.Equal(sign, dst) {
+		return ErrInvalidSignature
+	}
+
+	return nil
 }
