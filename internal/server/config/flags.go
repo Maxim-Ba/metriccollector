@@ -48,6 +48,7 @@ func ParseFlags() *ParsedFlags {
 	flag.StringVar(&ProfileFileMem, "mem", "", "memory file profile")
 	flag.StringVar(&ProfileFileCPU, "cpu", "", "CPU file profile")
 	flag.BoolVar(&IsProfileOn, "p", false, "Is profile is switch on")
+	flag.StringVar(&Key, "k", "", "private key for signature")
 
 	// парсим переданные серверу аргументы в зарегистрированные переменные
 	flag.Parse()
