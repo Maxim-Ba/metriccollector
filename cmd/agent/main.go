@@ -6,6 +6,8 @@ import (
 	"syscall"
 	"time"
 
+	_ "net/http/pprof"
+
 	"github.com/Maxim-Ba/metriccollector/internal/agent/client"
 	"github.com/Maxim-Ba/metriccollector/internal/agent/config"
 	metricGenerator "github.com/Maxim-Ba/metriccollector/internal/agent/generator"
@@ -21,7 +23,7 @@ func main() {
 
 	parameters := config.New()
 	logger.SetLogLevel(parameters.LogLevel)
-	signature.SetKey(parameters.Key)
+	signature.New(parameters.Key)
 	httpClient := client.NewClient(parameters.Addres)
 	reportIntervalStart := time.Now()
 	go func() {

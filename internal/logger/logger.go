@@ -23,17 +23,17 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	
+
 	// делаем регистратор SugaredLogger
 	sugar = *logger.Sugar()
 	LogInfo("logger is initialized")
 }
-func Sync(){
+func Sync() {
 	if err := sugar.Sync(); err != nil {
 		sugar.Error(err)
 	}
 }
-func SetLogLevel (level string){
+func SetLogLevel(level string) {
 	if level == "debug" {
 		atomicLevel.SetLevel(zap.DebugLevel)
 	} else if level == "info" {
@@ -43,7 +43,7 @@ func SetLogLevel (level string){
 	} else if level == "error" {
 		atomicLevel.SetLevel(zap.ErrorLevel)
 	}
-} 
+}
 func LogInfo(params ...interface{}) {
 	sugar.Info(params...)
 }
@@ -67,13 +67,13 @@ func LogMetric(m metrics.Metrics) {
 	)
 }
 
-func LogResponse(r *http.Request, duration time.Duration, status ,size int ) {
-	
+func LogResponse(r *http.Request, duration time.Duration, status, size int) {
+
 	sugar.Infoln(
 		"uri", r.RequestURI,
-					"method", r.Method,
-					"status", status, // получаем перехваченный код статуса ответа
-					"duration", duration,
-					"size", size, // получаем перехваченный размер ответа
+		"method", r.Method,
+		"status", status, // получаем перехваченный код статуса ответа
+		"duration", duration,
+		"size", size, // получаем перехваченный размер ответа
 	)
 }

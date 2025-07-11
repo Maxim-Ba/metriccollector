@@ -59,13 +59,13 @@ func TestGetMetrics(t *testing.T) {
 			name: "happy pass both types",
 			params: &[]*metrics.MetricDTOParams{{MetricsName: "a",
 				MetricType: constants.Counter}, {MetricsName: "random",
-				MetricType: constants.Counter},{MetricsName: "a",
-				MetricType: constants.Gauge},{MetricsName: "b",
+				MetricType: constants.Counter}, {MetricsName: "a",
+				MetricType: constants.Gauge}, {MetricsName: "b",
 				MetricType: constants.Gauge},
 			},
 			fixtures: MemStorage{
 				collectionCounter: map[string]int64{
-					string("a"): 100,
+					string("a"):      100,
 					string("random"): 100,
 				},
 				collectionGauge: map[string]float64{
@@ -117,9 +117,9 @@ func TestGetMetrics(t *testing.T) {
 						t.Errorf("GetMetrics() Delta = %v, want %v", gotSlice[i].Delta, v.Delta)
 					}
 				}
-				
+
 			}
-			
+
 		})
 	}
 }

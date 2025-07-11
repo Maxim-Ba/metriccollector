@@ -9,6 +9,9 @@ type Parameters struct {
 	DatabaseDSN         string
 	MigrationsPath      string
 	Key                 string
+	ProfileFileCPU      string
+	ProfileFileMem      string
+	IsProfileOn         bool
 }
 
 func New() Parameters {
@@ -21,6 +24,9 @@ func New() Parameters {
 	logLevel := envConfig.LogLevel
 	databaseDSN := envConfig.DatabaseDSN
 	migrationsPath := envConfig.MigrationsPath
+	profileFileCPU := envConfig.ProfileFileCPU
+	profileFileMem := envConfig.ProfileFileMem
+	isProfileOn := envConfig.IsProfileOn
 	key := envConfig.Key
 	if address == "" {
 		address = flags.FlagRunAddr
@@ -46,6 +52,16 @@ func New() Parameters {
 	if key == "" {
 		key = flags.Key
 	}
+	if profileFileCPU == "" {
+		profileFileCPU = flags.ProfileFileCPU
+	}
+	if profileFileMem == "" {
+		profileFileMem = flags.ProfileFileMem
+	}
+
+	if !isProfileOnSet() {
+		isProfileOn = flags.IsProfileOn
+	}
 	return Parameters{
 		Address:             address,
 		StoreIntervalSecond: storeInterval,
@@ -55,5 +71,8 @@ func New() Parameters {
 		DatabaseDSN:         databaseDSN,
 		MigrationsPath:      migrationsPath,
 		Key:                 key,
+		ProfileFileCPU:      profileFileCPU,
+		ProfileFileMem:      profileFileMem,
+		IsProfileOn:         isProfileOn,
 	}
 }

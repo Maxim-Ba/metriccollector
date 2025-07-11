@@ -31,8 +31,8 @@ tasks:
   run-server:
     cmds:
     - echo "Run server"
-    - go run cmd/server/main.go -a localhost:3333
+    - go run cmd/server/main.go -a 0.0.0.0:3333
   run-agent:
     cmds:
     - echo "Run agent"
-    - go run cmd/agent/main.go -a localhost:3333
+    - go run cmd/agent/main.go -a 0.0.0.0:3333

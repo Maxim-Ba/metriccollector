@@ -59,6 +59,6 @@ func ParseFlags() *ParsedFlags {
 		FlagPollInterval:   flagPollInterval,
 		LogLevel:           LogLevel,
 		Key:                Key,
-		RateLimit: rateLimit,
+		RateLimit:          rateLimit,
 	}
 }

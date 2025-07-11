@@ -13,17 +13,25 @@ type ParsedFlags struct {
 	LogLevel       string
 	DatabaseDSN    string
 	MigrationsPath string
-  Key string
+	Key            string
+	ProfileFileCPU string
+	ProfileFileMem string
+	IsProfileOn    bool
 }
 
-var FlagRunAddr string
-var FlagStoreIntervalSecond int
-var FlagStoragePath string
-var FlagRestore bool
-var LogLevel string
-var DatabaseDSN string
-var MigrationsPath string
-var Key string
+var (
+	FlagRunAddr             string
+	FlagStoreIntervalSecond int
+	FlagStoragePath         string
+	FlagRestore             bool
+	LogLevel                string
+	DatabaseDSN             string
+	MigrationsPath          string
+	Key                     string
+	ProfileFileCPU          string
+	ProfileFileMem          string
+	IsProfileOn             bool
+)
 
 // parseFlags обрабатывает аргументы командной строки
 // и сохраняет их значения в соответствующих переменных
@@ -35,9 +43,12 @@ func ParseFlags() *ParsedFlags {
 	flag.StringVar(&FlagStoragePath, "f", "./store.json", "file path for save metrics")
 	flag.BoolVar(&FlagRestore, "r", true, "load metrics at server start ")
 	flag.StringVar(&LogLevel, "l", "debug", "log level: debug info warn error")
-	flag.StringVar(&DatabaseDSN, "d", "", "addres to connect to database")          //-d postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
+	flag.StringVar(&DatabaseDSN, "d", "", "addres to connect to database")   //-d postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
 	flag.StringVar(&MigrationsPath, "m", "migrations", "path to migrations") // -m migrations
-  flag.StringVar(&Key, "k", "", "private key for signature")
+	flag.StringVar(&ProfileFileMem, "mem", "", "memory file profile")
+	flag.StringVar(&ProfileFileCPU, "cpu", "", "CPU file profile")
+	flag.BoolVar(&IsProfileOn, "p", false, "Is profile is switch on")
+
 	// парсим переданные серверу аргументы в зарегистрированные переменные
 	flag.Parse()
 	return &ParsedFlags{
@@ -48,6 +59,9 @@ func ParseFlags() *ParsedFlags {
 		LogLevel:                LogLevel,
 		DatabaseDSN:             DatabaseDSN,
 		MigrationsPath:          MigrationsPath,
-    Key: Key,
+		Key:                     Key,
+		ProfileFileCPU:          ProfileFileCPU,
+		ProfileFileMem:          ProfileFileMem,
+		IsProfileOn:             IsProfileOn,
 	}
 }

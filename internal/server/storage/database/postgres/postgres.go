@@ -83,7 +83,7 @@ func LoadMetricsFromDB(dbInstance *sql.DB) ([]*metrics.Metrics, error) {
 		}
 
 		return nil
-	},  []error{sql.ErrConnDone})
+	}, []error{sql.ErrConnDone})
 
 	if err != nil {
 		logger.LogError(err)
@@ -123,7 +123,7 @@ func SaveMetricsToDB(metricsList *[]metrics.Metrics, dbInstance *sql.DB) error {
 			return err
 		}
 		return nil
-	},  []error{sql.ErrConnDone})
+	}, []error{sql.ErrConnDone})
 
 	if err != nil {
 		logger.LogError(err)

@@ -7,11 +7,14 @@ import (
 	"os/signal"
 	"syscall"
 
+	_ "net/http/pprof"
+
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/server/config"
 	"github.com/Maxim-Ba/metriccollector/internal/server/router"
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
 	"github.com/Maxim-Ba/metriccollector/internal/signature"
+	"github.com/Maxim-Ba/metriccollector/pkg/profiler"
 )
 
 func main() {
@@ -19,14 +22,16 @@ func main() {
 	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
 
 	parameters := config.New()
-	
-	signature.SetKey(parameters.Key)
-	logger.SetLogLevel(parameters.LogLevel)
-	logger.LogInfo("config.Key ::::::" , parameters.Key)
-
-	_, err := storage.New(parameters)
+	p, err := profiler.New(parameters.IsProfileOn, parameters.ProfileFileCPU, parameters.ProfileFileMem)
 	if err != nil {
+		logger.LogError("Profiler error ", err)
+	}
+	p.Start()
+	signature.New(parameters.Key)
+	logger.SetLogLevel(parameters.LogLevel)
 
+	_, err = storage.New(parameters)
+	if err != nil {
 		panic(err)
 	}
 	mux := router.New()
@@ -41,7 +46,6 @@ func main() {
 			logger.LogError("ListenAndServe: ", err)
 		}
 	}()
-
 	<-exit // Ожидание сигнала завершения
 
 	logger.LogInfo("Shutting down server...")
@@ -49,9 +53,9 @@ func main() {
 	if err := server.Shutdown(context.Background()); err != nil {
 		logger.LogError("Server Shutdown: ", err)
 	}
-
 	logger.LogInfo("Server exiting")
 	// Явное закрытие ресурсов
+	p.Close()
 	storage.Close()
 	logger.Sync()
 }

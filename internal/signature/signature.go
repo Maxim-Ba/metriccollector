@@ -3,39 +3,56 @@ package signature
 import (
 	"crypto/hmac"
 	"crypto/sha256"
+	"errors"
 
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 )
 
-var hashKey = []byte("")
+type Signature struct {
+	Key []byte
+}
 
-func SetKey(key string) {
+var signature Signature
+var ErrKeyIsNotDefined = errors.New("key is not defined")
 
-	hashKey = []byte(key)
+func New(key string) Signature {
+	signature = Signature{
+		Key: []byte(key),
+	}
+	return signature
 }
 func GetKey() string {
-	return string(hashKey)
+	return string(signature.Key)
 }
 func Get(src []byte) ([]byte, error) {
-	h := hmac.New(sha256.New, hashKey)
+	if len(signature.Key) == 0 {
+		return nil, ErrKeyIsNotDefined
+	}
+	h := hmac.New(sha256.New, signature.Key)
 	_, err := h.Write(src)
 	if err != nil {
 		return nil, err
 	}
 	dst := h.Sum(nil)
-
-
 	return dst, nil
 }
 
-func Check(dst []byte, bodySrc []byte) bool {
-	h := hmac.New(sha256.New, hashKey)
+func Check(dst []byte, bodySrc []byte) (error) {
+	if len(signature.Key) == 0 {
+		return ErrKeyIsNotDefined
+	}
+	h := hmac.New(sha256.New, signature.Key)
 	_, err := h.Write(bodySrc)
 	if err != nil {
 		logger.LogError(err)
-		return false
+		return err
 	}
 
 	sign := h.Sum(nil)
-	return hmac.Equal(sign, dst)
+
+	if !hmac.Equal(sign, dst) {
+		return ErrInvalidSignature
+	}
+
+	return nil
 }

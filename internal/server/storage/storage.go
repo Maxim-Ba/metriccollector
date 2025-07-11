@@ -12,11 +12,14 @@ import (
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
+// MemStorage represents an in-memory storage implementation for metrics.
+// It maintains two separate collections for gauge and counter metrics.
 type MemStorage struct {
 	collectionGauge   map[string]float64
 	collectionCounter map[string]int64
 }
 
+// StorageInstance is the global instance of MemStorage initialized with empty collections.
 var StorageInstance = MemStorage{
 	collectionGauge:   map[string]float64{},
 	collectionCounter: map[string]int64{},
@@ -24,6 +27,17 @@ var StorageInstance = MemStorage{
 
 var db *sql.DB
 
+// New initializes the storage system based on configuration parameters.
+// It handles:
+// - Database connection setup if DSN is provided
+// - Metric restoration from file or database
+// - Background saving routine
+// Parameters:
+//   - cfg: Configuration parameters including storage options
+//
+// Returns:
+//   - *MemStorage: Initialized storage instance
+//   - error: if initialization fails
 func New(cfg config.Parameters) (*MemStorage, error) {
 	logger.LogInfo("storage New")
 	initStoreValues := []*metrics.Metrics{}
@@ -57,6 +71,9 @@ func New(cfg config.Parameters) (*MemStorage, error) {
 	go saveLoop()
 	return &StorageInstance, nil
 }
+
+// Close terminates the database connection if it exists.
+// Logs any errors encountered during closure.
 func Close() {
 	if db != nil {
 
@@ -69,6 +86,14 @@ func Close() {
 	}
 }
 
+// SaveMetric persists a single metric to memory storage.
+// For gauge metrics, it overwrites the existing value.
+// For counter metrics, it increments the existing value.
+// Parameters:
+//   - m: Metric to save
+//
+// Returns:
+//   - error: if metric type is invalid
 func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
 
 	if m.MType == constants.Gauge {
@@ -84,6 +109,14 @@ func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
 	}
 	return nil
 }
+
+// SaveMetrics persists multiple metrics to memory storage in batch.
+// Delegates to SaveMetric for each individual metric.
+// Parameters:
+//   - metricsSlice: Slice of metrics to save
+//
+// Returns:
+//   - error: if any metric fails to save
 func (s MemStorage) SaveMetrics(metricsSlice *[]metrics.Metrics) error {
 	for _, m := range *metricsSlice {
 		err := StorageInstance.SaveMetric(&m)
@@ -96,8 +129,16 @@ func (s MemStorage) SaveMetrics(metricsSlice *[]metrics.Metrics) error {
 	return nil
 }
 
+// GetMetrics retrieves metrics based on provided parameters.
+// Behavior:
+// - With empty params: returns all metrics
+// - With specific params: returns only requested metrics
+// Parameters:
+//   - metricsParams: Slice of metric lookup parameters
 //
-
+// Returns:
+//   - *[]metrics.Metrics: Retrieved metrics
+//   - error: if no metrics found (with specific params)
 func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]metrics.Metrics, error) {
 
 	metricsNames := make([]string, len(*metricsParams))
@@ -136,9 +177,36 @@ func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]me
 	return &metricsSlice, nil
 }
 
+// Ping verifies the database connection is alive.
+// Parameters:
+//   - ctx: Context for operation cancellation
+//
+// Returns:
+//   - error: if connection check fails or no connection exists
 func (s MemStorage) Ping(ctx context.Context) error {
 	if db == nil {
 		return ErrDatabaseConnection
 	}
 	return db.PingContext(ctx)
+}
+
+// ClearGaugeMetric removes a specific gauge metric from storage.
+// Parameters:
+//   - name: Name of the gauge metric to remove
+func (s *MemStorage) ClearGaugeMetric(name string) {
+	delete(s.collectionGauge, name)
+}
+
+// ClearCounterMetric removes a specific counter metric from storage.
+// Parameters:
+//   - name: Name of the counter metric to remove
+func (s *MemStorage) ClearCounterMetric(name string) {
+	delete(s.collectionCounter, name)
+}
+
+// ClearAll resets the storage by removing all metrics.
+// Reinitializes both gauge and counter collections.
+func (s *MemStorage) ClearAll() {
+	s.collectionGauge = make(map[string]float64)
+	s.collectionCounter = make(map[string]int64)
 }

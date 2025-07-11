@@ -13,32 +13,43 @@ type hashResponseWriter struct {
 	http.ResponseWriter // встраиваем оригинальный http.ResponseWriter
 }
 
+func (r *hashResponseWriter) Write(b []byte) (int, error) {
+	size, err := r.ResponseWriter.Write(b)
+	if err != nil {
+		return size, err
+	}
+	hash, err := signature.Get(b)
+	if err == nil {
+		encodedHash := base64.StdEncoding.EncodeToString(hash)
+		r.Header().Set("HashSHA256", encodedHash)
+	}
+	return size, err
+}
+
+// SignatureHandle is a middleware that handles request/response signing.
+// For incoming requests, it verifies the HashSHA256 header if present.
+// For responses, it calculates and sets the HashSHA256 header when
+// a signing key is configured.
 func SignatureHandle(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(res http.ResponseWriter, r *http.Request) {
 		headerValues := r.Header.Get("HashSHA256")
 
-		if signature.GetKey() == "" || r.Method == http.MethodGet || headerValues==""{
+		if signature.GetKey() == "" || headerValues == "" {
 			next.ServeHTTP(res, r)
 			return
 		}
-    decodedHeader, err := base64.StdEncoding.DecodeString(headerValues)
-
-    if err != nil {
-      res.WriteHeader(http.StatusBadRequest)
-			_, err := res.Write([]byte("invalid base64 encoding"))
-
-      if err != nil {
-				return
-			}
-      return 
-    }
-		bodyBytes, _ := io.ReadAll(r.Body)
-		if !signature.Check(decodedHeader, bodyBytes) {
-			res.WriteHeader(http.StatusBadRequest)
-			_, err := res.Write([]byte(""))
-			if err != nil {
-				return
-			}
+		decodedHeader, err := base64.StdEncoding.DecodeString(headerValues)
+		if err != nil {
+			http.Error(res, "invalid base64 encoding", http.StatusBadRequest)
+			return
+		}
+		bodyBytes, err := io.ReadAll(r.Body)
+		if err != nil {
+			http.Error(res, "failed to read request body", http.StatusBadRequest)
+			return
+		}
+		if err := signature.Check(decodedHeader, bodyBytes); err != nil {
+			http.Error(res, "", http.StatusBadRequest)
 			return
 		}
 		r.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
@@ -49,16 +60,4 @@ func SignatureHandle(next http.HandlerFunc) http.HandlerFunc {
 		next.ServeHTTP(&w, r)
 
 	})
-}
-func (r *hashResponseWriter) Write(b []byte) (int, error) {
-	size, err := r.ResponseWriter.Write(b)
-	if err != nil {
-		return size, err
-	}
-	hash, err := signature.Get(b)
-	if err == nil {
-    encodedHash := base64.StdEncoding.EncodeToString(hash)
-		r.Header().Set("HashSHA256", encodedHash)
-	}
-	return size, err
 }

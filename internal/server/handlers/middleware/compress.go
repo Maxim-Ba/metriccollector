@@ -19,6 +19,11 @@ func (w gzipWriter) Write(b []byte) (int, error) {
 	// w.Writer будет отвечать за gzip-сжатие, поэтому пишем в него
 	return w.Writer.Write(b)
 }
+
+// GzipHandle is a middleware that handles gzip compression for HTTP responses
+// and decompression for requests. It checks the Accept-Encoding and Content-Encoding
+// headers to determine if gzip should be used. Responses are compressed if the client
+// supports gzip, and requests with gzip content are automatically decompressed.
 func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(res http.ResponseWriter, r *http.Request) {
 
@@ -26,22 +31,21 @@ func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 		if err != nil {
 			logger.LogError(err)
 			res.WriteHeader(http.StatusMethodNotAllowed)
-			_,err:=res.Write([]byte(""))
+			_, err := res.Write([]byte(""))
 			if err != nil {
-				return 
+				return
 			}
 			return
 		}
 		// проверяем, что клиент поддерживает gzip-сжатие
 		headerValues := r.Header.Values("Accept-Encoding")
 
-
 		if !slices.Contains(headerValues, "gzip") {
 			next.ServeHTTP(res, r)
 			return
 		}
 		res.Header().Set("Content-Encoding", "gzip")
-	
+
 		// создаём gzip.Writer поверх текущего w
 		gz, err := gzip.NewWriterLevel(res, gzip.BestSpeed)
 		if err != nil {
@@ -49,7 +53,7 @@ func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 		defer func() {
-			if err :=  gz.Close(); err != nil {
+			if err := gz.Close(); err != nil {
 				logger.LogError(err)
 			}
 		}()
@@ -62,7 +66,6 @@ func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 func decodeGzip(r *http.Request) (*http.Request, error) {
 	headerValues := r.Header.Values("Content-Encoding")
 
-
 	if !slices.Contains(headerValues, "gzip") {
 		return r, nil
 	}
@@ -71,11 +74,11 @@ func decodeGzip(r *http.Request) (*http.Request, error) {
 		return r, ErrWrongBodyEncoding
 	}
 	defer func() {
-		if err :=  gz.Close(); err != nil {
+		if err := gz.Close(); err != nil {
 			logger.LogError(err)
 		}
 	}()
-	
+
 	body, err := io.ReadAll(gz)
 	if err != nil {
 		return r, ErrWrongBodyEncoding
