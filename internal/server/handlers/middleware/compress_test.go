@@ -30,6 +30,10 @@ func TestGzipHandle_NoCompression(t *testing.T) {
 	resp := w.Result()
 	assert.Equal(t, "test response", w.Body.String())
 	assert.Empty(t, resp.Header.Get("Content-Encoding"))
+
+	if err := resp.Body.Close(); err != nil {
+		fmt.Print(err)
+	}
 }
 
 func TestGzipHandle_ResponseCompression(t *testing.T) {
@@ -59,6 +63,9 @@ func TestGzipHandle_ResponseCompression(t *testing.T) {
 	body, err := io.ReadAll(gzReader)
 	require.NoError(t, err)
 	assert.Equal(t, "test response", string(body))
+	if err := resp.Body.Close(); err != nil {
+		fmt.Print(err)
+	}
 }
 
 func TestGzipHandle_RequestDecompression(t *testing.T) {
@@ -96,6 +103,9 @@ func TestGzipHandle_RequestDecompression(t *testing.T) {
 	body, err := io.ReadAll(gzReader)
 	require.NoError(t, err)
 	assert.Equal(t, "test request", string(body))
+	if err := resp.Body.Close(); err != nil {
+		fmt.Print(err)
+	}
 }
 
 func TestGzipHandle_InvalidGzipRequest(t *testing.T) {
@@ -114,6 +124,9 @@ func TestGzipHandle_InvalidGzipRequest(t *testing.T) {
 
 	resp := w.Result()
 	assert.Equal(t, http.StatusMethodNotAllowed, resp.StatusCode)
+	if err := resp.Body.Close(); err != nil {
+		fmt.Print(err)
+	}
 }
 
 func TestGzipWriter_Write(t *testing.T) {
@@ -144,4 +157,5 @@ func TestGzipWriter_Write(t *testing.T) {
 	body, err := io.ReadAll(gzReader)
 	require.NoError(t, err)
 	assert.Equal(t, "test data", string(body))
+	
 }
