@@ -7,6 +7,19 @@ import (
 	"golang.org/x/tools/go/analysis"
 )
 
+// OsExitAnalyzer checks for direct calls to os.Exit in the main function of main packages.
+//
+// This analyzer detects and reports usage of os.Exit() in main functions, which is
+// generally discouraged as it can prevent proper cleanup of resources and bypass
+// deferred functions. Instead, it's recommended to return from main or use proper
+// error handling patterns.
+//
+// Usage: multichecker [-flag] [package]
+//
+// Example of a finding:
+//   func main() {
+//       os.Exit(1) // this will be reported
+//   }
 var OsExitAnalyzer  = &analysis.Analyzer{
 	Name: "osexit",
 	Doc:  "check for using os.Exit in main function",

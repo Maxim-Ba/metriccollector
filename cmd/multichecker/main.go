@@ -1,3 +1,15 @@
+// Package provides custom static analysis tools for Go code.
+//
+// This package includes analyzers that extend the standard set of Go static analysis tools.
+// It is designed to be used with multichecker to perform comprehensive code checks.
+//
+// Usage:
+//
+//	go build -o multichecker
+//	multichecker [-flag] [package]
+//
+// The analyzers in this package focus on detecting specific patterns or potential issues
+// in Go code that aren't covered by standard analyzers.
 package main
 
 import (

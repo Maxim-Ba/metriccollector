@@ -268,7 +268,7 @@ func TestGetOneHandlerByParams(t *testing.T) {
 			assert.NoError(t, err)
 			defer func() {
 				err = res.Body.Close()
-				fmt.Print(err.Error())
+				fmt.Print(err)
 			}()
 
 			assert.Equal(t, test.want.code, res.StatusCode)
@@ -422,7 +422,7 @@ func TestGetOneHandler(t *testing.T) {
 			assert.NoError(t, err)
 			defer func() {
 				err = res.Body.Close()
-				fmt.Print(err.Error())
+				fmt.Print(err)
 			}()
 			assert.Equal(t, test.want.code, res.StatusCode)
 
@@ -576,7 +576,7 @@ func TestUpdateHandlerByURLParams(t *testing.T) {
 						MType: m.mType,
 						Value: &val,
 					})
-					fmt.Print(err.Error())
+					fmt.Print(err)
 				case constants.Counter:
 					val := m.value.(int64)
 					err := metricsService.Update(storage.StorageInstance, &metrics.Metrics{
@@ -584,7 +584,7 @@ func TestUpdateHandlerByURLParams(t *testing.T) {
 						MType: m.mType,
 						Delta: &val,
 					})
-					fmt.Print(err.Error())
+					fmt.Print(err)
 				}
 			}
 
@@ -600,7 +600,7 @@ func TestUpdateHandlerByURLParams(t *testing.T) {
 			assert.NoError(t, err)
 			defer func() {
 				err = res.Body.Close()
-				fmt.Print(err.Error())
+				fmt.Print(err)
 			}()
 			assert.Equal(t, test.want.code, res.StatusCode)
 
