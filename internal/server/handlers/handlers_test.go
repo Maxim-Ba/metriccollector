@@ -894,6 +894,164 @@ func TestUpdatesHandler(t *testing.T) {
 	}
 }
 
+func Test_parseMetric(t *testing.T) {
+	tests := []struct {
+		name    string
+		input   string
+		want    metrics.Metrics
+		wantErr bool
+		errType error
+	}{
+		{
+			name:    "Valid gauge metric",
+			input:   `{"id":"testGauge","type":"gauge","value":123.45}`,
+			want:    metrics.Metrics{ID: "testGauge", MType: constants.Gauge, Value: utils.FloatToPointerFloat(123.45)},
+			wantErr: false,
+		},
+		{
+			name:    "Valid counter metric",
+			input:   `{"id":"testCounter","type":"counter","delta":42}`,
+			want:    metrics.Metrics{ID: "testCounter", MType: constants.Counter, Delta: utils.FloatToPointerInt(42)},
+			wantErr: false,
+		},
+		{
+			name:    "Empty metric name",
+			input:   `{"id":"","type":"gauge","value":123.45}`,
+			want:    metrics.Metrics{},
+			wantErr: true,
+			errType: ErrNoMetricName,
+		},
+		{
+			name:    "Wrong metric type",
+			input:   `{"id":"test","type":"invalid","value":123.45}`,
+			want:    metrics.Metrics{},
+			wantErr: true,
+			errType: ErrNoMetricsType,
+		},
+		{
+			name:    "Invalid JSON",
+			input:   `{"id":"test","type":"gauge","value":123.45`,
+			want:    metrics.Metrics{},
+			wantErr: true,
+			errType: ErrNoMetricName, // Функция возвращает ErrNoMetricName при ошибке JSON
+		},
+		{
+			name:    "Missing required fields",
+			input:   `{"type":"gauge"}`,
+			want:    metrics.Metrics{},
+			wantErr: true,
+			errType: ErrNoMetricName,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			buf := bytes.NewBufferString(tt.input)
+			got, err := parseMetric(buf)
+
+			if tt.wantErr {
+				assert.Error(t, err)
+				if tt.errType != nil {
+					assert.Equal(t, tt.errType, err)
+				}
+			} else {
+				assert.NoError(t, err)
+				assert.Equal(t, tt.want.ID, got.ID)
+				assert.Equal(t, tt.want.MType, got.MType)
+
+				if tt.want.MType == constants.Gauge {
+					assert.Equal(t, *tt.want.Value, *got.Value)
+				} else if tt.want.MType == constants.Counter {
+					assert.Equal(t, *tt.want.Delta, *got.Delta)
+				}
+			}
+		})
+	}
+}
+
+func Test_parseMetrics(t *testing.T) {
+	tests := []struct {
+		name    string
+		input   string
+		want    []metrics.Metrics
+		wantErr bool
+		errType error
+	}{
+		{
+			name:  "Valid single gauge metric",
+			input: `[{"id":"testGauge","type":"gauge","value":123.45}]`,
+			want: []metrics.Metrics{
+				{ID: "testGauge", MType: constants.Gauge, Value: utils.FloatToPointerFloat(123.45)},
+			},
+			wantErr: false,
+		},
+		{
+			name:  "Valid multiple metrics",
+			input: `[{"id":"testGauge","type":"gauge","value":123.45},{"id":"testCounter","type":"counter","delta":42}]`,
+			want: []metrics.Metrics{
+				{ID: "testGauge", MType: constants.Gauge, Value: utils.FloatToPointerFloat(123.45)},
+				{ID: "testCounter", MType: constants.Counter, Delta: utils.FloatToPointerInt(42)},
+			},
+			wantErr: false,
+		},
+		{
+			name:    "Empty metric name",
+			input:   `[{"id":"","type":"gauge","value":123.45}]`,
+			want:    nil,
+			wantErr: true,
+			errType: ErrNoMetricName,
+		},
+		{
+			name:    "Wrong metric type",
+			input:   `[{"id":"test","type":"invalid","value":123.45}]`,
+			want:    nil,
+			wantErr: true,
+			errType: ErrNoMetricsType,
+		},
+		{
+			name:    "Invalid JSON",
+			input:   `[{"id":"test","type":"gauge","value":123.45`,
+			want:    nil,
+			wantErr: true,
+			errType: ErrNoMetricName, // Функция возвращает ErrNoMetricName при ошибке JSON
+		},
+		{
+			name:    "Empty array",
+			input:   `[]`,
+			want:    []metrics.Metrics{},
+			wantErr: false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			buf := bytes.NewBufferString(tt.input)
+			got, err := parseMetrics(buf)
+
+			if tt.wantErr {
+				assert.Error(t, err)
+				if tt.errType != nil {
+					assert.Equal(t, tt.errType, err)
+				}
+			} else {
+				assert.NoError(t, err)
+				assert.Equal(t, len(tt.want), len(*got))
+
+				for i, expected := range tt.want {
+					assert.Equal(t, expected.ID, (*got)[i].ID)
+					assert.Equal(t, expected.MType, (*got)[i].MType)
+
+					if expected.MType == constants.Gauge {
+						assert.Equal(t, *expected.Value, *(*got)[i].Value)
+					} else if expected.MType == constants.Counter {
+						assert.Equal(t, *expected.Delta, *(*got)[i].Delta)
+					}
+				}
+			}
+		})
+	}
+}
+
 // ..............................
 
 func BenchmarkUpdateHandler(b *testing.B) {

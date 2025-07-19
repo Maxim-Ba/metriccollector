@@ -36,6 +36,7 @@ func New(isOn bool, cpuProfile, memProfile string) (*Profiler, error) {
 	return &Profiler{
 		fileCPU: fcpu,
 		fileMem: fmem,
+		isOn:    isOn,
 	}, nil
 }
 
