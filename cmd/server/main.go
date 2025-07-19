@@ -42,7 +42,7 @@ func main() {
 
 	go func() {
 		logger.LogInfo("Running server on ", parameters.Address)
-		if err := http.ListenAndServe(parameters.Address, mux); err != nil && err != http.ErrServerClosed {
+		if err = http.ListenAndServe(parameters.Address, mux); err != nil && err != http.ErrServerClosed {
 			logger.LogError("ListenAndServe: ", err)
 		}
 	}()
@@ -50,12 +50,14 @@ func main() {
 
 	logger.LogInfo("Shutting down server...")
 
-	if err := server.Shutdown(context.Background()); err != nil {
+	if err = server.Shutdown(context.Background()); err != nil {
 		logger.LogError("Server Shutdown: ", err)
 	}
 	logger.LogInfo("Server exiting")
 	// Явное закрытие ресурсов
-	p.Close()
+	err = p.Close()
+	logger.LogError(err)
+
 	storage.Close()
 	logger.Sync()
 }

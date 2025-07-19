@@ -104,14 +104,14 @@ func SaveMetricsToDB(metricsList *[]metrics.Metrics, dbInstance *sql.DB) error {
 		}
 		for _, m := range *metricsList {
 			// все изменения записываются в транзакцию
-			_, err := dbInstance.Exec(`INSERT INTO metrics (id, type, value, delta) 
+			_, err = dbInstance.Exec(`INSERT INTO metrics (id, type, value, delta) 
 				VALUES ($1, $2, $3, $4)
 				ON CONFLICT (id) DO UPDATE 
 				SET type = $2, value = $3, delta = $4`,
 				m.ID, m.MType, m.Value, m.Delta)
 			if err != nil {
 				logger.LogError(err)
-				err := tx.Rollback()
+				err = tx.Rollback()
 				if err != nil {
 					logger.LogError(err)
 				}

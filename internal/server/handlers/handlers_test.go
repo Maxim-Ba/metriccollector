@@ -3,6 +3,7 @@ package handlers
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -265,7 +266,10 @@ func TestGetOneHandlerByParams(t *testing.T) {
 
 			res, err := client.Do(request)
 			assert.NoError(t, err)
-			defer res.Body.Close()
+			defer func() {
+				err = res.Body.Close()
+				fmt.Print(err.Error())
+			}()
 
 			assert.Equal(t, test.want.code, res.StatusCode)
 
@@ -416,8 +420,10 @@ func TestGetOneHandler(t *testing.T) {
 			client := &http.Client{}
 			res, err := client.Do(request)
 			assert.NoError(t, err)
-			defer res.Body.Close()
-
+			defer func() {
+				err = res.Body.Close()
+				fmt.Print(err.Error())
+			}()
 			assert.Equal(t, test.want.code, res.StatusCode)
 
 			if test.want.contentType != "" {
@@ -450,6 +456,7 @@ func TestGetOneHandler(t *testing.T) {
 		})
 	}
 }
+
 func TestUpdateHandlerByURLParams(t *testing.T) {
 	type want struct {
 		code        int
@@ -564,18 +571,20 @@ func TestUpdateHandlerByURLParams(t *testing.T) {
 				switch m.mType {
 				case constants.Gauge:
 					val := m.value.(float64)
-					metricsService.Update(storage.StorageInstance, &metrics.Metrics{
+					err := metricsService.Update(storage.StorageInstance, &metrics.Metrics{
 						ID:    m.name,
 						MType: m.mType,
 						Value: &val,
 					})
+					fmt.Print(err.Error())
 				case constants.Counter:
 					val := m.value.(int64)
-					metricsService.Update(storage.StorageInstance, &metrics.Metrics{
+					err := metricsService.Update(storage.StorageInstance, &metrics.Metrics{
 						ID:    m.name,
 						MType: m.mType,
 						Delta: &val,
 					})
+					fmt.Print(err.Error())
 				}
 			}
 
@@ -589,8 +598,10 @@ func TestUpdateHandlerByURLParams(t *testing.T) {
 			client := &http.Client{}
 			res, err := client.Do(req)
 			assert.NoError(t, err)
-			defer res.Body.Close()
-
+			defer func() {
+				err = res.Body.Close()
+				fmt.Print(err.Error())
+			}()
 			assert.Equal(t, test.want.code, res.StatusCode)
 
 			if test.want.contentType != "" {
@@ -619,6 +630,7 @@ func TestUpdateHandlerByURLParams(t *testing.T) {
 		})
 	}
 }
+
 func Test_metricRecord(t *testing.T) {
 	tests := []struct {
 		name       string
@@ -705,6 +717,7 @@ func Test_metricRecord(t *testing.T) {
 		})
 	}
 }
+
 func Test_checkForAllowedMethod(t *testing.T) {
 	type args struct {
 		req           *http.Request
@@ -769,6 +782,7 @@ func Test_checkForAllowedMethod(t *testing.T) {
 		})
 	}
 }
+
 func TestUpdatesHandler(t *testing.T) {
 	type want struct {
 		code int

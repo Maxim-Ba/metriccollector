@@ -25,7 +25,7 @@ func loadMetricsFromFile(path string) ([]*metrics.Metrics, error) {
 		return nil, err
 	}
 	defer func() {
-		if err := file.Close(); err != nil {
+		if err = file.Close(); err != nil {
 			logger.LogError(err)
 		}
 	}()
@@ -54,7 +54,7 @@ func saveMetricsToFile(path string, metricsList *[]metrics.Metrics) error {
 		return err
 	}
 	defer func() {
-		if err := file.Close(); err != nil {
+		if err = file.Close(); err != nil {
 			logger.LogError(err)
 		}
 	}()
