@@ -3,7 +3,6 @@ package handlers
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -16,6 +15,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_updateHandler(t *testing.T) {
@@ -268,7 +268,7 @@ func TestGetOneHandlerByParams(t *testing.T) {
 			assert.NoError(t, err)
 			defer func() {
 				err = res.Body.Close()
-				fmt.Print(err)
+				require.NoError(t, err)
 			}()
 
 			assert.Equal(t, test.want.code, res.StatusCode)
@@ -422,7 +422,7 @@ func TestGetOneHandler(t *testing.T) {
 			assert.NoError(t, err)
 			defer func() {
 				err = res.Body.Close()
-				fmt.Print(err)
+				require.NoError(t, err)
 			}()
 			assert.Equal(t, test.want.code, res.StatusCode)
 
@@ -576,7 +576,7 @@ func TestUpdateHandlerByURLParams(t *testing.T) {
 						MType: m.mType,
 						Value: &val,
 					})
-					fmt.Print(err)
+					require.NoError(t, err)
 				case constants.Counter:
 					val := m.value.(int64)
 					err := metricsService.Update(storage.StorageInstance, &metrics.Metrics{
@@ -584,7 +584,7 @@ func TestUpdateHandlerByURLParams(t *testing.T) {
 						MType: m.mType,
 						Delta: &val,
 					})
-					fmt.Print(err)
+					require.NoError(t, err)
 				}
 			}
 
@@ -600,7 +600,7 @@ func TestUpdateHandlerByURLParams(t *testing.T) {
 			assert.NoError(t, err)
 			defer func() {
 				err = res.Body.Close()
-				fmt.Print(err)
+				require.NoError(t, err)
 			}()
 			assert.Equal(t, test.want.code, res.StatusCode)
 

@@ -3,7 +3,6 @@ package middleware
 import (
 	"bytes"
 	"compress/gzip"
-	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -17,7 +16,7 @@ import (
 func TestGzipHandle_NoCompression(t *testing.T) {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_, err := w.Write([]byte("test response"))
-		fmt.Print(err)
+		require.NoError(t, err)
 	})
 
 	gzipHandler := GzipHandle(handler)
@@ -32,14 +31,14 @@ func TestGzipHandle_NoCompression(t *testing.T) {
 	assert.Empty(t, resp.Header.Get("Content-Encoding"))
 
 	if err := resp.Body.Close(); err != nil {
-		fmt.Print(err)
+		require.NoError(t, err)
 	}
 }
 
 func TestGzipHandle_ResponseCompression(t *testing.T) {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_, err := w.Write([]byte("test response"))
-		fmt.Print(err)
+		require.NoError(t, err)
 	})
 
 	gzipHandler := GzipHandle(handler)
@@ -57,14 +56,14 @@ func TestGzipHandle_ResponseCompression(t *testing.T) {
 	require.NoError(t, err)
 	defer func() {
 		err = gzReader.Close()
-		fmt.Print(err)
+		require.NoError(t, err)
 	}()
 
 	body, err := io.ReadAll(gzReader)
 	require.NoError(t, err)
 	assert.Equal(t, "test response", string(body))
 	if err := resp.Body.Close(); err != nil {
-		fmt.Print(err)
+		require.NoError(t, err)
 	}
 }
 
@@ -73,7 +72,7 @@ func TestGzipHandle_RequestDecompression(t *testing.T) {
 		body, err := io.ReadAll(r.Body)
 		require.NoError(t, err)
 		_, err = w.Write(body)
-		fmt.Print(err)
+		require.NoError(t, err)
 	})
 
 	gzipHandler := GzipHandle(handler)
@@ -98,20 +97,20 @@ func TestGzipHandle_RequestDecompression(t *testing.T) {
 	require.NoError(t, err)
 	defer func() {
 		err = gzReader.Close()
-		fmt.Print(err)
+		require.NoError(t, err)
 	}()
 	body, err := io.ReadAll(gzReader)
 	require.NoError(t, err)
 	assert.Equal(t, "test request", string(body))
 	if err := resp.Body.Close(); err != nil {
-		fmt.Print(err)
+		require.NoError(t, err)
 	}
 }
 
 func TestGzipHandle_InvalidGzipRequest(t *testing.T) {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_, err := w.Write([]byte("should not be called"))
-		fmt.Print(err)
+		require.NoError(t, err)
 	})
 
 	gzipHandler := GzipHandle(handler)
@@ -125,7 +124,7 @@ func TestGzipHandle_InvalidGzipRequest(t *testing.T) {
 	resp := w.Result()
 	assert.Equal(t, http.StatusMethodNotAllowed, resp.StatusCode)
 	if err := resp.Body.Close(); err != nil {
-		fmt.Print(err)
+		require.NoError(t, err)
 	}
 }
 
@@ -134,7 +133,7 @@ func TestGzipWriter_Write(t *testing.T) {
 	gzWriter := gzip.NewWriter(&buf)
 	defer func() {
 		err := gzWriter.Close()
-		fmt.Print(err)
+		require.NoError(t, err)
 	}()
 	recorder := httptest.NewRecorder()
 	writer := gzipWriter{
@@ -152,7 +151,7 @@ func TestGzipWriter_Write(t *testing.T) {
 	require.NoError(t, err)
 	defer func() {
 		err = gzReader.Close()
-		fmt.Print(err)
+		require.NoError(t, err)
 	}()
 	body, err := io.ReadAll(gzReader)
 	require.NoError(t, err)

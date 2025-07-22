@@ -2,9 +2,10 @@ package buildinfo
 
 import (
 	"bytes"
-	"fmt"
 	"os"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestPrintBuildInfo(t *testing.T) {
@@ -27,14 +28,14 @@ func TestPrintBuildInfo(t *testing.T) {
 			version:      "",
 			date:         "",
 			commit:       "",
-			expectOutput: "Build version: undefined\nBuild date: undefined\nBuild commit: undefined\n",
+			expectOutput: "Build version: N/A\nBuild date: N/A\nBuild commit: N/A\n",
 		},
 		{
 			name:         "some fields empty",
 			version:      "v1.0.0",
 			date:         "",
 			commit:       "abc123",
-			expectOutput: "Build version: v1.0.0\nBuild date: undefined\nBuild commit: abc123\n",
+			expectOutput: "Build version: v1.0.0\nBuild date: N/A\nBuild commit: abc123\n",
 		},
 	}
 
@@ -48,7 +49,7 @@ func TestPrintBuildInfo(t *testing.T) {
 			old := os.Stdout
 			r, w, err := os.Pipe()
 			if err != nil {
-				fmt.Print(err)
+				require.NoError(t, err)
 			}
 			os.Stdout = w
 
@@ -56,14 +57,14 @@ func TestPrintBuildInfo(t *testing.T) {
 
 			err = w.Close()
 			if err != nil {
-				fmt.Print(err)
+				require.NoError(t, err)
 			}
 			os.Stdout = old
 
 			var buf bytes.Buffer
 			_, err = buf.ReadFrom(r)
 			if err != nil {
-				fmt.Print(err)
+				require.NoError(t, err)
 			}
 			output := buf.String()
 

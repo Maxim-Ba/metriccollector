@@ -1,11 +1,12 @@
 package profiler
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestNewProfiler_Disabled(t *testing.T) {
@@ -29,7 +30,7 @@ func TestNewProfiler_Enabled(t *testing.T) {
 	// Cleanup before test
 	err := os.RemoveAll("profiles")
 	if err != nil {
-		fmt.Print(err)
+		require.NoError(t, err)
 	}
 
 	p, err := New(true, cpuProfile, memProfile)
@@ -38,7 +39,7 @@ func TestNewProfiler_Enabled(t *testing.T) {
 	}
 	defer func() {
 		err = p.Close()
-		fmt.Print(err)
+		require.NoError(t, err)
 	}()
 
 	if !p.isOn {
@@ -66,7 +67,7 @@ func TestProfiler_StartStop(t *testing.T) {
 	// Cleanup before test
 	err := os.RemoveAll("profiles")
 	if err != nil {
-		fmt.Print(err)
+		require.NoError(t, err)
 	}
 	p, err := New(true, cpuProfile, memProfile)
 	if err != nil {
@@ -74,7 +75,7 @@ func TestProfiler_StartStop(t *testing.T) {
 	}
 	defer func() {
 		err = p.Close()
-		fmt.Print(err)
+		require.NoError(t, err)
 	}()
 	// Test Start
 	p.Start()

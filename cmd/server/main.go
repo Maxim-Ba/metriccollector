@@ -25,7 +25,7 @@ var (
 )
 
 func main() {
-	buildinfo.PrintBuildInfo(buildVersion,buildDate , buildCommit)
+	buildinfo.PrintBuildInfo(buildVersion, buildDate, buildCommit)
 	exit := make(chan os.Signal, 1)
 	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
 

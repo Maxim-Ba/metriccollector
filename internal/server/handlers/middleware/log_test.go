@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -59,11 +58,11 @@ func TestWithLogging_MultipleWrites(t *testing.T) {
 		w.WriteHeader(http.StatusOK)
 		_, err := w.Write([]byte("part1 "))
 		if err != nil {
-			fmt.Print(err)
+			require.NoError(t, err)
 		}
 		_, err = w.Write([]byte("part2"))
 		if err != nil {
-			fmt.Print(err)
+			require.NoError(t, err)
 		}
 	})
 

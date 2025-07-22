@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"os"
 	"testing"
 )
@@ -16,7 +15,7 @@ func TestParseEnv(t *testing.T) {
 		os.Clearenv()
 		for _, env := range oldEnv {
 			err := os.Setenv(env, "")
-			fmt.Print(err)
+			t.Fatalf("Failed to restore env: %v", err)
 		}
 	}()
 
@@ -37,7 +36,7 @@ func TestParseEnv(t *testing.T) {
 
 	for k, v := range testVars {
 		err := os.Setenv(k, v)
-		fmt.Print(err)
+		t.Fatalf("Failed to restore env: %v", err)
 	}
 
 	// Вызываем тестируемую функцию
@@ -89,7 +88,7 @@ func TestIsRestoreSet(t *testing.T) {
 		os.Clearenv()
 		for _, env := range oldEnv {
 			err := os.Setenv(env, "")
-			fmt.Print(err)
+			t.Fatalf("Failed to restore env: %v", err)
 		}
 	}()
 
@@ -107,7 +106,7 @@ func TestIsRestoreSet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.setValue != "" || tt.name == "set empty" {
 				err := os.Setenv("RESTORE", tt.setValue)
-				fmt.Print(err)
+				t.Fatalf("Failed to restore env: %v", err)
 			}
 
 			if got := isRestoreSet(); got != tt.want {
@@ -127,7 +126,7 @@ func TestIsIntervalSet(t *testing.T) {
 		os.Clearenv()
 		for _, env := range oldEnv {
 			err := os.Setenv(env, "")
-			fmt.Print(err)
+			t.Fatalf("Failed to restore env: %v", err)
 		}
 	}()
 
@@ -145,7 +144,7 @@ func TestIsIntervalSet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.setValue != "" || tt.name == "set empty" {
 				err := os.Setenv("STORE_INTERVAL", tt.setValue)
-				fmt.Print(err)
+				t.Fatalf("Failed to restore env: %v", err)
 			}
 
 			if got := isIntervalSet(); got != tt.want {
@@ -165,7 +164,7 @@ func TestIsMigrationsPathSet(t *testing.T) {
 		os.Clearenv()
 		for _, env := range oldEnv {
 			err := os.Setenv(env, "")
-			fmt.Print(err)
+			t.Fatalf("Failed to restore env: %v", err)
 		}
 	}()
 
@@ -183,7 +182,7 @@ func TestIsMigrationsPathSet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.setValue != "" || tt.name == "set empty" {
 				err := os.Setenv("MIGRATIONS_PATH", tt.setValue)
-				fmt.Print(err)
+				t.Fatalf("Failed to restore env: %v", err)
 			}
 
 			if got := isMigrationsPathSet(); got != tt.want {
@@ -204,7 +203,7 @@ func TestIsProfileOnSet(t *testing.T) {
 
 		for _, env := range oldEnv {
 			err := os.Setenv(env, "")
-			fmt.Print(err)
+			t.Fatalf("Failed to restore env: %v", err)
 		}
 	}()
 
@@ -222,7 +221,7 @@ func TestIsProfileOnSet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.setValue != "" || tt.name == "set empty" {
 				err := os.Setenv("IS_PROFILE_ON", tt.setValue)
-				fmt.Print(err)
+				t.Fatalf("Failed to restore env: %v", err)
 			}
 
 			if got := isProfileOnSet(); got != tt.want {

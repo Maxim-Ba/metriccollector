@@ -3,13 +3,13 @@ package middleware
 import (
 	"bytes"
 	"encoding/base64"
-	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/Maxim-Ba/metriccollector/internal/signature"
+	"github.com/stretchr/testify/require"
 )
 
 func TestSignatureHandle(t *testing.T) {
@@ -111,7 +111,7 @@ func TestSignatureHandle(t *testing.T) {
 				}
 				_, err = w.Write([]byte("test response"))
 				if err != nil {
-					fmt.Print(err)
+					require.NoError(t, err)
 				}
 			})
 
