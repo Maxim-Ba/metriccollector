@@ -2,7 +2,10 @@ package config
 
 import (
 	"os"
+	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestParseEnv(t *testing.T) {
@@ -14,8 +17,13 @@ func TestParseEnv(t *testing.T) {
 	defer func() {
 		os.Clearenv()
 		for _, env := range oldEnv {
-			err := os.Setenv(env, "")
-			t.Fatalf("Failed to restore env: %v", err)
+			keyVal := strings.SplitN(env, "=", 2)
+			if len(keyVal) != 2 {
+				continue
+			}
+			if err := os.Setenv(keyVal[0], keyVal[1]); err != nil {
+				t.Errorf("Failed to restore env %s: %v", keyVal[0], err)
+			}
 		}
 	}()
 
@@ -36,7 +44,9 @@ func TestParseEnv(t *testing.T) {
 
 	for k, v := range testVars {
 		err := os.Setenv(k, v)
-		t.Fatalf("Failed to restore env: %v", err)
+		if err != nil {
+			require.NoError(t, err)
+		}
 	}
 
 	// Вызываем тестируемую функцию
@@ -87,8 +97,13 @@ func TestIsRestoreSet(t *testing.T) {
 	defer func() {
 		os.Clearenv()
 		for _, env := range oldEnv {
-			err := os.Setenv(env, "")
-			t.Fatalf("Failed to restore env: %v", err)
+			keyVal := strings.SplitN(env, "=", 2)
+			if len(keyVal) != 2 {
+				continue
+			}
+			if err := os.Setenv(keyVal[0], keyVal[1]); err != nil {
+				t.Errorf("Failed to restore env %s: %v", keyVal[0], err)
+			}
 		}
 	}()
 
@@ -106,7 +121,9 @@ func TestIsRestoreSet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.setValue != "" || tt.name == "set empty" {
 				err := os.Setenv("RESTORE", tt.setValue)
-				t.Fatalf("Failed to restore env: %v", err)
+				if err != nil {
+					t.Fatalf("Failed to restore env: %v", err)
+				}
 			}
 
 			if got := isRestoreSet(); got != tt.want {
@@ -125,8 +142,13 @@ func TestIsIntervalSet(t *testing.T) {
 	defer func() {
 		os.Clearenv()
 		for _, env := range oldEnv {
-			err := os.Setenv(env, "")
-			t.Fatalf("Failed to restore env: %v", err)
+			keyVal := strings.SplitN(env, "=", 2)
+			if len(keyVal) != 2 {
+				continue
+			}
+			if err := os.Setenv(keyVal[0], keyVal[1]); err != nil {
+				t.Errorf("Failed to restore env %s: %v", keyVal[0], err)
+			}
 		}
 	}()
 
@@ -144,7 +166,9 @@ func TestIsIntervalSet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.setValue != "" || tt.name == "set empty" {
 				err := os.Setenv("STORE_INTERVAL", tt.setValue)
-				t.Fatalf("Failed to restore env: %v", err)
+				if err != nil {
+					t.Fatalf("Failed to restore env: %v", err)
+				}
 			}
 
 			if got := isIntervalSet(); got != tt.want {
@@ -163,8 +187,13 @@ func TestIsMigrationsPathSet(t *testing.T) {
 	defer func() {
 		os.Clearenv()
 		for _, env := range oldEnv {
-			err := os.Setenv(env, "")
-			t.Fatalf("Failed to restore env: %v", err)
+			keyVal := strings.SplitN(env, "=", 2)
+			if len(keyVal) != 2 {
+				continue
+			}
+			if err := os.Setenv(keyVal[0], keyVal[1]); err != nil {
+				t.Errorf("Failed to restore env %s: %v", keyVal[0], err)
+			}
 		}
 	}()
 
@@ -182,7 +211,9 @@ func TestIsMigrationsPathSet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.setValue != "" || tt.name == "set empty" {
 				err := os.Setenv("MIGRATIONS_PATH", tt.setValue)
-				t.Fatalf("Failed to restore env: %v", err)
+				if err != nil {
+					t.Fatalf("Failed to restore env: %v", err)
+				}
 			}
 
 			if got := isMigrationsPathSet(); got != tt.want {
@@ -202,8 +233,13 @@ func TestIsProfileOnSet(t *testing.T) {
 		os.Clearenv()
 
 		for _, env := range oldEnv {
-			err := os.Setenv(env, "")
-			t.Fatalf("Failed to restore env: %v", err)
+			keyVal := strings.SplitN(env, "=", 2)
+			if len(keyVal) != 2 {
+				continue
+			}
+			if err := os.Setenv(keyVal[0], keyVal[1]); err != nil {
+				t.Errorf("Failed to restore env %s: %v", keyVal[0], err)
+			}
 		}
 	}()
 
@@ -221,7 +257,9 @@ func TestIsProfileOnSet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.setValue != "" || tt.name == "set empty" {
 				err := os.Setenv("IS_PROFILE_ON", tt.setValue)
-				t.Fatalf("Failed to restore env: %v", err)
+				if err != nil {
+					t.Fatalf("Failed to restore env: %v", err)
+				}
 			}
 
 			if got := isProfileOnSet(); got != tt.want {

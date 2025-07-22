@@ -80,11 +80,11 @@ func TestGetAll(t *testing.T) {
 
 func TestGet(t *testing.T) {
 	tests := []struct {
-		name          string
-		params        []*metrics.MetricDTOParams
-		mockSetup     func(*MockStorage)
+		name           string
+		params         []*metrics.MetricDTOParams
+		mockSetup      func(*MockStorage)
 		expectedMetric *metrics.Metrics
-		expectedError error
+		expectedError  error
 	}{
 		{
 			name: "successful retrieval",

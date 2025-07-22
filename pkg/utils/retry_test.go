@@ -40,7 +40,7 @@ func TestContains(t *testing.T) {
 			name:      "Wrapped error",
 			errorList: []error{err1},
 			err:       errors.New("error1"), // Новая ошибка с тем же текстом
-			expected:  false, // Теперь ожидаем false, так как это разные экземпляры
+			expected:  false,                // Теперь ожидаем false, так как это разные экземпляры
 		},
 	}
 
@@ -129,4 +129,3 @@ func TestRetryWrapperMaxRetries(t *testing.T) {
 		t.Errorf("Expected 3 attempts, got %d", counter)
 	}
 }
-

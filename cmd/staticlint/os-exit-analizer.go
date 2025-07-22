@@ -17,18 +17,19 @@ import (
 // Usage: multichecker [-flag] [package]
 //
 // Example of a finding:
-//   func main() {
-//       os.Exit(1) // this will be reported
-//   }
-var OsExitAnalyzer  = &analysis.Analyzer{
+//
+//	func main() {
+//	    os.Exit(1) // this will be reported
+//	}
+var OsExitAnalyzer = &analysis.Analyzer{
 	Name: "osexit",
 	Doc:  "check for using os.Exit in main function",
 	Run:  run,
 }
 
 func run(pass *analysis.Pass) (interface{}, error) {
-	
-for _, file := range pass.Files {
+
+	for _, file := range pass.Files {
 		// Проверяем, что это пакет main
 		if pass.Pkg.Name() != "main" {
 			continue
@@ -69,6 +70,7 @@ for _, file := range pass.Files {
 
 	return nil, nil
 }
+
 // isOsExitCall  возвращает true, если это вызов os.Exit.
 func isOsExitCall(pass *analysis.Pass, call *ast.CallExpr) bool {
 	sel, ok := call.Fun.(*ast.SelectorExpr)
@@ -86,4 +88,4 @@ func isOsExitCall(pass *analysis.Pass, call *ast.CallExpr) bool {
 	}
 
 	return false
-} 
+}

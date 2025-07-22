@@ -156,5 +156,5 @@ func TestGzipWriter_Write(t *testing.T) {
 	body, err := io.ReadAll(gzReader)
 	require.NoError(t, err)
 	assert.Equal(t, "test data", string(body))
-	
+
 }

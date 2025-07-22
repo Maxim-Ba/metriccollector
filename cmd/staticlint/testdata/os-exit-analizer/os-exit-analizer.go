@@ -7,5 +7,5 @@ func main() {
 }
 
 func otherFunc() {
-	os.Exit(1) // want 
+	os.Exit(1) // want
 }

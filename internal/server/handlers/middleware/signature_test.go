@@ -35,8 +35,8 @@ func TestSignatureHandle(t *testing.T) {
 		expectStatus   int
 		expectResponse string
 		checkResponse  bool
-		setup func()
-		cleanup func()
+		setup          func()
+		cleanup        func()
 	}{
 		{
 			name:          "No signature header - pass through",
@@ -191,6 +191,5 @@ func TestHashResponseWriter(t *testing.T) {
 			t.Errorf("Expected hash header %q, got %q", expectedHashBase64, actualHash)
 		}
 	})
-
 
 }

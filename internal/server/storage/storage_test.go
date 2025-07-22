@@ -129,12 +129,12 @@ func TestSaveMetric(t *testing.T) {
 		metric *metrics.Metrics
 	}
 	tests := []struct {
-		name          string
-		args          args
-		wantGaugeVal  float64
+		name           string
+		args           args
+		wantGaugeVal   float64
 		wantCounterVal int64
-		wantErr       bool
-		preSetup      func(s *MemStorage)
+		wantErr        bool
+		preSetup       func(s *MemStorage)
 	}{
 		{
 			name: "save new gauge metric",
@@ -146,7 +146,7 @@ func TestSaveMetric(t *testing.T) {
 				},
 			},
 			wantGaugeVal: 123.45,
-			wantErr:     false,
+			wantErr:      false,
 		},
 		{
 			name: "update existing gauge metric",
@@ -161,7 +161,7 @@ func TestSaveMetric(t *testing.T) {
 				s.collectionGauge["existing_gauge"] = 100.0
 			},
 			wantGaugeVal: 200.0,
-			wantErr:     false,
+			wantErr:      false,
 		},
 		{
 			name: "save new counter metric",
@@ -173,7 +173,7 @@ func TestSaveMetric(t *testing.T) {
 				},
 			},
 			wantCounterVal: 10,
-			wantErr:       false,
+			wantErr:        false,
 		},
 		{
 			name: "increment existing counter metric",
@@ -188,7 +188,7 @@ func TestSaveMetric(t *testing.T) {
 				s.collectionCounter["existing_counter"] = 10
 			},
 			wantCounterVal: 15,
-			wantErr:       false,
+			wantErr:        false,
 		},
 		{
 			name: "invalid metric type",
@@ -211,7 +211,7 @@ func TestSaveMetric(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			s.ClearAll()
-			
+
 			if tt.preSetup != nil {
 				tt.preSetup(s)
 			}
@@ -243,12 +243,12 @@ func TestSaveMetrics(t *testing.T) {
 		metrics *[]metrics.Metrics
 	}
 	tests := []struct {
-		name           string
-		args           args
-		wantGaugeVals  map[string]float64
+		name            string
+		args            args
+		wantGaugeVals   map[string]float64
 		wantCounterVals map[string]int64
-		wantErr        bool
-		preSetup       func(s *MemStorage)
+		wantErr         bool
+		preSetup        func(s *MemStorage)
 	}{
 		{
 			name: "save multiple new metrics",
@@ -358,7 +358,7 @@ func TestSaveMetrics(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			s.ClearAll()
-			
+
 			if tt.preSetup != nil {
 				tt.preSetup(s)
 			}
@@ -409,7 +409,7 @@ func TestClearGaugeMetric(t *testing.T) {
 			want:   0,
 			wantOk: false,
 		},
-	
+
 		{
 			name: "clear gauge from empty storage",
 			args: args{
@@ -431,7 +431,7 @@ func TestClearGaugeMetric(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			s.ClearAll()
-			
+
 			if tt.preSetup != nil {
 				tt.preSetup(s)
 			}
@@ -455,7 +455,6 @@ func TestClearGaugeMetric(t *testing.T) {
 	}
 }
 
-
 func TestClearCounterMetric(t *testing.T) {
 	type args struct {
 		name string
@@ -478,7 +477,7 @@ func TestClearCounterMetric(t *testing.T) {
 			want:   0,
 			wantOk: false,
 		},
-		
+
 		{
 			name: "clear counter from empty storage",
 			args: args{
@@ -500,7 +499,7 @@ func TestClearCounterMetric(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			s.ClearAll()
-			
+
 			if tt.preSetup != nil {
 				tt.preSetup(s)
 			}
@@ -567,7 +566,7 @@ func TestClearAll(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			s.ClearAll() // Clear before setup to ensure clean state
-			
+
 			if tt.preSetup != nil {
 				tt.preSetup(s)
 			}

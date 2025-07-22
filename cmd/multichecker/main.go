@@ -32,7 +32,7 @@ func main() {
 		}
 	}
 
-	analyzers = append(analyzers,staticanalizer.StaticchecAnalyzers... )
+	analyzers = append(analyzers, staticanalizer.StaticchecAnalyzers...)
 
 	multichecker.Main(
 		analyzers...,
