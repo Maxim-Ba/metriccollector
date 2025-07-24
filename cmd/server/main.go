@@ -14,10 +14,18 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/server/router"
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
 	"github.com/Maxim-Ba/metriccollector/internal/signature"
+	"github.com/Maxim-Ba/metriccollector/pkg/buildinfo"
 	"github.com/Maxim-Ba/metriccollector/pkg/profiler"
 )
 
+var (
+	buildVersion string
+	buildDate    string
+	buildCommit  string
+)
+
 func main() {
+	buildinfo.PrintBuildInfo(buildVersion, buildDate, buildCommit)
 	exit := make(chan os.Signal, 1)
 	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
 
@@ -42,7 +50,7 @@ func main() {
 
 	go func() {
 		logger.LogInfo("Running server on ", parameters.Address)
-		if err := http.ListenAndServe(parameters.Address, mux); err != nil && err != http.ErrServerClosed {
+		if err = http.ListenAndServe(parameters.Address, mux); err != nil && err != http.ErrServerClosed {
 			logger.LogError("ListenAndServe: ", err)
 		}
 	}()
@@ -50,12 +58,14 @@ func main() {
 
 	logger.LogInfo("Shutting down server...")
 
-	if err := server.Shutdown(context.Background()); err != nil {
+	if err = server.Shutdown(context.Background()); err != nil {
 		logger.LogError("Server Shutdown: ", err)
 	}
 	logger.LogInfo("Server exiting")
 	// Явное закрытие ресурсов
-	p.Close()
+	err = p.Close()
+	logger.LogError(err)
+
 	storage.Close()
 	logger.Sync()
 }

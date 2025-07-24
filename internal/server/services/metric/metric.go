@@ -1,6 +1,8 @@
 package metric
 
 import (
+	"errors"
+
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"github.com/Maxim-Ba/metriccollector/internal/templates"
@@ -27,11 +29,13 @@ func GetAll(s Storage) (string, error) {
 
 // Get retrieves a specific metric from storage based on provided parameters.
 func Get(s Storage, metricsNames *[]*metrics.MetricDTOParams) (*metrics.Metrics, error) {
-
 	metricsSlice, err := s.GetMetrics(metricsNames)
 	if err != nil {
 		logger.LogInfo(err)
 		return nil, err
+	}
+	if len(*metricsSlice) == 0 {
+		return nil, errors.New("no metrics found")
 	}
 	metric := (*metricsSlice)[0]
 	return &metric, nil

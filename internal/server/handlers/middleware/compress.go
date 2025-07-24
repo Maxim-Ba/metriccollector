@@ -31,7 +31,7 @@ func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 		if err != nil {
 			logger.LogError(err)
 			res.WriteHeader(http.StatusMethodNotAllowed)
-			_, err := res.Write([]byte(""))
+			_, err = res.Write([]byte(""))
 			if err != nil {
 				return
 			}
@@ -47,7 +47,8 @@ func GzipHandle(next http.HandlerFunc) http.HandlerFunc {
 		res.Header().Set("Content-Encoding", "gzip")
 
 		// создаём gzip.Writer поверх текущего w
-		gz, err := gzip.NewWriterLevel(res, gzip.BestSpeed)
+		var gz *gzip.Writer
+		gz, err = gzip.NewWriterLevel(res, gzip.BestSpeed)
 		if err != nil {
 			logger.LogError(err)
 			return
@@ -74,7 +75,7 @@ func decodeGzip(r *http.Request) (*http.Request, error) {
 		return r, ErrWrongBodyEncoding
 	}
 	defer func() {
-		if err := gz.Close(); err != nil {
+		if err = gz.Close(); err != nil {
 			logger.LogError(err)
 		}
 	}()

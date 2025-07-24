@@ -37,7 +37,7 @@ func Get(src []byte) ([]byte, error) {
 	return dst, nil
 }
 
-func Check(dst []byte, bodySrc []byte) (error) {
+func Check(dst []byte, bodySrc []byte) error {
 	if len(signature.Key) == 0 {
 		return ErrKeyIsNotDefined
 	}

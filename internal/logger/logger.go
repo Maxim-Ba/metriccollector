@@ -8,7 +8,7 @@ import (
 	"go.uber.org/zap"
 )
 
-var sugar zap.SugaredLogger
+var Sugar zap.SugaredLogger
 var atomicLevel = zap.NewAtomicLevel()
 
 func init() {
@@ -25,12 +25,12 @@ func init() {
 	}
 
 	// делаем регистратор SugaredLogger
-	sugar = *logger.Sugar()
+	Sugar = *logger.Sugar()
 	LogInfo("logger is initialized")
 }
 func Sync() {
-	if err := sugar.Sync(); err != nil {
-		sugar.Error(err)
+	if err := Sugar.Sync(); err != nil {
+		Sugar.Error(err)
 	}
 }
 func SetLogLevel(level string) {
@@ -45,10 +45,10 @@ func SetLogLevel(level string) {
 	}
 }
 func LogInfo(params ...interface{}) {
-	sugar.Info(params...)
+	Sugar.Info(params...)
 }
 func LogError(params ...interface{}) {
-	sugar.Error(params...)
+	Sugar.Error(params...)
 }
 func LogMetric(m metrics.Metrics) {
 	var Value float64
@@ -59,7 +59,7 @@ func LogMetric(m metrics.Metrics) {
 	if m.Delta != nil {
 		Delta = *m.Delta
 	}
-	sugar.Infoln(
+	Sugar.Infoln(
 		"MType", m.MType,
 		"ID", m.ID,
 		"Value", Value,
@@ -69,7 +69,7 @@ func LogMetric(m metrics.Metrics) {
 
 func LogResponse(r *http.Request, duration time.Duration, status, size int) {
 
-	sugar.Infoln(
+	Sugar.Infoln(
 		"uri", r.RequestURI,
 		"method", r.Method,
 		"status", status, // получаем перехваченный код статуса ответа

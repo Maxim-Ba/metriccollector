@@ -95,9 +95,9 @@ func Close() {
 // Returns:
 //   - error: if metric type is invalid
 func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
-
 	if m.MType == constants.Gauge {
 		StorageInstance.collectionGauge[m.ID] = *m.Value
+		return nil
 	}
 	if m.MType == constants.Counter {
 		metricValue := int64(*m.Delta)
@@ -106,8 +106,9 @@ func (s MemStorage) SaveMetric(m *metrics.Metrics) error {
 		} else {
 			StorageInstance.collectionCounter[m.ID] = metricValue
 		}
+		return nil
 	}
-	return nil
+	return ErrUnknownMetricType
 }
 
 // SaveMetrics persists multiple metrics to memory storage in batch.
@@ -140,7 +141,6 @@ func (s MemStorage) SaveMetrics(metricsSlice *[]metrics.Metrics) error {
 //   - *[]metrics.Metrics: Retrieved metrics
 //   - error: if no metrics found (with specific params)
 func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]metrics.Metrics, error) {
-
 	metricsNames := make([]string, len(*metricsParams))
 	metricsTypes := make([]string, len(*metricsParams))
 	for i, m := range *metricsParams {
@@ -159,7 +159,7 @@ func (s MemStorage) GetMetrics(metricsParams *[]*metrics.MetricDTOParams) (*[]me
 		return &metricsSlice, nil
 	}
 
-	//Get choosen metrics
+	// Get choosen metrics
 	for _, metric := range *metricsParams {
 		if metric.MetricType == constants.Gauge {
 			if value, ok := StorageInstance.collectionGauge[metric.MetricsName]; ok {

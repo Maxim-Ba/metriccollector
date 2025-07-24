@@ -13,10 +13,18 @@ import (
 	metricGenerator "github.com/Maxim-Ba/metriccollector/internal/agent/generator"
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/signature"
+	"github.com/Maxim-Ba/metriccollector/pkg/buildinfo"
 	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
+var (
+	buildVersion string
+	buildDate    string
+	buildCommit  string
+)
+
 func main() {
+	buildinfo.PrintBuildInfo(buildVersion, buildDate, buildCommit)
 
 	exit := make(chan os.Signal, 1)
 	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)

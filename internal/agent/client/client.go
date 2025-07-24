@@ -55,13 +55,15 @@ func (c *HTTPClient) SendMetrics(metrics []*metrics.Metrics) error {
 		if err != nil {
 			logger.LogError(err)
 		}
-		req, err := http.NewRequest("POST", path, &compressedBody)
+		var req *http.Request
+		req, err = http.NewRequest("POST", path, &compressedBody)
 		if err != nil {
 			logger.LogError(err)
 			return nil
 		}
 		if signature.GetKey() != "" {
-			hash, err := signature.Get(body)
+			var hash []byte
+			hash, err = signature.Get(body)
 			if err != nil {
 				logger.LogError(err)
 				return err
@@ -116,14 +118,15 @@ func (c *HTTPClient) SendMetricsWithBatch(metrics []*metrics.Metrics) error {
 	if err != nil {
 		logger.LogError(err)
 	}
-	req, err := http.NewRequest("POST", path, &compressedBody)
-
+	var req *http.Request
+	req, err = http.NewRequest("POST", path, &compressedBody)
 	if err != nil {
 		logger.LogError(err)
 		return nil
 	}
 	if signature.GetKey() != "" {
-		hash, err := signature.Get(body)
+		var hash []byte
+		hash, err = signature.Get(body)
 		if err != nil {
 			logger.LogError(err)
 			return err

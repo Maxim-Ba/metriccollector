@@ -1,6 +1,7 @@
 package profiler
 
 import (
+	"fmt"
 	_ "net/http/pprof"
 	"os"
 	"runtime"
@@ -11,39 +12,46 @@ import (
 type Profiler struct {
 	fileCPU *os.File
 	fileMem *os.File
-	isOn bool
+	isOn    bool
 }
 
-func New( isOn bool , cpuProfile, memProfile string) (*Profiler , error){
+func New(isOn bool, cpuProfile, memProfile string) (*Profiler, error) {
 	if !isOn {
-		return   &Profiler{
-		isOn: isOn,
-	}, nil
+		return &Profiler{
+			isOn: isOn,
+		}, nil
 	}
 	if err := os.MkdirAll("profiles", 0o755); err != nil {
-		return  nil , err
+		return nil, err
 	}
 	// создаём файл журнала профилирования cpu
 	fcpu, err := os.Create(`profiles/` + cpuProfile)
 	if err != nil {
-		return  nil , err
+		return nil, err
 	}
 	fmem, err := os.Create(`profiles/` + memProfile)
 	if err != nil {
-		return  nil , err
+		return nil, err
 	}
 	return &Profiler{
 		fileCPU: fcpu,
 		fileMem: fmem,
+		isOn:    isOn,
 	}, nil
 }
 
-func (p *Profiler) Close() {
+func (p *Profiler) Close() error {
 	if !p.isOn {
-		return
+		return nil
 	}
-	p.fileCPU.Close()
-	p.fileMem.Close()
+	if err := p.fileCPU.Close(); err != nil {
+		return fmt.Errorf("error in Profiler Close - fileCPU.Close: %v", err)
+	}
+
+	if err := p.fileMem.Close(); err != nil {
+		return fmt.Errorf("error in Profiler Close - fileMem.Close: %v", err)
+	}
+	return nil
 }
 
 func (p *Profiler) Start() {
