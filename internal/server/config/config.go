@@ -12,6 +12,7 @@ type Parameters struct {
 	ProfileFileCPU      string
 	ProfileFileMem      string
 	IsProfileOn         bool
+	CryptoKeyPath       string
 }
 
 func New() Parameters {
@@ -28,6 +29,7 @@ func New() Parameters {
 	profileFileMem := envConfig.ProfileFileMem
 	isProfileOn := envConfig.IsProfileOn
 	key := envConfig.Key
+	cryptoKeyPath := envConfig.CryptoKeyPath
 	if address == "" {
 		address = flags.FlagRunAddr
 	}
@@ -59,6 +61,10 @@ func New() Parameters {
 		profileFileMem = flags.ProfileFileMem
 	}
 
+	if cryptoKeyPath == "" {
+		cryptoKeyPath = flags.CryptoKeyPath
+	}
+
 	if !isProfileOnSet() {
 		isProfileOn = flags.IsProfileOn
 	}
@@ -74,5 +80,6 @@ func New() Parameters {
 		ProfileFileCPU:      profileFileCPU,
 		ProfileFileMem:      profileFileMem,
 		IsProfileOn:         isProfileOn,
+		CryptoKeyPath:       cryptoKeyPath,
 	}
 }

@@ -12,17 +12,21 @@ type ParsedFlags struct {
 	FlagReportInterval int
 	FlagPollInterval   int
 	// debug info warn error
-	LogLevel  string
-	Key       string
-	RateLimit int
+	LogLevel      string
+	Key           string
+	RateLimit     int
+	CryptoKeyPath string
 }
 
-var flagRunAddr string
-var flagReportInterval int
-var flagPollInterval int
-var LogLevel string
-var Key string
-var rateLimit int
+var (
+	flagRunAddr        string
+	flagReportInterval int
+	flagPollInterval   int
+	LogLevel           string
+	Key                string
+	rateLimit          int
+	cryptoKey          string
+)
 
 // parseFlags обрабатывает аргументы командной строки
 // и сохраняет их значения в соответствующих переменных
@@ -33,6 +37,7 @@ func ParseFlags() *ParsedFlags {
 	flag.StringVar(&LogLevel, "ll", "debug", "log level: debug info warn error")
 	flag.StringVar(&Key, "k", "", "private key for signature")
 	flag.IntVar(&rateLimit, "l", 10, "simultaneously get metrics")
+	flag.StringVar(&cryptoKey, "crypto-key", "", "path for public key for signature")
 
 	// парсим переданные серверу аргументы в зарегистрированные переменные
 	flag.Parse()
@@ -60,5 +65,6 @@ func ParseFlags() *ParsedFlags {
 		LogLevel:           LogLevel,
 		Key:                Key,
 		RateLimit:          rateLimit,
+		CryptoKeyPath:      cryptoKey,
 	}
 }

@@ -7,6 +7,7 @@ type Parameters struct {
 	LogLevel       string
 	Key            string
 	RateLimit      int
+	CryptoKeyPath  string
 }
 
 func New() Parameters {
@@ -18,6 +19,7 @@ func New() Parameters {
 	logLevel := envConfig.LogLevel
 	key := envConfig.Key
 	rateLimit := envConfig.RateLimit
+	cryptoKeyPath := envConfig.CryptoKeyPath
 
 	if address == "" {
 		address = flags.FlagRunAddr
@@ -34,6 +36,9 @@ func New() Parameters {
 	if key == "" {
 		key = flags.Key
 	}
+	if cryptoKeyPath == "" {
+		cryptoKeyPath = flags.CryptoKeyPath
+	}
 	if rateLimit == 0 {
 		rateLimit = flags.RateLimit
 	}
@@ -44,5 +49,6 @@ func New() Parameters {
 		LogLevel:       logLevel,
 		Key:            key,
 		RateLimit:      rateLimit,
+		CryptoKeyPath:  cryptoKeyPath,
 	}
 }
