@@ -35,7 +35,7 @@ func main() {
 		logger.LogError("Profiler error ", err)
 	}
 	p.Start()
-	signature.New(parameters.Key)
+	signature.New(parameters.Key, parameters.CryptoKeyPath)
 	logger.SetLogLevel(parameters.LogLevel)
 
 	_, err = storage.New(parameters)

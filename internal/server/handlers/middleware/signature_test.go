@@ -15,10 +15,10 @@ import (
 func TestSignatureHandle(t *testing.T) {
 	originalKey := signature.GetKey()
 	defer func() {
-		signature.New(originalKey)
+		signature.New(originalKey, "")
 	}()
 
-	signature.New("test-key")
+	signature.New("test-key", "")
 
 	// Генерируем валидную подпись для тестовых данных
 	validData := []byte("test data")
@@ -81,10 +81,10 @@ func TestSignatureHandle(t *testing.T) {
 			expectStatus:   http.StatusOK,
 			expectResponse: "test response",
 			setup: func() {
-				signature.New("") // очищаем ключ
+				signature.New("", "") // очищаем ключ
 			},
 			cleanup: func() {
-				signature.New("test-key") // восстанавливаем ключ
+				signature.New("test-key", "") // восстанавливаем ключ
 			},
 		},
 	}
@@ -150,9 +150,9 @@ func TestSignatureHandle(t *testing.T) {
 func TestHashResponseWriter(t *testing.T) {
 	originalKey := signature.GetKey()
 	defer func() {
-		signature.New(originalKey)
+		signature.New(originalKey, "")
 	}()
-	signature.New("test-key")
+	signature.New("test-key", "")
 
 	t.Run("With key set - should add signature header", func(t *testing.T) {
 		rr := httptest.NewRecorder()

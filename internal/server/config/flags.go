@@ -17,6 +17,7 @@ type ParsedFlags struct {
 	ProfileFileCPU string
 	ProfileFileMem string
 	IsProfileOn    bool
+	CryptoKeyPath  string
 }
 
 var (
@@ -31,6 +32,7 @@ var (
 	ProfileFileCPU          string
 	ProfileFileMem          string
 	IsProfileOn             bool
+	cryptoKey               string
 )
 
 // parseFlags обрабатывает аргументы командной строки
@@ -49,6 +51,7 @@ func ParseFlags() *ParsedFlags {
 	flag.StringVar(&ProfileFileCPU, "cpu", "", "CPU file profile")
 	flag.BoolVar(&IsProfileOn, "p", false, "Is profile is switch on")
 	flag.StringVar(&Key, "k", "", "private key for signature")
+	flag.StringVar(&cryptoKey, "crypto-key", "", "path for public key for signature")
 
 	// парсим переданные серверу аргументы в зарегистрированные переменные
 	flag.Parse()
@@ -64,5 +67,6 @@ func ParseFlags() *ParsedFlags {
 		ProfileFileCPU:          ProfileFileCPU,
 		ProfileFileMem:          ProfileFileMem,
 		IsProfileOn:             IsProfileOn,
+		CryptoKeyPath:           cryptoKey,
 	}
 }

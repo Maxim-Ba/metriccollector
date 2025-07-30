@@ -8,7 +8,7 @@ import (
 
 func TestNew(t *testing.T) {
 	key := "test-key"
-	sig := New(key)
+	sig := New(key, "")
 
 	if string(sig.Key) != key {
 		t.Errorf("Expected key %q, got %q", key, string(sig.Key))
@@ -32,7 +32,7 @@ func TestGetKey(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			New(tt.key)
+			New(tt.key, "")
 			got := GetKey()
 			if got != tt.expected {
 				t.Errorf("Expected key %q, got %q", tt.expected, got)
@@ -48,7 +48,7 @@ func TestGet(t *testing.T) {
 	expectedHash := computeHMAC(data, key)
 
 	t.Run("With key", func(t *testing.T) {
-		New(key)
+		New(key, "")
 		got, err := Get(data)
 		if err != nil {
 			t.Fatalf("Unexpected error: %v", err)
@@ -60,7 +60,7 @@ func TestGet(t *testing.T) {
 	})
 
 	t.Run("Without key", func(t *testing.T) {
-		New("") // Сбрасываем ключ
+		New("", "") // Сбрасываем ключ
 		_, err := Get(data)
 		if err != ErrKeyIsNotDefined {
 			t.Errorf("Expected error %v, got %v", ErrKeyIsNotDefined, err)
@@ -88,7 +88,7 @@ func TestCheck(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			New(tt.key)
+			New(tt.key, "")
 			err := Check(tt.signature, tt.data)
 
 			if err != tt.expectedErr {

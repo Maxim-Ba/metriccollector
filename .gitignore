@@ -34,3 +34,5 @@ store.json
 
 logs.log
 metrics.db
+
+*.pem

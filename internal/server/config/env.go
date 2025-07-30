@@ -19,6 +19,7 @@ type Config struct {
 	ProfileFileCPU      string `env:"CPU_FILE"`
 	ProfileFileMem      string `env:"MEM_FILE"`
 	IsProfileOn         bool   `env:"IS_PROFILE_ON"`
+	CryptoKeyPath       string `env:"CRYPTO_KEY"`
 }
 
 func ParseEnv() *Config {
@@ -44,6 +45,7 @@ func isMigrationsPathSet() bool {
 	_, isSet := os.LookupEnv("MIGRATIONS_PATH")
 	return isSet
 }
+
 func isProfileOnSet() bool {
 	_, isSet := os.LookupEnv("IS_PROFILE_ON")
 	return isSet
