@@ -7,39 +7,35 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 )
 
-type ParsedFlags struct {
-	FlagRunAddr        string
-	FlagReportInterval int
-	FlagPollInterval   int
-	// debug info warn error
-	LogLevel      string
-	Key           string
-	RateLimit     int
-	CryptoKeyPath string
+type FlagValue[T any] struct {
+	Passed bool // был ли флаг передан
+	Value  T    // текущее значение
 }
 
-var (
-	flagRunAddr        string
-	flagReportInterval int
-	flagPollInterval   int
-	LogLevel           string
-	Key                string
-	rateLimit          int
-	cryptoKey          string
-)
+type ParsedFlags struct {
+	FlagRunAddr        FlagValue[string]
+	FlagReportInterval FlagValue[int]
+	FlagPollInterval   FlagValue[int]
+	// debug info warn error
+	LogLevel      FlagValue[string]
+	Key           FlagValue[string]
+	RateLimit     FlagValue[int]
+	CryptoKeyPath FlagValue[string]
+	ConfigPath    FlagValue[string]
+}
 
-// parseFlags обрабатывает аргументы командной строки
-// и сохраняет их значения в соответствующих переменных
 func ParseFlags() *ParsedFlags {
-	flag.StringVar(&flagRunAddr, "a", "localhost:8080", "address and port to run server")
-	flag.IntVar(&flagReportInterval, "r", 10, "seconds interval to send report")
-	flag.IntVar(&flagPollInterval, "p", 2, "seconds interval to collect metrics")
-	flag.StringVar(&LogLevel, "ll", "debug", "log level: debug info warn error")
-	flag.StringVar(&Key, "k", "", "private key for signature")
-	flag.IntVar(&rateLimit, "l", 10, "simultaneously get metrics")
-	flag.StringVar(&cryptoKey, "crypto-key", "", "path for public key for signature")
+	flags := &ParsedFlags{}
 
-	// парсим переданные серверу аргументы в зарегистрированные переменные
+	flag.StringVar(&flags.FlagRunAddr.Value, "a", "localhost:8080", "address and port to run server")
+	flag.IntVar(&flags.FlagReportInterval.Value, "r", 10, "seconds interval to send report")
+	flag.IntVar(&flags.FlagPollInterval.Value, "p", 2, "seconds interval to collect metrics")
+	flag.StringVar(&flags.LogLevel.Value, "ll", "debug", "log level: debug info warn error")
+	flag.StringVar(&flags.Key.Value, "k", "", "private key for signature")
+	flag.IntVar(&flags.RateLimit.Value, "l", 10, "simultaneously get metrics")
+	flag.StringVar(&flags.CryptoKeyPath.Value, "crypto-key", "", "path for public key for signature")
+	flag.StringVar(&flags.ConfigPath.Value, "c", "", "path for configuration by json")
+
 	flag.Parse()
 
 	flag.Usage = func() {
@@ -47,7 +43,6 @@ func ParseFlags() *ParsedFlags {
 		flag.PrintDefaults()
 	}
 
-	// Parse the flags
 	flag.Parse()
 
 	// Check for unknown flags
@@ -58,13 +53,36 @@ func ParseFlags() *ParsedFlags {
 			os.Exit(1)
 		}
 	}
-	return &ParsedFlags{
-		FlagRunAddr:        flagRunAddr,
-		FlagReportInterval: flagReportInterval,
-		FlagPollInterval:   flagPollInterval,
-		LogLevel:           LogLevel,
-		Key:                Key,
-		RateLimit:          rateLimit,
-		CryptoKeyPath:      cryptoKey,
-	}
+
+	flag.Visit(func(f *flag.Flag) {
+		switch f.Name {
+		case "a":
+			flags.FlagRunAddr.Passed = true
+		case "r":
+			flags.FlagReportInterval.Passed = true
+		case "p":
+			flags.FlagPollInterval.Passed = true
+		case "ll":
+			flags.LogLevel.Passed = true
+		case "k":
+			flags.Key.Passed = true
+		case "l":
+			flags.RateLimit.Passed = true
+		case "crypto-key":
+			flags.CryptoKeyPath.Passed = true
+		case "c":
+			flags.ConfigPath.Passed = true
+		}
+	})
+	return flags
+}
+
+func isFlagPassed(name string) bool {
+	found := false
+	flag.Visit(func(f *flag.Flag) {
+		if f.Name == name {
+			found = true
+		}
+	})
+	return found
 }

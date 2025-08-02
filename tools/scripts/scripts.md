@@ -3,6 +3,8 @@ gofmt -l .
 gofmt -w .
 
 
+./cmd/multichecker/multichecker ./...
+
 
 //---- генерация ключей 
 

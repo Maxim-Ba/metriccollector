@@ -32,7 +32,7 @@ func main() {
 	parameters := config.New()
 	logger.SetLogLevel(parameters.LogLevel)
 	signature.New(parameters.Key, parameters.CryptoKeyPath)
-	httpClient := client.NewClient(parameters.Addres)
+	httpClient := client.NewClient(parameters.Address)
 	reportIntervalStart := time.Now()
 	go func() {
 

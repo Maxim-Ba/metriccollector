@@ -1,54 +1,91 @@
 package config
 
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
 type Parameters struct {
-	Addres         string
-	ReportInterval int
-	PollInterval   int
-	LogLevel       string
-	Key            string
-	RateLimit      int
-	CryptoKeyPath  string
+	Address        string `json:"address"`
+	ReportInterval int    `json:"report_interval"`
+	PollInterval   int    `json:"poll_interval"`
+	LogLevel       string `json:"log_level"`
+	Key            string `json:"key"`
+	RateLimit      int    `json:"rate_limit"`
+	CryptoKeyPath  string `json:"crypto_key"`
 }
 
 func New() Parameters {
 	flags := ParseFlags()
 	envConfig := ParseEnv()
-	address := envConfig.Address
-	pollInterval := envConfig.PollInterval
-	reportInterval := envConfig.ReportInterval
-	logLevel := envConfig.LogLevel
-	key := envConfig.Key
-	rateLimit := envConfig.RateLimit
-	cryptoKeyPath := envConfig.CryptoKeyPath
+	fileConfig := getParamsByConfigPath(resolveString(envConfig.ConfigPath, flags.ConfigPath, ""))
+	parameters := Parameters{
+		Address:        resolveString(envConfig.Address, flags.FlagRunAddr, fileConfig.Address),
+		ReportInterval: resolveInt(envConfig.ReportInterval, flags.FlagReportInterval, fileConfig.ReportInterval),
+		LogLevel:       resolveString(envConfig.LogLevel, flags.LogLevel, fileConfig.LogLevel),
+		PollInterval:   resolveInt(envConfig.PollInterval, flags.FlagPollInterval, fileConfig.PollInterval),
+		RateLimit:      resolveInt(envConfig.RateLimit, flags.RateLimit, fileConfig.RateLimit),
+		Key:            resolveString(envConfig.Key, flags.Key, fileConfig.Key),
 
-	if address == "" {
-		address = flags.FlagRunAddr
+		CryptoKeyPath: resolveString(envConfig.CryptoKeyPath, flags.CryptoKeyPath, fileConfig.CryptoKeyPath),
 	}
-	if pollInterval == 0 {
-		pollInterval = flags.FlagPollInterval
+	return parameters
+}
+
+func getParamsByConfigPath(configPath string) Parameters {
+	var parameters Parameters
+	if configPath == "" {
+		return parameters
 	}
-	if reportInterval == 0 {
-		reportInterval = flags.FlagReportInterval
+	data, err := os.ReadFile(configPath)
+	if err != nil {
+		fmt.Printf("%v", fmt.Errorf("read config path file: %v", err))
+		return parameters
 	}
-	if logLevel == "" {
-		logLevel = flags.LogLevel
+	err = json.Unmarshal(data, &parameters)
+	if err != nil {
+		fmt.Printf("%v", fmt.Errorf("unmarshal params: %v", err))
+		return parameters
 	}
-	if key == "" {
-		key = flags.Key
+	return parameters
+}
+
+func resolveString(envValue string, flag FlagValue[string], fileValue string) string {
+	if envValue != "" {
+		return envValue
 	}
-	if cryptoKeyPath == "" {
-		cryptoKeyPath = flags.CryptoKeyPath
+	if flag.Passed {
+		return flag.Value
 	}
-	if rateLimit == 0 {
-		rateLimit = flags.RateLimit
+	if fileValue != "" {
+		return fileValue
 	}
-	return Parameters{
-		Addres:         address,
-		ReportInterval: reportInterval,
-		PollInterval:   pollInterval,
-		LogLevel:       logLevel,
-		Key:            key,
-		RateLimit:      rateLimit,
-		CryptoKeyPath:  cryptoKeyPath,
+	return flag.Value
+}
+
+func resolveInt(envValue int, flag FlagValue[int], fileValue int) int {
+	if envValue != 0 {
+		return envValue
 	}
+	if flag.Passed {
+		return flag.Value
+	}
+	if fileValue != 0 {
+		return fileValue
+	}
+	return flag.Value
+}
+
+func resolveBool(isEnvSet bool, envValue bool, flag FlagValue[bool], fileValue bool) bool {
+	if isEnvSet {
+		return envValue
+	}
+	if flag.Passed {
+		return flag.Value
+	}
+	if fileValue {
+		return fileValue
+	}
+	return flag.Value
 }

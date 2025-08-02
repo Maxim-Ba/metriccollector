@@ -21,17 +21,19 @@ func TestParseFlags(t *testing.T) {
 			name: "default values",
 			args: []string{"test"},
 			expected: ParsedFlags{
-				FlagRunAddr:             ":8080",
-				FlagStoreIntervalSecond: 300,
-				FlagStoragePath:         "./store.json",
-				FlagRestore:             true,
-				LogLevel:                "debug",
-				DatabaseDSN:             "",
-				MigrationsPath:          "migrations",
-				Key:                     "",
-				ProfileFileCPU:          "",
-				ProfileFileMem:          "",
-				IsProfileOn:             false,
+				RunAddr:             FlagValue[string]{Value: ":8080"},
+				StoreIntervalSecond: FlagValue[int]{Value: 300},
+				StoragePath:         FlagValue[string]{Value: "./store.json"},
+				Restore:             FlagValue[bool]{Value: true},
+				LogLevel:            FlagValue[string]{Value: "debug"},
+				DatabaseDSN:         FlagValue[string]{Value: ""},
+				MigrationsPath:      FlagValue[string]{Value: "migrations"},
+				Key:                 FlagValue[string]{Value: ""},
+				ProfileFileCPU:      FlagValue[string]{Value: ""},
+				ProfileFileMem:      FlagValue[string]{Value: ""},
+				IsProfileOn:         FlagValue[bool]{Value: false},
+				CryptoKeyPath:       FlagValue[string]{Value: ""},
+				ConfigPath:          FlagValue[string]{Value: ""},
 			},
 		},
 		{
@@ -49,19 +51,23 @@ func TestParseFlags(t *testing.T) {
 				"-cpu", "cpu.prof",
 				"-mem", "mem.prof",
 				"-p=true",
+				"-crypto-key", "/path/to/key",
+				"-c", "/path/to/config",
 			},
 			expected: ParsedFlags{
-				FlagRunAddr:             ":9090",
-				FlagStoreIntervalSecond: 60,
-				FlagStoragePath:         "/tmp/store.json",
-				FlagRestore:             false,
-				LogLevel:                "info",
-				DatabaseDSN:             "postgres://user:pass@localhost:5432/db",
-				MigrationsPath:          "custom_migrations",
-				Key:                     "secret_key",
-				ProfileFileCPU:          "cpu.prof",
-				ProfileFileMem:          "mem.prof",
-				IsProfileOn:             true,
+				RunAddr:             FlagValue[string]{Passed: true, Value: ":9090"},
+				StoreIntervalSecond: FlagValue[int]{Passed: true, Value: 60},
+				StoragePath:         FlagValue[string]{Passed: true, Value: "/tmp/store.json"},
+				Restore:             FlagValue[bool]{Passed: true, Value: false},
+				LogLevel:            FlagValue[string]{Passed: true, Value: "info"},
+				DatabaseDSN:         FlagValue[string]{Passed: true, Value: "postgres://user:pass@localhost:5432/db"},
+				MigrationsPath:      FlagValue[string]{Passed: true, Value: "custom_migrations"},
+				Key:                 FlagValue[string]{Passed: true, Value: "secret_key"},
+				ProfileFileCPU:      FlagValue[string]{Passed: true, Value: "cpu.prof"},
+				ProfileFileMem:      FlagValue[string]{Passed: true, Value: "mem.prof"},
+				IsProfileOn:         FlagValue[bool]{Passed: true, Value: true},
+				CryptoKeyPath:       FlagValue[string]{Passed: true, Value: "/path/to/key"},
+				ConfigPath:          FlagValue[string]{Passed: true, Value: "/path/to/config"},
 			},
 		},
 		{
@@ -73,17 +79,19 @@ func TestParseFlags(t *testing.T) {
 				"-r=false",
 			},
 			expected: ParsedFlags{
-				FlagRunAddr:             ":9090",
-				FlagStoreIntervalSecond: 60,
-				FlagStoragePath:         "./store.json",
-				FlagRestore:             false,
-				LogLevel:                "debug",
-				DatabaseDSN:             "",
-				MigrationsPath:          "migrations",
-				Key:                     "",
-				ProfileFileCPU:          "",
-				ProfileFileMem:          "",
-				IsProfileOn:             false,
+				RunAddr:             FlagValue[string]{Passed: true, Value: ":9090"},
+				StoreIntervalSecond: FlagValue[int]{Passed: true, Value: 60},
+				StoragePath:         FlagValue[string]{Value: "./store.json"},
+				Restore:             FlagValue[bool]{Passed: true, Value: false},
+				LogLevel:            FlagValue[string]{Value: "debug"},
+				DatabaseDSN:         FlagValue[string]{Value: ""},
+				MigrationsPath:      FlagValue[string]{Value: "migrations"},
+				Key:                 FlagValue[string]{Value: ""},
+				ProfileFileCPU:      FlagValue[string]{Value: ""},
+				ProfileFileMem:      FlagValue[string]{Value: ""},
+				IsProfileOn:         FlagValue[bool]{Value: false},
+				CryptoKeyPath:       FlagValue[string]{Value: ""},
+				ConfigPath:          FlagValue[string]{Value: ""},
 			},
 		},
 	}
@@ -105,65 +113,51 @@ func TestParseFlags(t *testing.T) {
 	}
 }
 
-func TestParseFlags_GlobalVars(t *testing.T) {
+func Test_isFlagPassed(t *testing.T) {
 	// Сохраняем оригинальные аргументы командной строки и флаги
 	oldArgs := os.Args
 	defer func() { os.Args = oldArgs }()
 
-	// Устанавливаем тестовые аргументы
-	os.Args = []string{
-		"test",
-		"-a", ":9090",
-		"-i", "60",
-		"-f", "/tmp/store.json",
-		"-r=false",
-		"-l", "info",
-		"-d", "postgres://user:pass@localhost:5432/db",
-		"-m", "custom_migrations",
-		"-k", "secret_key",
-		"-cpu", "cpu.prof",
-		"-mem", "mem.prof",
-		"-p=true",
+	tests := []struct {
+		name     string
+		args     []string
+		flagName string
+		want     bool
+	}{
+		{
+			name:     "flag passed",
+			args:     []string{"test", "-a", ":9090"},
+			flagName: "a",
+			want:     true,
+		},
+		{
+			name:     "flag not passed",
+			args:     []string{"test"},
+			flagName: "a",
+			want:     false,
+		},
 	}
 
-	// Сбрасываем флаги перед тестом
-	flag.CommandLine = flag.NewFlagSet(os.Args[0], flag.ContinueOnError)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// Сбрасываем флаги перед каждым тестом
+			flag.CommandLine = flag.NewFlagSet(tt.args[0], flag.ContinueOnError)
+			os.Args = tt.args
 
-	// Вызываем тестируемую функцию
-	_ = ParseFlags()
+			// Регистрируем флаги, как в ParseFlags()
+			var runAddr string
+			flag.StringVar(&runAddr, "a", ":8080", "address and port to run server")
 
-	// Проверяем, что глобальные переменные установлены правильно
-	if FlagRunAddr != ":9090" {
-		t.Errorf("FlagRunAddr = %v, want %v", FlagRunAddr, ":9090")
-	}
-	if FlagStoreIntervalSecond != 60 {
-		t.Errorf("FlagStoreIntervalSecond = %v, want %v", FlagStoreIntervalSecond, 60)
-	}
-	if FlagStoragePath != "/tmp/store.json" {
-		t.Errorf("FlagStoragePath = %v, want %v", FlagStoragePath, "/tmp/store.json")
-	}
-	if FlagRestore != false {
-		t.Errorf("FlagRestore = %v, want %v", FlagRestore, false)
-	}
-	if LogLevel != "info" {
-		t.Errorf("LogLevel = %v, want %v", LogLevel, "info")
-	}
-	if DatabaseDSN != "postgres://user:pass@localhost:5432/db" {
-		t.Errorf("DatabaseDSN = %v, want %v", DatabaseDSN, "postgres://user:pass@localhost:5432/db")
-	}
-	if MigrationsPath != "custom_migrations" {
-		t.Errorf("MigrationsPath = %v, want %v", MigrationsPath, "custom_migrations")
-	}
-	if Key != "secret_key" {
-		t.Errorf("Key = %v, want %v", Key, "secret_key")
-	}
-	if ProfileFileCPU != "cpu.prof" {
-		t.Errorf("ProfileFileCPU = %v, want %v", ProfileFileCPU, "cpu.prof")
-	}
-	if ProfileFileMem != "mem.prof" {
-		t.Errorf("ProfileFileMem = %v, want %v", ProfileFileMem, "mem.prof")
-	}
-	if IsProfileOn != true {
-		t.Errorf("IsProfileOn = %v, want %v", IsProfileOn, true)
+			// Парсим флаги
+			flag.Parse()
+
+			// Проверяем, был ли флаг передан
+			got := isFlagPassed(tt.flagName)
+
+			// Проверяем результаты
+			if got != tt.want {
+				t.Errorf("isFlagPassed() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
