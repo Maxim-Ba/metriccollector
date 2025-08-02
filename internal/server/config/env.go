@@ -8,7 +8,7 @@ import (
 )
 
 type Config struct {
-	Addres              string `env:"ADDRESS"`
+	Address             string `env:"ADDRESS"`
 	StoreIntervalSecond int    `env:"STORE_INTERVAL"`
 	StoragePath         string `env:"FILE_STORAGE_PATH"`
 	Restore             bool   `env:"RESTORE"`
@@ -19,6 +19,8 @@ type Config struct {
 	ProfileFileCPU      string `env:"CPU_FILE"`
 	ProfileFileMem      string `env:"MEM_FILE"`
 	IsProfileOn         bool   `env:"IS_PROFILE_ON"`
+	CryptoKeyPath       string `env:"CRYPTO_KEY"`
+	ConfigPath          string `env:"CONFIG"`
 }
 
 func ParseEnv() *Config {
@@ -44,6 +46,7 @@ func isMigrationsPathSet() bool {
 	_, isSet := os.LookupEnv("MIGRATIONS_PATH")
 	return isSet
 }
+
 func isProfileOnSet() bool {
 	_, isSet := os.LookupEnv("IS_PROFILE_ON")
 	return isSet

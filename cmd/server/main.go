@@ -27,7 +27,7 @@ var (
 func main() {
 	buildinfo.PrintBuildInfo(buildVersion, buildDate, buildCommit)
 	exit := make(chan os.Signal, 1)
-	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
+	signal.Notify(exit, os.Interrupt, syscall.SIGTERM, syscall.SIGINT, syscall.SIGQUIT)
 
 	parameters := config.New()
 	p, err := profiler.New(parameters.IsProfileOn, parameters.ProfileFileCPU, parameters.ProfileFileMem)
@@ -35,7 +35,7 @@ func main() {
 		logger.LogError("Profiler error ", err)
 	}
 	p.Start()
-	signature.New(parameters.Key)
+	signature.New(parameters.Key, parameters.CryptoKeyPath)
 	logger.SetLogLevel(parameters.LogLevel)
 
 	_, err = storage.New(parameters)
