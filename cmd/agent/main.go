@@ -27,7 +27,7 @@ func main() {
 	buildinfo.PrintBuildInfo(buildVersion, buildDate, buildCommit)
 
 	exit := make(chan os.Signal, 1)
-	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
+	signal.Notify(exit, os.Interrupt, syscall.SIGTERM, syscall.SIGINT, syscall.SIGQUIT)
 
 	parameters := config.New()
 	logger.SetLogLevel(parameters.LogLevel)
