@@ -42,6 +42,13 @@ func (c *HTTPClient) SendMetrics(metrics []*metrics.Metrics) error {
 			logger.LogError(err)
 			return err
 		}
+		if signature.GetPubKey() != nil {
+			body, err = signature.Encrypt(body)
+			if err != nil {
+				logger.LogError(err)
+				return err
+			}
+		}
 		path := fmt.Sprintf("http://%s/update/", address)
 		// реализует io.Writer и io.Reader
 		var compressedBody bytes.Buffer
@@ -104,6 +111,13 @@ func (c *HTTPClient) SendMetricsWithBatch(metrics []*metrics.Metrics) error {
 	if err != nil {
 		logger.LogError(err)
 		return err
+	}
+	if signature.GetPubKey() != nil {
+		body, err = signature.Encrypt(body)
+		if err != nil {
+			logger.LogError(err)
+			return err
+		}
 	}
 	path := fmt.Sprintf("http://%s/updates/", address)
 	// реализует io.Writer и io.Reader

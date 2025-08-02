@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
@@ -28,6 +29,7 @@ func main() {
 	buildinfo.PrintBuildInfo(buildVersion, buildDate, buildCommit)
 	exit := make(chan os.Signal, 1)
 	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
+	fmt.Print("parameters := config.New()")
 
 	parameters := config.New()
 	p, err := profiler.New(parameters.IsProfileOn, parameters.ProfileFileCPU, parameters.ProfileFileMem)
@@ -35,7 +37,7 @@ func main() {
 		logger.LogError("Profiler error ", err)
 	}
 	p.Start()
-	signature.New(parameters.Key)
+	signature.New(parameters.Key, parameters.CryptoKeyPath)
 	logger.SetLogLevel(parameters.LogLevel)
 
 	_, err = storage.New(parameters)

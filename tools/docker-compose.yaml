@@ -37,4 +37,4 @@ services:
       - ../:/app
     working_dir: /app
     command: >
-      task static-tests
+      task unit-tests

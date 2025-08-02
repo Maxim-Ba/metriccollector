@@ -31,8 +31,8 @@ func main() {
 
 	parameters := config.New()
 	logger.SetLogLevel(parameters.LogLevel)
-	signature.New(parameters.Key)
-	httpClient := client.NewClient(parameters.Addres)
+	signature.New(parameters.Key, parameters.CryptoKeyPath)
+	httpClient := client.NewClient(parameters.Address)
 	reportIntervalStart := time.Now()
 	go func() {
 
