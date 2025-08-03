@@ -5,23 +5,19 @@ import (
 	"os"
 
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
-type FlagValue[T any] struct {
-	Passed bool // был ли флаг передан
-	Value  T    // текущее значение
-}
-
 type ParsedFlags struct {
-	FlagRunAddr        FlagValue[string]
-	FlagReportInterval FlagValue[int]
-	FlagPollInterval   FlagValue[int]
+	FlagRunAddr        utils.FlagValue[string]
+	FlagReportInterval utils.FlagValue[int]
+	FlagPollInterval   utils.FlagValue[int]
 	// debug info warn error
-	LogLevel      FlagValue[string]
-	Key           FlagValue[string]
-	RateLimit     FlagValue[int]
-	CryptoKeyPath FlagValue[string]
-	ConfigPath    FlagValue[string]
+	LogLevel      utils.FlagValue[string]
+	Key           utils.FlagValue[string]
+	RateLimit     utils.FlagValue[int]
+	CryptoKeyPath utils.FlagValue[string]
+	ConfigPath    utils.FlagValue[string]
 }
 
 func ParseFlags() *ParsedFlags {
@@ -75,14 +71,4 @@ func ParseFlags() *ParsedFlags {
 		}
 	})
 	return flags
-}
-
-func isFlagPassed(name string) bool {
-	found := false
-	flag.Visit(func(f *flag.Flag) {
-		if f.Name == name {
-			found = true
-		}
-	})
-	return found
 }

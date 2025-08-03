@@ -20,68 +20,72 @@ type Signature struct {
 }
 
 var (
-	signature          Signature
+	Instance           *Signature
 	ErrKeyIsNotDefined = errors.New("key is not defined")
 	ErrInvalidKey      = errors.New("invalid key format")
 )
 
-func New(key string, cryptoKeyPath string) Signature {
+func New(key string, cryptoKeyPath string) *Signature {
+	sig := &Signature{}
+	Instance = sig
 	if cryptoKeyPath != "" {
 		b, err := os.ReadFile(cryptoKeyPath)
 		if err != nil {
 			logger.LogError(err)
-			return signature
+			return sig
 		}
 
 		block, _ := pem.Decode(b)
 		if block == nil {
 			logger.LogError(ErrInvalidKey)
-			return signature
+			return sig
 		}
 
 		// для сервера пытаемся загрузить приватный ключ
 		if privKey, err := x509.ParsePKCS1PrivateKey(block.Bytes); err == nil {
-			signature = Signature{
-				PrivateKey: privKey,
-				PublicKey:  &privKey.PublicKey,
-			}
-			return signature
+			// signature = Signature{
+			sig.PrivateKey = privKey
+			sig.PublicKey = &privKey.PublicKey
+			// }
+			return sig
 		}
 
 		// для агента пытаемся загрузить публичный ключ
 		if pubKey, err := x509.ParsePKIXPublicKey(block.Bytes); err == nil {
 			if rsaPubKey, ok := pubKey.(*rsa.PublicKey); ok {
-				signature = Signature{
-					PublicKey: rsaPubKey,
-				}
-				return signature
+				// signature = Signature{
+				sig.PublicKey = rsaPubKey
+				// }
+				return sig
 			}
 		}
 
 		logger.LogError(ErrInvalidKey)
-		return signature
+		return sig
 	}
-	signature = Signature{
-		Key: []byte(key),
-	}
-	return signature
+	// signature = Signature{
+	sig.Key = []byte(key)
+	// }
+	return sig
 }
 
-func GetKey() string {
-	return string(signature.Key)
-}
-func GetPubKey() *rsa.PublicKey {
-	return signature.PublicKey
-}
-func GetPrivKey() *rsa.PrivateKey {
-	return signature.PrivateKey
+func (s *Signature) GetKey() string {
+	return string(s.Key)
 }
 
-func Get(src []byte) ([]byte, error) {
-	if len(signature.Key) == 0 {
+func (s *Signature) GetPubKey() *rsa.PublicKey {
+	return s.PublicKey
+}
+
+func (s *Signature) GetPrivKey() *rsa.PrivateKey {
+	return s.PrivateKey
+}
+
+func (s *Signature) Get(src []byte) ([]byte, error) {
+	if len(s.Key) == 0 {
 		return nil, ErrKeyIsNotDefined
 	}
-	h := hmac.New(sha256.New, signature.Key)
+	h := hmac.New(sha256.New, s.Key)
 	_, err := h.Write(src)
 	if err != nil {
 		return nil, err
@@ -90,11 +94,11 @@ func Get(src []byte) ([]byte, error) {
 	return dst, nil
 }
 
-func Check(dst []byte, bodySrc []byte) error {
-	if len(signature.Key) == 0 {
+func (s *Signature) Check(dst []byte, bodySrc []byte) error {
+	if len(s.Key) == 0 {
 		return ErrKeyIsNotDefined
 	}
-	h := hmac.New(sha256.New, signature.Key)
+	h := hmac.New(sha256.New, s.Key)
 	_, err := h.Write(bodySrc)
 	if err != nil {
 		logger.LogError(err)
@@ -112,14 +116,14 @@ func Check(dst []byte, bodySrc []byte) error {
 
 // -------- assym
 
-func Encrypt(data []byte) ([]byte, error) {
-	if signature.PublicKey == nil {
+func (s *Signature) Encrypt(data []byte) ([]byte, error) {
+	if s.PublicKey == nil {
 		return nil, ErrKeyIsNotDefined
 	}
 
 	hash := sha256.New()
 	msgLen := len(data)
-	step := signature.PublicKey.Size() - 2*hash.Size() - 2
+	step := s.PublicKey.Size() - 2*hash.Size() - 2
 	var encryptedBytes []byte
 
 	for start := 0; start < msgLen; start += step {
@@ -131,7 +135,7 @@ func Encrypt(data []byte) ([]byte, error) {
 		encryptedBlock, err := rsa.EncryptOAEP(
 			hash,
 			rand.Reader,
-			signature.PublicKey,
+			s.PublicKey,
 			data[start:finish],
 			nil,
 		)
@@ -145,13 +149,13 @@ func Encrypt(data []byte) ([]byte, error) {
 	return encryptedBytes, nil
 }
 
-func Decrypt(data []byte) ([]byte, error) {
-	if signature.PrivateKey == nil {
+func (s *Signature) Decrypt(data []byte) ([]byte, error) {
+	if s.PrivateKey == nil {
 		return nil, ErrKeyIsNotDefined
 	}
 
 	hash := sha256.New()
-	keySize := signature.PrivateKey.Size()
+	keySize := s.PrivateKey.Size()
 	var decryptedBytes []byte
 
 	for start := 0; start < len(data); start += keySize {
@@ -163,7 +167,7 @@ func Decrypt(data []byte) ([]byte, error) {
 		decryptedBlock, err := rsa.DecryptOAEP(
 			hash,
 			rand.Reader,
-			signature.PrivateKey,
+			s.PrivateKey,
 			data[start:finish],
 			nil,
 		)

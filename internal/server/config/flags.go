@@ -2,45 +2,26 @@ package config
 
 import (
 	"flag"
+
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
-type FlagValue[T any] struct {
-	Passed bool // был ли флаг передан
-	Value  T    // текущее значение
-}
-
 type ParsedFlags struct {
-	RunAddr             FlagValue[string]
-	StoreIntervalSecond FlagValue[int]
-	StoragePath         FlagValue[string]
-	Restore             FlagValue[bool]
+	RunAddr             utils.FlagValue[string]
+	StoreIntervalSecond utils.FlagValue[int]
+	StoragePath         utils.FlagValue[string]
+	Restore             utils.FlagValue[bool]
 	// debug info warn error
-	LogLevel       FlagValue[string]
-	DatabaseDSN    FlagValue[string]
-	MigrationsPath FlagValue[string]
-	Key            FlagValue[string]
-	ProfileFileCPU FlagValue[string]
-	ProfileFileMem FlagValue[string]
-	IsProfileOn    FlagValue[bool]
-	CryptoKeyPath  FlagValue[string]
-	ConfigPath     FlagValue[string]
+	LogLevel       utils.FlagValue[string]
+	DatabaseDSN    utils.FlagValue[string]
+	MigrationsPath utils.FlagValue[string]
+	Key            utils.FlagValue[string]
+	ProfileFileCPU utils.FlagValue[string]
+	ProfileFileMem utils.FlagValue[string]
+	IsProfileOn    utils.FlagValue[bool]
+	CryptoKeyPath  utils.FlagValue[string]
+	ConfigPath     utils.FlagValue[string]
 }
-
-// var (
-// 	FlagRunAddr             string
-// 	FlagStoreIntervalSecond int
-// 	FlagStoragePath         string
-// 	FlagRestore             bool
-// 	LogLevel                string
-// 	DatabaseDSN             string
-// 	MigrationsPath          string
-// 	Key                     string
-// 	ProfileFileCPU          string
-// 	ProfileFileMem          string
-// 	IsProfileOn             bool
-// 	cryptoKey               string
-// 	configPath              string
-// )
 
 // parseFlags обрабатывает аргументы командной строки
 // и сохраняет их значения в соответствующих переменных
@@ -92,14 +73,4 @@ func ParseFlags() *ParsedFlags {
 		}
 	})
 	return flags
-}
-
-func isFlagPassed(name string) bool {
-	found := false
-	flag.Visit(func(f *flag.Flag) {
-		if f.Name == name {
-			found = true
-		}
-	})
-	return found
 }

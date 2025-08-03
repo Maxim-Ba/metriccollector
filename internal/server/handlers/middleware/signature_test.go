@@ -13,16 +13,17 @@ import (
 )
 
 func TestSignatureHandle(t *testing.T) {
-	originalKey := signature.GetKey()
+	originalInstance := signature.Instance
 	defer func() {
-		signature.New(originalKey, "")
+		signature.Instance = originalInstance
 	}()
 
+	// Инициализируем новый Instance для теста
 	signature.New("test-key", "")
 
 	// Генерируем валидную подпись для тестовых данных
 	validData := []byte("test data")
-	validHash, err := signature.Get(validData)
+	validHash, err := signature.Instance.Get(validData)
 	if err != nil {
 		t.Fatalf("Failed to generate valid hash: %v", err)
 	}
@@ -148,10 +149,12 @@ func TestSignatureHandle(t *testing.T) {
 }
 
 func TestHashResponseWriter(t *testing.T) {
-	originalKey := signature.GetKey()
+	originalInstance := signature.Instance
 	defer func() {
-		signature.New(originalKey, "")
+		signature.Instance = originalInstance
 	}()
+
+	// Инициализируем новый Instance для теста
 	signature.New("test-key", "")
 
 	t.Run("With key set - should add signature header", func(t *testing.T) {
@@ -163,7 +166,7 @@ func TestHashResponseWriter(t *testing.T) {
 
 		// Тестовые данные
 		testData := []byte("test data")
-		expectedHash, err := signature.Get(testData)
+		expectedHash, err := signature.Instance.Get(testData)
 		if err != nil {
 			t.Fatalf("Failed to generate expected hash: %v", err)
 		}
@@ -191,5 +194,4 @@ func TestHashResponseWriter(t *testing.T) {
 			t.Errorf("Expected hash header %q, got %q", expectedHashBase64, actualHash)
 		}
 	})
-
 }

@@ -18,7 +18,7 @@ func (r *hashResponseWriter) Write(b []byte) (int, error) {
 	if err != nil {
 		return size, err
 	}
-	hash, err := signature.Get(b)
+	hash, err := signature.Instance.Get(b)
 	if err == nil {
 		encodedHash := base64.StdEncoding.EncodeToString(hash)
 		r.Header().Set("HashSHA256", encodedHash)
@@ -33,13 +33,13 @@ func (r *hashResponseWriter) Write(b []byte) (int, error) {
 func SignatureHandle(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(res http.ResponseWriter, r *http.Request) {
 		headerValues := r.Header.Get("HashSHA256")
-		if signature.GetKey() == "" && signature.GetPrivKey() == nil {
+		if signature.Instance.GetKey() == "" && signature.Instance.GetPrivKey() == nil {
 			next.ServeHTTP(res, r)
 			return
 		}
 
 		// Если есть ключ, но нет заголовка - тоже пропускаем
-		if headerValues == "" && signature.GetPrivKey() == nil {
+		if headerValues == "" && signature.Instance.GetPrivKey() == nil {
 			next.ServeHTTP(res, r)
 			return
 		}
@@ -49,8 +49,8 @@ func SignatureHandle(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		if signature.GetPrivKey() != nil {
-			bodyBytes, err = signature.Decrypt(bodyBytes)
+		if signature.Instance.GetPrivKey() != nil {
+			bodyBytes, err = signature.Instance.Decrypt(bodyBytes)
 			if err != nil {
 				http.Error(res, "failed to decrypt body", http.StatusBadRequest)
 				return
@@ -58,13 +58,13 @@ func SignatureHandle(next http.HandlerFunc) http.HandlerFunc {
 		}
 
 		// Проверяем подпись, если есть ключ подписи
-		if signature.GetKey() != "" && headerValues != "" {
+		if signature.Instance.GetKey() != "" && headerValues != "" {
 			decodedHeader, err := base64.StdEncoding.DecodeString(headerValues)
 			if err != nil {
 				http.Error(res, "invalid base64 encoding", http.StatusBadRequest)
 				return
 			}
-			if err := signature.Check(decodedHeader, bodyBytes); err != nil {
+			if err := signature.Instance.Check(decodedHeader, bodyBytes); err != nil {
 				http.Error(res, "", http.StatusBadRequest)
 				return
 			}

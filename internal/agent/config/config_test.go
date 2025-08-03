@@ -3,43 +3,44 @@ package config
 import (
 	"os"
 	"testing"
+
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
+	"github.com/stretchr/testify/assert"
 )
-
-
 
 func TestResolveString(t *testing.T) {
 	tests := []struct {
 		name      string
 		envValue  string
-		flag      FlagValue[string]
+		flag      utils.FlagValue[string]
 		fileValue string
 		expected  string
 	}{
 		{
 			name:      "env value takes precedence",
 			envValue:  "env_value",
-			flag:      FlagValue[string]{Value: "flag_value", Passed: true},
+			flag:      utils.FlagValue[string]{Value: "flag_value", Passed: true},
 			fileValue: "file_value",
 			expected:  "env_value",
 		},
 		{
 			name:      "flag value when env empty and flag passed",
 			envValue:  "",
-			flag:      FlagValue[string]{Value: "flag_value", Passed: true},
+			flag:      utils.FlagValue[string]{Value: "flag_value", Passed: true},
 			fileValue: "file_value",
 			expected:  "flag_value",
 		},
 		{
 			name:      "file value when env empty and flag not passed",
 			envValue:  "",
-			flag:      FlagValue[string]{Value: "flag_value", Passed: false},
+			flag:      utils.FlagValue[string]{Value: "flag_value", Passed: false},
 			fileValue: "file_value",
 			expected:  "file_value",
 		},
 		{
 			name:      "default flag value when all empty",
 			envValue:  "",
-			flag:      FlagValue[string]{Value: "default_flag_value", Passed: false},
+			flag:      utils.FlagValue[string]{Value: "default_flag_value", Passed: false},
 			fileValue: "",
 			expected:  "default_flag_value",
 		},
@@ -47,7 +48,7 @@ func TestResolveString(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := resolveString(tt.envValue, tt.flag, tt.fileValue)
+			result := utils.ResolveString(tt.envValue, tt.flag, tt.fileValue)
 			if result != tt.expected {
 				t.Errorf("resolveString() = %v, want %v", result, tt.expected)
 			}
@@ -59,35 +60,35 @@ func TestResolveInt(t *testing.T) {
 	tests := []struct {
 		name      string
 		envValue  int
-		flag      FlagValue[int]
+		flag      utils.FlagValue[int]
 		fileValue int
 		expected  int
 	}{
 		{
 			name:      "env value takes precedence",
 			envValue:  42,
-			flag:      FlagValue[int]{Value: 10, Passed: true},
+			flag:      utils.FlagValue[int]{Value: 10, Passed: true},
 			fileValue: 20,
 			expected:  42,
 		},
 		{
 			name:      "flag value when env empty and flag passed",
 			envValue:  0,
-			flag:      FlagValue[int]{Value: 10, Passed: true},
+			flag:      utils.FlagValue[int]{Value: 10, Passed: true},
 			fileValue: 20,
 			expected:  10,
 		},
 		{
 			name:      "file value when env empty and flag not passed",
 			envValue:  0,
-			flag:      FlagValue[int]{Value: 10, Passed: false},
+			flag:      utils.FlagValue[int]{Value: 10, Passed: false},
 			fileValue: 20,
 			expected:  20,
 		},
 		{
 			name:      "default flag value when all empty",
 			envValue:  0,
-			flag:      FlagValue[int]{Value: 5, Passed: false},
+			flag:      utils.FlagValue[int]{Value: 5, Passed: false},
 			fileValue: 0,
 			expected:  5,
 		},
@@ -95,7 +96,7 @@ func TestResolveInt(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := resolveInt(tt.envValue, tt.flag, tt.fileValue)
+			result := utils.ResolveInt(tt.envValue, tt.flag, tt.fileValue)
 			if result != tt.expected {
 				t.Errorf("resolveInt() = %v, want %v", result, tt.expected)
 			}
@@ -108,7 +109,7 @@ func TestResolveBool(t *testing.T) {
 		name      string
 		isEnvSet  bool
 		envValue  bool
-		flag      FlagValue[bool]
+		flag      utils.FlagValue[bool]
 		fileValue bool
 		expected  bool
 	}{
@@ -116,7 +117,7 @@ func TestResolveBool(t *testing.T) {
 			name:      "env value takes precedence when set",
 			isEnvSet:  true,
 			envValue:  true,
-			flag:      FlagValue[bool]{Value: false, Passed: true},
+			flag:      utils.FlagValue[bool]{Value: false, Passed: true},
 			fileValue: false,
 			expected:  true,
 		},
@@ -124,7 +125,7 @@ func TestResolveBool(t *testing.T) {
 			name:      "flag value when env not set and flag passed",
 			isEnvSet:  false,
 			envValue:  false,
-			flag:      FlagValue[bool]{Value: true, Passed: true},
+			flag:      utils.FlagValue[bool]{Value: true, Passed: true},
 			fileValue: false,
 			expected:  true,
 		},
@@ -132,7 +133,7 @@ func TestResolveBool(t *testing.T) {
 			name:      "file value when env not set and flag not passed",
 			isEnvSet:  false,
 			envValue:  false,
-			flag:      FlagValue[bool]{Value: false, Passed: false},
+			flag:      utils.FlagValue[bool]{Value: false, Passed: false},
 			fileValue: true,
 			expected:  true,
 		},
@@ -140,7 +141,7 @@ func TestResolveBool(t *testing.T) {
 			name:      "default flag value when all empty",
 			isEnvSet:  false,
 			envValue:  false,
-			flag:      FlagValue[bool]{Value: true, Passed: false},
+			flag:      utils.FlagValue[bool]{Value: true, Passed: false},
 			fileValue: false,
 			expected:  true,
 		},
@@ -148,7 +149,7 @@ func TestResolveBool(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := resolveBool(tt.isEnvSet, tt.envValue, tt.flag, tt.fileValue)
+			result := utils.ResolveBool(tt.isEnvSet, tt.envValue, tt.flag, tt.fileValue)
 			if result != tt.expected {
 				t.Errorf("resolveBool() = %v, want %v", result, tt.expected)
 			}
@@ -203,13 +204,13 @@ func TestGetParamsByConfigPath(t *testing.T) {
 			wantErr:    false,
 			expected:   Parameters{},
 		},
-		
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := getParamsByConfigPath(tt.configPath)
-			
+			got, err := getParamsByConfigPath(tt.configPath)
+			assert.NoError(t, err)
+
 			if tt.wantErr {
 				// Проверяем, что вернулся пустой Parameters при ошибке
 				if got != tt.expected {
@@ -254,7 +255,7 @@ func TestNew(t *testing.T) {
 		"address": "file_address:9090",
 		"report_interval": 20,
 		"poll_interval": 10,
-		"log_level": "debug",
+		"log_level": "debug"
 
 	}`
 

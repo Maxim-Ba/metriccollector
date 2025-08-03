@@ -34,8 +34,6 @@ func (m *MockMigrate) Down() error {
 	return nil
 }
 
-
-
 func TestNew_MigrationsUpError(t *testing.T) {
 	tempDir := t.TempDir()
 	migrationsDir := filepath.Join(tempDir, "migrations")
@@ -49,13 +47,10 @@ func TestNew_MigrationsUpError(t *testing.T) {
 		return db, err
 	}
 
-
 	originalMigrateNew := migrateNew
 	defer func() { migrateNew = originalMigrateNew }()
 	migrateNew = func(sourceURL, databaseURL string) (*migrate.Migrate, error) {
-		return &migrate.Migrate{
-
-		}, nil
+		return &migrate.Migrate{}, nil
 	}
 
 	db, err := New("postgres://user:pass@localhost:5432/db", migrationsDir)
@@ -82,30 +77,28 @@ func TestSaveMetricsToDB(t *testing.T) {
 
 	t.Run("successful save", func(t *testing.T) {
 		mock.ExpectBegin()
-		
+
 		for _, m := range testMetrics {
 			mock.ExpectExec(`INSERT INTO metrics`).
 				WithArgs(m.ID, m.MType, m.Value, m.Delta).
 				WillReturnResult(sqlmock.NewResult(1, 1))
 		}
-		
+
 		mock.ExpectCommit()
 
 		err := SaveMetricsToDB(&testMetrics, db)
 		assert.NoError(t, err)
-		
+
 		assert.NoError(t, mock.ExpectationsWereMet())
 	})
 
 	t.Run("transaction begin error", func(t *testing.T) {
 		mock.ExpectBegin().WillReturnError(sql.ErrConnDone)
-		
+
 		err := SaveMetricsToDB(&testMetrics, db)
 		assert.Error(t, err)
 		assert.NoError(t, mock.ExpectationsWereMet())
 	})
-
-
 
 	t.Run("commit error", func(t *testing.T) {
 		mock.ExpectBegin()
@@ -121,7 +114,6 @@ func TestSaveMetricsToDB(t *testing.T) {
 		assert.NoError(t, mock.ExpectationsWereMet())
 	})
 }
-
 
 func TestLoadMetricsFromDB(t *testing.T) {
 	expectedMetrics := []*metrics.Metrics{
@@ -155,8 +147,6 @@ func TestLoadMetricsFromDB(t *testing.T) {
 		assert.EqualError(t, err, "database not initialized")
 	})
 
-
-
 	t.Run("scan error", func(t *testing.T) {
 		db, mock, err := sqlmock.New()
 		if err != nil {
@@ -184,7 +174,7 @@ func TestLoadMetricsFromDB(t *testing.T) {
 
 		rows := sqlmock.NewRows([]string{"id", "type", "value", "delta"}).
 			AddRow("test1", "gauge", 1.23, nil).
-			RowError(0, sql.ErrNoRows) 
+			RowError(0, sql.ErrNoRows)
 
 		mock.ExpectQuery(`SELECT \* FROM metrics`).WillReturnRows(rows)
 

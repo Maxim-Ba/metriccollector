@@ -29,7 +29,7 @@ func TestLoadMetricsFromFile(t *testing.T) {
 			{
 				ID:    "test1",
 				MType: "gauge",
-				Value:  utils.FloatToPointerFloat(1.23),
+				Value: utils.FloatToPointerFloat(1.23),
 				Delta: utils.IntToPointerInt(0),
 			},
 			{
@@ -70,7 +70,6 @@ func TestLoadMetricsFromFile(t *testing.T) {
 		_, err = loadMetricsFromFile(tmpFile.Name())
 		assert.Error(t, err)
 	})
-
 
 }
 

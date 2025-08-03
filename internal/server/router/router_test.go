@@ -5,12 +5,21 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/Maxim-Ba/metriccollector/internal/signature"
 	"github.com/go-chi/chi/v5"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestMiddlewaresOrder(t *testing.T) {
+	originalInstance := signature.Instance
+	defer func() {
+		signature.Instance = originalInstance
+	}()
+
+	// Инициализируем новый Instance для теста
+	signature.New("test-key", "")
+
 	r := New()
 
 	req, err := http.NewRequest(http.MethodGet, "/", nil)
@@ -21,7 +30,6 @@ func TestMiddlewaresOrder(t *testing.T) {
 
 	// Проверяем наличие заголовков, которые должны добавляться middleware
 	assert.NotEmpty(t, rec.Header().Get("Content-Type"))
-
 }
 
 func TestChiRouter(t *testing.T) {
