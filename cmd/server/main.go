@@ -5,7 +5,9 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
+	"time"
 
 	_ "net/http/pprof"
 
@@ -26,8 +28,11 @@ var (
 
 func main() {
 	buildinfo.PrintBuildInfo(buildVersion, buildDate, buildCommit)
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
 	exit := make(chan os.Signal, 1)
-	signal.Notify(exit, os.Interrupt, syscall.SIGTERM)
+	signal.Notify(exit, os.Interrupt, syscall.SIGTERM, syscall.SIGINT, syscall.SIGQUIT)
 
 	parameters := config.New()
 	p, err := profiler.New(parameters.IsProfileOn, parameters.ProfileFileCPU, parameters.ProfileFileMem)
@@ -35,7 +40,7 @@ func main() {
 		logger.LogError("Profiler error ", err)
 	}
 	p.Start()
-	signature.New(parameters.Key)
+	signature.New(parameters.Key, parameters.CryptoKeyPath)
 	logger.SetLogLevel(parameters.LogLevel)
 
 	_, err = storage.New(parameters)
@@ -48,21 +53,38 @@ func main() {
 		Handler: mux,
 	}
 
+	var wg sync.WaitGroup
+	wg.Add(1)
+
 	go func() {
+		defer wg.Done()
+
 		logger.LogInfo("Running server on ", parameters.Address)
 		if err = http.ListenAndServe(parameters.Address, mux); err != nil && err != http.ErrServerClosed {
 			logger.LogError("ListenAndServe: ", err)
+			cancel()
 		}
 	}()
-	<-exit // Ожидание сигнала завершения
+
+	select {
+	case <-exit:
+		logger.LogInfo("Received shutdown signal...")
+	case <-ctx.Done():
+		logger.LogInfo("Context cancelled, shutting down...")
+	}
 
 	logger.LogInfo("Shutting down server...")
 
-	if err = server.Shutdown(context.Background()); err != nil {
+	shutdownCtx, shutdownCancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer shutdownCancel()
+
+	if err = server.Shutdown(shutdownCtx); err != nil {
 		logger.LogError("Server Shutdown: ", err)
+		if err = server.Close(); err != nil {
+			logger.LogError("Server forced close error: ", err)
+		}
 	}
-	logger.LogInfo("Server exiting")
-	// Явное закрытие ресурсов
+	wg.Wait()
 	err = p.Close()
 	logger.LogError(err)
 

@@ -1,48 +1,57 @@
 package config
 
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+
+	"github.com/Maxim-Ba/metriccollector/internal/logger"
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
+)
+
 type Parameters struct {
-	Addres         string
-	ReportInterval int
-	PollInterval   int
-	LogLevel       string
-	Key            string
-	RateLimit      int
+	Address        string `json:"address"`
+	ReportInterval int    `json:"report_interval"`
+	PollInterval   int    `json:"poll_interval"`
+	LogLevel       string `json:"log_level"`
+	Key            string `json:"key"`
+	RateLimit      int    `json:"rate_limit"`
+	CryptoKeyPath  string `json:"crypto_key"`
 }
 
 func New() Parameters {
 	flags := ParseFlags()
 	envConfig := ParseEnv()
-	address := envConfig.Address
-	pollInterval := envConfig.PollInterval
-	reportInterval := envConfig.ReportInterval
-	logLevel := envConfig.LogLevel
-	key := envConfig.Key
-	rateLimit := envConfig.RateLimit
+	fileConfig, err := getParamsByConfigPath(utils.ResolveString(envConfig.ConfigPath, flags.ConfigPath, ""))
+	if err != nil {
+		logger.LogError(err)
+		return fileConfig
+	}
+	parameters := Parameters{
+		Address:        utils.ResolveString(envConfig.Address, flags.FlagRunAddr, fileConfig.Address),
+		ReportInterval: utils.ResolveInt(envConfig.ReportInterval, flags.FlagReportInterval, fileConfig.ReportInterval),
+		LogLevel:       utils.ResolveString(envConfig.LogLevel, flags.LogLevel, fileConfig.LogLevel),
+		PollInterval:   utils.ResolveInt(envConfig.PollInterval, flags.FlagPollInterval, fileConfig.PollInterval),
+		RateLimit:      utils.ResolveInt(envConfig.RateLimit, flags.RateLimit, fileConfig.RateLimit),
+		Key:            utils.ResolveString(envConfig.Key, flags.Key, fileConfig.Key),
 
-	if address == "" {
-		address = flags.FlagRunAddr
+		CryptoKeyPath: utils.ResolveString(envConfig.CryptoKeyPath, flags.CryptoKeyPath, fileConfig.CryptoKeyPath),
 	}
-	if pollInterval == 0 {
-		pollInterval = flags.FlagPollInterval
+	return parameters
+}
+
+func getParamsByConfigPath(configPath string) (Parameters, error) {
+	var parameters Parameters
+	if configPath == "" {
+		return parameters, nil
 	}
-	if reportInterval == 0 {
-		reportInterval = flags.FlagReportInterval
+	data, err := os.ReadFile(configPath)
+	if err != nil {
+		return parameters, fmt.Errorf("read config path file: %w", err)
 	}
-	if logLevel == "" {
-		logLevel = flags.LogLevel
+	err = json.Unmarshal(data, &parameters)
+	if err != nil {
+		return parameters, fmt.Errorf("unmarshal params: %w", err)
 	}
-	if key == "" {
-		key = flags.Key
-	}
-	if rateLimit == 0 {
-		rateLimit = flags.RateLimit
-	}
-	return Parameters{
-		Addres:         address,
-		ReportInterval: reportInterval,
-		PollInterval:   pollInterval,
-		LogLevel:       logLevel,
-		Key:            key,
-		RateLimit:      rateLimit,
-	}
+	return parameters, nil
 }

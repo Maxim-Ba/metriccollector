@@ -13,6 +13,8 @@ type Config struct {
 	LogLevel       string `env:"LOG_LEVEL"`
 	Key            string `env:"KEY"`
 	RateLimit      int    `env:"RATE_LIMIT"`
+	CryptoKeyPath  string `env:"CRYPTO_KEY"`
+	ConfigPath     string `env:"CONFIG"`
 }
 
 func ParseEnv() *Config {

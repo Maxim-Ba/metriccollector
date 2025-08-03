@@ -53,8 +53,8 @@ func TestParseEnv(t *testing.T) {
 	cfg := ParseEnv()
 
 	// Проверяем результаты
-	if cfg.Addres != ":8080" {
-		t.Errorf("expected Addres ':8080', got '%s'", cfg.Addres)
+	if cfg.Address != ":8080" {
+		t.Errorf("expected Addres ':8080', got '%s'", cfg.Address)
 	}
 	if cfg.StoreIntervalSecond != 10 {
 		t.Errorf("expected StoreIntervalSecond 10, got %d", cfg.StoreIntervalSecond)

@@ -1,78 +1,68 @@
 package config
 
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+
+	"github.com/Maxim-Ba/metriccollector/internal/logger"
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
+)
+
 type Parameters struct {
-	Address             string
-	StoreIntervalSecond int
-	StoragePath         string
-	Restore             bool
-	LogLevel            string
-	DatabaseDSN         string
-	MigrationsPath      string
-	Key                 string
-	ProfileFileCPU      string
-	ProfileFileMem      string
-	IsProfileOn         bool
+	Address             string `json:"address"`
+	StoreIntervalSecond int    `json:"store_interval"`
+	StoragePath         string `json:"store_file"`
+	Restore             bool   `json:"restore"`
+	LogLevel            string `json:"log_level"`
+	DatabaseDSN         string `json:"database_dsn"`
+	MigrationsPath      string `json:"migrations_path"`
+	Key                 string `json:"key"`
+	ProfileFileCPU      string `json:"profile_file_cpu"`
+	ProfileFileMem      string `json:"profile_file_mem"`
+	IsProfileOn         bool   `json:"is_profile_on"`
+	CryptoKeyPath       string `json:"crypto_key"`
 }
 
 func New() Parameters {
 	flags := ParseFlags()
 	envConfig := ParseEnv()
-	address := envConfig.Addres
-	storeInterval := envConfig.StoreIntervalSecond
-	storagePath := envConfig.StoragePath
-	restore := envConfig.Restore
-	logLevel := envConfig.LogLevel
-	databaseDSN := envConfig.DatabaseDSN
-	migrationsPath := envConfig.MigrationsPath
-	profileFileCPU := envConfig.ProfileFileCPU
-	profileFileMem := envConfig.ProfileFileMem
-	isProfileOn := envConfig.IsProfileOn
-	key := envConfig.Key
-	if address == "" {
-		address = flags.FlagRunAddr
-	}
-	if !isIntervalSet() {
-		storeInterval = flags.FlagStoreIntervalSecond
-	}
-	if storagePath == "" {
-		storagePath = flags.FlagStoragePath
-	}
-	if !isRestoreSet() {
-		restore = flags.FlagRestore
-	}
-	if logLevel == "" {
-		logLevel = flags.LogLevel
-	}
-	if databaseDSN == "" {
-		databaseDSN = flags.DatabaseDSN
-	}
-	if !isMigrationsPathSet() {
-		migrationsPath = flags.MigrationsPath
-	}
-	if key == "" {
-		key = flags.Key
-	}
-	if profileFileCPU == "" {
-		profileFileCPU = flags.ProfileFileCPU
-	}
-	if profileFileMem == "" {
-		profileFileMem = flags.ProfileFileMem
-	}
 
-	if !isProfileOnSet() {
-		isProfileOn = flags.IsProfileOn
+	fileConfig, err := getParamsByConfigPath(utils.ResolveString(envConfig.ConfigPath, flags.ConfigPath, ""))
+	if err != nil {
+		logger.LogError(err)
+		return fileConfig
 	}
-	return Parameters{
-		Address:             address,
-		StoreIntervalSecond: storeInterval,
-		StoragePath:         storagePath,
-		Restore:             restore,
-		LogLevel:            logLevel,
-		DatabaseDSN:         databaseDSN,
-		MigrationsPath:      migrationsPath,
-		Key:                 key,
-		ProfileFileCPU:      profileFileCPU,
-		ProfileFileMem:      profileFileMem,
-		IsProfileOn:         isProfileOn,
+	parameters := Parameters{
+		Address:             utils.ResolveString(envConfig.Address, flags.RunAddr, fileConfig.Address),
+		StoreIntervalSecond: utils.ResolveInt(envConfig.StoreIntervalSecond, flags.StoreIntervalSecond, fileConfig.StoreIntervalSecond),
+		StoragePath:         utils.ResolveString(envConfig.StoragePath, flags.StoragePath, fileConfig.StoragePath),
+		Restore:             utils.ResolveBool(isRestoreSet(), envConfig.Restore, flags.Restore, fileConfig.Restore),
+		LogLevel:            utils.ResolveString(envConfig.LogLevel, flags.LogLevel, fileConfig.LogLevel),
+		DatabaseDSN:         utils.ResolveString(envConfig.DatabaseDSN, flags.DatabaseDSN, fileConfig.DatabaseDSN),
+		MigrationsPath:      utils.ResolveString(envConfig.MigrationsPath, flags.MigrationsPath, fileConfig.MigrationsPath),
+		Key:                 utils.ResolveString(envConfig.Key, flags.Key, fileConfig.Key),
+		ProfileFileCPU:      utils.ResolveString(envConfig.ProfileFileCPU, flags.ProfileFileCPU, fileConfig.ProfileFileCPU),
+		ProfileFileMem:      utils.ResolveString(envConfig.ProfileFileMem, flags.ProfileFileMem, fileConfig.ProfileFileMem),
+		IsProfileOn:         utils.ResolveBool(isProfileOnSet(), envConfig.IsProfileOn, flags.IsProfileOn, fileConfig.IsProfileOn),
+		CryptoKeyPath:       utils.ResolveString(envConfig.CryptoKeyPath, flags.CryptoKeyPath, fileConfig.CryptoKeyPath),
 	}
+	fmt.Printf("%+v\n", parameters)
+	return parameters
+}
+
+func getParamsByConfigPath(configPath string) (Parameters, error) {
+	var parameters Parameters
+	if configPath == "" {
+		return parameters, nil
+	}
+	data, err := os.ReadFile(configPath)
+	if err != nil {
+		return parameters, fmt.Errorf("read config path file: %w", err)
+	}
+	err = json.Unmarshal(data, &parameters)
+	if err != nil {
+		return parameters, fmt.Errorf("unmarshal params: %w", err)
+	}
+	return parameters, nil
 }
