@@ -14,6 +14,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/server/config"
 	"github.com/Maxim-Ba/metriccollector/internal/server/router"
+	"github.com/Maxim-Ba/metriccollector/internal/server/services/subnet"
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
 	"github.com/Maxim-Ba/metriccollector/internal/signature"
 	"github.com/Maxim-Ba/metriccollector/pkg/buildinfo"
@@ -41,6 +42,7 @@ func main() {
 	}
 	p.Start()
 	signature.New(parameters.Key, parameters.CryptoKeyPath)
+	subnet.New(parameters.TrustedSubnet)
 	logger.SetLogLevel(parameters.LogLevel)
 
 	_, err = storage.New(parameters)

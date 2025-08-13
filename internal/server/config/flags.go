@@ -21,6 +21,7 @@ type ParsedFlags struct {
 	IsProfileOn    utils.FlagValue[bool]
 	CryptoKeyPath  utils.FlagValue[string]
 	ConfigPath     utils.FlagValue[string]
+	TrustedSubnet  utils.FlagValue[string]
 }
 
 // parseFlags обрабатывает аргументы командной строки
@@ -40,6 +41,7 @@ func ParseFlags() *ParsedFlags {
 	flag.StringVar(&flags.Key.Value, "k", "", "private key for signature")
 	flag.StringVar(&flags.CryptoKeyPath.Value, "crypto-key", "", "path for public key")
 	flag.StringVar(&flags.ConfigPath.Value, "c", "", "path for JSON config")
+	flag.StringVar(&flags.TrustedSubnet.Value, "t", "", "trusted subnet for http requests")
 
 	flag.Parse()
 	flag.Visit(func(f *flag.Flag) {
@@ -70,6 +72,8 @@ func ParseFlags() *ParsedFlags {
 			flags.CryptoKeyPath.Passed = true
 		case "c":
 			flags.ConfigPath.Passed = true
+		case "t":
+			flags.TrustedSubnet.Passed = true
 		}
 	})
 	return flags

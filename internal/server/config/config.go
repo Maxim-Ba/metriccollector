@@ -22,6 +22,7 @@ type Parameters struct {
 	ProfileFileMem      string `json:"profile_file_mem"`
 	IsProfileOn         bool   `json:"is_profile_on"`
 	CryptoKeyPath       string `json:"crypto_key"`
+	TrustedSubnet       string `json:"trusted_subnet"`
 }
 
 func New() Parameters {
@@ -46,8 +47,8 @@ func New() Parameters {
 		ProfileFileMem:      utils.ResolveString(envConfig.ProfileFileMem, flags.ProfileFileMem, fileConfig.ProfileFileMem),
 		IsProfileOn:         utils.ResolveBool(isProfileOnSet(), envConfig.IsProfileOn, flags.IsProfileOn, fileConfig.IsProfileOn),
 		CryptoKeyPath:       utils.ResolveString(envConfig.CryptoKeyPath, flags.CryptoKeyPath, fileConfig.CryptoKeyPath),
+		TrustedSubnet:       utils.ResolveString(envConfig.TrustedSubnet, flags.TrustedSubnet, fileConfig.TrustedSubnet),
 	}
-	fmt.Printf("%+v\n", parameters)
 	return parameters
 }
 

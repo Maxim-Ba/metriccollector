@@ -12,6 +12,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/models/metrics"
 	"github.com/Maxim-Ba/metriccollector/internal/signature"
+	"github.com/Maxim-Ba/metriccollector/pkg/utils"
 )
 
 type Client interface {
@@ -79,9 +80,15 @@ func (c *HTTPClient) SendMetrics(metrics []*metrics.Metrics) error {
 			logger.LogInfo("encodedHash ", encodedHash)
 			req.Header.Set("HashSHA256", encodedHash)
 		}
+		localIP, err := utils.GetLocalIP()
+		if err != nil {
+			logger.LogError("failed to get local IP:", err)
+			localIP = "unknown" // fallback value
+		}
 		req.Header.Set("Accept-Encoding", "gzip")
 		req.Header.Set("Content-Encoding", "gzip")
 		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("X-Real-IP", localIP)
 
 		resp, err := c.httpClient.Do(req)
 		if err != nil {
@@ -148,9 +155,17 @@ func (c *HTTPClient) SendMetricsWithBatch(metrics []*metrics.Metrics) error {
 		encodedHash := base64.StdEncoding.EncodeToString(hash)
 		req.Header.Set("HashSHA256", encodedHash)
 	}
+
+	localIP, err := utils.GetLocalIP()
+	if err != nil {
+		logger.LogError("failed to get local IP:", err)
+		localIP = "unknown" // fallback value
+	}
+	logger.LogInfo("localIP: "+ localIP)
 	req.Header.Set("Accept-Encoding", "gzip")
 	req.Header.Set("Content-Encoding", "gzip")
 	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("X-Real-IP", localIP)
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {

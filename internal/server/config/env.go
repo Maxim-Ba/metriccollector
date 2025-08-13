@@ -21,6 +21,7 @@ type Config struct {
 	IsProfileOn         bool   `env:"IS_PROFILE_ON"`
 	CryptoKeyPath       string `env:"CRYPTO_KEY"`
 	ConfigPath          string `env:"CONFIG"`
+	TrustedSubnet       string `env:"TRUSTED_SUBNET"`
 }
 
 func ParseEnv() *Config {

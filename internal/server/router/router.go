@@ -49,6 +49,7 @@ func New() *chi.Mux {
 
 func middlewares(next http.HandlerFunc) http.HandlerFunc {
 	mids := []Middleware{
+		middleware.TrustedSubnetMiddleware,
 		middleware.SignatureHandle,
 		storage.WithSyncLocalStorage,
 		middleware.GzipHandle,
