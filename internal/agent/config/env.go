@@ -2,6 +2,7 @@ package config
 
 import (
 	"log"
+	"os"
 
 	"github.com/caarlos0/env/v11"
 )
@@ -15,6 +16,8 @@ type Config struct {
 	RateLimit      int    `env:"RATE_LIMIT"`
 	CryptoKeyPath  string `env:"CRYPTO_KEY"`
 	ConfigPath     string `env:"CONFIG"`
+	GrpcOn         bool   `env:"GRPC_ON"`
+	GrpcServer     string `env:"GRPC_SERVER"`
 }
 
 func ParseEnv() *Config {
@@ -25,4 +28,9 @@ func ParseEnv() *Config {
 	}
 
 	return &cfg
+}
+
+func isGRPCSet() bool {
+	_, isSet := os.LookupEnv("GRPC_ON")
+	return isSet
 }

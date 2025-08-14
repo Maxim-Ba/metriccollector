@@ -18,6 +18,8 @@ type ParsedFlags struct {
 	RateLimit     utils.FlagValue[int]
 	CryptoKeyPath utils.FlagValue[string]
 	ConfigPath    utils.FlagValue[string]
+	GrpcOn        utils.FlagValue[bool]
+	GrpcServer    utils.FlagValue[string]
 }
 
 func ParseFlags() *ParsedFlags {
@@ -31,6 +33,8 @@ func ParseFlags() *ParsedFlags {
 	flag.IntVar(&flags.RateLimit.Value, "l", 10, "simultaneously get metrics")
 	flag.StringVar(&flags.CryptoKeyPath.Value, "crypto-key", "", "path for public key for signature")
 	flag.StringVar(&flags.ConfigPath.Value, "c", "", "path for configuration by json")
+	flag.BoolVar(&flags.GrpcOn.Value, "grpc", false, "send metrics by gRPC")
+	flag.StringVar(&flags.GrpcServer.Value, "ga", "", "address and port server gRPC")
 
 	flag.Parse()
 
@@ -68,6 +72,11 @@ func ParseFlags() *ParsedFlags {
 			flags.CryptoKeyPath.Passed = true
 		case "c":
 			flags.ConfigPath.Passed = true
+		case "grpc":
+			flags.ConfigPath.Passed = true
+		case "ga":
+			flags.GrpcServer.Passed = true
+
 		}
 	})
 	return flags
