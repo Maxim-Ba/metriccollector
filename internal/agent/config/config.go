@@ -17,6 +17,8 @@ type Parameters struct {
 	Key            string `json:"key"`
 	RateLimit      int    `json:"rate_limit"`
 	CryptoKeyPath  string `json:"crypto_key"`
+	GrpcOn         bool   `json:"grpc_on"`
+	GrpcServer     string `json:"grpc_server_address"`
 }
 
 func New() Parameters {
@@ -36,6 +38,8 @@ func New() Parameters {
 		Key:            utils.ResolveString(envConfig.Key, flags.Key, fileConfig.Key),
 
 		CryptoKeyPath: utils.ResolveString(envConfig.CryptoKeyPath, flags.CryptoKeyPath, fileConfig.CryptoKeyPath),
+		GrpcOn:        utils.ResolveBool(isGRPCSet(), envConfig.GrpcOn, flags.GrpcOn, fileConfig.GrpcOn),
+		GrpcServer:    utils.ResolveString(envConfig.GrpcServer, flags.GrpcServer, fileConfig.GrpcServer),
 	}
 	return parameters
 }

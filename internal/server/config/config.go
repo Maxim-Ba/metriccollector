@@ -23,6 +23,7 @@ type Parameters struct {
 	IsProfileOn         bool   `json:"is_profile_on"`
 	CryptoKeyPath       string `json:"crypto_key"`
 	TrustedSubnet       string `json:"trusted_subnet"`
+	GrpcServer          string `json:"grpc_server"`
 }
 
 func New() Parameters {
@@ -48,6 +49,7 @@ func New() Parameters {
 		IsProfileOn:         utils.ResolveBool(isProfileOnSet(), envConfig.IsProfileOn, flags.IsProfileOn, fileConfig.IsProfileOn),
 		CryptoKeyPath:       utils.ResolveString(envConfig.CryptoKeyPath, flags.CryptoKeyPath, fileConfig.CryptoKeyPath),
 		TrustedSubnet:       utils.ResolveString(envConfig.TrustedSubnet, flags.TrustedSubnet, fileConfig.TrustedSubnet),
+		GrpcServer:          utils.ResolveString(envConfig.GrpcServer, flags.GrpcServer, fileConfig.GrpcServer),
 	}
 	return parameters
 }

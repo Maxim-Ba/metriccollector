@@ -36,6 +36,7 @@ func TestParseFlags(t *testing.T) {
 				IsProfileOn:         utils.FlagValue[bool]{Value: false},
 				CryptoKeyPath:       utils.FlagValue[string]{Value: ""},
 				ConfigPath:          utils.FlagValue[string]{Value: ""},
+				GrpcServer:          utils.FlagValue[string]{Value: ":8081"},
 			},
 		},
 		{
@@ -55,6 +56,7 @@ func TestParseFlags(t *testing.T) {
 				"-p=true",
 				"-crypto-key", "/path/to/key",
 				"-c", "/path/to/config",
+				"-ga", ":9001",
 			},
 			expected: ParsedFlags{
 				RunAddr:             utils.FlagValue[string]{Passed: true, Value: ":9090"},
@@ -70,6 +72,7 @@ func TestParseFlags(t *testing.T) {
 				IsProfileOn:         utils.FlagValue[bool]{Passed: true, Value: true},
 				CryptoKeyPath:       utils.FlagValue[string]{Passed: true, Value: "/path/to/key"},
 				ConfigPath:          utils.FlagValue[string]{Passed: true, Value: "/path/to/config"},
+				GrpcServer:          utils.FlagValue[string]{Passed: true, Value: ":9001"},
 			},
 		},
 		{
@@ -94,6 +97,7 @@ func TestParseFlags(t *testing.T) {
 				IsProfileOn:         utils.FlagValue[bool]{Value: false},
 				CryptoKeyPath:       utils.FlagValue[string]{Value: ""},
 				ConfigPath:          utils.FlagValue[string]{Value: ""},
+				GrpcServer:          utils.FlagValue[string]{Passed: false, Value: ":8081"},
 			},
 		},
 	}

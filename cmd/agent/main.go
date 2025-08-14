@@ -13,6 +13,7 @@ import (
 	"github.com/Maxim-Ba/metriccollector/internal/agent/client"
 	"github.com/Maxim-Ba/metriccollector/internal/agent/config"
 	metricGenerator "github.com/Maxim-Ba/metriccollector/internal/agent/generator"
+	protoclient "github.com/Maxim-Ba/metriccollector/internal/agent/proto-client"
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/signature"
 	"github.com/Maxim-Ba/metriccollector/pkg/buildinfo"
@@ -40,7 +41,10 @@ func main() {
 
 	var wg sync.WaitGroup
 	wg.Add(1)
-
+	conn, err := protoclient.Connect(parameters.GrpcServer)
+	if err != nil && parameters.GrpcOn {
+		panic(err)
+	}
 	go func() {
 		defer wg.Done()
 		for {
@@ -56,17 +60,22 @@ func main() {
 				}
 				if time.Since(reportIntervalStart) >= time.Duration(parameters.ReportInterval)*time.Second {
 					metricGenerator.Generator.UpdatePollCount()
-					err = utils.RetryWrapper(func() error {
-						return httpClient.SendMetrics(metrics)
-					}, []error{client.ErrServerInternalError, client.ErrRequestTimeout})
-					if err != nil {
-						logger.LogError(err)
-					}
-					err = utils.RetryWrapper(func() error {
-						return httpClient.SendMetricsWithBatch(metrics)
-					}, []error{client.ErrServerInternalError, client.ErrRequestTimeout})
-					if err != nil {
-						logger.LogError(err)
+					if parameters.GrpcOn {
+						conn.SendMetrics(metrics)
+					} else {
+
+						err = utils.RetryWrapper(func() error {
+							return httpClient.SendMetrics(metrics)
+						}, []error{client.ErrServerInternalError, client.ErrRequestTimeout})
+						if err != nil {
+							logger.LogError(err)
+						}
+						err = utils.RetryWrapper(func() error {
+							return httpClient.SendMetricsWithBatch(metrics)
+						}, []error{client.ErrServerInternalError, client.ErrRequestTimeout})
+						if err != nil {
+							logger.LogError(err)
+						}
 					}
 
 					reportIntervalStart = time.Now()

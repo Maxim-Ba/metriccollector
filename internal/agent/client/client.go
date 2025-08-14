@@ -161,7 +161,7 @@ func (c *HTTPClient) SendMetricsWithBatch(metrics []*metrics.Metrics) error {
 		logger.LogError("failed to get local IP:", err)
 		localIP = "unknown" // fallback value
 	}
-	logger.LogInfo("localIP: "+ localIP)
+	logger.LogInfo("localIP: " + localIP)
 	req.Header.Set("Accept-Encoding", "gzip")
 	req.Header.Set("Content-Encoding", "gzip")
 	req.Header.Set("Content-Type", "application/json")

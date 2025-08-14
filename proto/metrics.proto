@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package metriccollector;
+
+option go_package = "github.com/Maxim-Ba/metriccollector/proto";
+
+message  Metric {
+  string id = 1;
+  string type = 2;
+  int64 delta = 3;
+  double value = 4;
+}
+
+message SendMetricsRequest {
+  repeated Metric metrics = 1;  // Массив метрик
+}
+
+message SendMetricsResponse {
+  string error = 1;
+}
+
+service Metrics {
+  rpc SendMetrics(SendMetricsRequest) returns (SendMetricsResponse);
+}

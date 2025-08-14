@@ -13,6 +13,7 @@ import (
 
 	"github.com/Maxim-Ba/metriccollector/internal/logger"
 	"github.com/Maxim-Ba/metriccollector/internal/server/config"
+	protoserver "github.com/Maxim-Ba/metriccollector/internal/server/proto-server"
 	"github.com/Maxim-Ba/metriccollector/internal/server/router"
 	"github.com/Maxim-Ba/metriccollector/internal/server/services/subnet"
 	"github.com/Maxim-Ba/metriccollector/internal/server/storage"
@@ -56,7 +57,15 @@ func main() {
 	}
 
 	var wg sync.WaitGroup
-	wg.Add(1)
+	wg.Add(2)
+	go func() {
+		defer wg.Done()
+		logger.LogInfo("Running grpc server on ", parameters.GrpcServer)
+		if err = protoserver.Start(parameters.GrpcServer); err != nil {
+			logger.LogError("Start: ", err)
+			cancel()
+		}
+	}()
 
 	go func() {
 		defer wg.Done()
